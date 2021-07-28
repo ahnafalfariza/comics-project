@@ -4,5 +4,9 @@
     "browser": true,
     "es2020": true
   },
-  "extends": ["next", "next/core-web-vitals", "eslint:recommended", "prettier"]
+  "extends": ["next", "next/core-web-vitals", "eslint:recommended", "prettier"],
+  "rules": {
+    "@next/next/no-img-element": "off",
+    "jsx-a11y/alt-text": "off"
+  }
 }
