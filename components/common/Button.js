@@ -9,6 +9,7 @@ const Button = ({
   children,
   className,
   style,
+  onClick,
 }) => {
   const buttonBaseStyle =
     'inline-block text-center relative whitespace-nowrap rounded-full font-medium text-body'
@@ -63,7 +64,12 @@ const Button = ({
   }
 
   return (
-    <button disabled={isDisabled} className={buttonStyle} style={style}>
+    <button
+      disabled={isDisabled}
+      className={buttonStyle}
+      style={style}
+      onClick={onClick}
+    >
       {children}
     </button>
   )
@@ -82,6 +88,7 @@ Button.propTypes = {
   isFullWidth: PropTypes.bool,
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
   variant: PropTypes.oneOf(['primary', 'secondary', 'ghost']),
+  onClick: PropTypes.func,
 }
 
 export default Button

@@ -1,7 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Avatar = ({ alt, entityName, bg, size, src, className, style }) => {
+const Avatar = ({
+  alt,
+  entityName,
+  bg,
+  size,
+  src,
+  className,
+  style,
+  onClick,
+}) => {
   const avatarBaseStyle =
     'rounded-full overflow-hidden select-none inline-flex items-center justify-center relative text-white'
 
@@ -59,7 +68,7 @@ const Avatar = ({ alt, entityName, bg, size, src, className, style }) => {
   }
 
   return (
-    <div className={avatarStyle} style={style}>
+    <div className={avatarStyle} style={style} onClick={onClick}>
       {renderChild()}
     </div>
   )
@@ -80,6 +89,7 @@ Avatar.propTypes = {
   entityName: PropTypes.string,
   src: PropTypes.string,
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', 'xxl']),
+  onClick: PropTypes.func,
 }
 
 export default Avatar
