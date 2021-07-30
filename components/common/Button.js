@@ -9,6 +9,7 @@ const Button = ({
   children,
   className,
   style,
+  onClick,
 }) => {
   const buttonBaseStyle =
     'inline-block text-center relative whitespace-nowrap rounded-full font-medium text-body'
@@ -37,13 +38,13 @@ const Button = ({
 
   let buttonSizeStyle
   switch (size) {
-    case 'large':
+    case 'lg':
       buttonSizeStyle = 'py-3 px-20 text-base'
       break
-    case 'medium':
+    case 'md':
       buttonSizeStyle = 'py-3 px-8 text-sm'
       break
-    case 'small':
+    case 'sm':
       buttonSizeStyle = 'py-2 px-4 text-xs'
       break
     default:
@@ -65,9 +66,9 @@ const Button = ({
   return (
     <button
       disabled={isDisabled}
-      className="bg-blue"
       className={buttonStyle}
       style={style}
+      onClick={onClick}
     >
       {children}
     </button>
@@ -77,7 +78,7 @@ const Button = ({
 Button.defaultProps = {
   isDisabled: false,
   isFullWidth: false,
-  size: 'large',
+  size: 'lg',
   variant: 'primary',
   className: '',
 }
@@ -85,8 +86,9 @@ Button.defaultProps = {
 Button.propTypes = {
   isDisabled: PropTypes.bool,
   isFullWidth: PropTypes.bool,
-  size: PropTypes.oneOf(['large', 'medium', 'small']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
   variant: PropTypes.oneOf(['primary', 'secondary', 'ghost']),
+  onClick: PropTypes.func,
 }
 
 export default Button
