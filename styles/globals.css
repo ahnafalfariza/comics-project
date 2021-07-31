@@ -52,3 +52,67 @@ svg {
     0 -2px 2px rgba(255, 255, 255, 0.3), 0 -4px 4px rgba(255, 255, 255, 0.5),
     0 -8px 8px rgba(255, 255, 255, 0.5), 0 -16px 16px rgba(255, 255, 255, 0.5);
 }
+
+.input-text {
+  transition: all 0.2s ease-in-out;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.input-text::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.input-text::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.input-text:not(:disabled):hover {
+  border: 1px solid #3b82f6;
+}
+
+.input-text:not(:disabled):active,
+.input-text:not(:disabled):focus {
+  border-color: #3b82f6;
+  box-shadow: 0px 0px 0px 3px #1e40af;
+}
+
+.input-text--error {
+  border: 1px solid #ef4444;
+}
+
+.input-text--error:not(:disabled):hover {
+  border: 1px solid #ef4444;
+}
+
+.input-text--error:not(:disabled):active,
+.input-text--error:not(:disabled):focus {
+  border-color: #ef4444;
+  box-shadow: 0px 0px 0px 3px #991b1b;
+}
+
+.input-text:disabled {
+  background: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: not-allowed;
+}
+
+.select-wrapper::after {
+  color: white;
+  content: '▾';
+  pointer-events: none;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  font-size: 16px;
+  transform: translateY(-50%);
+}
+
+.input-select {
+  -webkit-appearance: none;
+  padding-right: 24px;
+}
+
+.input-select::-ms-expand {
+  display: none;
+}
