@@ -4,8 +4,8 @@ import near from '../lib/near'
 
 import * as gtag from '../lib/gtag'
 
-import '../styles/globals.css'
 import 'tailwindcss/tailwind.css'
+import '../styles/globals.css'
 
 const App = ({ Component, pageProps }) => {
   const router = useRouter()
