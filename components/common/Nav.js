@@ -21,7 +21,7 @@ const Nav = () => {
 
   useEffect(() => {
     const onClickEv = (e) => {
-      if (!profileModalRef.current.contains(e.target)) {
+      if (profileModalRef && !profileModalRef.current.contains(e.target)) {
         setShowProfileModal(false)
       }
     }
@@ -37,7 +37,7 @@ const Nav = () => {
 
   useEffect(() => {
     const onClickEv = (e) => {
-      if (!mobileMenuRef.current.contains(e.target)) {
+      if (mobileMenuRef && !mobileMenuRef.current.contains(e.target)) {
         setShowHamburgerMenu(false)
       }
     }
