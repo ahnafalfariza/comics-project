@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Card from '../components/common/Card'
 import near from '../lib/near'
 import styles from '../styles/Home.module.css'
 
@@ -31,6 +32,17 @@ export default function Home() {
         ) : (
           <button onClick={() => near.signIn()}>Sign In</button>
         )}
+
+        <div className="h-48 w-full">
+          <Card
+            special
+            imgUrl="https://cdn.paras.id/tr:w-300/bafybeiaslffvcxwkqpkhatxwbgtosk7gfds4uh4rtbahqy5j2xy4q3qu4a"
+            initialRotate={{
+              x: 0,
+              y: 0,
+            }}
+          />
+        </div>
 
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
