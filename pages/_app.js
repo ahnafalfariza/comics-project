@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import near from '../lib/near'
+import Loading from 'components/common/Loading'
 
 import * as gtag from '../lib/gtag'
 
@@ -31,7 +32,9 @@ const App = ({ Component, pageProps }) => {
   }, [])
 
   if (isLoading) {
-    return null
+    return (
+      <Loading className="w-screen h-screen m-auto flex justify-center items-center" />
+    )
   }
 
   return <Component {...pageProps} />
