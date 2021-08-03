@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Blurhash } from 'react-blurhash'
 
-const Card = ({
+const Token = ({
   imgUrl,
   imgWidth = 640,
   imgHeight = 890,
@@ -299,4 +299,4 @@ const Card = ({
   )
 }
 
-export default Card
+export default Token
