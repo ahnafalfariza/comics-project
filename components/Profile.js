@@ -1,6 +1,6 @@
 import { COVER_IMAGE, PROFILE_IMAGE } from 'constants/dummy'
 import { Blurhash } from 'react-blurhash'
-import Avatar from './common/Avatar'
+import Avatar from './Common/Avatar'
 
 const Profile = ({
   username = 'ahnaf.near',

@@ -1,4 +1,4 @@
-import Nav from 'components/common/Nav'
+import Nav from 'components/Common/Nav'
 import Profile from 'components/Profile'
 
 const ProfilePage = () => {
