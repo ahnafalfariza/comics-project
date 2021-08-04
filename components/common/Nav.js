@@ -65,7 +65,7 @@ const Nav = () => {
 
   const ProfileModal = () => {
     return (
-      <div className="absolute right-0 mt-3 z-10">
+      <div className="absolute right-0 mt-3 z-30">
         <div className="min-w-max w-64 bg-blueGray-800 p-3 rounded-md shadow-xl">
           <div className="flex items-center">
             <Avatar size="lg" className="mr-3" src={PROFILE_IMAGE} />
@@ -102,7 +102,7 @@ const Nav = () => {
 
   return (
     <>
-      <div className="bg-background sticky z-10 top-0">
+      <div className="bg-background sticky z-30 top-0">
         <div className="relative bg-background max-w-6xl m-auto flex p-4 items-center justify-between z-30">
           <div className="block md:hidden">
             <HamburgerMenu
@@ -149,7 +149,7 @@ const Nav = () => {
         </div>
         <div ref={mobileMenuRef} className="relative">
           <div
-            className={`absolute bg-background left-0 z-10 right-0 transform transition-transform duration-500 ${
+            className={`absolute bg-background left-0 z-30 right-0 transform transition-transform duration-500 ${
               showHamburgerMenu ? 'translate-y-0' : '-translate-y-96'
             }`}
           >
