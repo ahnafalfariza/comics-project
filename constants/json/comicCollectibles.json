@@ -1,0 +1,1094 @@
+{
+  "results": [
+    {
+      "_id": "61076dd72e6e0d327fba7f3d",
+      "tokenId": "bafybeifllt47vu2mtyfppv4h67zo3webr3dwmfhbfpssdqx2jvgdfo2zuu",
+      "creatorId": "yasuoarts.near",
+      "supply": 20,
+      "createdAt": 1627876815709,
+      "updatedAt": 1628000880528,
+      "metadata": {
+        "name": "POWER UP",
+        "description": "The Power Within",
+        "collection": "LEVEL UP",
+        "royalty": "5",
+        "blurhash": "UyK,cUof-+t6~RbatOs-S^s,Rmj=$~s,V]Rk",
+        "image": "ipfs://bafybeih2vy3gx5f2o73hkapvo7iybutqflhqcdtigr3645sd5i4r6z3esu",
+        "imageWidth": 1280,
+        "imageHeight": 1780,
+        "createdAt": 1627876815709
+      },
+      "categories": [],
+      "ownerships": [
+        {
+          "_id": "61076dd7c3f4ce008a0252ed",
+          "id": "bafybeifllt47vu2mtyfppv4h67zo3webr3dwmfhbfpssdqx2jvgdfo2zuu::yasuoarts.near",
+          "createdAt": 1627876821745,
+          "ownerId": "yasuoarts.near",
+          "quantity": 20,
+          "tokenId": "bafybeifllt47vu2mtyfppv4h67zo3webr3dwmfhbfpssdqx2jvgdfo2zuu",
+          "updatedAt": 1628000880528,
+          "marketData": {
+            "quantity": 20,
+            "amount": "200000000000000000000000",
+            "amountDecimal": {
+              "$numberDecimal": "200000000000000000000000"
+            }
+          }
+        }
+      ],
+      "bidmarket": [],
+      "minPriceDecimal": {
+        "$numberDecimal": "200000000000000000000000"
+      },
+      "maxBidDecimal": null,
+      "view": 12
+    },
+    {
+      "_id": "6108f19d2e6e0d327fba8435",
+      "tokenId": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka",
+      "creatorId": "yasuoarts.near",
+      "supply": 20,
+      "createdAt": 1627976080211,
+      "updatedAt": 1627997768875,
+      "metadata": {
+        "name": "Juice Wrld ",
+        "description": "Juice Wrld as Phoenix in VALORANT",
+        "collection": "VALORANT",
+        "royalty": "10",
+        "blurhash": "USH^-b^l#S=HQSrCxHnj~Co#M{S3=|t7NGRi",
+        "image": "ipfs://bafybeiart3wizdmltr54zkod7mymkamnvzh6mq6g4n5fihrsyqrsbjugcy",
+        "imageWidth": 512,
+        "imageHeight": 712,
+        "createdAt": 1627976080211
+      },
+      "categories": [],
+      "ownerships": [
+        {
+          "_id": "6108f19dc3f4ce008a193f18",
+          "id": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka::yasuoarts.near",
+          "createdAt": 1627997741414,
+          "ownerId": "yasuoarts.near",
+          "quantity": 15,
+          "tokenId": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka",
+          "updatedAt": 1627997741414,
+          "marketData": {
+            "quantity": 15,
+            "amount": "100000000000000000000000",
+            "amountDecimal": {
+              "$numberDecimal": "100000000000000000000000"
+            }
+          }
+        },
+        {
+          "_id": "6109438ac3f4ce008a1e5e2b",
+          "id": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka::toni2411992.near",
+          "createdAt": 1627997175720,
+          "ownerId": "toni2411992.near",
+          "quantity": 2,
+          "tokenId": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka",
+          "updatedAt": 1627997175720
+        },
+        {
+          "_id": "61094516c3f4ce008a1e7939",
+          "id": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka::rabit.near",
+          "createdAt": 1627997460712,
+          "ownerId": "rabit.near",
+          "quantity": 1,
+          "tokenId": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka",
+          "updatedAt": 1627997460712
+        },
+        {
+          "_id": "6109462ec3f4ce008a1e8b6d",
+          "id": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka::mzarts.near",
+          "createdAt": 1627997741414,
+          "ownerId": "mzarts.near",
+          "quantity": 2,
+          "tokenId": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka",
+          "updatedAt": 1627997768875,
+          "marketData": {
+            "quantity": 1,
+            "amount": "1500000000000000000000000",
+            "amountDecimal": {
+              "$numberDecimal": "1500000000000000000000000"
+            }
+          }
+        }
+      ],
+      "bidmarket": [],
+      "minPriceDecimal": {
+        "$numberDecimal": "100000000000000000000000"
+      },
+      "maxBidDecimal": null,
+      "view": 16
+    },
+    {
+      "_id": "610827d12e6e0d327fba81b7",
+      "tokenId": "bafybeihymekqtbh4meuztqsuwkcdpjyh2hqfdiykpov36lk5tqfbhvjaki",
+      "creatorId": "yasuoarts.near",
+      "supply": 2,
+      "createdAt": 1627924421101,
+      "updatedAt": 1627996667952,
+      "metadata": {
+        "name": "E-GIRL",
+        "description": "A Futuristic Girl Gamer. ⭐⭐⭐",
+        "collection": "CYBERPUNK",
+        "royalty": "10",
+        "blurhash": "UZJ$q6Vs~D%3}GtRa0XS9?NEI-EKI.Ntt7Rj",
+        "image": "ipfs://bafybeias7m7xpl634imy5rulouj53wjuhx23j4ipxsdsbwop753imsjsae",
+        "imageWidth": 1280,
+        "imageHeight": 1780,
+        "createdAt": 1627924421101
+      },
+      "categories": [],
+      "ownerships": [
+        {
+          "_id": "610827d1c3f4ce008a0d6747",
+          "id": "bafybeihymekqtbh4meuztqsuwkcdpjyh2hqfdiykpov36lk5tqfbhvjaki::yasuoarts.near",
+          "createdAt": 1627999102325,
+          "ownerId": "yasuoarts.near",
+          "quantity": 1,
+          "tokenId": "bafybeihymekqtbh4meuztqsuwkcdpjyh2hqfdiykpov36lk5tqfbhvjaki",
+          "updatedAt": 1627999102325,
+          "marketData": {
+            "quantity": 1,
+            "amount": "3000000000000000000000000",
+            "amountDecimal": {
+              "$numberDecimal": "3000000000000000000000000"
+            }
+          }
+        },
+        {
+          "_id": "61094b7fc3f4ce008a1ee377",
+          "id": "bafybeihymekqtbh4meuztqsuwkcdpjyh2hqfdiykpov36lk5tqfbhvjaki::shambhala.near",
+          "createdAt": 1627999102325,
+          "ownerId": "shambhala.near",
+          "quantity": 1,
+          "tokenId": "bafybeihymekqtbh4meuztqsuwkcdpjyh2hqfdiykpov36lk5tqfbhvjaki",
+          "updatedAt": 1627999102325
+        }
+      ],
+      "bidmarket": [],
+      "minPriceDecimal": {
+        "$numberDecimal": "3000000000000000000000000"
+      },
+      "maxBidDecimal": null,
+      "view": 12
+    },
+    {
+      "_id": "61076b122e6e0d327fba7f36",
+      "tokenId": "bafybeieljmlh6obguxt24sgzanmmoqfjst64zamp5c42xgkxxnej2sszfi",
+      "creatorId": "yasuoarts.near",
+      "supply": 5,
+      "createdAt": 1627876105781,
+      "updatedAt": 1627912819491,
+      "metadata": {
+        "name": "Billie Eilish",
+        "description": "Billie Eilish is a popular American singer and songwriter and she's the first artist born in the 21st century to top the Billboard 200.",
+        "collection": "MUSIC ARTIST",
+        "royalty": "10",
+        "blurhash": "UE98^zs;Pnk;y;X4xvVa4VHsz?VsL%QoNFV@",
+        "image": "ipfs://bafybeiezcapbfsl66fllmafa3fr3oo3fcobbpukkulae4ykzfnjgktzx5m",
+        "imageWidth": 1280,
+        "imageHeight": 1780,
+        "createdAt": 1627876105781
+      },
+      "categories": [],
+      "ownerships": [
+        {
+          "_id": "61076b12c3f4ce008a02264c",
+          "id": "bafybeieljmlh6obguxt24sgzanmmoqfjst64zamp5c42xgkxxnej2sszfi::yasuoarts.near",
+          "createdAt": 1627876112495,
+          "ownerId": "yasuoarts.near",
+          "quantity": 5,
+          "tokenId": "bafybeieljmlh6obguxt24sgzanmmoqfjst64zamp5c42xgkxxnej2sszfi",
+          "updatedAt": 1627912819491,
+          "marketData": {
+            "quantity": 4,
+            "amount": "5000000000000000000000000",
+            "amountDecimal": {
+              "$numberDecimal": "5000000000000000000000000"
+            }
+          }
+        }
+      ],
+      "bidmarket": [],
+      "minPriceDecimal": {
+        "$numberDecimal": "5000000000000000000000000"
+      },
+      "maxBidDecimal": null,
+      "view": 14
+    },
+    {
+      "_id": "61077c892e6e0d327fba7f71",
+      "tokenId": "bafybeid5nggiyvffqrwlmtsaymuihtyylws2a6bagilg4pnan3jdgdb6ji",
+      "creatorId": "yasuoarts.near",
+      "supply": 50,
+      "createdAt": 1627880578519,
+      "updatedAt": 1627880583953,
+      "metadata": {
+        "name": "Demon Cyborg",
+        "description": "#1",
+        "collection": "CYBERPUNK",
+        "royalty": "5",
+        "blurhash": "UBIDBu~B0Lt70L-B9u0yo}%2bbNGNvEg^Qxt",
+        "image": "ipfs://bafybeih4tjcp6ujszsngmnnn355otknslulpq52qn3fvkmpnydxxjzan3a",
+        "imageWidth": 1280,
+        "imageHeight": 1780,
+        "createdAt": 1627880578519
+      },
+      "categories": [],
+      "ownerships": [
+        {
+          "_id": "61077c89c3f4ce008a033886",
+          "id": "bafybeid5nggiyvffqrwlmtsaymuihtyylws2a6bagilg4pnan3jdgdb6ji::yasuoarts.near",
+          "createdAt": 1627883747097,
+          "ownerId": "yasuoarts.near",
+          "quantity": 49,
+          "tokenId": "bafybeid5nggiyvffqrwlmtsaymuihtyylws2a6bagilg4pnan3jdgdb6ji",
+          "updatedAt": 1627883747097,
+          "marketData": {
+            "quantity": 49,
+            "amount": "700000000000000000000000",
+            "amountDecimal": {
+              "$numberDecimal": "700000000000000000000000"
+            }
+          }
+        },
+        {
+          "_id": "610788e4c3f4ce008a03f8fc",
+          "id": "bafybeid5nggiyvffqrwlmtsaymuihtyylws2a6bagilg4pnan3jdgdb6ji::starpause.near",
+          "createdAt": 1627883747097,
+          "ownerId": "starpause.near",
+          "quantity": 1,
+          "tokenId": "bafybeid5nggiyvffqrwlmtsaymuihtyylws2a6bagilg4pnan3jdgdb6ji",
+          "updatedAt": 1627883747097
+        }
+      ],
+      "bidmarket": [],
+      "minPriceDecimal": {
+        "$numberDecimal": "700000000000000000000000"
+      },
+      "maxBidDecimal": null,
+      "view": 13
+    },
+    {
+      "_id": "61076dd72e6e0d327fba7f3d",
+      "tokenId": "bafybeifllt47vu2mtyfppv4h67zo3webr3dwmfhbfpssdqx2jvgdfo2zuu",
+      "creatorId": "yasuoarts.near",
+      "supply": 20,
+      "createdAt": 1627876815709,
+      "updatedAt": 1628000880528,
+      "metadata": {
+        "name": "POWER UP",
+        "description": "The Power Within",
+        "collection": "LEVEL UP",
+        "royalty": "5",
+        "blurhash": "UyK,cUof-+t6~RbatOs-S^s,Rmj=$~s,V]Rk",
+        "image": "ipfs://bafybeih2vy3gx5f2o73hkapvo7iybutqflhqcdtigr3645sd5i4r6z3esu",
+        "imageWidth": 1280,
+        "imageHeight": 1780,
+        "createdAt": 1627876815709
+      },
+      "categories": [],
+      "ownerships": [
+        {
+          "_id": "61076dd7c3f4ce008a0252ed",
+          "id": "bafybeifllt47vu2mtyfppv4h67zo3webr3dwmfhbfpssdqx2jvgdfo2zuu::yasuoarts.near",
+          "createdAt": 1627876821745,
+          "ownerId": "yasuoarts.near",
+          "quantity": 20,
+          "tokenId": "bafybeifllt47vu2mtyfppv4h67zo3webr3dwmfhbfpssdqx2jvgdfo2zuu",
+          "updatedAt": 1628000880528,
+          "marketData": {
+            "quantity": 20,
+            "amount": "200000000000000000000000",
+            "amountDecimal": {
+              "$numberDecimal": "200000000000000000000000"
+            }
+          }
+        }
+      ],
+      "bidmarket": [],
+      "minPriceDecimal": {
+        "$numberDecimal": "200000000000000000000000"
+      },
+      "maxBidDecimal": null,
+      "view": 12
+    },
+    {
+      "_id": "6108f19d2e6e0d327fba8435",
+      "tokenId": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka",
+      "creatorId": "yasuoarts.near",
+      "supply": 20,
+      "createdAt": 1627976080211,
+      "updatedAt": 1627997768875,
+      "metadata": {
+        "name": "Juice Wrld ",
+        "description": "Juice Wrld as Phoenix in VALORANT",
+        "collection": "VALORANT",
+        "royalty": "10",
+        "blurhash": "USH^-b^l#S=HQSrCxHnj~Co#M{S3=|t7NGRi",
+        "image": "ipfs://bafybeiart3wizdmltr54zkod7mymkamnvzh6mq6g4n5fihrsyqrsbjugcy",
+        "imageWidth": 512,
+        "imageHeight": 712,
+        "createdAt": 1627976080211
+      },
+      "categories": [],
+      "ownerships": [
+        {
+          "_id": "6108f19dc3f4ce008a193f18",
+          "id": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka::yasuoarts.near",
+          "createdAt": 1627997741414,
+          "ownerId": "yasuoarts.near",
+          "quantity": 15,
+          "tokenId": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka",
+          "updatedAt": 1627997741414,
+          "marketData": {
+            "quantity": 15,
+            "amount": "100000000000000000000000",
+            "amountDecimal": {
+              "$numberDecimal": "100000000000000000000000"
+            }
+          }
+        },
+        {
+          "_id": "6109438ac3f4ce008a1e5e2b",
+          "id": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka::toni2411992.near",
+          "createdAt": 1627997175720,
+          "ownerId": "toni2411992.near",
+          "quantity": 2,
+          "tokenId": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka",
+          "updatedAt": 1627997175720
+        },
+        {
+          "_id": "61094516c3f4ce008a1e7939",
+          "id": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka::rabit.near",
+          "createdAt": 1627997460712,
+          "ownerId": "rabit.near",
+          "quantity": 1,
+          "tokenId": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka",
+          "updatedAt": 1627997460712
+        },
+        {
+          "_id": "6109462ec3f4ce008a1e8b6d",
+          "id": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka::mzarts.near",
+          "createdAt": 1627997741414,
+          "ownerId": "mzarts.near",
+          "quantity": 2,
+          "tokenId": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka",
+          "updatedAt": 1627997768875,
+          "marketData": {
+            "quantity": 1,
+            "amount": "1500000000000000000000000",
+            "amountDecimal": {
+              "$numberDecimal": "1500000000000000000000000"
+            }
+          }
+        }
+      ],
+      "bidmarket": [],
+      "minPriceDecimal": {
+        "$numberDecimal": "100000000000000000000000"
+      },
+      "maxBidDecimal": null,
+      "view": 16
+    },
+    {
+      "_id": "610827d12e6e0d327fba81b7",
+      "tokenId": "bafybeihymekqtbh4meuztqsuwkcdpjyh2hqfdiykpov36lk5tqfbhvjaki",
+      "creatorId": "yasuoarts.near",
+      "supply": 2,
+      "createdAt": 1627924421101,
+      "updatedAt": 1627996667952,
+      "metadata": {
+        "name": "E-GIRL",
+        "description": "A Futuristic Girl Gamer. ⭐⭐⭐",
+        "collection": "CYBERPUNK",
+        "royalty": "10",
+        "blurhash": "UZJ$q6Vs~D%3}GtRa0XS9?NEI-EKI.Ntt7Rj",
+        "image": "ipfs://bafybeias7m7xpl634imy5rulouj53wjuhx23j4ipxsdsbwop753imsjsae",
+        "imageWidth": 1280,
+        "imageHeight": 1780,
+        "createdAt": 1627924421101
+      },
+      "categories": [],
+      "ownerships": [
+        {
+          "_id": "610827d1c3f4ce008a0d6747",
+          "id": "bafybeihymekqtbh4meuztqsuwkcdpjyh2hqfdiykpov36lk5tqfbhvjaki::yasuoarts.near",
+          "createdAt": 1627999102325,
+          "ownerId": "yasuoarts.near",
+          "quantity": 1,
+          "tokenId": "bafybeihymekqtbh4meuztqsuwkcdpjyh2hqfdiykpov36lk5tqfbhvjaki",
+          "updatedAt": 1627999102325,
+          "marketData": {
+            "quantity": 1,
+            "amount": "3000000000000000000000000",
+            "amountDecimal": {
+              "$numberDecimal": "3000000000000000000000000"
+            }
+          }
+        },
+        {
+          "_id": "61094b7fc3f4ce008a1ee377",
+          "id": "bafybeihymekqtbh4meuztqsuwkcdpjyh2hqfdiykpov36lk5tqfbhvjaki::shambhala.near",
+          "createdAt": 1627999102325,
+          "ownerId": "shambhala.near",
+          "quantity": 1,
+          "tokenId": "bafybeihymekqtbh4meuztqsuwkcdpjyh2hqfdiykpov36lk5tqfbhvjaki",
+          "updatedAt": 1627999102325
+        }
+      ],
+      "bidmarket": [],
+      "minPriceDecimal": {
+        "$numberDecimal": "3000000000000000000000000"
+      },
+      "maxBidDecimal": null,
+      "view": 12
+    },
+    {
+      "_id": "61076b122e6e0d327fba7f36",
+      "tokenId": "bafybeieljmlh6obguxt24sgzanmmoqfjst64zamp5c42xgkxxnej2sszfi",
+      "creatorId": "yasuoarts.near",
+      "supply": 5,
+      "createdAt": 1627876105781,
+      "updatedAt": 1627912819491,
+      "metadata": {
+        "name": "Billie Eilish",
+        "description": "Billie Eilish is a popular American singer and songwriter and she's the first artist born in the 21st century to top the Billboard 200.",
+        "collection": "MUSIC ARTIST",
+        "royalty": "10",
+        "blurhash": "UE98^zs;Pnk;y;X4xvVa4VHsz?VsL%QoNFV@",
+        "image": "ipfs://bafybeiezcapbfsl66fllmafa3fr3oo3fcobbpukkulae4ykzfnjgktzx5m",
+        "imageWidth": 1280,
+        "imageHeight": 1780,
+        "createdAt": 1627876105781
+      },
+      "categories": [],
+      "ownerships": [
+        {
+          "_id": "61076b12c3f4ce008a02264c",
+          "id": "bafybeieljmlh6obguxt24sgzanmmoqfjst64zamp5c42xgkxxnej2sszfi::yasuoarts.near",
+          "createdAt": 1627876112495,
+          "ownerId": "yasuoarts.near",
+          "quantity": 5,
+          "tokenId": "bafybeieljmlh6obguxt24sgzanmmoqfjst64zamp5c42xgkxxnej2sszfi",
+          "updatedAt": 1627912819491,
+          "marketData": {
+            "quantity": 4,
+            "amount": "5000000000000000000000000",
+            "amountDecimal": {
+              "$numberDecimal": "5000000000000000000000000"
+            }
+          }
+        }
+      ],
+      "bidmarket": [],
+      "minPriceDecimal": {
+        "$numberDecimal": "5000000000000000000000000"
+      },
+      "maxBidDecimal": null,
+      "view": 14
+    },
+    {
+      "_id": "61077c892e6e0d327fba7f71",
+      "tokenId": "bafybeid5nggiyvffqrwlmtsaymuihtyylws2a6bagilg4pnan3jdgdb6ji",
+      "creatorId": "yasuoarts.near",
+      "supply": 50,
+      "createdAt": 1627880578519,
+      "updatedAt": 1627880583953,
+      "metadata": {
+        "name": "Demon Cyborg",
+        "description": "#1",
+        "collection": "CYBERPUNK",
+        "royalty": "5",
+        "blurhash": "UBIDBu~B0Lt70L-B9u0yo}%2bbNGNvEg^Qxt",
+        "image": "ipfs://bafybeih4tjcp6ujszsngmnnn355otknslulpq52qn3fvkmpnydxxjzan3a",
+        "imageWidth": 1280,
+        "imageHeight": 1780,
+        "createdAt": 1627880578519
+      },
+      "categories": [],
+      "ownerships": [
+        {
+          "_id": "61077c89c3f4ce008a033886",
+          "id": "bafybeid5nggiyvffqrwlmtsaymuihtyylws2a6bagilg4pnan3jdgdb6ji::yasuoarts.near",
+          "createdAt": 1627883747097,
+          "ownerId": "yasuoarts.near",
+          "quantity": 49,
+          "tokenId": "bafybeid5nggiyvffqrwlmtsaymuihtyylws2a6bagilg4pnan3jdgdb6ji",
+          "updatedAt": 1627883747097,
+          "marketData": {
+            "quantity": 49,
+            "amount": "700000000000000000000000",
+            "amountDecimal": {
+              "$numberDecimal": "700000000000000000000000"
+            }
+          }
+        },
+        {
+          "_id": "610788e4c3f4ce008a03f8fc",
+          "id": "bafybeid5nggiyvffqrwlmtsaymuihtyylws2a6bagilg4pnan3jdgdb6ji::starpause.near",
+          "createdAt": 1627883747097,
+          "ownerId": "starpause.near",
+          "quantity": 1,
+          "tokenId": "bafybeid5nggiyvffqrwlmtsaymuihtyylws2a6bagilg4pnan3jdgdb6ji",
+          "updatedAt": 1627883747097
+        }
+      ],
+      "bidmarket": [],
+      "minPriceDecimal": {
+        "$numberDecimal": "700000000000000000000000"
+      },
+      "maxBidDecimal": null,
+      "view": 13
+    },
+    {
+      "_id": "61076dd72e6e0d327fba7f3d",
+      "tokenId": "bafybeifllt47vu2mtyfppv4h67zo3webr3dwmfhbfpssdqx2jvgdfo2zuu",
+      "creatorId": "yasuoarts.near",
+      "supply": 20,
+      "createdAt": 1627876815709,
+      "updatedAt": 1628000880528,
+      "metadata": {
+        "name": "POWER UP",
+        "description": "The Power Within",
+        "collection": "LEVEL UP",
+        "royalty": "5",
+        "blurhash": "UyK,cUof-+t6~RbatOs-S^s,Rmj=$~s,V]Rk",
+        "image": "ipfs://bafybeih2vy3gx5f2o73hkapvo7iybutqflhqcdtigr3645sd5i4r6z3esu",
+        "imageWidth": 1280,
+        "imageHeight": 1780,
+        "createdAt": 1627876815709
+      },
+      "categories": [],
+      "ownerships": [
+        {
+          "_id": "61076dd7c3f4ce008a0252ed",
+          "id": "bafybeifllt47vu2mtyfppv4h67zo3webr3dwmfhbfpssdqx2jvgdfo2zuu::yasuoarts.near",
+          "createdAt": 1627876821745,
+          "ownerId": "yasuoarts.near",
+          "quantity": 20,
+          "tokenId": "bafybeifllt47vu2mtyfppv4h67zo3webr3dwmfhbfpssdqx2jvgdfo2zuu",
+          "updatedAt": 1628000880528,
+          "marketData": {
+            "quantity": 20,
+            "amount": "200000000000000000000000",
+            "amountDecimal": {
+              "$numberDecimal": "200000000000000000000000"
+            }
+          }
+        }
+      ],
+      "bidmarket": [],
+      "minPriceDecimal": {
+        "$numberDecimal": "200000000000000000000000"
+      },
+      "maxBidDecimal": null,
+      "view": 12
+    },
+    {
+      "_id": "6108f19d2e6e0d327fba8435",
+      "tokenId": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka",
+      "creatorId": "yasuoarts.near",
+      "supply": 20,
+      "createdAt": 1627976080211,
+      "updatedAt": 1627997768875,
+      "metadata": {
+        "name": "Juice Wrld ",
+        "description": "Juice Wrld as Phoenix in VALORANT",
+        "collection": "VALORANT",
+        "royalty": "10",
+        "blurhash": "USH^-b^l#S=HQSrCxHnj~Co#M{S3=|t7NGRi",
+        "image": "ipfs://bafybeiart3wizdmltr54zkod7mymkamnvzh6mq6g4n5fihrsyqrsbjugcy",
+        "imageWidth": 512,
+        "imageHeight": 712,
+        "createdAt": 1627976080211
+      },
+      "categories": [],
+      "ownerships": [
+        {
+          "_id": "6108f19dc3f4ce008a193f18",
+          "id": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka::yasuoarts.near",
+          "createdAt": 1627997741414,
+          "ownerId": "yasuoarts.near",
+          "quantity": 15,
+          "tokenId": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka",
+          "updatedAt": 1627997741414,
+          "marketData": {
+            "quantity": 15,
+            "amount": "100000000000000000000000",
+            "amountDecimal": {
+              "$numberDecimal": "100000000000000000000000"
+            }
+          }
+        },
+        {
+          "_id": "6109438ac3f4ce008a1e5e2b",
+          "id": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka::toni2411992.near",
+          "createdAt": 1627997175720,
+          "ownerId": "toni2411992.near",
+          "quantity": 2,
+          "tokenId": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka",
+          "updatedAt": 1627997175720
+        },
+        {
+          "_id": "61094516c3f4ce008a1e7939",
+          "id": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka::rabit.near",
+          "createdAt": 1627997460712,
+          "ownerId": "rabit.near",
+          "quantity": 1,
+          "tokenId": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka",
+          "updatedAt": 1627997460712
+        },
+        {
+          "_id": "6109462ec3f4ce008a1e8b6d",
+          "id": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka::mzarts.near",
+          "createdAt": 1627997741414,
+          "ownerId": "mzarts.near",
+          "quantity": 2,
+          "tokenId": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka",
+          "updatedAt": 1627997768875,
+          "marketData": {
+            "quantity": 1,
+            "amount": "1500000000000000000000000",
+            "amountDecimal": {
+              "$numberDecimal": "1500000000000000000000000"
+            }
+          }
+        }
+      ],
+      "bidmarket": [],
+      "minPriceDecimal": {
+        "$numberDecimal": "100000000000000000000000"
+      },
+      "maxBidDecimal": null,
+      "view": 16
+    },
+    {
+      "_id": "610827d12e6e0d327fba81b7",
+      "tokenId": "bafybeihymekqtbh4meuztqsuwkcdpjyh2hqfdiykpov36lk5tqfbhvjaki",
+      "creatorId": "yasuoarts.near",
+      "supply": 2,
+      "createdAt": 1627924421101,
+      "updatedAt": 1627996667952,
+      "metadata": {
+        "name": "E-GIRL",
+        "description": "A Futuristic Girl Gamer. ⭐⭐⭐",
+        "collection": "CYBERPUNK",
+        "royalty": "10",
+        "blurhash": "UZJ$q6Vs~D%3}GtRa0XS9?NEI-EKI.Ntt7Rj",
+        "image": "ipfs://bafybeias7m7xpl634imy5rulouj53wjuhx23j4ipxsdsbwop753imsjsae",
+        "imageWidth": 1280,
+        "imageHeight": 1780,
+        "createdAt": 1627924421101
+      },
+      "categories": [],
+      "ownerships": [
+        {
+          "_id": "610827d1c3f4ce008a0d6747",
+          "id": "bafybeihymekqtbh4meuztqsuwkcdpjyh2hqfdiykpov36lk5tqfbhvjaki::yasuoarts.near",
+          "createdAt": 1627999102325,
+          "ownerId": "yasuoarts.near",
+          "quantity": 1,
+          "tokenId": "bafybeihymekqtbh4meuztqsuwkcdpjyh2hqfdiykpov36lk5tqfbhvjaki",
+          "updatedAt": 1627999102325,
+          "marketData": {
+            "quantity": 1,
+            "amount": "3000000000000000000000000",
+            "amountDecimal": {
+              "$numberDecimal": "3000000000000000000000000"
+            }
+          }
+        },
+        {
+          "_id": "61094b7fc3f4ce008a1ee377",
+          "id": "bafybeihymekqtbh4meuztqsuwkcdpjyh2hqfdiykpov36lk5tqfbhvjaki::shambhala.near",
+          "createdAt": 1627999102325,
+          "ownerId": "shambhala.near",
+          "quantity": 1,
+          "tokenId": "bafybeihymekqtbh4meuztqsuwkcdpjyh2hqfdiykpov36lk5tqfbhvjaki",
+          "updatedAt": 1627999102325
+        }
+      ],
+      "bidmarket": [],
+      "minPriceDecimal": {
+        "$numberDecimal": "3000000000000000000000000"
+      },
+      "maxBidDecimal": null,
+      "view": 12
+    },
+    {
+      "_id": "61076b122e6e0d327fba7f36",
+      "tokenId": "bafybeieljmlh6obguxt24sgzanmmoqfjst64zamp5c42xgkxxnej2sszfi",
+      "creatorId": "yasuoarts.near",
+      "supply": 5,
+      "createdAt": 1627876105781,
+      "updatedAt": 1627912819491,
+      "metadata": {
+        "name": "Billie Eilish",
+        "description": "Billie Eilish is a popular American singer and songwriter and she's the first artist born in the 21st century to top the Billboard 200.",
+        "collection": "MUSIC ARTIST",
+        "royalty": "10",
+        "blurhash": "UE98^zs;Pnk;y;X4xvVa4VHsz?VsL%QoNFV@",
+        "image": "ipfs://bafybeiezcapbfsl66fllmafa3fr3oo3fcobbpukkulae4ykzfnjgktzx5m",
+        "imageWidth": 1280,
+        "imageHeight": 1780,
+        "createdAt": 1627876105781
+      },
+      "categories": [],
+      "ownerships": [
+        {
+          "_id": "61076b12c3f4ce008a02264c",
+          "id": "bafybeieljmlh6obguxt24sgzanmmoqfjst64zamp5c42xgkxxnej2sszfi::yasuoarts.near",
+          "createdAt": 1627876112495,
+          "ownerId": "yasuoarts.near",
+          "quantity": 5,
+          "tokenId": "bafybeieljmlh6obguxt24sgzanmmoqfjst64zamp5c42xgkxxnej2sszfi",
+          "updatedAt": 1627912819491,
+          "marketData": {
+            "quantity": 4,
+            "amount": "5000000000000000000000000",
+            "amountDecimal": {
+              "$numberDecimal": "5000000000000000000000000"
+            }
+          }
+        }
+      ],
+      "bidmarket": [],
+      "minPriceDecimal": {
+        "$numberDecimal": "5000000000000000000000000"
+      },
+      "maxBidDecimal": null,
+      "view": 14
+    },
+    {
+      "_id": "61077c892e6e0d327fba7f71",
+      "tokenId": "bafybeid5nggiyvffqrwlmtsaymuihtyylws2a6bagilg4pnan3jdgdb6ji",
+      "creatorId": "yasuoarts.near",
+      "supply": 50,
+      "createdAt": 1627880578519,
+      "updatedAt": 1627880583953,
+      "metadata": {
+        "name": "Demon Cyborg",
+        "description": "#1",
+        "collection": "CYBERPUNK",
+        "royalty": "5",
+        "blurhash": "UBIDBu~B0Lt70L-B9u0yo}%2bbNGNvEg^Qxt",
+        "image": "ipfs://bafybeih4tjcp6ujszsngmnnn355otknslulpq52qn3fvkmpnydxxjzan3a",
+        "imageWidth": 1280,
+        "imageHeight": 1780,
+        "createdAt": 1627880578519
+      },
+      "categories": [],
+      "ownerships": [
+        {
+          "_id": "61077c89c3f4ce008a033886",
+          "id": "bafybeid5nggiyvffqrwlmtsaymuihtyylws2a6bagilg4pnan3jdgdb6ji::yasuoarts.near",
+          "createdAt": 1627883747097,
+          "ownerId": "yasuoarts.near",
+          "quantity": 49,
+          "tokenId": "bafybeid5nggiyvffqrwlmtsaymuihtyylws2a6bagilg4pnan3jdgdb6ji",
+          "updatedAt": 1627883747097,
+          "marketData": {
+            "quantity": 49,
+            "amount": "700000000000000000000000",
+            "amountDecimal": {
+              "$numberDecimal": "700000000000000000000000"
+            }
+          }
+        },
+        {
+          "_id": "610788e4c3f4ce008a03f8fc",
+          "id": "bafybeid5nggiyvffqrwlmtsaymuihtyylws2a6bagilg4pnan3jdgdb6ji::starpause.near",
+          "createdAt": 1627883747097,
+          "ownerId": "starpause.near",
+          "quantity": 1,
+          "tokenId": "bafybeid5nggiyvffqrwlmtsaymuihtyylws2a6bagilg4pnan3jdgdb6ji",
+          "updatedAt": 1627883747097
+        }
+      ],
+      "bidmarket": [],
+      "minPriceDecimal": {
+        "$numberDecimal": "700000000000000000000000"
+      },
+      "maxBidDecimal": null,
+      "view": 13
+    },
+    {
+      "_id": "61076dd72e6e0d327fba7f3d",
+      "tokenId": "bafybeifllt47vu2mtyfppv4h67zo3webr3dwmfhbfpssdqx2jvgdfo2zuu",
+      "creatorId": "yasuoarts.near",
+      "supply": 20,
+      "createdAt": 1627876815709,
+      "updatedAt": 1628000880528,
+      "metadata": {
+        "name": "POWER UP",
+        "description": "The Power Within",
+        "collection": "LEVEL UP",
+        "royalty": "5",
+        "blurhash": "UyK,cUof-+t6~RbatOs-S^s,Rmj=$~s,V]Rk",
+        "image": "ipfs://bafybeih2vy3gx5f2o73hkapvo7iybutqflhqcdtigr3645sd5i4r6z3esu",
+        "imageWidth": 1280,
+        "imageHeight": 1780,
+        "createdAt": 1627876815709
+      },
+      "categories": [],
+      "ownerships": [
+        {
+          "_id": "61076dd7c3f4ce008a0252ed",
+          "id": "bafybeifllt47vu2mtyfppv4h67zo3webr3dwmfhbfpssdqx2jvgdfo2zuu::yasuoarts.near",
+          "createdAt": 1627876821745,
+          "ownerId": "yasuoarts.near",
+          "quantity": 20,
+          "tokenId": "bafybeifllt47vu2mtyfppv4h67zo3webr3dwmfhbfpssdqx2jvgdfo2zuu",
+          "updatedAt": 1628000880528,
+          "marketData": {
+            "quantity": 20,
+            "amount": "200000000000000000000000",
+            "amountDecimal": {
+              "$numberDecimal": "200000000000000000000000"
+            }
+          }
+        }
+      ],
+      "bidmarket": [],
+      "minPriceDecimal": {
+        "$numberDecimal": "200000000000000000000000"
+      },
+      "maxBidDecimal": null,
+      "view": 12
+    },
+    {
+      "_id": "6108f19d2e6e0d327fba8435",
+      "tokenId": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka",
+      "creatorId": "yasuoarts.near",
+      "supply": 20,
+      "createdAt": 1627976080211,
+      "updatedAt": 1627997768875,
+      "metadata": {
+        "name": "Juice Wrld ",
+        "description": "Juice Wrld as Phoenix in VALORANT",
+        "collection": "VALORANT",
+        "royalty": "10",
+        "blurhash": "USH^-b^l#S=HQSrCxHnj~Co#M{S3=|t7NGRi",
+        "image": "ipfs://bafybeiart3wizdmltr54zkod7mymkamnvzh6mq6g4n5fihrsyqrsbjugcy",
+        "imageWidth": 512,
+        "imageHeight": 712,
+        "createdAt": 1627976080211
+      },
+      "categories": [],
+      "ownerships": [
+        {
+          "_id": "6108f19dc3f4ce008a193f18",
+          "id": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka::yasuoarts.near",
+          "createdAt": 1627997741414,
+          "ownerId": "yasuoarts.near",
+          "quantity": 15,
+          "tokenId": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka",
+          "updatedAt": 1627997741414,
+          "marketData": {
+            "quantity": 15,
+            "amount": "100000000000000000000000",
+            "amountDecimal": {
+              "$numberDecimal": "100000000000000000000000"
+            }
+          }
+        },
+        {
+          "_id": "6109438ac3f4ce008a1e5e2b",
+          "id": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka::toni2411992.near",
+          "createdAt": 1627997175720,
+          "ownerId": "toni2411992.near",
+          "quantity": 2,
+          "tokenId": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka",
+          "updatedAt": 1627997175720
+        },
+        {
+          "_id": "61094516c3f4ce008a1e7939",
+          "id": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka::rabit.near",
+          "createdAt": 1627997460712,
+          "ownerId": "rabit.near",
+          "quantity": 1,
+          "tokenId": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka",
+          "updatedAt": 1627997460712
+        },
+        {
+          "_id": "6109462ec3f4ce008a1e8b6d",
+          "id": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka::mzarts.near",
+          "createdAt": 1627997741414,
+          "ownerId": "mzarts.near",
+          "quantity": 2,
+          "tokenId": "bafybeiakviycxpooc3fn23infhosubhp5hyk4mqtx4gyyatdp4jpjiyaka",
+          "updatedAt": 1627997768875,
+          "marketData": {
+            "quantity": 1,
+            "amount": "1500000000000000000000000",
+            "amountDecimal": {
+              "$numberDecimal": "1500000000000000000000000"
+            }
+          }
+        }
+      ],
+      "bidmarket": [],
+      "minPriceDecimal": {
+        "$numberDecimal": "100000000000000000000000"
+      },
+      "maxBidDecimal": null,
+      "view": 16
+    },
+    {
+      "_id": "610827d12e6e0d327fba81b7",
+      "tokenId": "bafybeihymekqtbh4meuztqsuwkcdpjyh2hqfdiykpov36lk5tqfbhvjaki",
+      "creatorId": "yasuoarts.near",
+      "supply": 2,
+      "createdAt": 1627924421101,
+      "updatedAt": 1627996667952,
+      "metadata": {
+        "name": "E-GIRL",
+        "description": "A Futuristic Girl Gamer. ⭐⭐⭐",
+        "collection": "CYBERPUNK",
+        "royalty": "10",
+        "blurhash": "UZJ$q6Vs~D%3}GtRa0XS9?NEI-EKI.Ntt7Rj",
+        "image": "ipfs://bafybeias7m7xpl634imy5rulouj53wjuhx23j4ipxsdsbwop753imsjsae",
+        "imageWidth": 1280,
+        "imageHeight": 1780,
+        "createdAt": 1627924421101
+      },
+      "categories": [],
+      "ownerships": [
+        {
+          "_id": "610827d1c3f4ce008a0d6747",
+          "id": "bafybeihymekqtbh4meuztqsuwkcdpjyh2hqfdiykpov36lk5tqfbhvjaki::yasuoarts.near",
+          "createdAt": 1627999102325,
+          "ownerId": "yasuoarts.near",
+          "quantity": 1,
+          "tokenId": "bafybeihymekqtbh4meuztqsuwkcdpjyh2hqfdiykpov36lk5tqfbhvjaki",
+          "updatedAt": 1627999102325,
+          "marketData": {
+            "quantity": 1,
+            "amount": "3000000000000000000000000",
+            "amountDecimal": {
+              "$numberDecimal": "3000000000000000000000000"
+            }
+          }
+        },
+        {
+          "_id": "61094b7fc3f4ce008a1ee377",
+          "id": "bafybeihymekqtbh4meuztqsuwkcdpjyh2hqfdiykpov36lk5tqfbhvjaki::shambhala.near",
+          "createdAt": 1627999102325,
+          "ownerId": "shambhala.near",
+          "quantity": 1,
+          "tokenId": "bafybeihymekqtbh4meuztqsuwkcdpjyh2hqfdiykpov36lk5tqfbhvjaki",
+          "updatedAt": 1627999102325
+        }
+      ],
+      "bidmarket": [],
+      "minPriceDecimal": {
+        "$numberDecimal": "3000000000000000000000000"
+      },
+      "maxBidDecimal": null,
+      "view": 12
+    },
+    {
+      "_id": "61076b122e6e0d327fba7f36",
+      "tokenId": "bafybeieljmlh6obguxt24sgzanmmoqfjst64zamp5c42xgkxxnej2sszfi",
+      "creatorId": "yasuoarts.near",
+      "supply": 5,
+      "createdAt": 1627876105781,
+      "updatedAt": 1627912819491,
+      "metadata": {
+        "name": "Billie Eilish",
+        "description": "Billie Eilish is a popular American singer and songwriter and she's the first artist born in the 21st century to top the Billboard 200.",
+        "collection": "MUSIC ARTIST",
+        "royalty": "10",
+        "blurhash": "UE98^zs;Pnk;y;X4xvVa4VHsz?VsL%QoNFV@",
+        "image": "ipfs://bafybeiezcapbfsl66fllmafa3fr3oo3fcobbpukkulae4ykzfnjgktzx5m",
+        "imageWidth": 1280,
+        "imageHeight": 1780,
+        "createdAt": 1627876105781
+      },
+      "categories": [],
+      "ownerships": [
+        {
+          "_id": "61076b12c3f4ce008a02264c",
+          "id": "bafybeieljmlh6obguxt24sgzanmmoqfjst64zamp5c42xgkxxnej2sszfi::yasuoarts.near",
+          "createdAt": 1627876112495,
+          "ownerId": "yasuoarts.near",
+          "quantity": 5,
+          "tokenId": "bafybeieljmlh6obguxt24sgzanmmoqfjst64zamp5c42xgkxxnej2sszfi",
+          "updatedAt": 1627912819491,
+          "marketData": {
+            "quantity": 4,
+            "amount": "5000000000000000000000000",
+            "amountDecimal": {
+              "$numberDecimal": "5000000000000000000000000"
+            }
+          }
+        }
+      ],
+      "bidmarket": [],
+      "minPriceDecimal": {
+        "$numberDecimal": "5000000000000000000000000"
+      },
+      "maxBidDecimal": null,
+      "view": 14
+    },
+    {
+      "_id": "61077c892e6e0d327fba7f71",
+      "tokenId": "bafybeid5nggiyvffqrwlmtsaymuihtyylws2a6bagilg4pnan3jdgdb6ji",
+      "creatorId": "yasuoarts.near",
+      "supply": 50,
+      "createdAt": 1627880578519,
+      "updatedAt": 1627880583953,
+      "metadata": {
+        "name": "Demon Cyborg",
+        "description": "#1",
+        "collection": "CYBERPUNK",
+        "royalty": "5",
+        "blurhash": "UBIDBu~B0Lt70L-B9u0yo}%2bbNGNvEg^Qxt",
+        "image": "ipfs://bafybeih4tjcp6ujszsngmnnn355otknslulpq52qn3fvkmpnydxxjzan3a",
+        "imageWidth": 1280,
+        "imageHeight": 1780,
+        "createdAt": 1627880578519
+      },
+      "categories": [],
+      "ownerships": [
+        {
+          "_id": "61077c89c3f4ce008a033886",
+          "id": "bafybeid5nggiyvffqrwlmtsaymuihtyylws2a6bagilg4pnan3jdgdb6ji::yasuoarts.near",
+          "createdAt": 1627883747097,
+          "ownerId": "yasuoarts.near",
+          "quantity": 49,
+          "tokenId": "bafybeid5nggiyvffqrwlmtsaymuihtyylws2a6bagilg4pnan3jdgdb6ji",
+          "updatedAt": 1627883747097,
+          "marketData": {
+            "quantity": 49,
+            "amount": "700000000000000000000000",
+            "amountDecimal": {
+              "$numberDecimal": "700000000000000000000000"
+            }
+          }
+        },
+        {
+          "_id": "610788e4c3f4ce008a03f8fc",
+          "id": "bafybeid5nggiyvffqrwlmtsaymuihtyylws2a6bagilg4pnan3jdgdb6ji::starpause.near",
+          "createdAt": 1627883747097,
+          "ownerId": "starpause.near",
+          "quantity": 1,
+          "tokenId": "bafybeid5nggiyvffqrwlmtsaymuihtyylws2a6bagilg4pnan3jdgdb6ji",
+          "updatedAt": 1627883747097
+        }
+      ],
+      "bidmarket": [],
+      "minPriceDecimal": {
+        "$numberDecimal": "700000000000000000000000"
+      },
+      "maxBidDecimal": null,
+      "view": 13
+    }
+  ],
+  "skip": 0,
+  "limit": 12
+}
