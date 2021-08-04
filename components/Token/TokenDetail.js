@@ -111,8 +111,10 @@ const TokenDetail = ({ localToken = TOKEN_DATA }) => {
                 {tabDetail('history')}
               </div>
               {activeTab === 'info' && <TabInfo localToken={localToken} />}
-              {activeTab === 'owners' && <TabOwners />}
-              {activeTab === 'history' && <TabHistory />}
+              {activeTab === 'owners' && <TabOwners localToken={localToken} />}
+              {activeTab === 'history' && (
+                <TabHistory localToken={localToken} />
+              )}
             </div>
           </Scrollbars>
           <div className="p-3">
