@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import ReactLinkify from 'react-linkify'
+import { parseDate } from 'utils/dateHelper'
 
 const TabInfo = ({ localToken }) => {
   return (
@@ -47,8 +48,7 @@ const TabInfo = ({ localToken }) => {
         <div className="w-1/2">
           <p className="text-sm text-white font-bold">Created</p>
           <p className="text-gray-100">
-            10 August 2021
-            {/* {parseDate(localToken.metadata.createdAt)} */}
+            {parseDate(localToken.metadata.createdAt)}
           </p>
         </div>
         <div className="w-1/2">
