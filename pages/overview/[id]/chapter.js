@@ -1,4 +1,4 @@
-import Nav from 'components/common/Nav'
+import Nav from 'components/Common/Nav'
 import ChapterInfo from 'components/Chapter/ChapterInfo'
 import ChapterLists from 'components/Chapter/ChapterLists'
 import { useRouter } from 'next/router'

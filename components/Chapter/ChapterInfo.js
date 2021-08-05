@@ -1,4 +1,4 @@
-import { Tab, TabList, Tabs } from 'components/common/Tabs'
+import { Tab, TabList, Tabs } from 'components/Common/Tabs'
 import { Blurhash } from 'react-blurhash'
 import { useRouter } from 'next/router'
 import { parseDate } from 'utils/dateHelper'
