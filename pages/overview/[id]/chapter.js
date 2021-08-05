@@ -7,7 +7,7 @@ import { COMIC_CHAPTER_DATA, COMIC_OVERVIEW_DATA } from 'constants/dummy'
 
 const LIMIT = 12
 
-const collection = ({ chapterInfo, accountId }) => {
+const Collection = ({ chapterInfo, accountId }) => {
   const router = useRouter()
 
   const scrollChapter = `${router.query.id}::collection`
@@ -60,7 +60,7 @@ const collection = ({ chapterInfo, accountId }) => {
   )
 }
 
-export default collection
+export default Collection
 
 export async function getServerSideProps({ params }) {
   const chapterRes = COMIC_OVERVIEW_DATA
