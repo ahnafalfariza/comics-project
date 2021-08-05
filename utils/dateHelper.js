@@ -2,6 +2,8 @@ import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
 
 TimeAgo.addDefaultLocale(en)
+const timeAgo = new TimeAgo('en-US')
+
 const monthNames = [
   'January',
   'February',
@@ -18,7 +20,6 @@ const monthNames = [
 ]
 
 export const formatTimeAgo = (date) => {
-  const timeAgo = new TimeAgo('en-US')
   return timeAgo.format(date)
 }
 

@@ -7,7 +7,7 @@ import { COMIC_COLLECTIBLES_DATA, COMIC_OVERVIEW_DATA } from 'constants/dummy'
 
 const LIMIT = 12
 
-const collectibles = ({ chapterInfo, accountId }) => {
+const Collectibles = ({ chapterInfo, accountId }) => {
   const router = useRouter()
 
   const scrollCollectibles = `${router.query.id}::collectibles`
@@ -17,6 +17,7 @@ const collectibles = ({ chapterInfo, accountId }) => {
   const [hasMore, setHasMore] = useState(true)
   const [isFetching, setIsFetching] = useState(false)
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     await fetchOwnerTokens()
   }, [router.query.id])
@@ -57,7 +58,7 @@ const collectibles = ({ chapterInfo, accountId }) => {
   )
 }
 
-export default collectibles
+export default Collectibles
 
 export async function getServerSideProps({ params }) {
   const chapterRes = COMIC_OVERVIEW_DATA
