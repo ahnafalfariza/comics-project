@@ -1,6 +1,6 @@
 import Nav from 'components/Common/Nav'
 import ChapterInfo from 'components/Chapter/ChapterInfo'
-import ChapterCollectibles from 'components/Chapter/ChapterCollectibles'
+import ChapterCollectibles from 'components/Token/TokenList'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { COMIC_COLLECTIBLES_DATA, COMIC_OVERVIEW_DATA } from 'constants/dummy'
