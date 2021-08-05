@@ -1,6 +1,6 @@
+import Token from 'components/Token/Token'
 import Head from 'next/head'
 import Image from 'next/image'
-import Card from '../components/common/Card'
 import near from '../lib/near'
 import styles from '../styles/Home.module.css'
 
@@ -34,7 +34,7 @@ export default function Home() {
         )}
 
         <div className="h-48 w-full">
-          <Card
+          <Token
             special
             imgUrl="https://cdn.paras.id/tr:w-300/bafybeiaslffvcxwkqpkhatxwbgtosk7gfds4uh4rtbahqy5j2xy4q3qu4a"
             initialRotate={{

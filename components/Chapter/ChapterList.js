@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { parseDate } from 'utils/dateHelper'
 
 const ChapterList = ({
   className = '',
@@ -26,7 +27,7 @@ const ChapterList = ({
   const listBadgeStyle = `${listBadgeBaseStyle} ${listBadgeResponsiveStyle}`
 
   return (
-    <div className={`sm:h-44 h-40 flex items-end ${className}`} {...rest}>
+    <div className={`sm:h-40 h-36 flex mb-4 items-end ${className}`} {...rest}>
       <div className={listWrapperStyle}>
         <div className={listCoverStyle} style={chapterImage} />
         <div className="sm:ml-36 ml-24 pl-1 w-full flex flex-col sm:flex-row sm:items-center items-start justify-between">
@@ -36,7 +37,7 @@ const ChapterList = ({
             </h5>
             <h3 className="text-white text-sm sm:text-xl">{data.title}</h3>
             <h5 className="text-blueGray-300 sm:text-sm text-xs">
-              {data.date}
+              {parseDate(data.date)}
             </h5>
           </div>
           <h4 className={listBadgeStyle}>{data.label}</h4>
