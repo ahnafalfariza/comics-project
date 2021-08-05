@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import Nav from 'components/common/Nav'
+import Nav from 'components/Common/Nav'
 import { COMIC_OVERVIEW_DATA } from 'constants/dummy'
 
 const ProfileDetail = ({ userProfile, accountId }) => {

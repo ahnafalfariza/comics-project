@@ -103,7 +103,7 @@ const Nav = () => {
   return (
     <>
       <div className="bg-background sticky z-30 top-0">
-        <div className="relative bg-background max-w-6xl m-auto flex p-4 items-center justify-between z-30">
+        <div className="relative bg-background max-w-6xl m-auto flex p-4 items-center justify-between z-40">
           <div className="block md:hidden">
             <HamburgerMenu
               isOpen={showHamburgerMenu}

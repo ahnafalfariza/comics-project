@@ -13,7 +13,8 @@ const Token = ({
   imgBlur,
   disableFlip = false,
   borderRadius = '10px',
-  special = false,
+  shadow = 'default',
+  hoverMouse = true,
 }) => {
   const containerRef = useRef()
   const cardRef = useRef()
@@ -59,6 +60,10 @@ const Token = ({
   }, [containerRef, imgHeight, imgWidth])
 
   const handleMouseMove = (e) => {
+    if (!hoverMouse) {
+      return
+    }
+
     const bbox = cardRef.current.getBoundingClientRect()
 
     const mouseX = e.pageX - (bbox.left + window.scrollX) - dimension.width / 2
@@ -88,6 +93,15 @@ const Token = ({
       return
     }
     setIsShowFront(!isShowFront)
+  }
+
+  const boxShadow = () => {
+    if (shadow === 'special') {
+      return 'rgba(255, 255, 255, 0.2) 0 0 40px 5px, white 0 0 0 1px,rgba(0, 0, 0, 0.66) 0 30px 60px 0'
+    } else if (shadow === 'none') {
+      return 'none'
+    }
+    return ''
   }
 
   return (
@@ -122,13 +136,11 @@ const Token = ({
           }}
         >
           <div
-            className="card  bg-gray-800 w-full h-full"
+            className="card bg-gray-800 w-full h-full"
             style={{
               transform: `rotateY(${rotate.x}deg) rotateX(${rotate.y}deg)`,
               borderRadius: borderRadius,
-              boxShadow:
-                special &&
-                'rgba(255, 255, 255, 0.2) 0 0 40px 5px, white 0 0 0 1px,rgba(0, 0, 0, 0.66) 0 30px 60px 0',
+              boxShadow: boxShadow(),
             }}
           >
             <div className="card-bg relative">
