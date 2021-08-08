@@ -12,9 +12,9 @@ const IconArrowNarrow = ({ size, color, ...props }) => (
     <path
       d="M17 8L21 12M21 12L17 16M21 12H3"
       stroke={color}
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 )

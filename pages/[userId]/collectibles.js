@@ -1,18 +1,19 @@
-import { COMIC_COLLECTIBLES_DATA } from 'constants/dummy'
+import Head from 'components/Common/Head'
 import TokenList from 'components/Token/TokenList'
+import Layout from 'components/Layout'
+import Profile from 'components/Profile'
 
-const { default: Nav } = require('components/Common/Nav')
-const { default: Profile } = require('components/Profile')
+import { COMIC_COLLECTIBLES_DATA } from 'constants/dummy'
 
 const ProfilePageCollectibles = () => {
   return (
-    <div>
-      <Nav />
+    <Layout>
+      <Head />
       <Profile />
       <div className="max-w-5xl m-auto pb-16">
         <TokenList tokens={COMIC_COLLECTIBLES_DATA.results} />
       </div>
-    </div>
+    </Layout>
   )
 }
 

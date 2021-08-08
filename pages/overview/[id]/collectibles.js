@@ -1,8 +1,11 @@
-import Nav from 'components/Common/Nav'
-import ChapterInfo from 'components/Chapter/ChapterInfo'
-import ChapterCollectibles from 'components/Token/TokenList'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+
+import Layout from 'components/Layout'
+import Head from 'components/Common/Head'
+import ChapterInfo from 'components/Chapter/ChapterInfo'
+import ChapterCollectibles from 'components/Token/TokenList'
+
 import { COMIC_COLLECTIBLES_DATA, COMIC_OVERVIEW_DATA } from 'constants/dummy'
 
 const LIMIT = 12
@@ -45,8 +48,8 @@ const Collectibles = ({ chapterInfo, accountId }) => {
   }
 
   return (
-    <div className="min-h-screen">
-      <Nav />
+    <Layout>
+      <Head title={chapterInfo.title} description={chapterInfo.description} />
       <ChapterInfo data={chapterInfo} defaultIndex={1} />
       <ChapterCollectibles
         name={scrollCollectibles}
@@ -54,7 +57,7 @@ const Collectibles = ({ chapterInfo, accountId }) => {
         fetchData={fetchOwnerTokens}
         hasMore={hasMore}
       />
-    </div>
+    </Layout>
   )
 }
 

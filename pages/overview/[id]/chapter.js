@@ -1,8 +1,11 @@
-import Nav from 'components/Common/Nav'
-import ChapterInfo from 'components/Chapter/ChapterInfo'
-import ChapterLists from 'components/Chapter/ChapterLists'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+
+import Layout from 'components/Layout'
+import Head from 'components/Common/Head'
+import ChapterInfo from 'components/Chapter/ChapterInfo'
+import ChapterLists from 'components/Chapter/ChapterLists'
+
 import { COMIC_CHAPTER_DATA, COMIC_OVERVIEW_DATA } from 'constants/dummy'
 
 const LIMIT = 12
@@ -17,6 +20,7 @@ const Collection = ({ chapterInfo, accountId }) => {
   const [hasMore, setHasMore] = useState(true)
   const [isFetching, setIsFetching] = useState(false)
 
+  // eslint-disable-next-line
   useEffect(async () => {
     await fetchChapter(true)
   }, [router.query.id])
@@ -45,8 +49,8 @@ const Collection = ({ chapterInfo, accountId }) => {
   }
 
   return (
-    <div className="min-h-screen">
-      <Nav />
+    <Layout>
+      <Head title={chapterInfo.title} description={chapterInfo.description} />
       <ChapterInfo data={chapterInfo} />
       <div className="mb-9 px-4">
         <ChapterLists
@@ -56,7 +60,7 @@ const Collection = ({ chapterInfo, accountId }) => {
           hasMore={hasMore}
         />
       </div>
-    </div>
+    </Layout>
   )
 }
 

@@ -1,6 +1,9 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import Nav from 'components/Common/Nav'
+
+import Layout from 'components/Layout'
+import Head from 'components/Common/Head'
+
 import { COMIC_OVERVIEW_DATA } from 'constants/dummy'
 
 const ProfileDetail = ({ userProfile, accountId }) => {
@@ -11,10 +14,10 @@ const ProfileDetail = ({ userProfile, accountId }) => {
   }, [router.query.id])
 
   return (
-    <div className="min-h-screen">
-      <Nav />
+    <Layout>
+      <Head />
       <div className="h-screen" />
-    </div>
+    </Layout>
   )
 }
 

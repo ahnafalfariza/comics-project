@@ -12,9 +12,9 @@ const IconChevron = ({ size, color, ...props }) => (
     <path
       d="M9 5L16 12L9 19"
       stroke={color}
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 )

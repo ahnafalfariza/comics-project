@@ -1,10 +1,12 @@
-import Nav from 'components/Common/Nav'
+import Head from 'components/Common/Head'
+import Layout from 'components/Layout'
 
 const Collectibles = () => {
   return (
-    <div>
-      <Nav />
-    </div>
+    <Layout>
+      <Head />
+      <div>Collectibles</div>
+    </Layout>
   )
 }
 

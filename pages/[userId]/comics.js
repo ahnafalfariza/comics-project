@@ -1,14 +1,15 @@
-import Nav from 'components/Common/Nav'
-import ChapterListProfile from 'components/Chapter/ChapterListProfile'
+import Layout from 'components/Layout'
+import Head from 'components/Common/Head'
 import Profile from 'components/Profile'
+import ChapterListProfile from 'components/Chapter/ChapterListProfile'
 
 const ProfilePageComics = () => {
   return (
-    <div>
-      <Nav />
+    <Layout>
+      <Head />
       <Profile />
       <ChapterListProfile />
-    </div>
+    </Layout>
   )
 }
 

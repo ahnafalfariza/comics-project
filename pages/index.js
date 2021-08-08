@@ -1,9 +1,11 @@
-import Nav from 'components/Common/Nav'
+import Head from 'components/Common/Head'
+import Layout from 'components/Layout'
 
 export default function Home() {
   return (
-    <div>
-      <Nav />
-    </div>
+    <Layout>
+      <Head />
+      <div>Home</div>
+    </Layout>
   )
 }
