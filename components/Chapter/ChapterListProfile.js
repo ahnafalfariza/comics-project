@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 import Token from 'components/Token/Token'
 import { parseImgUrl } from 'utils/common'
+import comicsStyles from 'styles/Comics.module.css'
 
 const LIMIT = 8
 
@@ -132,7 +133,7 @@ const ChapterListProfile = ({
           <div className="relative">
             <div
               ref={shelvesRef}
-              className="flex flex-shrink-0 flex-nowraps pt-6 pb-2 w-full relative overflow-x-auto"
+              className={`flex flex-shrink-0 flex-nowraps pt-6 pb-2 w-full relative overflow-x-auto ${comicsStyles.chapterListProfile}`}
             >
               {tokens.map((token) => (
                 <div
