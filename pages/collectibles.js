@@ -1,5 +1,11 @@
+import Nav from 'components/Common/Nav'
+
 const Collectibles = () => {
-  return <div>Collectibles Page</div>
+  return (
+    <div>
+      <Nav />
+    </div>
+  )
 }
 
 export default Collectibles

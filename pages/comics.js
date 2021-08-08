@@ -1,5 +1,11 @@
+import Nav from 'components/Common/Nav'
+
 const Comics = () => {
-  return <div>Comics Page</div>
+  return (
+    <div>
+      <Nav />
+    </div>
+  )
 }
 
 export default Comics
