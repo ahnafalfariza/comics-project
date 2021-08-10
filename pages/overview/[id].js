@@ -6,11 +6,11 @@ import Head from 'components/Common/Head'
 
 import { COMIC_OVERVIEW_DATA } from 'constants/dummy'
 
-const ProfileDetail = ({ userProfile, accountId }) => {
+const OverviewPage = ({ userProfile, accountId }) => {
   const router = useRouter()
 
   useEffect(() => {
-    router.replace(`${accountId}/collectibles`)
+    router.replace(`${accountId}/chapter`)
   }, [router.query.id])
 
   return (
@@ -29,4 +29,4 @@ export async function getServerSideProps({ params }) {
   }
 }
 
-export default ProfileDetail
+export default OverviewPage

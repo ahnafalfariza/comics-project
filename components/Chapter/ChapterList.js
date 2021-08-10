@@ -5,6 +5,7 @@ const ChapterList = ({
   className = '',
   data = { chapter: '', cover: '', title: '', date: '', label: '' },
   rest = {},
+  onClick = () => {},
 }) => {
   const chapterImage = {
     backgroundImage: `url(${data.cover})`,
@@ -27,7 +28,11 @@ const ChapterList = ({
   const listBadgeStyle = `${listBadgeBaseStyle} ${listBadgeResponsiveStyle}`
 
   return (
-    <div className={`sm:h-40 h-36 flex mb-4 items-end ${className}`} {...rest}>
+    <div
+      className={`sm:h-40 h-36 flex mb-4 items-end ${className}`}
+      onClick={onClick}
+      {...rest}
+    >
       <div className={listWrapperStyle}>
         <div className={listCoverStyle} style={chapterImage} />
         <div className="sm:ml-36 ml-24 pl-1 w-full flex flex-col sm:flex-row sm:items-center items-start justify-between">

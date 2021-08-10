@@ -52,14 +52,12 @@ const Collection = ({ chapterInfo, accountId }) => {
     <Layout>
       <Head title={chapterInfo.title} description={chapterInfo.description} />
       <ChapterInfo data={chapterInfo} />
-      <div className="mb-9 px-4">
-        <ChapterLists
-          name={scrollChapter}
-          chapters={chapters}
-          fetchData={fetchChapter}
-          hasMore={hasMore}
-        />
-      </div>
+      <ChapterLists
+        name={scrollChapter}
+        chapters={chapters}
+        fetchData={fetchChapter}
+        hasMore={hasMore}
+      />
     </Layout>
   )
 }
