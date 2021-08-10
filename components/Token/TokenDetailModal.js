@@ -19,14 +19,20 @@ const TokenDetailModal = ({ tokens = [] }) => {
   }
 
   useEffect(() => {
+    router.beforePopState((state) => {
+      state.options.scroll = false
+      return true
+    })
+  }, [router])
+
+  useEffect(() => {
     if (router.query.tokenId) {
       const token = tokens.find(
         (token) => token?.tokenId === router.query.tokenId
       )
       setActiveToken(token)
     } else {
-      setActiveToken(tokens[0])
-      // setActiveToken(null)
+      setActiveToken(null)
     }
   }, [router.query, tokens])
 

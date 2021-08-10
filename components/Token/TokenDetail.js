@@ -12,7 +12,7 @@ import TabInfo from './Tabs/TabInfo'
 import TabOwners from './Tabs/TabOwners'
 import TabHistory from './Tabs/TabHistory'
 
-const TokenDetail = ({ localToken = TOKEN_DATA }) => {
+const TokenDetail = ({ localToken = TOKEN_DATA, className }) => {
   const [activeTab, setActiveTab] = useState('info')
 
   const changeActiveTab = (tab) => {
@@ -35,7 +35,7 @@ const TokenDetail = ({ localToken = TOKEN_DATA }) => {
   }
 
   return (
-    <div className="max-w-6xl m-auto">
+    <div className={`max-w-6xl m-auto ${className}`}>
       <div
         className="flex flex-wrap h-full rounded-lg overflow-hidden"
         style={{ height: `85vh` }}

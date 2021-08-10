@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import JSBI from 'jsbi'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import TokenListLoader from 'components/Token/TokenListLoader'
+import TokenDetailModal from './TokenDetailModal'
 // import TokenDetailModal from 'components/Token/TokenDetailModal'
 
 //
@@ -77,7 +78,7 @@ const TokenList = ({
 
   return (
     <div ref={containerRef} className="overflow-x-hidden max-w-5xl mx-auto">
-      {/* <TokenDetailModal tokens={tokens} /> */}
+      <TokenDetailModal tokens={tokens} />
       {tokens.length === 0 && !hasMore && (
         <div className="w-full">
           <div className="m-auto text-2xl text-gray-600 font-semibold py-32 text-center">
@@ -99,7 +100,7 @@ const TokenList = ({
             return (
               <div
                 key={token.tokenId}
-                className={`w-full md:w-1/3 lg:w-1/4 flex-shrink-0 p-8 relative ${
+                className={`w-1/2 md:w-1/3 lg:w-1/4 flex-shrink-0 p-8 relative ${
                   toggleOwnership
                   // &&
                   // !_getUserOwnership(store.currentUser, token.ownerships) &&
