@@ -127,8 +127,8 @@ const Nav = () => {
             <Link href="/comics">
               <a className="hidden md:block">Comics</a>
             </Link>
-            <Link href="/collectibles">
-              <a className="hidden md:block">Collectibles</a>
+            <Link href="/market">
+              <a className="hidden md:block">Market</a>
             </Link>
           </div>
           {near.isLoggedIn() ? (
@@ -165,8 +165,8 @@ const Nav = () => {
                 </Link>
               </div>
               <div className="p-3">
-                <Link href="/collectibles">
-                  <a>Collectibles</a>
+                <Link href="/market">
+                  <a>Market</a>
                 </Link>
               </div>
             </div>

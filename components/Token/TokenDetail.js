@@ -40,7 +40,7 @@ const TokenDetail = ({ localToken = TOKEN_DATA, className }) => {
         className="flex flex-wrap h-full rounded-lg overflow-hidden"
         style={{ height: `85vh` }}
       >
-        <div className="w-full h-1/2 lg:h-full lg:w-3/5 bg-dark-primary-1 p-12 relative">
+        <div className="w-full h-1/2 lg:h-full lg:w-3/5 bg-black p-12 relative">
           <div className="absolute inset-0 opacity-75">
             <Blurhash
               hash={

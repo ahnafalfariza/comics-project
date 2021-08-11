@@ -16,6 +16,7 @@ const TokenList = ({
   tokens,
   fetchData,
   hasMore,
+  containerClassName = '',
   toggleOwnership = false,
 }) => {
   // const store = useStore()
@@ -93,19 +94,14 @@ const TokenList = ({
         dataLength={tokens.length}
         next={fetchData}
         hasMore={hasMore}
-        loader={<TokenListLoader />}
+        loader={<TokenListLoader className={containerClassName} />}
       >
         <div className="flex flex-wrap select-none">
           {tokens.map((token) => {
             return (
               <div
                 key={token.tokenId}
-                className={`w-1/2 md:w-1/3 lg:w-1/4 flex-shrink-0 p-8 relative ${
-                  toggleOwnership
-                  // &&
-                  // !_getUserOwnership(store.currentUser, token.ownerships) &&
-                  // 'opacity-25'
-                }`}
+                className={`w-1/2 md:w-1/3 lg:w-1/4 flex-shrink-0 p-4 relative ${containerClassName}`}
               >
                 <div className="w-full m-auto">
                   <Token
@@ -129,7 +125,7 @@ const TokenList = ({
                   />
                 </div>
                 <div className="text-center">
-                  <div className="mt-8">
+                  <div className="mt-4 md:mt-8">
                     <div className="p-2">
                       <p className="text-gray-400 text-xs">Start From</p>
                       <div className="text-gray-100 text-2xl">
