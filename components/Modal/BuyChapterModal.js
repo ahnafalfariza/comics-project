@@ -1,6 +1,7 @@
 import Button from 'components/Common/Button'
 import Modal from 'components/Common/Modal'
 import { IconX, IconXCircle } from 'components/Icons'
+import { useRouter } from 'next/router'
 
 const BuyChapterModal = ({
   data = {
@@ -13,7 +14,18 @@ const BuyChapterModal = ({
   },
   active,
   onClose,
+  owned = true,
 }) => {
+  const router = useRouter()
+
+  const onClickMarket = () => {
+    router.push('/market')
+  }
+
+  const onClickReadNow = () => {
+    router.push('/viewer/123')
+  }
+
   return (
     <Modal closeOnBgClick closeOnEscape isShow={active} close={onClose}>
       <div className="relative m-auto">
@@ -29,7 +41,7 @@ const BuyChapterModal = ({
           >
             <div className="w-full h-full bg-gradient-to-b from-transparent via-transparent to-blueGray-800 md:to-transparent" />
           </div>
-          <div className="-mt-16 md:mt-0 md:w-3/5 relative p-6 md:p-8 flex flex-col justify-between h-96">
+          <div className="-mt-16 md:mt-0 md:w-3/5 relative p-6 md:p-8 flex flex-col justify-between md:h-96">
             <div>
               <p className="text-2xl text-gray-50">{data.title}</p>
               <p className="text-blueGray-400 text-lg">
@@ -39,17 +51,28 @@ const BuyChapterModal = ({
                 {data.desc}
               </p>
             </div>
-            <div>
-              <Button size="md" isFullWidth>
-                Buy for 1
+            {owned ? (
+              <Button size="md" isFullWidth onClick={onClickReadNow}>
+                Read Now
               </Button>
-              <p className="text-blueGray-400 text-xs my-3 text-center">
-                Looking for other?
-              </p>
-              <Button size="md" isFullWidth variant="ghost">
-                Buy for {data.price} Ⓝ
-              </Button>
-            </div>
+            ) : (
+              <div>
+                <Button size="md" isFullWidth>
+                  Buy for 1 {data.price} Ⓝ
+                </Button>
+                <p className="text-blueGray-400 text-xs my-3 text-center">
+                  Looking for other?
+                </p>
+                <Button
+                  size="md"
+                  isFullWidth
+                  variant="ghost"
+                  onClick={onClickMarket}
+                >
+                  Go to Marketplace
+                </Button>
+              </div>
+            )}
             <div
               className="absolute top-0 right-0 m-4 cursor-pointer hidden md:block"
               onClick={onClose}
