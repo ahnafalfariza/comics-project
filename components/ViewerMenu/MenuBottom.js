@@ -1,8 +1,11 @@
 import { forwardRef } from 'react'
 
 import { IconGift, IconMessageCircle } from 'components/Icons'
+import useStore from 'lib/store'
 
 const MenuBottom = forwardRef(({ showMenu }, ref) => {
+  const setShowComment = useStore((state) => state.setShowComment)
+
   return (
     <div
       ref={ref}
@@ -13,10 +16,17 @@ const MenuBottom = forwardRef(({ showMenu }, ref) => {
       <div className="bg-background relative">
         <div className="flex max-w-xl m-auto p-4 items-center justify-between">
           <div className="flex items-center">
-            <IconGift size={20} color="#ffffff" />
-            <p className="text-white ml-2 text-sm">Support</p>
-            <IconMessageCircle size={20} color="#ffffff" className="ml-4" />
-            <p className="text-white ml-2 text-sm">Comment</p>
+            <div className="flex items-center cursor-pointer">
+              <IconGift size={20} color="#ffffff" />
+              <p className="text-white ml-2 text-sm">Support</p>
+            </div>
+            <div
+              className="ml-4 flex items-center cursor-pointer"
+              onClick={setShowComment}
+            >
+              <IconMessageCircle size={20} color="#ffffff" />
+              <p className="text-white ml-2 text-sm">Comment</p>
+            </div>
           </div>
           <div>
             <p className="text-white">Ch 4</p>
