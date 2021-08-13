@@ -102,7 +102,7 @@ const Nav = () => {
 
   return (
     <>
-      <div className="bg-background sticky z-30 top-0">
+      <div ref={mobileMenuRef} className="bg-background sticky z-30 top-0">
         <div className="relative bg-background max-w-6xl m-auto flex p-4 items-center justify-between z-40">
           <div className="block md:hidden">
             <HamburgerMenu
@@ -147,7 +147,7 @@ const Nav = () => {
             </Button>
           )}
         </div>
-        <div ref={mobileMenuRef} className="relative">
+        <div className="relative">
           <div
             className={`absolute bg-background left-0 z-30 right-0 transform transition-transform duration-500 ${
               showHamburgerMenu ? 'translate-y-0' : '-translate-y-96'

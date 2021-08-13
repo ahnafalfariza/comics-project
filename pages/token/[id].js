@@ -14,7 +14,9 @@ const TokenPage = ({ errorCode, token }) => {
 }
 
 export async function getServerSideProps({ params }) {
-  const res = await axios(`${process.env.API_URL}/tokens?tokenId=${params.id}`)
+  const res = await axios(
+    `${process.env.PARAS_API_URL}/tokens?tokenId=${params.id}`
+  )
   const token = (await res.data.data.results[0]) || null
 
   const errorCode = token ? false : 404

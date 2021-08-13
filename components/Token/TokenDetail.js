@@ -11,9 +11,12 @@ import { parseImgUrl } from 'utils/common'
 import TabInfo from './Tabs/TabInfo'
 import TabOwners from './Tabs/TabOwners'
 import TabHistory from './Tabs/TabHistory'
+import BuyTokenModal from 'components/Modal/BuyTokenModal'
+import ListModal from 'components/Modal/ListModal'
 
 const TokenDetail = ({ localToken = TOKEN_DATA, className }) => {
   const [activeTab, setActiveTab] = useState('info')
+  const [showModal, setShowModal] = useState(null)
 
   const changeActiveTab = (tab) => {
     setActiveTab(tab)
@@ -33,6 +36,18 @@ const TokenDetail = ({ localToken = TOKEN_DATA, className }) => {
       </div>
     )
   }
+
+  const onDismissModal = () => {
+    setShowModal(null)
+  }
+
+  const listModalItem = [
+    { name: 'Copy Link', onClick: () => {} },
+    { name: 'Share to...', onClick: () => {} },
+    { name: 'Update Listing', onClick: () => {} },
+    { name: 'Transfer Card', onClick: () => {} },
+    { name: 'Burn Card', onClick: () => {} },
+  ]
 
   return (
     <div className={`max-w-6xl m-auto ${className}`}>
@@ -102,7 +117,10 @@ const TokenDetail = ({ localToken = TOKEN_DATA, className }) => {
                   </p>
                 </div>
                 <div>
-                  <IconDots color="#ffffff" />
+                  <IconDots
+                    color="#ffffff"
+                    onClick={() => setShowModal('list')}
+                  />
                 </div>
               </div>
               <div className="flex mt-3 space-x-4">
@@ -118,10 +136,21 @@ const TokenDetail = ({ localToken = TOKEN_DATA, className }) => {
             </div>
           </Scrollbars>
           <div className="p-3">
-            <Button isFullWidth>Buy for 1 Ⓝ</Button>
+            <Button onClick={() => setShowModal('confirmBuy')} isFullWidth>
+              Buy for 1 Ⓝ
+            </Button>
           </div>
         </div>
       </div>
+      <BuyTokenModal
+        show={showModal === 'confirmBuy'}
+        onClose={onDismissModal}
+      />
+      <ListModal
+        list={listModalItem}
+        show={showModal === 'list'}
+        onClose={onDismissModal}
+      />
     </div>
   )
 }
