@@ -29,7 +29,7 @@ const CommentList = () => {
     <div className="w-full md:max-w-lg bg-blueGray-800 p-3 h-2/3 flex flex-col m-auto">
       <div className="flex items-center justify-between p-3">
         <p className="text-xl font-medium text-white">Comments (4)</p>
-        <IconX onClick={setShowComment} />
+        <IconX onClick={setShowComment} className="cursor-pointer" />
       </div>
       <hr className="my-2 -mx-3 opacity-20" />
       <Scrollbars
@@ -102,12 +102,14 @@ const Comment = ({
       <div className="flex items-center">
         <IconThumbUp
           className="cursor-pointer"
-          onClick={() => likeComment(data._id)}
+          onClick={() => likeComment(data._id, data.userLikes === 'likes')}
           {...(data.userLikes === 'likes' && { color: '#60A5FA' })}
         />
         <p className="text-xs text-blueGray-200">{data.likes}</p>
         <IconThumbDown
-          onClick={() => dislikeComment(data._id)}
+          onClick={() =>
+            dislikeComment(data._id, data.userLikes === 'dislikes')
+          }
           className="ml-3 cursor-pointer"
           {...(data.userLikes === 'dislikes' && { color: '#60A5FA' })}
         />

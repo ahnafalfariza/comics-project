@@ -12,11 +12,16 @@ const MenuTop = forwardRef(({ showMenu }, ref) => {
     >
       <div className="bg-background relative">
         <div className="flex max-w-xl m-auto p-4 items-center">
-          <IconArrow size={20} transform="scale(-1,1)" color="#ffffff" />
+          <IconArrow
+            size={20}
+            transform="scale(-1,1)"
+            color="#ffffff"
+            className="cursor-pointer"
+          />
           <p className="text-white ml-4 flex-1 text-sm md:text-base lg:text-lg">
             Paradigm - Chapter 1
           </p>
-          <IconShare size={20} color="#ffffff" />
+          <IconShare size={20} color="#ffffff" className="cursor-pointer" />
         </div>
       </div>
     </div>
