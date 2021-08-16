@@ -1,0 +1,8 @@
+@media screen and (min-width: 720px) {
+  .latestComic {
+    background-image: url('https://ipfs.fleek.co/ipfs/bafybeiekmxwrljpvorvm2tkss27rd7axzylbedig46gkzboupjbmvc5tii');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+}

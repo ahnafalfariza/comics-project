@@ -2,12 +2,24 @@ import Button from 'components/Common/Button'
 import Head from 'components/Common/Head'
 import Layout from 'components/Layout'
 
+import HomeStyles from 'styles/Home.module.css'
+
 export default function Home() {
   return (
     <Layout>
       <Head />
       <div className="py-12 md:px-8">
-        <div className="max-w-6xl m-auto py-16 px-4 flex">
+        <div className="max-w-6xl m-auto py-16 px-4 md:flex md:flex-row-reverse">
+          <div
+            className="flex-1 h-64 mb-8"
+            style={{
+              backgroundImage:
+                'url("https://ipfs.fleek.co/ipfs/bafybeifcszvyf5rkpjzuugjejdj3g4jbizzedq7yprbu33s3eokvyd6tbm")',
+              backgroundPositionX: 'right',
+              backgroundSize: 'contain',
+              backgroundRepeat: 'no-repeat',
+            }}
+          />
           <div className="flex-1">
             <div className="text-5xl font-bold mb-4 text-white w-96 leading-normal">
               Digital Comic and Beyond
@@ -19,31 +31,12 @@ export default function Home() {
             </div>
             <Button size="lg">Read Comics</Button>
           </div>
-          <div
-            className="flex-1"
-            style={{
-              backgroundImage:
-                'url("https://ipfs.fleek.co/ipfs/bafybeifcszvyf5rkpjzuugjejdj3g4jbizzedq7yprbu33s3eokvyd6tbm")',
-              backgroundPositionX: 'right',
-              backgroundSize: 'contain',
-              backgroundRepeat: 'no-repeat',
-            }}
-          ></div>
         </div>
 
-        <div className="text-5xl font-bold mb-4 text-white leading-normal text-center pt-16">
+        <div className="px-4 text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white leading-normal md:text-center pt-16">
           Latest Comic
         </div>
-        <div
-          className="py-36"
-          style={{
-            backgroundImage:
-              'url("https://ipfs.fleek.co/ipfs/bafybeiekmxwrljpvorvm2tkss27rd7axzylbedig46gkzboupjbmvc5tii")',
-            backgroundPosition: 'center',
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-          }}
-        >
+        <div className={`pb-16 md:py-36 ${HomeStyles.latestComic}`}>
           <div className="max-w-6xl m-auto px-4">
             <div className="text-5xl font-medium mb-4 text-white">Paradigm</div>
             <div className="text-gray-200 md:w-1/2 mb-8">
