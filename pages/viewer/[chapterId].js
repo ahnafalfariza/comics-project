@@ -42,7 +42,7 @@ const ChapterView = () => {
   }, [menuTopRef, menuBottomRef, showMenu, showComment])
 
   return (
-    <Layout showNav={false} className="bg-black">
+    <Layout showNav={false} showFooter={false} className="bg-black">
       <MenuTop ref={menuTopRef} showMenu={showMenu} />
       <MenuBottom ref={menuBottomRef} showMenu={showMenu} />
       <div className="bg-red-200 h-screen" />

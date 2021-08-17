@@ -21,7 +21,7 @@ export default function Home() {
             }}
           />
           <div className="flex-1">
-            <div className="text-5xl font-bold mb-4 text-white w-96 leading-normal">
+            <div className="text-5xl font-bold mb-4 text-white md:w-96 leading-normal">
               Digital Comic and Beyond
             </div>
             <div className="text-xl mb-12 text-gray-200">
