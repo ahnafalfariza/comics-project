@@ -1,8 +1,10 @@
+import Head from 'components/Common/Head'
 import Layout from 'components/Layout'
 
 const Faq = () => {
   return (
     <Layout>
+      <Head />
       <div className="max-w-4xl m-auto py-12 px-4">
         <div className="text-center text-white font-bold text-4xl mb-8">
           Frequently Asked Question
