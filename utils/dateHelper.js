@@ -20,7 +20,7 @@ const monthNames = [
 ]
 
 export const formatTimeAgo = (date) => {
-  return timeAgo.format(date)
+  return timeAgo.format(new Date(date))
 }
 
 export const parseDate = (ts) => {

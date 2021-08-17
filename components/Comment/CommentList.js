@@ -11,7 +11,7 @@ import { IconThumbDown, IconThumbUp, IconX } from 'components/Icons'
 import CommentsLoader from './CommentsLoader'
 
 import { PROFILE_IMAGE } from 'constants/dummy'
-import { parseDate } from 'utils/dateHelper'
+import { formatTimeAgo } from 'utils/dateHelper'
 
 const CommentList = () => {
   const [commentText, setCommentText] = useState('')
@@ -28,7 +28,7 @@ const CommentList = () => {
   return (
     <div className="w-full md:max-w-lg bg-blueGray-800 p-3 h-2/3 flex flex-col m-auto">
       <div className="flex items-center justify-between p-3">
-        <p className="text-xl font-medium text-white">Comments (4)</p>
+        <p className="text-xl font-medium text-white">Comments</p>
         <IconX onClick={setShowComment} className="cursor-pointer" />
       </div>
       <hr className="my-2 -mx-3 opacity-20" />
@@ -78,42 +78,57 @@ const CommentList = () => {
 const Comment = ({
   data = {
     _id: '6114bb0dbac918f0a4f2c8eb',
-    accountId: 'p123.testnet',
+    account_id: 'p123.testnet',
     body: 'hello 23',
-    chapterId: '1',
-    comicId: 'paradigm',
-    createdAt: 1628742532450,
-    userLikes: null,
+    chapter_id: '1',
+    comic_id: 'paradigm',
+    issued_at: '2021-08-17T06:43:00.486Z',
+    user_likes: null,
     likes: 0,
   },
 }) => {
+  const [userLikes, setUserLikes] = useState(userLikes)
+  const [numLikes, setNumLikes] = useState(data.likes)
+
   const likeComment = useStore((state) => state.likeComment)
   const dislikeComment = useStore((state) => state.dislikeComment)
   const deleteComment = useStore((state) => state.deleteComment)
+
+  const _likeAction = () => {
+    setUserLikes(userLikes === 'likes' ? null : 'likes')
+    setNumLikes(userLikes === 'likes' ? numLikes - 1 : numLikes + 1)
+    likeComment(data._id, userLikes === 'likes')
+  }
+
+  const _unlikeAction = () => {
+    setUserLikes(userLikes === 'dislikes' ? null : 'dislikes')
+    setNumLikes(userLikes === 'likes' ? numLikes - 1 : numLikes)
+    dislikeComment(data._id, userLikes === 'dislikes')
+  }
 
   return (
     <div className="p-4">
       <div className="flex items-center">
         <Avatar size="md" src={PROFILE_IMAGE} />
-        <p className="font-bold mx-3 text-white">{data.accountId}</p>
-        <p className="text-blueGray-400 text-xs">{parseDate(data.createdAt)}</p>
+        <p className="font-bold mx-3 text-white">{data.account_id}</p>
+        <p className="text-blueGray-400 text-xs">
+          {formatTimeAgo(new Date(data.issued_at))}
+        </p>
       </div>
       <p className="text-blueGray-200 my-3">{data.body}</p>
       <div className="flex items-center">
         <IconThumbUp
           className="cursor-pointer"
-          onClick={() => likeComment(data._id, data.userLikes === 'likes')}
-          {...(data.userLikes === 'likes' && { color: '#60A5FA' })}
+          onClick={_likeAction}
+          {...(userLikes === 'likes' && { color: '#60A5FA' })}
         />
-        <p className="text-xs text-blueGray-200">{data.likes}</p>
+        <p className="text-xs text-blueGray-200">{numLikes}</p>
         <IconThumbDown
-          onClick={() =>
-            dislikeComment(data._id, data.userLikes === 'dislikes')
-          }
+          onClick={_unlikeAction}
           className="ml-3 cursor-pointer"
-          {...(data.userLikes === 'dislikes' && { color: '#60A5FA' })}
+          {...(userLikes === 'dislikes' && { color: '#60A5FA' })}
         />
-        {data.accountId === near.currentUser.accountId && (
+        {data.account_id === near.currentUser.accountId && (
           <p
             className="text-white ml-2 text-xs cursor-pointer"
             onClick={() => deleteComment(data._id)}
