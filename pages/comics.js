@@ -7,11 +7,13 @@ const Comics = () => {
   return (
     <Layout>
       <Head />
-      <div className="max-w-5xl m-auto my-12">
-        <div className="bg-white p-4 cursor-pointer">
-          <Link href="/overview/paradigm">
-            <a>Read Paradigm</a>
-          </Link>
+      <div className="max-w-6xl m-auto p-4 py-8">
+        <p className="text-white font-bold text-4xl mb-8">Comics</p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <img
+            src="https://d30womf5coomej.cloudfront.net/sa/62/7b09e240-fd2a-4e9c-ac85-d4b54ea39778_z.jpg"
+            className="rounded-md"
+          />
         </div>
       </div>
     </Layout>

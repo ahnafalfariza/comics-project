@@ -2,7 +2,7 @@ import Button from 'components/Common/Button'
 import { InputText } from 'components/Common/form'
 import Modal from 'components/Common/Modal'
 
-const BuyTokenModal = ({ show, onClose }) => {
+const TokenDetailBuyModal = ({ show, onClose }) => {
   return (
     <Modal
       isShow={show}
@@ -109,4 +109,4 @@ const BuyTokenModal = ({ show, onClose }) => {
   )
 }
 
-export default BuyTokenModal
+export default TokenDetailBuyModal
