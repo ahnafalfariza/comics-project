@@ -9,17 +9,20 @@ import axios from 'axios'
 
 const LIMIT = 8
 
-const ProfilePageComics = () => {
+const ProfilePageComics = ({ profile }) => {
   const router = useRouter()
   const [comics, setComics] = useState([])
   const [page, setPage] = useState(0)
   const [hasMore, setHasMore] = useState(true)
   const [isFetching, setIsFetching] = useState(false)
+  const [userData, setUserData] = useState(profile)
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(async () => {
-    await fetchOwnerComics()
-  }, [router.query.id])
+  useEffect(() => {
+    if (router.query.userId) {
+      fetchOwnerComics()
+    }
+  }, [router.query.userId])
 
   const fetchOwnerComics = async () => {
     if (!hasMore || isFetching) {
@@ -49,25 +52,41 @@ const ProfilePageComics = () => {
   return (
     <Layout>
       <Head />
-      <Profile />
-      <InfiniteScroll
-        dataLength={comics.length}
-        next={fetchOwnerComics}
-        hasMore={hasMore}
-        loader={<div>Loading</div>}
-      >
-        {comics.map((comic) => {
-          return (
-            <ChapterListProfile
-              comicId={comic.comic_id}
-              comicCover={comic.media}
-              comicTitle={comic.title}
-            />
-          )
-        })}
-      </InfiniteScroll>
+      <Profile userData={userData} setUserData={setUserData} />
+      <div className="max-w-5xl m-auto pt-8 pb-16">
+        <InfiniteScroll
+          dataLength={comics.length}
+          next={fetchOwnerComics}
+          hasMore={hasMore}
+          loader={<div>Loading</div>}
+        >
+          {comics.map((comic) => {
+            return (
+              <div key={comic.comic_id}>
+                <ChapterListProfile
+                  comicId={comic.comic_id}
+                  comicCover={comic.media}
+                  comicTitle={comic.title}
+                />
+              </div>
+            )
+          })}
+        </InfiniteScroll>
+      </div>
     </Layout>
   )
+}
+
+export async function getServerSideProps({ params }) {
+  const response = await axios.get(
+    `${process.env.PARAS_API_URL}/profiles?accountId=${params.userId}`
+  )
+
+  return {
+    props: {
+      profile: response.data.data.results[0],
+    },
+  }
 }
 
 export default ProfilePageComics

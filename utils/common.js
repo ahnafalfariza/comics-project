@@ -1,5 +1,16 @@
 import CID from 'cids'
 
+export const readFileAsUrl = (file) => {
+  const temporaryFileReader = new FileReader()
+
+  return new Promise((resolve, reject) => {
+    temporaryFileReader.onload = () => {
+      resolve(temporaryFileReader.result)
+    }
+    temporaryFileReader.readAsDataURL(file)
+  })
+}
+
 export const prettyBalance = (balance, decimals = 18, len = 8) => {
   if (!balance) {
     return '0'
@@ -24,7 +35,6 @@ export const parseImgUrl = (url, defaultValue = '', opts = {}) => {
     return defaultValue
   }
   if (url.includes('://')) {
-    console.log('hmm')
     const [protocol, path] = url.split('://')
     if (protocol === 'ipfs') {
       if (opts.useOriginal || process.env.APP_ENV !== 'production') {
@@ -46,11 +56,15 @@ export const parseImgUrl = (url, defaultValue = '', opts = {}) => {
     }
     return url
   } else {
-    const cid = new CID(url)
-    if (cid.version === 0) {
-      return `https://ipfs-gateway.paras.id/ipfs/${cid}`
-    } else if (cid.version === 1) {
-      return `https://ipfs.fleek.co/ipfs/${cid}`
+    try {
+      const cid = new CID(url)
+      if (cid.version === 0) {
+        return `https://ipfs-gateway.paras.id/ipfs/${cid}`
+      } else if (cid.version === 1) {
+        return `https://ipfs.fleek.co/ipfs/${cid}`
+      }
+    } catch (err) {
+      return url
     }
   }
 }

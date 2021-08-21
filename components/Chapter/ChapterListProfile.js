@@ -117,112 +117,110 @@ const ChapterListProfile = ({
   }
 
   return (
-    <div className="max-w-5xl m-auto pt-8 pb-16">
-      <div className="px-4 lg:p-0 md:flex items-center">
-        <div className="hidden md:block md:w-1/5 flex-shrink-0 p-4 lg:p-0 lg:pr-4">
+    <div className="px-4 lg:p-0 md:flex items-center">
+      <div className="hidden md:block md:w-1/5 flex-shrink-0 p-4 lg:p-0 lg:pr-4">
+        <div
+          className="w-full h-40 md:h-72 flex-none rounded-md bg-no-repeat bg-center bg-cover shadow-2xl"
+          style={{
+            backgroundImage: `url(${parseImgUrl(comicCover)})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+      </div>
+      <div className="md:w-4/5 relative px-4">
+        <div className="text-white text-xl md:text-3xl">{comicTitle}</div>
+        <div className="relative">
           <div
-            className="w-full h-40 md:h-72 flex-none rounded-md bg-no-repeat bg-center bg-cover shadow-2xl"
-            style={{
-              backgroundImage: `url(${parseImgUrl(comicCover)})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
-          />
-        </div>
-        <div className="md:w-4/5 relative px-4">
-          <div className="text-white text-xl md:text-3xl">{comicTitle}</div>
-          <div className="relative">
-            <div
-              ref={shelvesRef}
-              className={`flex flex-shrink-0 flex-nowraps pt-6 pb-2 w-full relative overflow-x-auto ${comicsStyles.chapterListProfile}`}
-            >
-              {tokens.map((token) => (
+            ref={shelvesRef}
+            className={`flex flex-shrink-0 flex-nowraps pt-6 pb-2 w-full relative overflow-x-auto ${comicsStyles.chapterListProfile}`}
+          >
+            {tokens.map((token) => (
+              <div
+                key={token.tokenId}
+                className="relative w-2/5 md:w-1/4 lg:w-1/5 flex-shrink-0 -mr-10 inline-block transform transition-all origin-bottom-right duration-300 ease-in-out hover:rotate-3 hover:mr-0 hover:-translate-y-3"
+              >
                 <div
-                  key={token.tokenId}
-                  className="relative w-2/5 md:w-1/4 lg:w-1/5 flex-shrink-0 -mr-10 inline-block transform transition-all origin-bottom-right duration-300 ease-in-out hover:rotate-3 hover:mr-0 hover:-translate-y-3"
-                >
-                  <div
-                    className="w-full"
-                    style={{
-                      filter:
-                        'drop-shadow(-4px 0px 8px rgba(0, 0, 0, 0.25)) drop-shadow(-8px 0px 16px rgba(0, 0, 0, 0.25))',
-                    }}
-                  >
-                    <Token
-                      imgUrl={parseImgUrl(token.metadata.media, null, {
-                        width: `300`,
-                      })}
-                      imgBlur={token.metadata.blurhash}
-                      token={{
-                        name: token.metadata.name,
-                        collection: token.metadata.collection,
-                        description: token.metadata.description,
-                        creatorId: token.creatorId,
-                        supply: token.supply,
-                        tokenId: token.tokenId,
-                        createdAt: token.createdAt,
-                      }}
-                      hoverMouse={false}
-                      initialRotate={{ x: 0, y: 0 }}
-                      shadow="none"
-                      borderRadius="8px"
-                      disableFlip
-                    />
-                    <div
-                      className="absolute inset-0 rounded-md flex flex-col justify-end p-3 text-white"
-                      style={{
-                        background:
-                          'linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0) 31.93%, #18162B 100%), url(image.png)',
-                      }}
-                    >
-                      <p className="text-xl">Ch. {token.chapter_id}</p>
-                      <p className="text-xs">Edition {token.edition_id}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-              {hasMore && (
-                <div
-                  className="relative w-1/3 md:w-1/5 flex-shrink-0 -mr-10 inline-block opacity-0"
-                  ref={loader}
+                  className="w-full"
+                  style={{
+                    filter:
+                      'drop-shadow(-4px 0px 8px rgba(0, 0, 0, 0.25)) drop-shadow(-8px 0px 16px rgba(0, 0, 0, 0.25))',
+                  }}
                 >
                   <Token
+                    imgUrl={parseImgUrl(token.metadata.media, null, {
+                      width: `300`,
+                    })}
+                    imgBlur={token.metadata.blurhash}
+                    token={{
+                      name: token.metadata.name,
+                      collection: token.metadata.collection,
+                      description: token.metadata.description,
+                      creatorId: token.creatorId,
+                      supply: token.supply,
+                      tokenId: token.tokenId,
+                      createdAt: token.createdAt,
+                    }}
                     hoverMouse={false}
-                    imgUrl=""
                     initialRotate={{ x: 0, y: 0 }}
                     shadow="none"
                     borderRadius="8px"
                     disableFlip
                   />
-                </div>
-              )}
-            </div>
-            {showLeftArrow && (
-              <div
-                className="absolute left-0 bottom-0 top-0 flex items-center"
-                onClick={() => scrollShelves('left')}
-              >
-                <div className="bg-white p-2 rounded-full">
-                  <IconArrow
-                    size={16}
-                    transform="scale(-1,1)"
-                    color="black"
-                    style={{ transform: 'rotate(180deg)' }}
-                  />
+                  <div
+                    className="absolute inset-0 rounded-md flex flex-col justify-end p-3 text-white"
+                    style={{
+                      background:
+                        'linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0) 31.93%, #18162B 100%), url(image.png)',
+                    }}
+                  >
+                    <p className="text-xl">Ch. {token.chapter_id}</p>
+                    <p className="text-xs">Edition {token.edition_id}</p>
+                  </div>
                 </div>
               </div>
-            )}
-            {showRightArrow && (
+            ))}
+            {hasMore && (
               <div
-                className="absolute right-0 bottom-0 top-0 flex items-center"
-                onClick={() => scrollShelves('right')}
+                className="relative w-1/3 md:w-1/5 flex-shrink-0 -mr-10 inline-block opacity-0"
+                ref={loader}
               >
-                <div className="bg-white p-2 rounded-full">
-                  <IconArrow size={16} color="black" />
-                </div>
+                <Token
+                  hoverMouse={false}
+                  imgUrl=""
+                  initialRotate={{ x: 0, y: 0 }}
+                  shadow="none"
+                  borderRadius="8px"
+                  disableFlip
+                />
               </div>
             )}
           </div>
+          {showLeftArrow && (
+            <div
+              className="absolute left-0 bottom-0 top-0 flex items-center"
+              onClick={() => scrollShelves('left')}
+            >
+              <div className="bg-white p-2 rounded-full">
+                <IconArrow
+                  size={16}
+                  transform="scale(-1,1)"
+                  color="black"
+                  style={{ transform: 'rotate(180deg)' }}
+                />
+              </div>
+            </div>
+          )}
+          {showRightArrow && (
+            <div
+              className="absolute right-0 bottom-0 top-0 flex items-center"
+              onClick={() => scrollShelves('right')}
+            >
+              <div className="bg-white p-2 rounded-full">
+                <IconArrow size={16} color="black" />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
