@@ -1,18 +1,26 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 import Layout from 'components/Layout'
 import Head from 'components/Common/Head'
-import ChapterInfo from 'components/Chapter/ChapterInfo'
+import ComicInfo from 'components/Comic/ComicInfo'
 import ChapterLists from 'components/Chapter/ChapterLists'
 
-import { COMIC_CHAPTER_DATA, COMIC_OVERVIEW_DATA } from 'constants/dummy'
+import { FETCH_CHAPTER_LIMIT } from 'constants'
 
-const LIMIT = 12
-
-const Collection = ({ chapterInfo, accountId }) => {
+const Collection = ({
+  comicInfo = {
+    comic_id: 'naruto',
+    title: 'Naruto',
+    description: 'Lorum ipsum dolor amet',
+    author_ids: ['afiq.testnet'],
+    issued_at: '',
+    media: 'bafybeiahl55gjwifng26oya77sw5nvtiqevc5jcxai3u7atupyiyyry2ji',
+    media_cover: 'bafybeiahl55gjwifng26oya77sw5nvtiqevc5jcxai3u7atupyiyyry2ji',
+  },
+}) => {
   const router = useRouter()
-
   const scrollChapter = `${router.query.id}::collection`
 
   const [chapters, setChapters] = useState([])
@@ -20,9 +28,10 @@ const Collection = ({ chapterInfo, accountId }) => {
   const [hasMore, setHasMore] = useState(true)
   const [isFetching, setIsFetching] = useState(false)
 
-  // eslint-disable-next-line
-  useEffect(async () => {
-    await fetchChapter(true)
+  useEffect(() => {
+    if (router.query.id) {
+      fetchChapter(true)
+    }
   }, [router.query.id])
 
   const fetchChapter = async () => {
@@ -31,16 +40,17 @@ const Collection = ({ chapterInfo, accountId }) => {
     }
 
     setIsFetching(true)
-    const waitFor = (delay) =>
-      new Promise((resolve) => setTimeout(resolve, delay))
-    await waitFor(2000)
-
-    const newData = COMIC_CHAPTER_DATA
-
-    const newChapters = [...(chapters || []), ...newData.results]
+    const response = await axios.get(`${process.env.COMIC_API_URL}/chapters`, {
+      comic_id: router.query.id,
+      __skip: page * FETCH_CHAPTER_LIMIT,
+      __limit: FETCH_CHAPTER_LIMIT,
+    })
+    const newData = response.data.data
+    const newChapters = [...chapters, ...newData.results]
     setChapters(newChapters)
     setPage(page + 1)
-    if (newData.results.length < LIMIT) {
+
+    if (newData.results.length < FETCH_CHAPTER_LIMIT) {
       setHasMore(false)
     } else {
       setHasMore(true)
@@ -48,10 +58,11 @@ const Collection = ({ chapterInfo, accountId }) => {
     setIsFetching(false)
   }
 
+  console.log('chapter', chapters)
   return (
     <Layout>
-      <Head title={chapterInfo.title} description={chapterInfo.description} />
-      <ChapterInfo data={chapterInfo} />
+      <Head title={comicInfo.title} description={comicInfo.description} />
+      <ComicInfo data={comicInfo} />
       <ChapterLists
         name={scrollChapter}
         chapters={chapters}
@@ -65,9 +76,12 @@ const Collection = ({ chapterInfo, accountId }) => {
 export default Collection
 
 export async function getServerSideProps({ params }) {
-  const chapterRes = COMIC_OVERVIEW_DATA
-  const chapterInfo = chapterRes.data.results[0] || null
+  const response = await axios.get(`${process.env.COMIC_API_URL}/comics`, {
+    comic_id: params.id,
+  })
+  const comicInfo = response.data.data.results[0] || null
+
   return {
-    props: { chapterInfo, accountId: params.id },
+    props: { comicInfo },
   }
 }

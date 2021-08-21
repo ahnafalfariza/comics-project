@@ -1,52 +1,26 @@
-import { createContext, useContext, useState } from 'react'
 import Modal from 'components/Common/Modal'
-
-const toastContext = createContext()
-
-export const useToast = () => useContext(toastContext)
-
-const { Provider } = toastContext
-
-let timeout
+import useStore from 'lib/store'
 
 const ToastProvider = ({ children }) => {
-  const [reveal, setReveal] = useState(false)
-  const [config, setConfig] = useState({
-    text: '',
-    type: 'info',
-    duration: 2500,
-  })
-
-  const show = (newConfig) => {
-    clearTimeout(timeout)
-    const updateConfig = { ...config, ...newConfig }
-    setConfig(updateConfig)
-    setReveal(true)
-
-    if (updateConfig.duration) {
-      timeout = setTimeout(() => {
-        setReveal(false)
-      }, config.duration)
-    }
-  }
+  const toastReveal = useStore((state) => state.toastReveal)
+  const toastConfig = useStore((state) => state.toastConfig)
+  const setToastReveal = useStore((state) => state.setToastReveal)
 
   const _backgroundStyle = () => {
-    if (config.type === 'error') {
+    if (toastConfig.type === 'error') {
       return `text-red-600 bg-red-300 border border-red-500 rounded-md`
-    } else if (config.type === 'success') {
+    } else if (toastConfig.type === 'success') {
       return `text-green-600 bg-green-300 border border-green-500 rounded-md`
     } else {
       return `bg-gray-100 rounded-md`
     }
   }
 
-  const value = { show }
-
   return (
-    <Provider value={value}>
-      {reveal && (
+    <div>
+      {toastReveal && (
         <Modal
-          close={(_) => setReveal(false)}
+          close={(_) => setToastReveal(false)}
           style={{
             zIndex: 100,
           }}
@@ -56,13 +30,13 @@ const ToastProvider = ({ children }) => {
           <div className="hidden bg-gray-100 rounded-md"></div>
           <div className="w-full max-w-xs m-auto overflow-y-auto max-h-screen">
             <div className={_backgroundStyle()}>
-              <div className="p-4">{config.text}</div>
+              <div className="p-4">{toastConfig.text}</div>
             </div>
           </div>
         </Modal>
       )}
       <div>{children}</div>
-    </Provider>
+    </div>
   )
 }
 

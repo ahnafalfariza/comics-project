@@ -1,16 +1,17 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 import Layout from 'components/Layout'
 import Head from 'components/Common/Head'
-import ChapterInfo from 'components/Chapter/ChapterInfo'
+import ComicInfo from 'components/Comic/ComicInfo'
 import ChapterCollectibles from 'components/Token/TokenList'
 
-import { COMIC_COLLECTIBLES_DATA, COMIC_OVERVIEW_DATA } from 'constants/dummy'
+import { COMIC_COLLECTIBLES_DATA } from 'constants/dummy'
 
 const LIMIT = 12
 
-const Collectibles = ({ chapterInfo, accountId }) => {
+const Collectibles = ({ comicInfo }) => {
   const router = useRouter()
 
   const scrollCollectibles = `${router.query.id}::collectibles`
@@ -49,8 +50,8 @@ const Collectibles = ({ chapterInfo, accountId }) => {
 
   return (
     <Layout>
-      <Head title={chapterInfo.title} description={chapterInfo.description} />
-      <ChapterInfo data={chapterInfo} defaultIndex={1} />
+      <Head title={comicInfo.title} description={comicInfo.description} />
+      <ComicInfo data={comicInfo} defaultIndex={1} />
       <ChapterCollectibles
         name={scrollCollectibles}
         tokens={tokens}
@@ -64,9 +65,12 @@ const Collectibles = ({ chapterInfo, accountId }) => {
 export default Collectibles
 
 export async function getServerSideProps({ params }) {
-  const chapterRes = COMIC_OVERVIEW_DATA
-  const chapterInfo = chapterRes.data.results[0] || null
+  const response = await axios.get(`${process.env.COMIC_API_URL}/comics`, {
+    comic_id: params.id,
+  })
+  const comicInfo = response.data.data.results[0] || null
+
   return {
-    props: { chapterInfo, accountId: params.id },
+    props: { comicInfo },
   }
 }

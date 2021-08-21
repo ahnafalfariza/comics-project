@@ -4,12 +4,14 @@ import ChapterList from 'components/Chapter/ChapterList'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import ChapterListLoader from 'components/Chapter/ChapterListLoader'
 import BuyChapterModal from 'components/Modal/BuyChapterModal'
+import LoginModal from 'components/Modal/LoginModal'
 
 const Overview = ({ chapters, hasMore, fetchData }) => {
-  const [showChapterDetail, setShowChapterDetail] = useState(null)
+  const [chapterOpen, setChapterOpen] = useState(null)
+  const [showLogin, setShowLogin] = useState(false)
 
   const onCloseChapterDetail = () => {
-    setShowChapterDetail(null)
+    setChapterOpen(null)
   }
 
   return (
@@ -35,15 +37,18 @@ const Overview = ({ chapters, hasMore, fetchData }) => {
             <ChapterList
               key={i}
               data={data}
-              onClick={() => setShowChapterDetail(data)}
+              onClick={() => setChapterOpen(data)}
             />
           )
         })}
       </InfiniteScroll>
       <BuyChapterModal
-        active={showChapterDetail !== null}
+        active={chapterOpen !== null}
+        data={chapterOpen}
         onClose={onCloseChapterDetail}
+        onShowLogin={() => setShowLogin(true)}
       />
+      <LoginModal onClose={() => setShowLogin(false)} show={showLogin} />
     </div>
   )
 }

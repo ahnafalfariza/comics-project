@@ -1,11 +1,11 @@
-import { useToast } from 'hooks/useToast'
+import useStore from 'lib/store'
 import Link from 'next/link'
 
 const Footer = () => {
-  const toast = useToast()
+  const setToastConfig = useStore((state) => state.setToastConfig)
 
   const _showBetaInfo = () => {
-    toast.show({
+    setToastConfig({
       text: (
         <div className="text-sm text-gray-900">
           <p>
@@ -93,7 +93,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="py-2">
-        {/* <div className="flex items-center justify-center md:justify-start">
+        <div className="flex items-center justify-center md:justify-start">
           <div className="flex">
             <p>This project is in public beta.</p>
             <svg
@@ -113,7 +113,7 @@ const Footer = () => {
               />
             </svg>
           </div>
-        </div> */}
+        </div>
         <div className="mt-2 flex items-center">
           <p>2021 Paras</p>
           <p className="mx-2">|</p>
