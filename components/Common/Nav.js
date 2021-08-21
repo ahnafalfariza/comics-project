@@ -15,7 +15,7 @@ const Nav = () => {
   const profileModalRef = useRef()
   const mobileMenuRef = useRef()
   const router = useRouter()
-  const { currentUser } = useStore()
+  const currentUser = useStore((state) => state.currentUser)
 
   const [showProfileModal, setShowProfileModal] = useState(false)
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false)
@@ -74,7 +74,7 @@ const Nav = () => {
             <Avatar
               size="lg"
               className="mr-3"
-              src={parseImgUrl(currentUser.imgUrl)}
+              src={parseImgUrl(currentUser.imgUrl || '')}
             />
             <div>
               <p className="font-medium text-white">
@@ -144,7 +144,7 @@ const Nav = () => {
                 className="w-10 h-10 align-middle"
                 size="md"
                 onClick={onClickProfile}
-                src={parseImgUrl(currentUser.imgUrl)}
+                src={parseImgUrl(currentUser.imgUrl || '')}
               />
               {showProfileModal && ProfileModal()}
             </div>

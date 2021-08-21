@@ -84,7 +84,9 @@ export async function getServerSideProps({ params }) {
 
   return {
     props: {
-      profile: response.data.data.results[0],
+      profile: response.data.data.results[0] || {
+        accountId: params.userId,
+      },
     },
   }
 }

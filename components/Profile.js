@@ -60,18 +60,18 @@ const Profile = ({ userData, setUserData }) => {
         <div className="md:flex">
           <Avatar
             size="xxl"
-            src={parseImgUrl(userData.imgUrl)}
+            src={parseImgUrl(userData?.imgUrl || '')}
             className="md:w-64 md:h-64 -mt-12 md:-mt-32 flex-shrink-0 border-8 border-background z-20"
           />
           <div className="w-full md:ml-8 md:mt-4">
             <div className="w-full flex justify-between items-center">
               <div>
                 <p className="text-white text-3xl font-bold">
-                  {userData.accountId}
+                  {userData?.accountId}
                 </p>
               </div>
               {near.getAccount() &&
-                near.getAccount().accountId === userData.accountId && (
+                near.getAccount().accountId === userData?.accountId && (
                   <div>
                     <Button
                       onClick={() => setShowModal('editProfile')}
@@ -83,7 +83,7 @@ const Profile = ({ userData, setUserData }) => {
                   </div>
                 )}
             </div>
-            <p className="mt-2 text-white opacity-80">{userData.bio}</p>
+            <p className="mt-2 text-white opacity-80">{userData?.bio}</p>
           </div>
         </div>
       </div>
