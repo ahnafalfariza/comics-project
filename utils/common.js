@@ -44,6 +44,7 @@ export const parseImgUrl = (url, defaultValue = '', opts = {}) => {
       }
       return `https://cdn.paras.id/${transformationList.join(',')}/${path}`
     }
+    return url
   } else {
     const cid = new CID(url)
     if (cid.version === 0) {
@@ -51,7 +52,5 @@ export const parseImgUrl = (url, defaultValue = '', opts = {}) => {
     } else if (cid.version === 1) {
       return `https://ipfs.fleek.co/ipfs/${cid}`
     }
-
-    return url
   }
 }
