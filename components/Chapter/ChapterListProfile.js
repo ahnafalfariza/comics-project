@@ -10,6 +10,7 @@ import comicsStyles from 'styles/Comics.module.css'
 const LIMIT = 8
 
 const ChapterListProfile = ({
+  comicId = 'paradigm',
   comicTitle = 'Paradigm',
   comicCover = 'https://d30womf5coomej.cloudfront.net/sa/62/7b09e240-fd2a-4e9c-ac85-d4b54ea39778_z.jpg',
 }) => {
@@ -60,7 +61,7 @@ const ChapterListProfile = ({
 
     setIsFetching(true)
     const res = await axios(
-      `https://mainnet-api.paras.id/tokens?excludeTotalBurn=true&ownerId=${
+      `${process.env.COMIC_API_URL}/tokens?comic_id=${comicId}&owner_id=${
         router.query.userId
       }&__skip=${page * LIMIT}&__limit=${LIMIT}`
     )
@@ -122,7 +123,7 @@ const ChapterListProfile = ({
           <div
             className="w-full h-40 md:h-72 flex-none rounded-md bg-no-repeat bg-center bg-cover shadow-2xl"
             style={{
-              backgroundImage: `url(${comicCover})`,
+              backgroundImage: `url(${parseImgUrl(comicCover)})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
@@ -148,7 +149,7 @@ const ChapterListProfile = ({
                     }}
                   >
                     <Token
-                      imgUrl={parseImgUrl(token.metadata.image, null, {
+                      imgUrl={parseImgUrl(token.metadata.media, null, {
                         width: `300`,
                       })}
                       imgBlur={token.metadata.blurhash}
@@ -174,8 +175,8 @@ const ChapterListProfile = ({
                           'linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0) 31.93%, #18162B 100%), url(image.png)',
                       }}
                     >
-                      <p className="text-xl">Ch. 10</p>
-                      <p className="text-xs">Edition 1</p>
+                      <p className="text-xl">Ch. {token.chapter_id}</p>
+                      <p className="text-xs">Edition {token.edition_id}</p>
                     </div>
                   </div>
                 </div>

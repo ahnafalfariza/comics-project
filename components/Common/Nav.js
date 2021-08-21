@@ -60,7 +60,7 @@ const Nav = () => {
   }
 
   const onClickViewProfile = () => {
-    router.push('/ahnaf.near')
+    router.push(`/${near.getAccount().accountId}`)
   }
 
   const ProfileModal = () => {
