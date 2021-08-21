@@ -4,10 +4,11 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 
 import Head from 'components/Common/Head'
 import Layout from 'components/Layout'
-import { FETCH_COMICS_LIMIT } from 'constants'
 import axios from 'axios'
 import { parseImgUrl } from 'utils/common'
 import Token from 'components/Token/Token'
+
+import { FETCH_COMICS_LIMIT } from 'constants/constant'
 
 const Comics = () => {
   const router = useRouter()

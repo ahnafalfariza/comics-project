@@ -6,8 +6,7 @@ import Layout from 'components/Layout'
 import Head from 'components/Common/Head'
 import ComicInfo from 'components/Comic/ComicInfo'
 import ChapterLists from 'components/Chapter/ChapterLists'
-
-import { FETCH_CHAPTERS_LIMIT } from 'constants'
+import { FETCH_CHAPTERS_LIMIT } from 'constants/constant'
 
 const Collection = ({
   comicInfo = {
