@@ -11,8 +11,10 @@ import { parseImgUrl } from 'utils/common'
 import TabInfo from './Tabs/TabInfo'
 import TabOwners from './Tabs/TabOwners'
 import TabHistory from './Tabs/TabHistory'
-import BuyTokenModal from 'components/Modal/BuyTokenModal'
-import ListModal from 'components/Modal/ListModal'
+import TokenDetailBuyModal from 'components/Modal/TokenDetailBuyModal'
+import TokenDetailMoreModal from 'components/Modal/TokenDetailMoreModal'
+import TokenDetailShareModal from 'components/Modal/TokenDetailShareModal'
+import TokenDetailUpdateModal from 'components/Modal/TokenDetailUpdateModal'
 
 const TokenDetail = ({ localToken = TOKEN_DATA, className }) => {
   const [activeTab, setActiveTab] = useState('info')
@@ -41,13 +43,13 @@ const TokenDetail = ({ localToken = TOKEN_DATA, className }) => {
     setShowModal(null)
   }
 
-  const listModalItem = [
-    { name: 'Copy Link', onClick: () => {} },
-    { name: 'Share to...', onClick: () => {} },
-    { name: 'Update Listing', onClick: () => {} },
-    { name: 'Transfer Card', onClick: () => {} },
-    { name: 'Burn Card', onClick: () => {} },
-  ]
+  const onClickShare = () => {
+    setShowModal('share')
+  }
+
+  const onClickUpdate = () => {
+    setShowModal('update')
+  }
 
   return (
     <div className={`max-w-6xl m-auto ${className}`}>
@@ -119,7 +121,8 @@ const TokenDetail = ({ localToken = TOKEN_DATA, className }) => {
                 <div>
                   <IconDots
                     color="#ffffff"
-                    onClick={() => setShowModal('list')}
+                    className="cursor-pointer"
+                    onClick={() => setShowModal('more')}
                   />
                 </div>
               </div>
@@ -142,13 +145,22 @@ const TokenDetail = ({ localToken = TOKEN_DATA, className }) => {
           </div>
         </div>
       </div>
-      <BuyTokenModal
+      <TokenDetailBuyModal
         show={showModal === 'confirmBuy'}
         onClose={onDismissModal}
       />
-      <ListModal
-        list={listModalItem}
-        show={showModal === 'list'}
+      <TokenDetailMoreModal
+        show={showModal === 'more'}
+        onClose={onDismissModal}
+        onClickShare={onClickShare}
+        onClickUpdate={onClickUpdate}
+      />
+      <TokenDetailShareModal
+        show={showModal === 'share'}
+        onClose={onDismissModal}
+      />
+      <TokenDetailUpdateModal
+        show={showModal === 'update'}
         onClose={onDismissModal}
       />
     </div>
