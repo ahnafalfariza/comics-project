@@ -1,16 +1,16 @@
-import { COVER_IMAGE, PROFILE_IMAGE } from 'constants/dummy'
+import near from 'lib/near'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import { Blurhash } from 'react-blurhash'
+import { parseImgUrl } from 'utils/common'
 import Avatar from './Common/Avatar'
+import Button from './Common/Button'
 import { Tab, TabList, Tabs } from './Common/Tabs'
+import EditProfileModal from './Modal/EditProfileModal'
 
-const Profile = ({
-  username = 'ahnaf.near',
-  profileImage = PROFILE_IMAGE,
-  bgImage = COVER_IMAGE,
-  bio = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer elementum sem sed diam fringilla, ut efficitur urna congue. Suspendisse in malesuada quam.',
-}) => {
+const Profile = ({ userData, setUserData }) => {
   const router = useRouter()
+  const [showModal, setShowModal] = useState('')
 
   const onTabsChange = (idx) => {
     if (idx === 0) {
@@ -30,6 +30,13 @@ const Profile = ({
 
   return (
     <div>
+      {showModal === 'editProfile' && (
+        <EditProfileModal
+          userData={userData}
+          setUserData={setUserData}
+          onClose={() => setShowModal('')}
+        />
+      )}
       <div className="h-40 md:h-72 relative">
         <div className="absolute inset-0 opacity-0">
           <Blurhash
@@ -42,18 +49,41 @@ const Profile = ({
             punch={1}
           />
         </div>
-        <img src={bgImage} className="object-cover w-full h-full" />
+        <img
+          src={parseImgUrl(
+            'bafybeihjydufqanles3dh7zctbbxaljhduapkmmzk3f55zzebcuj2sn32y'
+          )}
+          className="object-cover w-full h-full"
+        />
       </div>
       <div className="max-w-5xl m-auto px-4">
         <div className="md:flex">
           <Avatar
             size="xxl"
-            src={profileImage}
+            src={parseImgUrl(userData.imgUrl)}
             className="md:w-64 md:h-64 -mt-12 md:-mt-32 flex-shrink-0 border-8 border-background z-20"
           />
-          <div className="md:ml-8 md:mt-4">
-            <p className="text-white text-3xl font-bold">{username}</p>
-            <p className="mt-2 text-white opacity-80">{bio}</p>
+          <div className="w-full md:ml-8 md:mt-4">
+            <div className="w-full flex justify-between items-center">
+              <div>
+                <p className="text-white text-3xl font-bold">
+                  {userData.accountId}
+                </p>
+              </div>
+              {near.getAccount() &&
+                near.getAccount().accountId === userData.accountId && (
+                  <div>
+                    <Button
+                      onClick={() => setShowModal('editProfile')}
+                      size="md"
+                      variant="secondary"
+                    >
+                      Edit Profile
+                    </Button>
+                  </div>
+                )}
+            </div>
+            <p className="mt-2 text-white opacity-80">{userData.bio}</p>
           </div>
         </div>
       </div>

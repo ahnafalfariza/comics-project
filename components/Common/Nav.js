@@ -8,13 +8,14 @@ import Button from './Button'
 import Avatar from './Avatar'
 
 import { IconLogout } from 'components/Icons'
-import { prettyBalance } from 'utils/common'
-import { PROFILE_IMAGE } from 'constants/dummy'
+import { parseImgUrl, prettyBalance } from 'utils/common'
+import useStore from 'lib/store'
 
 const Nav = () => {
   const profileModalRef = useRef()
   const mobileMenuRef = useRef()
   const router = useRouter()
+  const { currentUser } = useStore()
 
   const [showProfileModal, setShowProfileModal] = useState(false)
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false)
@@ -60,15 +61,21 @@ const Nav = () => {
   }
 
   const onClickViewProfile = () => {
-    router.push('/ahnaf.near')
+    router.push(`/${near.getAccount().accountId}`)
   }
+
+  console.log(currentUser)
 
   const ProfileModal = () => {
     return (
       <div className="absolute right-0 mt-3 z-30">
         <div className="min-w-max w-64 bg-blueGray-800 p-3 rounded-md shadow-xl">
           <div className="flex items-center">
-            <Avatar size="lg" className="mr-3" src={PROFILE_IMAGE} />
+            <Avatar
+              size="lg"
+              className="mr-3"
+              src={parseImgUrl(currentUser.imgUrl)}
+            />
             <div>
               <p className="font-medium text-white">
                 {near.getAccount().accountId}
@@ -137,7 +144,7 @@ const Nav = () => {
                 className="w-10 h-10 align-middle"
                 size="md"
                 onClick={onClickProfile}
-                src={PROFILE_IMAGE}
+                src={parseImgUrl(currentUser.imgUrl)}
               />
               {showProfileModal && ProfileModal()}
             </div>

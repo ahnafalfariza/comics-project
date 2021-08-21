@@ -7,10 +7,14 @@ import ToastProvider from 'hooks/useToast'
 import * as gtag from '../lib/gtag'
 
 import 'tailwindcss/tailwind.css'
+import 'croppie/croppie.css'
 import '../styles/globals.css'
+import useStore from 'lib/store'
+import axios from 'axios'
 
 const App = ({ Component, pageProps }) => {
   const router = useRouter()
+  const { setCurrentUser } = useStore()
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -27,6 +31,41 @@ const App = ({ Component, pageProps }) => {
     const init = async () => {
       setIsLoading(true)
       await near.init()
+      const account = near.getAccount()
+      if (account) {
+        try {
+          const response = await axios.get(
+            `${process.env.PARAS_API_URL}/profiles?accountId=${account.accountId}`
+          )
+          const userProfileResults = response.data.data.results
+
+          if (userProfileResults.length === 0) {
+            const formData = new FormData()
+            formData.append('bio', 'Citizen of Paras')
+            formData.append('accountId', currentUser.accountId)
+
+            try {
+              const resp = await axios.put(
+                `${process.env.API_URL}/profiles`,
+                formData,
+                {
+                  headers: {
+                    'Content-Type': 'multipart/form-data',
+                  },
+                }
+              )
+              setCurrentUser(resp.data.data)
+            } catch (err) {
+              setCurrentUser({})
+            }
+          } else {
+            const userProfile = userProfileResults[0]
+            setCurrentUser(userProfile)
+          }
+        } catch (err) {
+          console.log(err)
+        }
+      }
       setIsLoading(false)
     }
     init()
