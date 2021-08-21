@@ -3,8 +3,6 @@ import TokenList from 'components/Token/TokenList'
 import Layout from 'components/Layout'
 import Profile from 'components/Profile'
 
-import { COMIC_COLLECTIBLES_DATA } from 'constants/dummy'
-import { useRouter } from 'next/router'
 import { useState } from 'react'
 import axios from 'axios'
 
@@ -29,7 +27,9 @@ export async function getServerSideProps({ params }) {
 
   return {
     props: {
-      profile: response.data.data.results[0],
+      profile: response.data.data.results[0] || {
+        accountId: params.userId,
+      },
     },
   }
 }

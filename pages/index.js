@@ -1,6 +1,7 @@
 import Button from 'components/Common/Button'
 import Head from 'components/Common/Head'
 import Layout from 'components/Layout'
+import LoginModal from 'components/Modal/LoginModal'
 
 import HomeStyles from 'styles/Home.module.css'
 

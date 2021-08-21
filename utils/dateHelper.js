@@ -24,6 +24,10 @@ export const formatTimeAgo = (date) => {
 }
 
 export const parseDate = (ts) => {
+  if (!ts) {
+    return
+  }
+
   let dateObj = new Date(ts)
   let month = monthNames[dateObj.getMonth()].slice(0, 3)
   let day = String(dateObj.getDate()).padStart(2, '0')

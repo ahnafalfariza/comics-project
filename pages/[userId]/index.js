@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import Profile from 'components/Profile'
@@ -6,8 +6,9 @@ import Layout from 'components/Layout'
 import Head from 'components/Common/Head'
 import axios from 'axios'
 
-const ProfilePage = () => {
+const ProfilePage = ({ profile }) => {
   const router = useRouter()
+  const [userData, setUserData] = useState(profile)
 
   useEffect(() => {
     router.replace(`${router.query.userId}/comics`)
@@ -16,7 +17,7 @@ const ProfilePage = () => {
   return (
     <Layout>
       <Head />
-      <Profile />
+      <Profile userData={userData} setUserData={setUserData} />
     </Layout>
   )
 }
@@ -28,7 +29,9 @@ export async function getServerSideProps({ params }) {
 
   return {
     props: {
-      profile: response.data.data.results[0],
+      profile: response.data.data.results[0] || {
+        accountId: params.userId,
+      },
     },
   }
 }

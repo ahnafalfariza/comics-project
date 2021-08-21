@@ -42,7 +42,7 @@ const App = ({ Component, pageProps }) => {
           if (userProfileResults.length === 0) {
             const formData = new FormData()
             formData.append('bio', 'Citizen of Paras')
-            formData.append('accountId', currentUser.accountId)
+            formData.append('accountId', account.accountId)
 
             try {
               const resp = await axios.put(
