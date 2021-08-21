@@ -4,28 +4,33 @@ import { useEffect } from 'react'
 import Layout from 'components/Layout'
 import Head from 'components/Common/Head'
 
-import { COMIC_OVERVIEW_DATA } from 'constants/dummy'
+import axios from 'axios'
 
-const OverviewPage = ({ userProfile, accountId }) => {
+const OverviewPage = ({ comicInfo }) => {
   const router = useRouter()
 
   useEffect(() => {
-    router.replace(`${accountId}/chapter`)
-  }, [router.query.id])
+    if (router.query.id) {
+      router.replace(`${router.query.id}/chapter`)
+    }
+  }, [router, router.query.id])
 
   return (
     <Layout>
-      <Head />
+      <Head title={comicInfo.title} description={comicInfo.description} />
       <div className="h-screen" />
     </Layout>
   )
 }
 
 export async function getServerSideProps({ params }) {
-  const chapterRes = COMIC_OVERVIEW_DATA
-  const chapterInfo = chapterRes.data.results[0] || null
+  const response = await axios.get(
+    `${process.env.COMIC_API_URL}/comics?comic_id=${params.id}`
+  )
+  const comicInfo = response.data.data.results[0] || null
+
   return {
-    props: { chapterInfo, accountId: params.id },
+    props: { comicInfo },
   }
 }
 

@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import axios from 'axios'
 
 import ChapterList from 'components/Chapter/ChapterList'
-import InfiniteScroll from 'react-infinite-scroll-component'
 import ChapterListLoader from 'components/Chapter/ChapterListLoader'
 import BuyChapterModal from 'components/Modal/BuyChapterModal'
 import LoginModal from 'components/Modal/LoginModal'
@@ -10,8 +12,50 @@ const Overview = ({ chapters, hasMore, fetchData }) => {
   const [chapterOpen, setChapterOpen] = useState(null)
   const [showLogin, setShowLogin] = useState(false)
 
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!router.query.chapterId) {
+      setChapterOpen(null)
+    } else if (router.query.chapterId && chapterOpen === null) {
+      getChapter(router.query.id, router.query.chapterId)
+    }
+    // eslint-disable-next-line
+  }, [router.query.chapterId])
+
+  const getChapter = async (comicId, chapterId) => {
+    const response = await axios.get(`${process.env.COMIC_API_URL}/chapters`, {
+      params: {
+        comic_id: comicId,
+        chapter_id: chapterId,
+      },
+    })
+    setChapterOpen(response.data.data.results[0] || null)
+  }
+
   const onCloseChapterDetail = () => {
     setChapterOpen(null)
+    router.replace(router.asPath.split('?')[0], '', {
+      scroll: false,
+      shalllow: true,
+    })
+  }
+
+  const onClickChapter = (data) => {
+    setChapterOpen(data)
+    router.push(
+      {
+        query: {
+          ...router.query,
+          chapterId: data.chapter_id,
+        },
+      },
+      '',
+      {
+        scroll: false,
+        shalllow: true,
+      }
+    )
   }
 
   return (
@@ -37,7 +81,7 @@ const Overview = ({ chapters, hasMore, fetchData }) => {
             <ChapterList
               key={i}
               data={data}
-              onClick={() => setChapterOpen(data)}
+              onClick={() => onClickChapter(data)}
             />
           )
         })}

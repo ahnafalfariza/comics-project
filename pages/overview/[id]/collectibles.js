@@ -65,9 +65,9 @@ const Collectibles = ({ comicInfo }) => {
 export default Collectibles
 
 export async function getServerSideProps({ params }) {
-  const response = await axios.get(`${process.env.COMIC_API_URL}/comics`, {
-    comic_id: params.id,
-  })
+  const response = await axios.get(
+    `${process.env.COMIC_API_URL}/comics?comic_id=${params.id}`
+  )
   const comicInfo = response.data.data.results[0] || null
 
   return {

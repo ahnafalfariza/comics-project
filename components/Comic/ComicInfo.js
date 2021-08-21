@@ -25,7 +25,10 @@ const ComicInfo = ({
       0: 'chapter',
       1: 'collectibles',
     }
-    router.push(`/overview/${router.query.id}/${mapTabs[v]}`)
+    router.push(`/overview/${router.query.id}/${mapTabs[v]}`, '', {
+      scroll: false,
+      shallow: true,
+    })
   }
 
   return (
