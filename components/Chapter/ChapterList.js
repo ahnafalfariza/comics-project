@@ -71,7 +71,7 @@ const ChapterList = ({
               Chapter {data.chapter_id}
             </h5>
             <h3 className="text-white text-sm sm:text-xl">
-              {data.metadata.title}
+              {data.metadata.subtitle}
             </h3>
             <h5 className="text-blueGray-300 sm:text-sm text-xs">
               {parseDate(data.metadata.issued_at)}

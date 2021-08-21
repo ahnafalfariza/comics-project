@@ -3,37 +3,36 @@ import Modal from 'components/Common/Modal'
 import { IconX, IconXCircle } from 'components/Icons'
 import near from 'lib/near'
 import useStore from 'lib/store'
-import { formatNearAmount, parseNearAmount } from 'near-api-js/lib/utils/format'
+import { formatNearAmount } from 'near-api-js/lib/utils/format'
 import { useRouter } from 'next/router'
 import { parseImgUrl } from 'utils/common'
-import LoginModal from './LoginModal'
 
 const BuyChapterModal = ({
   data = {
-    token_type: 'naruto-8',
+    token_id: 'naruto-9:1',
     comic_id: 'naruto',
-    chapter_id: 8,
+    chapter_id: 9,
+    edition_id: 1,
     metadata: {
-      title: 'Naruto Ch.8 : Beginning of the End',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer elementum sem sed diam.',
+      title: 'Naruto Ch.9 : Beginning of the End #1',
+      description: 'welcome to the world of naruto!',
       media: 'bafybeiahl55gjwifng26oya77sw5nvtiqevc5jcxai3u7atupyiyyry2ji',
       media_hash: null,
       copies: null,
-      issued_at: '2021-08-21T04:08:12.190Z',
+      issued_at: '2021-08-21T07:56:50.893Z',
       expires_at: null,
       starts_at: null,
       updated_at: null,
       extra: null,
-      reference: 'bafybeidf5qebeqaahfsifxtbakxazyiqy5ejmrlcdjlmcisxwuqdlllloq',
+      reference: 'bafybeihmcchkcrpj5eqk5no4thhrhhwpw373idpxdrwp3qbabdl54d6v4a',
       reference_hash: null,
       blurhash: 'U36t:x-50JOY~V-;E1NG4,N{sHs9J:9FV@%L',
+      author_ids: ['rng.testnet'],
       page_count: 1,
       collection: 'naruto',
       subtitle: 'Beginning of the End',
     },
-    price: '1000000000000000000000000',
-    status: null,
+    owner_id: 'rng.testnet',
   },
   active,
   onClose,
@@ -47,7 +46,10 @@ const BuyChapterModal = ({
   }
 
   const onClickReadNow = () => {
-    router.push('/viewer/123')
+    router.push({
+      pathname: `/viewer/${data.comic_id}`,
+      query: { chapterId: data.chapter_id },
+    })
   }
 
   const onBuyChapter = () => {
@@ -81,7 +83,9 @@ const BuyChapterModal = ({
                 <p className="text-blueGray-400 text-lg">
                   Chapter {data.chapter_id}
                 </p>
-                <p className="text-2xl text-gray-50">{data.metadata.title}</p>
+                <p className="text-2xl text-gray-50">
+                  {data.metadata.subtitle}
+                </p>
                 <p className="text-gray-200 mt-4 text-sm mb-6">
                   {data.metadata.description}
                 </p>

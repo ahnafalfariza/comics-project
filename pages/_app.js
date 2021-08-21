@@ -46,7 +46,7 @@ const App = ({ Component, pageProps }) => {
 
             try {
               const resp = await axios.put(
-                `${process.env.API_URL}/profiles`,
+                `${process.env.PARAS_API_URL}/profiles`,
                 formData,
                 {
                   headers: {
