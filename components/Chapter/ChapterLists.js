@@ -90,9 +90,7 @@ const Overview = ({ chapters, hasMore, fetchData }) => {
         active={chapterOpen !== null}
         data={chapterOpen}
         onClose={onCloseChapterDetail}
-        onShowLogin={() => setShowLogin(true)}
       />
-      <LoginModal onClose={() => setShowLogin(false)} show={showLogin} />
     </div>
   )
 }

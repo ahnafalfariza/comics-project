@@ -53,7 +53,7 @@ const ProfilePageComics = ({ profile }) => {
     <Layout>
       <Head />
       <Profile userData={userData} setUserData={setUserData} />
-      <div className="max-w-5xl m-auto pt-8 pb-16">
+      <div className="max-w-5xl mx-auto pt-8 pb-16 -mt-8">
         <InfiniteScroll
           dataLength={comics.length}
           next={fetchOwnerComics}
@@ -62,7 +62,7 @@ const ProfilePageComics = ({ profile }) => {
         >
           {comics.map((comic) => {
             return (
-              <div key={comic.comic_id}>
+              <div className="pt-8 px-4" key={comic.comic_id}>
                 <ChapterListProfile
                   comicId={comic.comic_id}
                   comicCover={comic.media}

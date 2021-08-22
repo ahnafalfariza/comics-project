@@ -5,7 +5,10 @@ import near from 'lib/near'
 import useStore from 'lib/store'
 import { formatNearAmount } from 'near-api-js/lib/utils/format'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { BounceLoader } from 'react-spinners'
 import { parseImgUrl } from 'utils/common'
+import LoginModal from './LoginModal'
 
 const BuyChapterModal = ({
   data = {
@@ -36,10 +39,11 @@ const BuyChapterModal = ({
   },
   active,
   onClose,
-  onShowLogin,
+  isLoading,
 }) => {
   const router = useRouter()
   const buyChapter = useStore((state) => state.buyChapter)
+  const [showLogin, setShowLogin] = useState(false)
 
   const onClickMarket = () => {
     router.push('/market')
@@ -54,7 +58,7 @@ const BuyChapterModal = ({
 
   const onBuyChapter = () => {
     if (!near.currentUser) {
-      onShowLogin()
+      setShowLogin(true)
       return
     }
     buyChapter(data.token_type, data.price)
@@ -65,69 +69,78 @@ const BuyChapterModal = ({
   return (
     <>
       <Modal closeOnBgClick closeOnEscape isShow={active} close={onClose}>
-        <div className="relative m-auto">
-          <div className="max-w-2xl md:flex bg-blueGray-800 rounded-lg m-4 md:m-auto overflow-hidden relative">
-            <div
-              className="md:block md:w-64 h-64 md:h-auto overflow-hidden"
-              style={{
-                backgroundImage: `url(${parseImgUrl(data.metadata.media)})`,
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'top',
-              }}
-            >
-              <div className="w-full h-full bg-gradient-to-b from-transparent via-transparent to-blueGray-800 md:to-transparent" />
-            </div>
-            <div className="-mt-16 md:mt-0 md:w-96 w-full relative p-6 md:p-8 flex flex-col justify-between md:h-96 overflow-y-scroll">
-              <div className="w-full">
-                <p className="text-blueGray-400 text-lg">
-                  Chapter {data.chapter_id}
-                </p>
-                <p className="text-2xl text-gray-50">
-                  {data.metadata.subtitle}
-                </p>
-                <p className="text-gray-200 mt-4 text-sm mb-6">
-                  {data.metadata.description}
-                </p>
+        <div className="relative max-w-2xl w-full my-auto mx-4 md:mx-auto">
+          <div className="w-full md:flex bg-blueGray-800 rounded-lg overflow-hidden">
+            {isLoading ? (
+              <div className="mx-auto w-full h-96 flex items-center justify-center">
+                <BounceLoader
+                  loading={true}
+                  color={'rgb(107, 114, 128)'}
+                  size={24}
+                />
               </div>
-              {data.status === 'read' ? (
-                <Button size="md" isFullWidth onClick={onClickReadNow}>
-                  Read Now
-                </Button>
-              ) : (
-                <div>
-                  <Button size="md" isFullWidth onClick={onBuyChapter}>
-                    Buy for {formatNearAmount(data.price)} Ⓝ
-                  </Button>
-                  <p className="text-blueGray-400 text-xs my-3 text-center">
-                    Looking for other?
-                  </p>
-                  <Button
-                    size="md"
-                    isFullWidth
-                    variant="ghost"
-                    onClick={onClickMarket}
-                  >
-                    Go to Marketplace
-                  </Button>
+            ) : (
+              <>
+                <div
+                  className="md:block md:w-64 h-64 md:h-auto overflow-hidden flex-shrink-0"
+                  style={{
+                    backgroundImage: `url(${parseImgUrl(data.metadata.media)})`,
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center',
+                  }}
+                >
+                  <div className="w-full h-full bg-gradient-to-b from-transparent via-transparent to-blueGray-800 md:to-transparent" />
                 </div>
-              )}
-              <div
-                className="absolute top-0 right-0 m-4 cursor-pointer hidden md:block"
-                onClick={onClose}
-              >
-                <IconX size={24} />
-              </div>
-            </div>
+                <div className="-mt-16 md:mt-0 w-full relative p-4 md:p-8 flex flex-col justify-between md:h-96 overflow-y-auto">
+                  <div className="w-full">
+                    <p className="text-blueGray-400 text-lg">
+                      Chapter {data.chapter_id}
+                    </p>
+                    <p className="text-2xl text-gray-50">
+                      {data.metadata.subtitle}
+                    </p>
+                    <p className="text-gray-200 mt-4 text-sm mb-6">
+                      {data.metadata.description}
+                    </p>
+                  </div>
+                  {data.status === 'read' ? (
+                    <Button size="md" isFullWidth onClick={onClickReadNow}>
+                      Read Now
+                    </Button>
+                  ) : (
+                    <div>
+                      <Button size="md" isFullWidth onClick={onBuyChapter}>
+                        Buy for {formatNearAmount(data.price)} Ⓝ
+                      </Button>
+                      <p className="text-blueGray-400 text-xs my-3 text-center">
+                        Looking for other?
+                      </p>
+                      <Button
+                        size="md"
+                        isFullWidth
+                        variant="ghost"
+                        onClick={onClickMarket}
+                      >
+                        Go to Marketplace
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
           </div>
           <div
-            className="absolute top-0 right-0 cursor-pointer md:hidden"
+            className="absolute z-10 top-0 right-0 cursor-pointer"
             onClick={onClose}
           >
-            <IconXCircle size={32} />
+            <div className="-mt-4 -mr-4">
+              <IconXCircle size={40} />
+            </div>
           </div>
         </div>
       </Modal>
+      <LoginModal onClose={() => setShowLogin(false)} show={showLogin} />
     </>
   )
 }

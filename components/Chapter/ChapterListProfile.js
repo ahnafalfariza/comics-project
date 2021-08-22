@@ -6,6 +6,8 @@ import axios from 'axios'
 import Token from 'components/Token/Token'
 import { parseImgUrl } from 'utils/common'
 import comicsStyles from 'styles/Comics.module.css'
+import Link from 'next/link'
+import BuyChapterModal from 'components/Modal/BuyChapterModal'
 
 const LIMIT = 8
 
@@ -26,6 +28,9 @@ const ChapterListProfile = ({
   const [page, setPage] = useState(0)
   const [hasMore, setHasMore] = useState(true)
   const [isFetching, setIsFetching] = useState(false)
+
+  const [activeChapter, setActiveChapter] = useState(null)
+  const [isFetchingChapter, setIsFetchingChapter] = useState(false)
 
   useEffect(() => {
     var options = {
@@ -116,20 +121,56 @@ const ChapterListProfile = ({
     }
   }
 
+  const openChapterModal = async (comicId, chapterId) => {
+    setIsFetchingChapter(true)
+    setActiveChapter(true)
+
+    try {
+      const response = await axios.get(
+        `${process.env.COMIC_API_URL}/chapters`,
+        {
+          params: {
+            comic_id: comicId,
+            chapter_id: chapterId,
+            __skip: 0,
+            __limit: 1,
+          },
+        }
+      )
+
+      const results = response.data.data.results
+
+      if (results.length > 0) {
+        setActiveChapter(results[0])
+        setIsFetchingChapter(false)
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
-    <div className="px-4 lg:p-0 md:flex items-center">
-      <div className="hidden md:block md:w-1/5 flex-shrink-0 p-4 lg:p-0 lg:pr-4">
+    <div className="md:flex items-end">
+      <BuyChapterModal
+        active={activeChapter !== null}
+        data={activeChapter}
+        onClose={() => setActiveChapter(null)}
+        isLoading={isFetchingChapter}
+      />
+      <div className="hidden md:block md:w-44 md:h-60 w-64 h-96 flex-shrink-0">
         <div
-          className="w-full h-40 md:h-72 flex-none rounded-md bg-no-repeat bg-center bg-cover shadow-2xl"
+          className="w-full h-full rounded-md bg-no-repeat bg-center bg-cover shadow-2xl"
           style={{
             backgroundImage: `url(${parseImgUrl(comicCover)})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
           }}
         />
       </div>
-      <div className="md:w-4/5 relative px-4">
-        <div className="text-white text-xl md:text-3xl">{comicTitle}</div>
+      <div className="w-full relative pl-0 md:pl-8">
+        <div className="text-white text-xl md:text-3xl font-bold">
+          <Link href={`/overview/${comicId}/chapter`}>
+            <a>{comicTitle}</a>
+          </Link>
+        </div>
         <div className="relative">
           <div
             ref={shelvesRef}
@@ -139,9 +180,12 @@ const ChapterListProfile = ({
               <div
                 key={token.tokenId}
                 className="relative w-2/5 md:w-1/4 lg:w-1/5 flex-shrink-0 -mr-10 inline-block transform transition-all origin-bottom-right duration-300 ease-in-out hover:rotate-3 hover:mr-0 hover:-translate-y-3"
+                onClick={() =>
+                  openChapterModal(token.comic_id, token.chapter_id)
+                }
               >
                 <div
-                  className="w-full"
+                  className="w-full cursor-pointer"
                   style={{
                     filter:
                       'drop-shadow(-4px 0px 8px rgba(0, 0, 0, 0.25)) drop-shadow(-8px 0px 16px rgba(0, 0, 0, 0.25))',
@@ -174,7 +218,7 @@ const ChapterListProfile = ({
                         'linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0) 31.93%, #18162B 100%), url(image.png)',
                     }}
                   >
-                    <p className="text-xl">Ch. {token.chapter_id}</p>
+                    <p className="text-lg md:text-xl">Ch. {token.chapter_id}</p>
                     <p className="text-xs">Edition {token.edition_id}</p>
                   </div>
                 </div>
