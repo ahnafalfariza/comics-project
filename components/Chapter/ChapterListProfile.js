@@ -21,7 +21,7 @@ const ChapterListProfile = ({
   const router = useRouter()
 
   const [showLeftArrow, setShowLeftArrow] = useState(false)
-  const [showRightArrow, setShowRigthArrow] = useState(true)
+  const [showRightArrow, setShowRigthArrow] = useState(false)
   const [intersecting, setIntersecting] = useState(false)
 
   const [tokens, setTokens] = useState([])
@@ -150,7 +150,7 @@ const ChapterListProfile = ({
   }
 
   return (
-    <div className="md:flex items-end">
+    <div className="md:flex w-full items-end">
       <BuyChapterModal
         active={activeChapter !== null}
         data={activeChapter}
@@ -169,8 +169,8 @@ const ChapterListProfile = ({
           </a>
         </Link>
       </div>
-      <div className="w-full relative pl-0 md:pl-8">
-        <div className="text-white text-xl md:text-3xl font-bold ">
+      <div className="md:w-96 flex-1 pl-0 md:pl-8">
+        <div className="text-white text-xl md:text-3xl font-bold">
           <Link href={`/overview/${comicId}/chapter`}>
             <a className="hover:opacity-50 transition-all duration-200">
               {comicTitle}
