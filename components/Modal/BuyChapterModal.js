@@ -52,8 +52,7 @@ const BuyChapterModal = ({
 
   const onClickReadNow = () => {
     router.push({
-      pathname: `/viewer/${data.comic_id}`,
-      query: { chapterId: data.chapter_id },
+      pathname: `/viewer/${data.comic_id}/${data.chapter_id}`,
     })
   }
 

@@ -13,8 +13,7 @@ const MenuBottom = forwardRef(({ showMenu, data, hasNext }, ref) => {
   const onClickNextChapter = () => {
     if (hasNext) {
       router.push({
-        pathname: `/viewer/${data.comic_id}`,
-        query: { chapterId: data.chapter_id + 1 },
+        pathname: `/viewer/${data.comic_id}/${data.chapter_id + 1}`,
       })
     }
   }
@@ -22,8 +21,7 @@ const MenuBottom = forwardRef(({ showMenu, data, hasNext }, ref) => {
   const onClickPrevChapter = () => {
     if (data.chapter_id !== 1) {
       router.push({
-        pathname: `/viewer/${data.comic_id}`,
-        query: { chapterId: data.chapter_id - 1 },
+        pathname: `/viewer/${data.comic_id}/${data.chapter_id - 1}`,
       })
     }
   }
