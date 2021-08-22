@@ -12,6 +12,7 @@ import CommentsLoader from './CommentsLoader'
 
 import { PROFILE_IMAGE } from 'constants/dummy'
 import { formatTimeAgo } from 'utils/dateHelper'
+import { useRouter } from 'next/router'
 
 const CommentList = () => {
   const [commentText, setCommentText] = useState('')
@@ -21,9 +22,13 @@ const CommentList = () => {
   const fetchCommentData = useStore((state) => state.fetchCommentData)
   const postComment = useStore((state) => state.postComment)
 
+  const router = useRouter()
+
+  const { comicId, chapterId } = router.query
+
   useEffect(() => {
-    fetchCommentData()
-  }, [fetchCommentData])
+    fetchCommentData(comicId, chapterId)
+  }, [chapterId, comicId, fetchCommentData])
 
   return (
     <div className="w-full md:max-w-lg bg-blueGray-800 p-3 h-2/3 flex flex-col m-auto">

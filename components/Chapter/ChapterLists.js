@@ -6,11 +6,9 @@ import axios from 'axios'
 import ChapterList from 'components/Chapter/ChapterList'
 import ChapterListLoader from 'components/Chapter/ChapterListLoader'
 import BuyChapterModal from 'components/Modal/BuyChapterModal'
-import LoginModal from 'components/Modal/LoginModal'
 
 const Overview = ({ chapters, hasMore, fetchData }) => {
   const [chapterOpen, setChapterOpen] = useState(null)
-  const [showLogin, setShowLogin] = useState(false)
 
   const router = useRouter()
 

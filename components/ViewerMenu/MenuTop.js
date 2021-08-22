@@ -3,7 +3,7 @@ import { forwardRef } from 'react'
 import { IconArrow, IconShare } from 'components/Icons'
 import { useRouter } from 'next/router'
 
-const MenuTop = forwardRef(({ showMenu }, ref) => {
+const MenuTop = forwardRef(({ showMenu, data }, ref) => {
   const router = useRouter()
 
   const onClickBack = () => {
@@ -13,7 +13,7 @@ const MenuTop = forwardRef(({ showMenu }, ref) => {
   return (
     <div
       ref={ref}
-      className={`fixed inset-x-0 overflow-hidden transform transition-transform ease-in-out duration-300 ${
+      className={`fixed inset-x-0 overflow-hidden transform z-10 transition-transform ease-in-out duration-300 ${
         showMenu ? 'translate-y-0' : '-translate-y-20'
       }`}
     >
@@ -27,7 +27,7 @@ const MenuTop = forwardRef(({ showMenu }, ref) => {
             onClick={onClickBack}
           />
           <p className="text-white ml-4 flex-1 md:text-base lg:text-lg">
-            Paradigm - Chapter 1
+            {data?.metadata.title}
           </p>
           <IconShare size={20} color="#ffffff" className="cursor-pointer" />
         </div>

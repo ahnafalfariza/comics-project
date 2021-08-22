@@ -1,6 +1,6 @@
 import Button from 'components/Common/Button'
 import Modal from 'components/Common/Modal'
-import { IconX, IconXCircle } from 'components/Icons'
+import { IconXCircle } from 'components/Icons'
 import near from 'lib/near'
 import useStore from 'lib/store'
 import { formatNearAmount } from 'near-api-js/lib/utils/format'
@@ -40,6 +40,7 @@ const BuyChapterModal = ({
   active,
   onClose,
   isLoading,
+  hideCloseButton,
 }) => {
   const router = useRouter()
   const buyChapter = useStore((state) => state.buyChapter)
@@ -110,8 +111,13 @@ const BuyChapterModal = ({
                     </Button>
                   ) : (
                     <div>
+                      <p className="text-blueGray-400 text-xs my-3 text-center">
+                        Small transaction fee is applied of 0.01832 Ⓝ
+                      </p>
                       <Button size="md" isFullWidth onClick={onBuyChapter}>
-                        Buy for {formatNearAmount(data.price)} Ⓝ
+                        {data.price === '0'
+                          ? 'Free'
+                          : `Buy for ${formatNearAmount(data.price)} Ⓝ`}
                       </Button>
                       <p className="text-blueGray-400 text-xs my-3 text-center">
                         Looking for other?
@@ -135,7 +141,7 @@ const BuyChapterModal = ({
             onClick={onClose}
           >
             <div className="-mt-4 -mr-4">
-              <IconXCircle size={40} />
+              {!hideCloseButton && <IconXCircle size={40} />}
             </div>
           </div>
         </div>
