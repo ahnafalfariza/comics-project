@@ -18,11 +18,11 @@ const ProfilePageComics = ({ profile }) => {
   const [isFetching, setIsFetching] = useState(false)
   const [userData, setUserData] = useState(profile)
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (router.query.userId) {
       fetchOwnerComics()
     }
+    // eslint-disable-next-line
   }, [router.query.userId])
 
   const fetchOwnerComics = async () => {

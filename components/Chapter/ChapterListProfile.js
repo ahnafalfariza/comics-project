@@ -21,7 +21,7 @@ const ChapterListProfile = ({
   const router = useRouter()
 
   const [showLeftArrow, setShowLeftArrow] = useState(false)
-  const [showRightArrow, setShowRigthArrow] = useState(true)
+  const [showRightArrow, setShowRigthArrow] = useState(false)
   const [intersecting, setIntersecting] = useState(false)
 
   const [tokens, setTokens] = useState([])
@@ -150,7 +150,7 @@ const ChapterListProfile = ({
   }
 
   return (
-    <div className="md:flex items-end">
+    <div className="md:flex w-full items-end">
       <BuyChapterModal
         active={activeChapter !== null}
         data={activeChapter}
@@ -165,7 +165,7 @@ const ChapterListProfile = ({
           }}
         />
       </div>
-      <div className="w-full relative pl-0 md:pl-8">
+      <div className="md:w-96 flex-1 pl-0 md:pl-8">
         <div className="text-white text-xl md:text-3xl font-bold">
           <Link href={`/overview/${comicId}/chapter`}>
             <a>{comicTitle}</a>
@@ -178,7 +178,7 @@ const ChapterListProfile = ({
           >
             {tokens.map((token) => (
               <div
-                key={token.tokenId}
+                key={token.token_id}
                 className="relative w-2/5 md:w-1/4 lg:w-1/5 flex-shrink-0 -mr-10 inline-block transform transition-all origin-bottom-right duration-300 ease-in-out hover:rotate-3 hover:mr-0 hover:-translate-y-3"
                 onClick={() =>
                   openChapterModal(token.comic_id, token.chapter_id)
