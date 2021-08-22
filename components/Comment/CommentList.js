@@ -13,6 +13,8 @@ import CommentsLoader from './CommentsLoader'
 import { PROFILE_IMAGE } from 'constants/dummy'
 import { formatTimeAgo } from 'utils/dateHelper'
 import { useRouter } from 'next/router'
+import axios from 'axios'
+import { parseImgUrl } from 'utils/common'
 
 const CommentList = () => {
   const [commentText, setCommentText] = useState('')
@@ -95,9 +97,21 @@ const Comment = ({
   const [userLikes, setUserLikes] = useState(userLikes)
   const [numLikes, setNumLikes] = useState(data.likes)
 
+  const [userData, setUserData] = useState({})
+
   const likeComment = useStore((state) => state.likeComment)
   const dislikeComment = useStore((state) => state.dislikeComment)
   const deleteComment = useStore((state) => state.deleteComment)
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const response = await axios.get(
+        `${process.env.PARAS_API_URL}/profiles?accountId=${data.account_id}`
+      )
+      setUserData(response.data.data.results[0])
+    }
+    fetchUser()
+  }, [])
 
   const _likeAction = () => {
     setUserLikes(userLikes === 'likes' ? null : 'likes')
@@ -114,7 +128,11 @@ const Comment = ({
   return (
     <div className="p-4">
       <div className="flex items-center">
-        <Avatar size="md" src={PROFILE_IMAGE} />
+        <Avatar
+          size="md"
+          src={parseImgUrl(userData?.imgUrl || '')}
+          entityName={data.account_id}
+        />
         <p className="font-bold mx-3 text-white">{data.account_id}</p>
         <p className="text-blueGray-400 text-xs">
           {formatTimeAgo(new Date(data.issued_at))}

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Avatar from 'components/Common/Avatar'
 import Button from 'components/Common/Button'
 import { InputTextarea } from 'components/Common/form'
 import ImgCrop from 'components/Common/ImgCrop'
@@ -92,14 +93,14 @@ const EditProfileModal = ({ userData = {}, setUserData, active, onClose }) => {
               }}
             />
             <div className="flex items-center justify-center relative">
-              <div className="w-32 h-32 rounded-full overflow-hidden bg-primary shadow-inner">
-                <img
-                  src={parseImgUrl(imgUrl, null, {
-                    width: `300`,
-                  })}
-                  className="w-full object-cover"
-                />
-              </div>
+              <Avatar
+                size="xxl"
+                src={parseImgUrl(imgUrl, null, {
+                  width: `300`,
+                })}
+                entityName={userData?.accountId}
+                className="md:w-32 md:h-32"
+              />
               <div className="absolute right-0 bottom-0">
                 <div className="mx-auto">
                   <IconCamera size={32} />
@@ -108,7 +109,7 @@ const EditProfileModal = ({ userData = {}, setUserData, active, onClose }) => {
             </div>
           </div>
           <div className="mt-4">
-            <label className="block text-sm text-gray-100">Bio</label>
+            <label className="block font-bold text-gray-100">Bio</label>
             <InputTextarea
               type="text"
               name="description"

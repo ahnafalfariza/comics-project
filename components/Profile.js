@@ -61,6 +61,7 @@ const Profile = ({ userData, setUserData }) => {
           <Avatar
             size="xxl"
             src={parseImgUrl(userData?.imgUrl || '')}
+            entityName={userData?.accountId}
             className="md:w-64 md:h-64 -mt-12 md:-mt-32 flex-shrink-0 border-8 border-background z-20"
           />
           <div className="w-full md:ml-8 md:mt-4">
