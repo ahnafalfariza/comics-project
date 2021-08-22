@@ -69,6 +69,7 @@ const Comics = () => {
                 imgUrl={parseImgUrl(data.media, null, {
                   width: `300`,
                 })}
+                imgBlur="U0Csjj-;fQ-;%MfQfQfQfQfQfQfQ%MfQfQfQ"
                 hoverMouse={false}
                 initialRotate={{ x: 0, y: 0 }}
                 shadow="none"
