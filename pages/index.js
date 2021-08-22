@@ -1,11 +1,13 @@
 import Button from 'components/Common/Button'
 import Head from 'components/Common/Head'
 import Layout from 'components/Layout'
-import LoginModal from 'components/Modal/LoginModal'
+import { useRouter } from 'next/router'
 
 import HomeStyles from 'styles/Home.module.css'
 
 export default function Home() {
+  const router = useRouter()
+
   return (
     <Layout>
       <Head />
@@ -30,7 +32,9 @@ export default function Home() {
               support the creators through collectibles NFTs. Tipping is now
               interactive!
             </div>
-            <Button size="lg">Read Comics</Button>
+            <Button size="lg" onClick={() => router.push('/comics')}>
+              Read Comics
+            </Button>
           </div>
         </div>
 

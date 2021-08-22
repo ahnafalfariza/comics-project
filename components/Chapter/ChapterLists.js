@@ -74,10 +74,10 @@ const Overview = ({ chapters, hasMore, fetchData }) => {
         hasMore={hasMore}
         loader={<ChapterListLoader />}
       >
-        {chapters.map((data, i) => {
+        {chapters.map((data) => {
           return (
             <ChapterList
-              key={i}
+              key={data.chapter_id}
               data={data}
               onClick={() => onClickChapter(data)}
             />

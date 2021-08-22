@@ -10,7 +10,6 @@ import { InputTextarea } from 'components/Common/form'
 import { IconThumbDown, IconThumbUp, IconX } from 'components/Icons'
 import CommentsLoader from './CommentsLoader'
 
-import { PROFILE_IMAGE } from 'constants/dummy'
 import { formatTimeAgo } from 'utils/dateHelper'
 import { useRouter } from 'next/router'
 import axios from 'axios'
@@ -23,6 +22,7 @@ const CommentList = () => {
   const setShowComment = useStore((state) => state.setShowComment)
   const fetchCommentData = useStore((state) => state.fetchCommentData)
   const postComment = useStore((state) => state.postComment)
+  const clearCommentData = useStore((state) => state.clearCommentData)
 
   const router = useRouter()
 
@@ -31,6 +31,10 @@ const CommentList = () => {
   useEffect(() => {
     fetchCommentData(comicId, chapterId)
   }, [chapterId, comicId, fetchCommentData])
+
+  useEffect(() => {
+    return () => clearCommentData()
+  }, [clearCommentData])
 
   return (
     <div className="w-full md:max-w-lg bg-blueGray-800 p-3 h-2/3 flex flex-col m-auto">
@@ -51,8 +55,8 @@ const CommentList = () => {
             hasMore={false}
             loader={<CommentsLoader />}
           >
-            {commentData.map((data, index) => (
-              <Comment key={index} data={data} />
+            {commentData.map((data) => (
+              <Comment key={data.comment_id} data={data} />
             ))}
           </InfiniteScroll>
         ) : (
@@ -94,7 +98,7 @@ const Comment = ({
     likes: 0,
   },
 }) => {
-  const [userLikes, setUserLikes] = useState(userLikes)
+  const [userLikes, setUserLikes] = useState(data.user_likes)
   const [numLikes, setNumLikes] = useState(data.likes)
 
   const [userData, setUserData] = useState({})
@@ -102,6 +106,8 @@ const Comment = ({
   const likeComment = useStore((state) => state.likeComment)
   const dislikeComment = useStore((state) => state.dislikeComment)
   const deleteComment = useStore((state) => state.deleteComment)
+
+  const router = useRouter()
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -116,13 +122,17 @@ const Comment = ({
   const _likeAction = () => {
     setUserLikes(userLikes === 'likes' ? null : 'likes')
     setNumLikes(userLikes === 'likes' ? numLikes - 1 : numLikes + 1)
-    likeComment(data._id, userLikes === 'likes')
+    likeComment(data.comment_id, userLikes === 'likes')
   }
 
   const _unlikeAction = () => {
     setUserLikes(userLikes === 'dislikes' ? null : 'dislikes')
     setNumLikes(userLikes === 'likes' ? numLikes - 1 : numLikes)
-    dislikeComment(data._id, userLikes === 'dislikes')
+    dislikeComment(data.comment_id, userLikes === 'dislikes')
+  }
+
+  const redirectToProfile = () => {
+    router.push(`/${data.account_id}`)
   }
 
   return (
@@ -131,9 +141,16 @@ const Comment = ({
         <Avatar
           size="md"
           src={parseImgUrl(userData?.imgUrl || '')}
+          onClick={redirectToProfile}
           entityName={data.account_id}
+          className="cursor-pointer"
         />
-        <p className="font-bold mx-3 text-white">{data.account_id}</p>
+        <p
+          className="font-bold mx-3 text-white cursor-pointer"
+          onClick={redirectToProfile}
+        >
+          {data.account_id}
+        </p>
         <p className="text-blueGray-400 text-xs">
           {formatTimeAgo(new Date(data.issued_at))}
         </p>
@@ -154,7 +171,7 @@ const Comment = ({
         {data.account_id === near.currentUser.accountId && (
           <p
             className="text-white ml-2 text-xs cursor-pointer"
-            onClick={() => deleteComment(data._id)}
+            onClick={() => deleteComment(data.comment_id)}
           >
             Delete
           </p>

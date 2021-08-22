@@ -44,6 +44,7 @@ const BuyChapterModal = ({
   onClose,
   isLoading,
   hideCloseButton,
+  hideActionButton,
 }) => {
   const router = useRouter()
   const buyChapter = useStore((state) => state.buyChapter)
@@ -108,34 +109,46 @@ const BuyChapterModal = ({
                     </p>
                   </div>
                   <div>
-                    {data.status === 'read' ? (
-                      <div>
-                        <Button size="md" isFullWidth onClick={onClickReadNow}>
-                          Read Now
-                        </Button>
-                      </div>
-                    ) : (
-                      <div>
-                        <p className="text-blueGray-400 text-xs my-3 text-center">
-                          Small transaction fee is applied of 0.01832 Ⓝ
-                        </p>
-                        <Button size="md" isFullWidth onClick={onBuyChapter}>
-                          {data.price === '0'
-                            ? 'Free'
-                            : `Buy for ${formatNearAmount(data.price)} Ⓝ`}
-                        </Button>
-                        <p className="text-blueGray-400 text-xs my-3 text-center">
-                          Looking for other?
-                        </p>
-                        <Button
-                          size="md"
-                          isFullWidth
-                          variant="ghost"
-                          onClick={onClickMarket}
-                        >
-                          Go to Marketplace
-                        </Button>
-                      </div>
+                    {!hideActionButton && (
+                      <>
+                        {data.status === 'read' ? (
+                          <div>
+                            <Button
+                              size="md"
+                              isFullWidth
+                              onClick={onClickReadNow}
+                            >
+                              Read Now
+                            </Button>
+                          </div>
+                        ) : (
+                          <div>
+                            <p className="text-blueGray-400 text-xs mb-2 text-center">
+                              Small transaction fee is applied of 0.01832 Ⓝ
+                            </p>
+                            <Button
+                              size="md"
+                              isFullWidth
+                              onClick={onBuyChapter}
+                            >
+                              {data.price === '0'
+                                ? 'Free'
+                                : `Buy for ${formatNearAmount(data.price)} Ⓝ`}
+                            </Button>
+                            <p className="text-blueGray-400 text-xs my-3 text-center">
+                              Looking for other?
+                            </p>
+                            <Button
+                              size="md"
+                              isFullWidth
+                              variant="ghost"
+                              onClick={onClickMarket}
+                            >
+                              Go to Marketplace
+                            </Button>
+                          </div>
+                        )}
+                      </>
                     )}
                     <ShareComponent
                       title="Read this comic"

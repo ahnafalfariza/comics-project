@@ -8,8 +8,8 @@ import useStore from 'lib/store'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import Head from 'components/Common/Head'
-import { BounceLoader } from 'react-spinners'
 import BuyChapterModal from 'components/Modal/BuyChapterModal'
+import ChapterImagePage from 'components/ViewerMenu/ChapterImagePage'
 
 const ChapterView = () => {
   const menuTopRef = useRef()
@@ -78,7 +78,6 @@ const ChapterView = () => {
   }
 
   const fetchChapterPage = async (numPage, comicId, chapterId) => {
-    console.log(numPage)
     let url = []
     for (let i = 1; i <= numPage; i++) {
       url.push(
@@ -87,8 +86,6 @@ const ChapterView = () => {
     }
     setChapterPageUrl(url)
   }
-
-  console.log('hasnext', hasNext)
 
   return (
     <Layout showNav={false} showFooter={false} className="bg-black">
@@ -116,36 +113,3 @@ const ChapterView = () => {
 }
 
 export default ChapterView
-
-const ChapterImagePage = ({ url }) => {
-  const [imageCh, setImageCh] = useState('')
-  const [unauthorized, setUnauthorized] = useState(null)
-
-  useEffect(() => {
-    const fetchImage = async () => {
-      try {
-        const response = await axios.get(url, {
-          responseType: 'blob',
-        })
-        const objectUrl = URL.createObjectURL(response.data)
-        setImageCh([objectUrl])
-      } catch (error) {
-        setUnauthorized(true)
-      }
-    }
-    fetchImage()
-  }, [url])
-
-  if (unauthorized) return null
-
-  return imageCh !== '' ? (
-    <div className="">
-      <img src={imageCh} />
-      <div className="absolute inset-0 bg-transparent z-0" />
-    </div>
-  ) : (
-    <div className="h-96 flex justify-center items-center gray">
-      <BounceLoader loading={true} color={'rgb(107, 114, 128)'} size={24} />
-    </div>
-  )
-}
