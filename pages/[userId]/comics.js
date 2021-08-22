@@ -6,9 +6,15 @@ import { useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useRouter } from 'next/router'
 import axios from 'axios'
-import ChapterListLoader from 'components/Chapter/ChapterListLoader'
+import ProfileChapterListLoader from 'components/Chapter/ProfileChapterListLoader'
 
 const LIMIT = 8
+
+const Loader = () => (
+  <div className="px-4">
+    <ProfileChapterListLoader />
+  </div>
+)
 
 const ProfilePageComics = ({ profile }) => {
   const router = useRouter()
@@ -32,22 +38,24 @@ const ProfilePageComics = ({ profile }) => {
 
     setIsFetching(true)
 
-    const res = await axios(
-      `${process.env.COMIC_API_URL}/comics?owner_id=${
-        router.query.userId
-      }&__skip=${page * LIMIT}&__limit=${LIMIT}`
-    )
-    const newData = await res.data.data
+    setTimeout(async () => {
+      const res = await axios(
+        `${process.env.COMIC_API_URL}/comics?owner_id=${
+          router.query.userId
+        }&__skip=${page * LIMIT}&__limit=${LIMIT}`
+      )
+      const newData = await res.data.data
 
-    const newComics = [...(comics || []), ...newData.results]
-    setComics(newComics)
-    setPage(page + 1)
-    if (newData.results.length < LIMIT) {
-      setHasMore(false)
-    } else {
-      setHasMore(true)
-    }
-    setIsFetching(false)
+      const newComics = [...(comics || []), ...newData.results]
+      setComics(newComics)
+      setPage(page + 1)
+      if (newData.results.length < LIMIT) {
+        setHasMore(false)
+      } else {
+        setHasMore(true)
+      }
+      setIsFetching(false)
+    }, 2500)
   }
 
   return (
@@ -59,7 +67,7 @@ const ProfilePageComics = ({ profile }) => {
           dataLength={comics.length}
           next={fetchOwnerComics}
           hasMore={hasMore}
-          loader={<ChapterListLoader />}
+          loader={<Loader />}
         >
           {comics.map((comic) => {
             return (

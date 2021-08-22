@@ -158,27 +158,33 @@ const ChapterListProfile = ({
         isLoading={isFetchingChapter}
       />
       <div className="hidden md:block md:w-44 md:h-60 w-64 h-96 flex-shrink-0">
-        <div
-          className="w-full h-full rounded-md bg-no-repeat bg-center bg-cover shadow-2xl"
-          style={{
-            backgroundImage: `url(${parseImgUrl(comicCover)})`,
-          }}
-        />
+        <Link href={`/overview/${comicId}/chapter`}>
+          <a>
+            <div
+              className="w-full h-full rounded-md bg-no-repeat bg-center bg-cover shadow-2xl hover:opacity-75 transition-all duration-200"
+              style={{
+                backgroundImage: `url(${parseImgUrl(comicCover)})`,
+              }}
+            />
+          </a>
+        </Link>
       </div>
       <div className="w-full relative pl-0 md:pl-8">
-        <div className="text-white text-xl md:text-3xl font-bold">
+        <div className="text-white text-xl md:text-3xl font-bold ">
           <Link href={`/overview/${comicId}/chapter`}>
-            <a>{comicTitle}</a>
+            <a className="hover:opacity-50 transition-all duration-200">
+              {comicTitle}
+            </a>
           </Link>
         </div>
         <div className="relative">
           <div
             ref={shelvesRef}
-            className={`flex flex-shrink-0 flex-nowraps pt-6 pb-2 w-full relative overflow-x-auto ${comicsStyles.chapterListProfile}`}
+            className={`flex flex-shrink-0 flex-nowraps pt-6 w-full relative overflow-x-auto ${comicsStyles.chapterListProfile}`}
           >
             {tokens.map((token) => (
               <div
-                key={token.tokenId}
+                key={token.token_id}
                 className="relative w-2/5 md:w-1/4 lg:w-1/5 flex-shrink-0 -mr-10 inline-block transform transition-all origin-bottom-right duration-300 ease-in-out hover:rotate-3 hover:mr-0 hover:-translate-y-3"
                 onClick={() =>
                   openChapterModal(token.comic_id, token.chapter_id)
