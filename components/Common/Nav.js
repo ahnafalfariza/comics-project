@@ -64,8 +64,6 @@ const Nav = () => {
     router.push(`/${near.getAccount().accountId}`)
   }
 
-  console.log(currentUser)
-
   const ProfileModal = () => {
     return (
       <div className="absolute right-0 mt-3 z-30">
