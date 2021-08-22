@@ -16,7 +16,7 @@ const ProfilePage = ({ profile }) => {
 
   return (
     <Layout>
-      <Head />
+      <Head title={`${profile.accountId} - Comics by Paras`} />
       <Profile userData={userData} setUserData={setUserData} />
     </Layout>
   )

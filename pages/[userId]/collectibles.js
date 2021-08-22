@@ -11,7 +11,7 @@ const ProfilePageCollectibles = ({ profile }) => {
 
   return (
     <Layout>
-      <Head />
+      <Head title={`${profile.accountId} - Comics by Paras`} />
       <Profile userData={userData} setUserData={setUserData} />
       <div className="max-w-5xl m-auto pb-16">
         <TokenList tokens={[]} />

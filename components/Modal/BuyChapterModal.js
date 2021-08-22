@@ -1,14 +1,17 @@
-import Button from 'components/Common/Button'
-import Modal from 'components/Common/Modal'
-import { IconXCircle } from 'components/Icons'
-import near from 'lib/near'
-import useStore from 'lib/store'
-import { formatNearAmount } from 'near-api-js/lib/utils/format'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import { formatNearAmount } from 'near-api-js/lib/utils/format'
 import { BounceLoader } from 'react-spinners'
+
+import near from 'lib/near'
+import useStore from 'lib/store'
+
+import Button from 'components/Common/Button'
+import Modal from 'components/Common/Modal'
+import ShareComponent from 'components/Common/ShareComponent'
+import { IconXCircle } from 'components/Icons'
 import { parseImgUrl } from 'utils/common'
-import LoginModal from './LoginModal'
+import LoginModal from 'components/Modal/LoginModal'
 
 const BuyChapterModal = ({
   data = {
@@ -104,33 +107,41 @@ const BuyChapterModal = ({
                       {data.metadata.description}
                     </p>
                   </div>
-                  {data.status === 'read' ? (
-                    <Button size="md" isFullWidth onClick={onClickReadNow}>
-                      Read Now
-                    </Button>
-                  ) : (
-                    <div>
-                      <p className="text-blueGray-400 text-xs my-3 text-center">
-                        Small transaction fee is applied of 0.01832 Ⓝ
-                      </p>
-                      <Button size="md" isFullWidth onClick={onBuyChapter}>
-                        {data.price === '0'
-                          ? 'Free'
-                          : `Buy for ${formatNearAmount(data.price)} Ⓝ`}
-                      </Button>
-                      <p className="text-blueGray-400 text-xs my-3 text-center">
-                        Looking for other?
-                      </p>
-                      <Button
-                        size="md"
-                        isFullWidth
-                        variant="ghost"
-                        onClick={onClickMarket}
-                      >
-                        Go to Marketplace
-                      </Button>
-                    </div>
-                  )}
+                  <div>
+                    {data.status === 'read' ? (
+                      <div>
+                        <Button size="md" isFullWidth onClick={onClickReadNow}>
+                          Read Now
+                        </Button>
+                      </div>
+                    ) : (
+                      <div>
+                        <p className="text-blueGray-400 text-xs my-3 text-center">
+                          Small transaction fee is applied of 0.01832 Ⓝ
+                        </p>
+                        <Button size="md" isFullWidth onClick={onBuyChapter}>
+                          {data.price === '0'
+                            ? 'Free'
+                            : `Buy for ${formatNearAmount(data.price)} Ⓝ`}
+                        </Button>
+                        <p className="text-blueGray-400 text-xs my-3 text-center">
+                          Looking for other?
+                        </p>
+                        <Button
+                          size="md"
+                          isFullWidth
+                          variant="ghost"
+                          onClick={onClickMarket}
+                        >
+                          Go to Marketplace
+                        </Button>
+                      </div>
+                    )}
+                    <ShareComponent
+                      title="Read this comic"
+                      shareUrl={window.location.href}
+                    />
+                  </div>
                 </div>
               </>
             )}

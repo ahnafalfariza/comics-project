@@ -52,7 +52,7 @@ const ProfilePageComics = ({ profile }) => {
 
   return (
     <Layout>
-      <Head />
+      <Head title={`${profile.accountId} - Comics by Paras`} />
       <Profile userData={userData} setUserData={setUserData} />
       <div className="max-w-5xl mx-auto pt-8 pb-16 -mt-8">
         <InfiniteScroll

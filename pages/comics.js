@@ -50,7 +50,7 @@ const Comics = () => {
 
   return (
     <Layout>
-      <Head />
+      <Head title="Comics - Comics by Paras" />
       <div className="max-w-6xl m-auto p-4 py-8">
         <p className="text-white font-bold text-4xl mb-8">Comics</p>
         <InfiniteScroll

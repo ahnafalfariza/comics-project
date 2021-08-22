@@ -5,6 +5,7 @@ import Layout from 'components/Layout'
 import Head from 'components/Common/Head'
 
 import axios from 'axios'
+import { parseImgUrl } from 'utils/common'
 
 const OverviewPage = ({ comicInfo }) => {
   const router = useRouter()
@@ -17,7 +18,11 @@ const OverviewPage = ({ comicInfo }) => {
 
   return (
     <Layout>
-      <Head title={comicInfo.title} description={comicInfo.description} />
+      <Head
+        title={comicInfo.title}
+        description={comicInfo.description}
+        image={parseImgUrl(comicInfo.media)}
+      />
       <div className="h-screen" />
     </Layout>
   )

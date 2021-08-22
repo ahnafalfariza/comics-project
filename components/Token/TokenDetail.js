@@ -11,6 +11,7 @@ import { parseImgUrl } from 'utils/common'
 import TabInfo from './Tabs/TabInfo'
 import TabOwners from './Tabs/TabOwners'
 import TabHistory from './Tabs/TabHistory'
+
 import TokenDetailBuyModal from 'components/Modal/TokenDetailBuyModal'
 import TokenDetailMoreModal from 'components/Modal/TokenDetailMoreModal'
 import TokenDetailShareModal from 'components/Modal/TokenDetailShareModal'

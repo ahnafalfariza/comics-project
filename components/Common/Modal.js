@@ -8,6 +8,7 @@ const Modal = ({
   children,
   backgroundColor = `rgba(0,0,0,0.86)`,
   style = {},
+  className,
 }) => {
   const modalRef = useRef(null)
 
@@ -38,7 +39,7 @@ const Modal = ({
     <div
       ref={modalRef}
       onClick={(e) => bgClick(e)}
-      className="fixed inset-0 z-50 flex items-center p-4"
+      className={`fixed inset-0 z-50 flex items-center p-4 ${className}`}
       style={{
         backgroundColor: backgroundColor,
         ...style,

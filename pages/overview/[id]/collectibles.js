@@ -8,6 +8,7 @@ import ComicInfo from 'components/Comic/ComicInfo'
 import ChapterCollectibles from 'components/Token/TokenList'
 
 import { COMIC_COLLECTIBLES_DATA } from 'constants/dummy'
+import { parseImgUrl } from 'utils/common'
 
 const LIMIT = 12
 
@@ -50,7 +51,11 @@ const Collectibles = ({ comicInfo }) => {
 
   return (
     <Layout>
-      <Head title={comicInfo.title} description={comicInfo.description} />
+      <Head
+        title={comicInfo.title}
+        description={comicInfo.description}
+        image={parseImgUrl(comicInfo.media)}
+      />
       <ComicInfo data={comicInfo} defaultIndex={1} />
       <ChapterCollectibles
         name={scrollCollectibles}

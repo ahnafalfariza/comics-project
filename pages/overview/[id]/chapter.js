@@ -7,6 +7,7 @@ import Head from 'components/Common/Head'
 import ComicInfo from 'components/Comic/ComicInfo'
 import ChapterLists from 'components/Chapter/ChapterLists'
 import { FETCH_CHAPTERS_LIMIT } from 'constants/constant'
+import { parseImgUrl } from 'utils/common'
 
 const Collection = ({
   comicInfo = {
@@ -61,7 +62,11 @@ const Collection = ({
 
   return (
     <Layout>
-      <Head title={comicInfo.title} description={comicInfo.description} />
+      <Head
+        title={comicInfo.title}
+        description={comicInfo.description}
+        image={parseImgUrl(comicInfo.media)}
+      />
       <ComicInfo data={comicInfo} />
       <ChapterLists
         name={scrollChapter}

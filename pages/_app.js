@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import near from '../lib/near'
 import Loading from 'components/Common/Loading'
 import ToastProvider from 'hooks/useToast'
 
-import * as gtag from '../lib/gtag'
+import near from 'lib/near'
+import * as gtag from 'lib/gtag'
 
 import 'tailwindcss/tailwind.css'
 import 'croppie/croppie.css'

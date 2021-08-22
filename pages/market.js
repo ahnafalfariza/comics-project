@@ -10,7 +10,7 @@ const Market = () => {
 
   return (
     <Layout>
-      <Head />
+      <Head title="Market - Comics by Paras" />
       <div className="max-w-6xl m-auto p-4 py-8">
         <p className="text-white font-bold text-4xl mb-4 ml-4 md:ml-16">
           Market
