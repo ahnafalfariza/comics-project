@@ -66,7 +66,7 @@ const Profile = ({ userData, setUserData }) => {
           <div className="w-full md:ml-8 md:mt-4">
             <div className="w-full flex justify-between items-center">
               <div>
-                <p className="text-white text-3xl font-bold">
+                <p className="text-white text-xl md:text-3xl font-bold">
                   {userData?.accountId}
                 </p>
               </div>
@@ -77,6 +77,15 @@ const Profile = ({ userData, setUserData }) => {
                       onClick={() => setShowModal('editProfile')}
                       size="md"
                       variant="secondary"
+                      className={'hidden md:block'}
+                    >
+                      Edit Profile
+                    </Button>
+                    <Button
+                      onClick={() => setShowModal('editProfile')}
+                      size="sm"
+                      variant="secondary"
+                      className={'block md:hidden'}
                     >
                       Edit Profile
                     </Button>
