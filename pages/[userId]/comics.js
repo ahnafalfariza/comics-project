@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import ChapterListLoader from 'components/Chapter/ChapterListLoader'
 
 const LIMIT = 8
 
@@ -58,7 +59,7 @@ const ProfilePageComics = ({ profile }) => {
           dataLength={comics.length}
           next={fetchOwnerComics}
           hasMore={hasMore}
-          loader={<div>Loading</div>}
+          loader={<ChapterListLoader />}
         >
           {comics.map((comic) => {
             return (
