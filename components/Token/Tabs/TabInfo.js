@@ -2,7 +2,7 @@ import Link from 'next/link'
 import ReactLinkify from 'react-linkify'
 import { parseDate } from 'utils/dateHelper'
 
-const TabInfo = ({ localToken }) => {
+const TabInfo = ({ localToken, isNFT }) => {
   const supply = localToken.metadata.copies
     ? `${localToken.metadata.copies}pcs`
     : `Open Edition`
@@ -28,6 +28,18 @@ const TabInfo = ({ localToken }) => {
           </Link>
         </div>
       </div> */}
+      {isNFT && (
+        <div className="flex bg-blueGray-900 border border-blueGray-700 mt-4 p-3 rounded-md shadow-md">
+          <div>
+            <p className="text-sm text-white font-bold">Owner</p>
+            <Link href={`/${localToken.owner_id}`}>
+              <a className="text-gray-100 font-semibold hover:opacity-80">
+                {localToken.owner_id}
+              </a>
+            </Link>
+          </div>
+        </div>
+      )}
       <div className="bg-blueGray-900 border border-blueGray-700 mt-4 p-3 rounded-md shadow-md">
         <p className="text-sm text-white font-bold">Description</p>
         <ReactLinkify

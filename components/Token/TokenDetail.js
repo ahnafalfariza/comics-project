@@ -16,8 +16,9 @@ import TokenDetailBuyModal from 'components/Modal/TokenDetailBuyModal'
 import TokenDetailMoreModal from 'components/Modal/TokenDetailMoreModal'
 import TokenDetailShareModal from 'components/Modal/TokenDetailShareModal'
 import TokenDetailUpdateModal from 'components/Modal/TokenDetailUpdateModal'
+import TokenType from './TokenType'
 
-const TokenDetail = ({ localToken = TOKEN_DATA, className }) => {
+const TokenDetail = ({ token, metadata, className }) => {
   const [activeTab, setActiveTab] = useState('info')
   const [showModal, setShowModal] = useState(null)
 
@@ -62,7 +63,7 @@ const TokenDetail = ({ localToken = TOKEN_DATA, className }) => {
           <div className="absolute inset-0 opacity-75">
             <Blurhash
               hash={
-                localToken.metadata.blurhash ||
+                token.metadata.blurhash ||
                 'UZ9ZtPzmpHv;R]ONJ6bKQ-l7Z.S_bow5$-nh'
               }
               width={`100%`}
@@ -73,25 +74,7 @@ const TokenDetail = ({ localToken = TOKEN_DATA, className }) => {
             />
           </div>
           <div className="h-full flex items-center">
-            <Token
-              imgUrl={parseImgUrl(localToken.metadata.image, null, {
-                useOriginal: true,
-              })}
-              imgBlur={localToken.metadata.blurhash}
-              token={{
-                name: localToken.metadata.name,
-                collection: localToken.metadata.collection,
-                description: localToken.metadata.description,
-                creatorId: localToken.creatorId,
-                supply: localToken.supply,
-                tokenId: localToken.tokenId,
-                createdAt: localToken.createdAt,
-              }}
-              initialRotate={{
-                x: 15,
-                y: 15,
-              }}
-            />
+            <TokenType metadata={metadata} />
           </div>
         </div>
         <div className="flex flex-col w-full h-1/2 lg:h-full lg:w-2/5 bg-blueGray-800">
@@ -106,14 +89,14 @@ const TokenDetail = ({ localToken = TOKEN_DATA, className }) => {
               <div className="flex justify-between">
                 <div>
                   <h1 className="text-xl md:text-2xl font-bold text-white tracking-tight pr-4 break-all">
-                    {localToken.metadata.name}
+                    {token.metadata.title}
                   </h1>
-                  <p className="text-white">
+                  <p className="mt-1 text-white">
                     by{' '}
                     <span className="font-semibold">
-                      <Link href={`/${localToken.creatorId}`}>
+                      <Link href={`/${token.metadata.author_ids[0]}`}>
                         <a className="text-white font-semibold border-b-2 border-transparent hover:border-white">
-                          {localToken.creatorId}
+                          {token.metadata.author_ids[0]}
                         </a>
                       </Link>
                     </span>
@@ -129,14 +112,14 @@ const TokenDetail = ({ localToken = TOKEN_DATA, className }) => {
               </div>
               <div className="flex mt-3 space-x-4">
                 {tabDetail('info')}
-                {tabDetail('owners')}
-                {tabDetail('history')}
+                {/* {tabDetail('owners')} */}
+                {/* {tabDetail('history')} */}
               </div>
-              {activeTab === 'info' && <TabInfo localToken={localToken} />}
-              {activeTab === 'owners' && <TabOwners localToken={localToken} />}
-              {activeTab === 'history' && (
-                <TabHistory localToken={localToken} />
+              {activeTab === 'info' && (
+                <TabInfo localToken={token} isNFT={true} />
               )}
+              {activeTab === 'owners' && <TabOwners localToken={token} />}
+              {activeTab === 'history' && <TabHistory localToken={token} />}
             </div>
           </Scrollbars>
           <div className="p-3">

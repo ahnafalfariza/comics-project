@@ -94,7 +94,7 @@ const Owner = ({ token = {} }) => {
           </Link>
         </div>
         <div className="flex">
-          <Link href={`/${token.token_type}/${token.token_id}`}>
+          <Link href={`/token/${token.token_type}/${token.token_id}`}>
             <a className="hover:opacity-80">
               <p className="text-white font-semibold">
                 Edition #{token.edition_id}
