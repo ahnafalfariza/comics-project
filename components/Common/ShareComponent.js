@@ -9,8 +9,8 @@ import {
 
 const ShareComponent = ({ title, shareUrl }) => {
   return (
-    <div className="mt-4 flex space-x-2 justify-between md:-mb-4 md:-mx-2">
-      <div className="text-white mr-4 text-sm opacity-80">Share Now</div>
+    <div className="flex items-center space-x-2 justify-between">
+      <div className="text-white text-sm opacity-80 pr-4">Share Now</div>
       <div className="flex space-x-3">
         <FacebookShareButton
           url={shareUrl}

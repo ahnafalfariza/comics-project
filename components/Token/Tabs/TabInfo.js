@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import ReactLinkify from 'react-linkify'
-import { parseDate } from 'utils/dateHelper'
 
 const TabInfo = ({ localToken, isNFT }) => {
   const supply = localToken.metadata.copies
@@ -28,18 +27,6 @@ const TabInfo = ({ localToken, isNFT }) => {
           </Link>
         </div>
       </div> */}
-      {isNFT && (
-        <div className="flex bg-blueGray-900 border border-blueGray-700 mt-4 p-3 rounded-md shadow-md">
-          <div>
-            <p className="text-sm text-white font-bold">Owner</p>
-            <Link href={`/${localToken.owner_id}`}>
-              <a className="text-gray-100 font-semibold hover:opacity-80">
-                {localToken.owner_id}
-              </a>
-            </Link>
-          </div>
-        </div>
-      )}
       <div className="bg-blueGray-900 border border-blueGray-700 mt-4 p-3 rounded-md shadow-md">
         <p className="text-sm text-white font-bold">Description</p>
         <ReactLinkify
@@ -59,16 +46,26 @@ const TabInfo = ({ localToken, isNFT }) => {
           </p>
         </ReactLinkify>
       </div>
-      <div className="flex items-center bg-blueGray-900 border border-blueGray-700 mt-4 p-3 rounded-md shadow-md space-x-3">
-        <div className="w-1/2">
-          <p className="text-sm text-white font-bold">Created</p>
-          <p className="text-gray-100">
-            {parseDate(localToken.metadata.issued_at)}
-          </p>
+      {isNFT && (
+        <div className="flex bg-blueGray-900 border border-blueGray-700 mt-4 p-3 rounded-md shadow-md">
+          <div>
+            <p className="text-sm text-white font-bold">Owner</p>
+            <Link href={`/${localToken.owner_id}`}>
+              <a className="text-gray-100 font-semibold hover:opacity-80">
+                {localToken.owner_id}
+              </a>
+            </Link>
+          </div>
         </div>
-        <div className="w-1/2">
-          <p className="text-sm text-white font-bold">Supply</p>
-          <p className="text-gray-100">{supply}</p>
+      )}
+      <div className="flex bg-blueGray-900 border border-blueGray-700 mt-4 p-3 rounded-md shadow-md">
+        <div>
+          <p className="text-sm text-white font-bold">Edition</p>
+          <Link href={`/token/${localToken.token_type}`}>
+            <a className="text-gray-100 font-semibold hover:opacity-80">
+              #{localToken.edition_id} of {supply}
+            </a>
+          </Link>
         </div>
       </div>
     </div>

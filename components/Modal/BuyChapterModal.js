@@ -12,6 +12,7 @@ import ShareComponent from 'components/Common/ShareComponent'
 import { IconXCircle } from 'components/Icons'
 import { parseImgUrl } from 'utils/common'
 import LoginModal from 'components/Modal/LoginModal'
+import Link from 'next/link'
 
 const BuyChapterModal = ({
   data = {
@@ -43,6 +44,7 @@ const BuyChapterModal = ({
   active,
   onClose,
   isLoading,
+  tokenId,
   hideCloseButton,
   hideActionButton,
 }) => {
@@ -70,6 +72,16 @@ const BuyChapterModal = ({
 
   if (!data) return null
 
+  const tokenCta = tokenId
+    ? {
+        link: `/token/${data.token_type}/${tokenId}`,
+        text: `See Token Edition`,
+      }
+    : {
+        link: `/token/${data.token_type}`,
+        text: `See Token Details`,
+      }
+
   return (
     <>
       <Modal closeOnBgClick closeOnEscape isShow={active} close={onClose}>
@@ -94,9 +106,9 @@ const BuyChapterModal = ({
                     backgroundPosition: 'center',
                   }}
                 >
-                  <div className="w-full h-full bg-gradient-to-b from-transparent via-transparent to-blueGray-800 md:to-transparent" />
+                  <div className="w-full h-full bg-gradient-to-b from-transparent via-transparent to-blueGray-800 md:to-transparent flex items-end"></div>
                 </div>
-                <div className="-mt-16 md:mt-0 w-full relative p-4 md:p-8 flex flex-col justify-between md:h-96 overflow-y-auto">
+                <div className="-mt-16 md:mt-0 w-full relative p-4 md:p-6 flex flex-col justify-between md:h-96 overflow-y-auto">
                   <div className="w-full">
                     <p className="text-blueGray-400 text-lg">
                       Chapter {data.chapter_id}
@@ -135,25 +147,27 @@ const BuyChapterModal = ({
                                 ? 'Free'
                                 : `Buy for ${formatNearAmount(data.price)} Ⓝ`}
                             </Button>
-                            <p className="text-blueGray-400 text-xs my-3 text-center">
-                              Looking for other?
-                            </p>
-                            <Button
-                              size="md"
-                              isFullWidth
-                              variant="ghost"
-                              onClick={onClickMarket}
-                            >
-                              Go to Marketplace
-                            </Button>
                           </div>
                         )}
                       </>
                     )}
-                    <ShareComponent
-                      title="Read this comic"
-                      shareUrl={window.location.href}
-                    />
+                    <div className="mt-2">
+                      <div className="mt-2 w-full text-center">
+                        <Link href={tokenCta.link}>
+                          <a className="font-semibold text-white text-sm">
+                            {tokenCta.text}
+                          </a>
+                        </Link>
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap items-center justify-between -mb-4">
+                      <div className="mt-4 w-full">
+                        <ShareComponent
+                          title="Read this comic"
+                          shareUrl={window.location.href}
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </>

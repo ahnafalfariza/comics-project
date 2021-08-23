@@ -4,8 +4,6 @@ import Layout from 'components/Layout'
 import TokenTypeDetail from 'components/Token/TokenTypeDetail'
 
 const TokenPage = ({ errorCode, token }) => {
-  console.log(token)
-
   return (
     <Layout>
       <div className="p-4">
@@ -21,7 +19,7 @@ const TokenPage = ({ errorCode, token }) => {
 
 export async function getServerSideProps({ params }) {
   const res = await axios(
-    `${process.env.COMIC_API_URL}/token_types?token_types=${params.id}`
+    `${process.env.COMIC_API_URL}/token_types?token_type=${params.tokenTypeId}`
   )
   const token = (await res.data.data.results[0]) || null
 

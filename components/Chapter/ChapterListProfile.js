@@ -29,6 +29,7 @@ const ChapterListProfile = ({
   const [hasMore, setHasMore] = useState(true)
   const [isFetching, setIsFetching] = useState(false)
 
+  const [activeTokenId, setActiveTokenId] = useState(null)
   const [activeChapter, setActiveChapter] = useState(null)
   const [isFetchingChapter, setIsFetchingChapter] = useState(false)
 
@@ -121,9 +122,10 @@ const ChapterListProfile = ({
     }
   }
 
-  const openChapterModal = async (comicId, chapterId) => {
+  const openChapterModal = async (tokenId, comicId, chapterId) => {
     setIsFetchingChapter(true)
     setActiveChapter(true)
+    setActiveTokenId(tokenId)
 
     try {
       const response = await axios.get(
@@ -151,12 +153,6 @@ const ChapterListProfile = ({
 
   return (
     <div className="md:flex w-full items-end">
-      <BuyChapterModal
-        active={activeChapter !== null}
-        data={activeChapter}
-        onClose={() => setActiveChapter(null)}
-        isLoading={isFetchingChapter}
-      />
       <div className="hidden md:block md:w-44 md:h-60 w-64 h-96 flex-shrink-0">
         <Link href={`/overview/${comicId}/chapter`}>
           <a>
@@ -187,7 +183,11 @@ const ChapterListProfile = ({
                 key={token.token_id}
                 className="relative w-2/5 md:w-1/4 lg:w-1/5 flex-shrink-0 -mr-10 inline-block transform transition-all origin-bottom-right duration-300 ease-in-out hover:rotate-3 hover:mr-0 hover:-translate-y-3"
                 onClick={() =>
-                  openChapterModal(token.comic_id, token.chapter_id)
+                  openChapterModal(
+                    token.token_id,
+                    token.comic_id,
+                    token.chapter_id
+                  )
                 }
               >
                 <div
@@ -273,6 +273,13 @@ const ChapterListProfile = ({
           )}
         </div>
       </div>
+      <BuyChapterModal
+        active={activeChapter !== null}
+        data={activeChapter}
+        onClose={() => setActiveChapter(null)}
+        isLoading={isFetchingChapter}
+        tokenId={activeTokenId}
+      />
     </div>
   )
 }
