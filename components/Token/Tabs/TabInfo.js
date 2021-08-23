@@ -3,9 +3,12 @@ import ReactLinkify from 'react-linkify'
 import { parseDate } from 'utils/dateHelper'
 
 const TabInfo = ({ localToken }) => {
+  const supply = localToken.metadata.copies
+    ? `${localToken.metadata.copies}pcs`
+    : `Open Edition`
   return (
     <div>
-      <div className="flex bg-blueGray-900 border border-blueGray-700 mt-4 p-3 rounded-md shadow-md">
+      {/* <div className="flex bg-blueGray-900 border border-blueGray-700 mt-4 p-3 rounded-md shadow-md">
         <div>
           <p className="text-sm text-white font-bold">Collection</p>
           <Link
@@ -24,7 +27,7 @@ const TabInfo = ({ localToken }) => {
             </a>
           </Link>
         </div>
-      </div>
+      </div> */}
       <div className="bg-blueGray-900 border border-blueGray-700 mt-4 p-3 rounded-md shadow-md">
         <p className="text-sm text-white font-bold">Description</p>
         <ReactLinkify
@@ -48,12 +51,12 @@ const TabInfo = ({ localToken }) => {
         <div className="w-1/2">
           <p className="text-sm text-white font-bold">Created</p>
           <p className="text-gray-100">
-            {parseDate(localToken.metadata.createdAt)}
+            {parseDate(localToken.metadata.issued_at)}
           </p>
         </div>
         <div className="w-1/2">
           <p className="text-sm text-white font-bold">Supply</p>
-          <p className="text-gray-100">{localToken.supply} pcs</p>
+          <p className="text-gray-100">{supply}</p>
         </div>
       </div>
     </div>

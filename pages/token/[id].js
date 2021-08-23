@@ -1,13 +1,19 @@
 import axios from 'axios'
 
 import Layout from 'components/Layout'
-import TokenDetail from 'components/Token/TokenDetail'
+import TokenTypeDetail from 'components/Token/TokenTypeDetail'
 
 const TokenPage = ({ errorCode, token }) => {
+  console.log(token)
+
   return (
     <Layout>
       <div className="p-4">
-        <TokenDetail token={token} className="shadow-2xl" />
+        <TokenTypeDetail
+          token={token}
+          metadata={token.metadata}
+          className="shadow-2xl"
+        />
       </div>
     </Layout>
   )
@@ -15,7 +21,7 @@ const TokenPage = ({ errorCode, token }) => {
 
 export async function getServerSideProps({ params }) {
   const res = await axios(
-    `${process.env.PARAS_API_URL}/tokens?tokenId=${params.id}`
+    `${process.env.COMIC_API_URL}/token_types?token_types=${params.id}`
   )
   const token = (await res.data.data.results[0]) || null
 
