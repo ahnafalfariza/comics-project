@@ -45,13 +45,18 @@ const BuyChapterModal = ({
   isLoading,
   hideCloseButton,
   hideActionButton,
+  backToOverview,
 }) => {
   const router = useRouter()
   const buyChapter = useStore((state) => state.buyChapter)
   const [showLogin, setShowLogin] = useState(false)
 
-  const onClickMarket = () => {
-    router.push('/market')
+  const onClickSecondaryButton = () => {
+    if (backToOverview) {
+      router.push(`/overview/${data.comic_id}`)
+    } else {
+      router.push('/market')
+    }
   }
 
   const onClickReadNow = () => {
@@ -142,9 +147,11 @@ const BuyChapterModal = ({
                               size="md"
                               isFullWidth
                               variant="ghost"
-                              onClick={onClickMarket}
+                              onClick={onClickSecondaryButton}
                             >
-                              Go to Marketplace
+                              {backToOverview
+                                ? 'Go to overview'
+                                : 'Go to Marketplace'}
                             </Button>
                           </div>
                         )}
