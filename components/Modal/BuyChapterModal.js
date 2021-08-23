@@ -47,13 +47,18 @@ const BuyChapterModal = ({
   tokenId,
   hideCloseButton,
   hideActionButton,
+  backToOverview,
 }) => {
   const router = useRouter()
   const buyChapter = useStore((state) => state.buyChapter)
   const [showLogin, setShowLogin] = useState(false)
 
-  const onClickMarket = () => {
-    router.push('/market')
+  const onClickSecondaryButton = () => {
+    if (backToOverview) {
+      router.push(`/overview/${data.comic_id}`)
+    } else {
+      router.push('/market')
+    }
   }
 
   const onClickReadNow = () => {

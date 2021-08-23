@@ -54,7 +54,9 @@ const ChapterList = ({
   const listBadgeStyle = `${listBadgeBaseStyle} ${listBadgeResponsiveStyle}`
 
   const textRight = () => {
-    return data.status === 'read' ? 'Read' : `${formatNearAmount(data.price)} Ⓝ`
+    return data.status === 'read'
+      ? 'Read'
+      : `${data.price === '0' ? 'Free' : formatNearAmount(data.price)} Ⓝ`
   }
 
   return (
