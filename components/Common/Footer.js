@@ -20,7 +20,7 @@ const Footer = () => {
   }
 
   return (
-    <div className="max-w-6xl m-auto px-4 flex flex-wrap items-end justify-center md:justify-between mt-20 text-sm text-gray-200 z-10 relative pb-4">
+    <div className="max-w-6xl w-full m-auto px-4 flex flex-wrap items-end justify-center md:justify-between mt-20 text-sm text-gray-200 z-10 relative pb-4">
       <div className="py-2">
         <div className="flex flex-wrap justify-center md:justify-start -mx-2">
           <div className="flex items-center pt-2 px-2">
