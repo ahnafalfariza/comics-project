@@ -136,6 +136,9 @@ const Nav = () => {
             <Link href="/market">
               <a className="hidden md:block">Market</a>
             </Link>
+            <Link href="/faq">
+              <a className="hidden md:block">FAQ</a>
+            </Link>
           </div>
           {near.isLoggedIn() ? (
             <div ref={profileModalRef} className="relative h-auto">
@@ -174,6 +177,11 @@ const Nav = () => {
               <div className="p-3">
                 <Link href="/market">
                   <a>Market</a>
+                </Link>
+              </div>
+              <div className="p-3">
+                <Link href="/faq">
+                  <a>FAQ</a>
                 </Link>
               </div>
             </div>
