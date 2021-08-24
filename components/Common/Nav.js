@@ -142,7 +142,9 @@ const Nav = () => {
               <a className="hidden md:block font-semibold hover:text-primary">
                 <span
                   className={
-                    router.pathname.includes('/comics') ? `text-primary` : ''
+                    router.pathname.split('/')[1] === 'comics'
+                      ? `text-primary`
+                      : ''
                   }
                 >
                   Comics

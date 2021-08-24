@@ -154,7 +154,7 @@ const ChapterListProfile = ({
   return (
     <div className="md:flex w-full items-end">
       <div className="hidden md:block md:w-44 md:h-60 w-64 h-96 flex-shrink-0">
-        <Link href={`/overview/${comicId}/chapter`}>
+        <Link href={`/comics/${comicId}/chapter`}>
           <a>
             <div
               className="w-full h-full rounded-md bg-no-repeat bg-center bg-cover shadow-2xl hover:opacity-75 transition-all duration-200"
@@ -167,7 +167,7 @@ const ChapterListProfile = ({
       </div>
       <div className="md:w-96 flex-1 pl-0 md:pl-8">
         <div className="text-white text-xl md:text-3xl font-bold">
-          <Link href={`/overview/${comicId}/chapter`}>
+          <Link href={`/comics/${comicId}/chapter`}>
             <a className="hover:opacity-50 transition-all duration-200">
               {comicTitle}
             </a>

@@ -23,7 +23,7 @@ const Button = ({
       }`
       break
     case 'secondary':
-      buttonVariantStyle = `bg-blueGray-800 text-gray-900 ${
+      buttonVariantStyle = `bg-blueGray-800 text-gray-200 ${
         !isDisabled && 'hover:bg-opacity-70'
       }`
       break
