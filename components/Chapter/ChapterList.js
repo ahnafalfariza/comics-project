@@ -56,7 +56,7 @@ const ChapterList = ({
   const textRight = () => {
     return data.status === 'read'
       ? 'Read'
-      : `${data.price === '0' ? 'Free' : formatNearAmount(data.price)} Ⓝ`
+      : `${data.price === '0' ? 'Free' : `${formatNearAmount(data.price)} Ⓝ`}`
   }
 
   return (

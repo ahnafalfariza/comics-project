@@ -7,9 +7,9 @@ const Layout = ({
   className = '',
   showFooter = true,
 }) => (
-  <div className={`min-h-screen ${className}`}>
+  <div className={`min-h-screen ${className} flex flex-col`}>
     {showNav && <Nav />}
-    {children}
+    <div className="flex-1">{children}</div>
     {showFooter && <Footer />}
   </div>
 )

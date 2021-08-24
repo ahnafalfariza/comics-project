@@ -63,7 +63,7 @@ const Comics = () => {
             <div
               className="cursor-pointer shadow-2xl "
               key={i}
-              onClick={() => router.push(`/overview/${data.comic_id}`)}
+              onClick={() => router.push(`/comics/${data.comic_id}`)}
             >
               <Token
                 imgUrl={parseImgUrl(data.media, null, {
