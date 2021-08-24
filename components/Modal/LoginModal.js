@@ -15,9 +15,12 @@ const LoginModal = ({ show, onClose, title = 'Login to buy this chapter' }) => {
           Read and truly own your digital comics. Interact, engage, and support
           the creators through collectibles NFTs.
         </p>
-        <div className="mt-4">
-          <Button size="lg" onClick={() => near.signIn()}>
-            Login
+        <div className="mt-6">
+          <p className="text-blueGray-400 text-xs mb-2 text-center">
+            You will be redirected to NEAR Wallet
+          </p>
+          <Button className="mt-2" size="lg" onClick={() => near.signIn()}>
+            Login with NEAR
           </Button>
         </div>
         <div
