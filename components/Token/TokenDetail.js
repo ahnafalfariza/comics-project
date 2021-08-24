@@ -4,19 +4,16 @@ import { Blurhash } from 'react-blurhash'
 import Scrollbars from 'react-custom-scrollbars-2'
 
 import Button from '../Common/Button'
-import Token from './Token'
 import { IconDots } from '../Icons'
-import { TOKEN_DATA } from 'constants/dummy'
-import { parseImgUrl } from 'utils/common'
 import TabInfo from './Tabs/TabInfo'
-import TabOwners from './Tabs/TabOwners'
 import TabHistory from './Tabs/TabHistory'
 
-import TokenDetailBuyModal from 'components/Modal/TokenDetailBuyModal'
-import TokenDetailMoreModal from 'components/Modal/TokenDetailMoreModal'
-import TokenDetailShareModal from 'components/Modal/TokenDetailShareModal'
+import TokenMoreModal from 'components/Modal/TokenMoreModal'
+import TokenShareModal from 'components/Modal/TokenShareModal'
 import TokenDetailUpdateModal from 'components/Modal/TokenDetailUpdateModal'
 import TokenType from './TokenType'
+import near from 'lib/near'
+import TokenTransfer from 'components/Modal/TokenTransfer'
 
 const TokenDetail = ({ token, metadata, className }) => {
   const [activeTab, setActiveTab] = useState('info')
@@ -59,7 +56,7 @@ const TokenDetail = ({ token, metadata, className }) => {
         className="flex flex-wrap h-full rounded-lg overflow-hidden"
         style={{ height: `85vh` }}
       >
-        <div className="w-full h-1/2 lg:h-full lg:w-3/5 bg-black p-12 relative">
+        <div className="w-full h-2/5 lg:h-full lg:w-3/5 bg-black p-6 md:p-12 relative">
           <div className="absolute inset-0 opacity-75">
             <Blurhash
               hash={
@@ -77,7 +74,7 @@ const TokenDetail = ({ token, metadata, className }) => {
             <TokenType metadata={metadata} />
           </div>
         </div>
-        <div className="flex flex-col w-full h-1/2 lg:h-full lg:w-2/5 bg-blueGray-800">
+        <div className="flex flex-col w-full h-3/5 lg:h-full lg:w-2/5 bg-blueGray-800">
           <Scrollbars
             className="h-full"
             universal={true}
@@ -118,34 +115,46 @@ const TokenDetail = ({ token, metadata, className }) => {
               {activeTab === 'info' && (
                 <TabInfo localToken={token} isNFT={true} />
               )}
-              {activeTab === 'owners' && <TabOwners localToken={token} />}
               {activeTab === 'history' && <TabHistory localToken={token} />}
             </div>
           </Scrollbars>
           <div className="p-3">
-            <Button onClick={() => setShowModal('confirmBuy')} isFullWidth>
-              Buy for 1 Ⓝ
-            </Button>
+            {near.currentUser?.accountId === token.owner_id ? (
+              <Button
+                onClick={() => setShowModal('transfer')}
+                isFullWidth
+                variant="ghost"
+              >
+                Transfer
+              </Button>
+            ) : (
+              <>
+                <p className="text-blueGray-400 text-xs mb-2 text-center">
+                  Secondary marketplace coming soon
+                </p>
+                <Button onClick={() => {}} isFullWidth>
+                  Coming Soon
+                </Button>
+              </>
+            )}
           </div>
         </div>
       </div>
-      <TokenDetailBuyModal
-        show={showModal === 'confirmBuy'}
-        onClose={onDismissModal}
-      />
-      <TokenDetailMoreModal
+      <TokenMoreModal
         show={showModal === 'more'}
         onClose={onDismissModal}
         onClickShare={onClickShare}
         onClickUpdate={onClickUpdate}
       />
-      <TokenDetailShareModal
-        show={showModal === 'share'}
-        onClose={onDismissModal}
-      />
+      <TokenShareModal show={showModal === 'share'} onClose={onDismissModal} />
       <TokenDetailUpdateModal
         show={showModal === 'update'}
         onClose={onDismissModal}
+      />
+      <TokenTransfer
+        show={showModal === 'transfer'}
+        onClose={onDismissModal}
+        data={token}
       />
     </div>
   )
