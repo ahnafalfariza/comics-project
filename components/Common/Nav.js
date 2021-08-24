@@ -10,6 +10,7 @@ import Avatar from './Avatar'
 import { IconLogout } from 'components/Icons'
 import { parseImgUrl, prettyBalance } from 'utils/common'
 import useStore from 'lib/store'
+import LoginModal from 'components/Modal/LoginModal'
 
 const Nav = () => {
   const profileModalRef = useRef()
@@ -19,6 +20,7 @@ const Nav = () => {
 
   const [showProfileModal, setShowProfileModal] = useState(false)
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false)
+  const [showLoginModal, setShowLoginModal] = useState(false)
 
   useEffect(() => {
     const onClickEv = (e) => {
@@ -108,6 +110,11 @@ const Nav = () => {
 
   return (
     <>
+      <LoginModal
+        title={`Login to Paras Comic`}
+        show={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+      />
       <div ref={mobileMenuRef} className="bg-background sticky z-30 top-0">
         <div className="relative bg-background max-w-6xl m-auto flex p-4 items-center justify-between z-40">
           <div className="block md:hidden">
@@ -182,7 +189,11 @@ const Nav = () => {
               {showProfileModal && ProfileModal()}
             </div>
           ) : (
-            <Button variant="primary" size="md" onClick={() => near.signIn()}>
+            <Button
+              variant="primary"
+              size="md"
+              onClick={() => setShowLoginModal(true)}
+            >
               Login
             </Button>
           )}

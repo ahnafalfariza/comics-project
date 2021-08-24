@@ -68,6 +68,7 @@ const data = [
     ],
   },
   {
+    img: `/resell.png`,
     question: 'Can I resell my Paras Comic?',
     answer: [
       'Absolutely! Every chapter of NFT can be resold in the Paras marketplace. To recreate our childhood experience, you can lend your chapter NFT to your friend by transferring it; enabling them to read the comic.',

@@ -60,7 +60,13 @@ export default function Home() {
         </div>
         <div className={`pb-16 md:py-36 ${HomeStyles.latestComic}`}>
           <div className="max-w-6xl m-auto px-4">
-            <div className="text-5xl font-medium mb-4 text-white">Paradigm</div>
+            <img
+              className="md:hidden h-72 mx-auto rounded-lg"
+              src="https://ipfs.fleek.co/ipfs/bafybeidf6pg3g65nx2kzirjy37rlwh7sfjmsc4lqlhoiiggng3g3j4ouj4"
+            />
+            <div className="text-5xl font-medium mt-4 md:mt-0 mb-4 text-white">
+              Paradigm
+            </div>
             <div className="text-gray-200 md:w-1/2 mb-8">
               “In desolate and sequestered lands, Abee wakes up remembering
               nothing but the hackathon he just participated in. Alongside three
