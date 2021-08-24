@@ -1,8 +1,8 @@
 import axios from 'axios'
 import Avatar from 'components/Common/Avatar'
-import Button from 'components/Common/Button'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import InfiniteScroll from 'react-infinite-scroll-component'
 import { parseImgUrl } from 'utils/common'
 
 const FETCH_TOKENS_LIMIT = 12
@@ -47,10 +47,16 @@ const TabOwners = ({ localToken }) => {
   }
 
   return (
-    <div className="mt-4">
-      {tokens.map((token) => (
-        <Owner token={token} key={token.token_id} />
-      ))}
+    <div>
+      <InfiniteScroll
+        dataLength={tokens.length}
+        next={fetchTokens}
+        hasMore={true}
+      >
+        {tokens.map((token) => (
+          <Owner token={token} key={token.token_id} />
+        ))}
+      </InfiniteScroll>
     </div>
   )
 }
@@ -71,7 +77,7 @@ const Owner = ({ token = {} }) => {
           accountId: token.owner_id,
         },
       })
-      const newData = resp.data.data.results[0]
+      const newData = resp.data.data.results[0] || {}
       setProfile(newData)
     } catch (err) {
       console.log(err)
@@ -84,7 +90,11 @@ const Owner = ({ token = {} }) => {
         <div className="flex items-center">
           <Link href={`/${token.owner_id}`}>
             <a className="hover:opacity-80">
-              <Avatar size="md" src={parseImgUrl(profile.imgUrl)} />
+              <Avatar
+                size="md"
+                src={parseImgUrl(profile.imgUrl)}
+                className="align-bottom"
+              />
             </a>
           </Link>
           <Link href={`/${token.owner_id}`}>
@@ -103,12 +113,6 @@ const Owner = ({ token = {} }) => {
           </Link>
         </div>
       </div>
-      {/* <div className="mt-2 flex items-center justify-between">
-        <p className="text-white text-sm opacity-80">On sale for 5 Ⓝ</p>
-        <Button size="sm" className="w-20">
-          Buy
-        </Button>
-      </div> */}
     </div>
   )
 }
