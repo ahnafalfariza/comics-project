@@ -1,26 +1,36 @@
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Blurhash } from 'react-blurhash'
 import Scrollbars from 'react-custom-scrollbars-2'
+import { useRouter } from 'next/router'
+import { formatNearAmount } from 'near-api-js/lib/utils/format'
 
 import Button from '../Common/Button'
-import Token from './Token'
 import { IconDots } from '../Icons'
-import { TOKEN_DATA } from 'constants/dummy'
-import { parseImgUrl } from 'utils/common'
 import TabInfo from './Tabs/TabInfo'
 import TabOwners from './Tabs/TabOwners'
 import TabHistory from './Tabs/TabHistory'
 
-import TokenDetailBuyModal from 'components/Modal/TokenDetailBuyModal'
-import TokenDetailMoreModal from 'components/Modal/TokenDetailMoreModal'
-import TokenDetailShareModal from 'components/Modal/TokenDetailShareModal'
+import TokenBuyModal from 'components/Modal/TokenBuyModal'
+import TokenMoreModal from 'components/Modal/TokenMoreModal'
+import TokenShareModal from 'components/Modal/TokenShareModal'
 import TokenDetailUpdateModal from 'components/Modal/TokenDetailUpdateModal'
 import TokenType from './TokenType'
+import useStore from 'lib/store'
+import LoginModal from 'components/Modal/LoginModal'
+import near from 'lib/near'
 
 const TokenTypeDetail = ({ token, metadata, className }) => {
   const [activeTab, setActiveTab] = useState('info')
   const [showModal, setShowModal] = useState(null)
+  const router = useRouter()
+
+  const isOwned = useStore((state) => state.isOwned)
+  const fetchOwned = useStore((state) => state.fetchOwned)
+
+  useEffect(() => {
+    fetchOwned(token.token_type)
+  }, [fetchOwned, token.token_type])
 
   const changeActiveTab = (tab) => {
     setActiveTab(tab)
@@ -53,13 +63,27 @@ const TokenTypeDetail = ({ token, metadata, className }) => {
     setShowModal('update')
   }
 
+  const onClickBuy = () => {
+    if (!near.currentUser) {
+      setShowModal('notLogin')
+      return
+    }
+    setShowModal('confirmBuy')
+  }
+
+  const onClickRead = () => {
+    router.push({
+      pathname: `/viewer/${token.comic_id}/${token.chapter_id}`,
+    })
+  }
+
   return (
     <div className={`max-w-6xl m-auto ${className}`}>
       <div
         className="flex flex-wrap h-full rounded-lg overflow-hidden"
         style={{ height: `85vh` }}
       >
-        <div className="w-full h-1/2 lg:h-full lg:w-3/5 bg-black p-12 relative">
+        <div className="w-full h-2/5 lg:h-full lg:w-3/5 bg-black p-6 md:p-12 relative">
           <div className="absolute inset-0 opacity-75">
             <Blurhash
               hash={
@@ -77,7 +101,7 @@ const TokenTypeDetail = ({ token, metadata, className }) => {
             <TokenType metadata={metadata} />
           </div>
         </div>
-        <div className="flex flex-col w-full h-1/2 lg:h-full lg:w-2/5 bg-blueGray-800">
+        <div className="flex flex-col w-full h-3/5 lg:h-full lg:w-2/5 bg-blueGray-800">
           <Scrollbars
             className="h-full"
             universal={true}
@@ -121,30 +145,38 @@ const TokenTypeDetail = ({ token, metadata, className }) => {
             </div>
           </Scrollbars>
           <div className="p-3">
-            <Button onClick={() => setShowModal('confirmBuy')} isFullWidth>
-              Buy for 1 Ⓝ
-            </Button>
+            {isOwned && isOwned === 'not_owned' && (
+              <Button onClick={onClickBuy} isFullWidth>
+                {token.price === '0'
+                  ? 'Free'
+                  : `Buy for ${formatNearAmount(token.price)} Ⓝ`}
+              </Button>
+            )}
+            {isOwned && isOwned === 'owned' && (
+              <Button onClick={onClickRead} isFullWidth>
+                Read
+              </Button>
+            )}
           </div>
         </div>
       </div>
-      <TokenDetailBuyModal
+      <TokenBuyModal
         show={showModal === 'confirmBuy'}
         onClose={onDismissModal}
+        data={token}
       />
-      <TokenDetailMoreModal
+      <TokenMoreModal
         show={showModal === 'more'}
         onClose={onDismissModal}
         onClickShare={onClickShare}
         onClickUpdate={onClickUpdate}
       />
-      <TokenDetailShareModal
-        show={showModal === 'share'}
-        onClose={onDismissModal}
-      />
+      <TokenShareModal show={showModal === 'share'} onClose={onDismissModal} />
       <TokenDetailUpdateModal
         show={showModal === 'update'}
         onClose={onDismissModal}
       />
+      <LoginModal show={showModal === 'notLogin'} onClose={onDismissModal} />
     </div>
   )
 }

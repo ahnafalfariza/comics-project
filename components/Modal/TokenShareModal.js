@@ -1,13 +1,27 @@
 import {
   FacebookIcon,
   FacebookShareButton,
+  TelegramIcon,
+  TelegramShareButton,
   TwitterIcon,
   TwitterShareButton,
 } from 'react-share'
 import ListModal from './ListModal'
 
-const TokenDetailShareModal = ({ show, onClose }) => {
+const TokenShareModal = ({ show, onClose }) => {
   const ShareList = [
+    {
+      name: (
+        <FacebookShareButton
+          url={window.location.href}
+          className="flex text-white"
+        >
+          <FacebookIcon size={24} round />
+          <p className="ml-3">Facebook</p>
+        </FacebookShareButton>
+      ),
+      onClick: () => {},
+    },
     {
       name: (
         <TwitterShareButton
@@ -23,13 +37,13 @@ const TokenDetailShareModal = ({ show, onClose }) => {
     },
     {
       name: (
-        <FacebookShareButton
+        <TelegramShareButton
           url={window.location.href}
           className="flex text-white"
         >
-          <FacebookIcon size={24} round />
-          <p className="ml-3">Facebook</p>
-        </FacebookShareButton>
+          <TelegramIcon size={24} round />
+          <p className="ml-3">Telegram</p>
+        </TelegramShareButton>
       ),
       onClick: () => {},
     },
@@ -38,4 +52,4 @@ const TokenDetailShareModal = ({ show, onClose }) => {
   return <ListModal show={show} onClose={onClose} list={ShareList} />
 }
 
-export default TokenDetailShareModal
+export default TokenShareModal

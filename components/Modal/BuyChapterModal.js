@@ -47,19 +47,10 @@ const BuyChapterModal = ({
   tokenId,
   hideCloseButton,
   hideActionButton,
-  backToOverview,
 }) => {
   const router = useRouter()
   const buyChapter = useStore((state) => state.buyChapter)
   const [showLogin, setShowLogin] = useState(false)
-
-  const onClickSecondaryButton = () => {
-    if (backToOverview) {
-      router.push(`/overview/${data.comic_id}`)
-    } else {
-      router.push('/market')
-    }
-  }
 
   const onClickReadNow = () => {
     router.push({
@@ -154,18 +145,18 @@ const BuyChapterModal = ({
                             </Button>
                           </div>
                         )}
+                        <div className="mt-2">
+                          <div className="mt-2 w-full text-center">
+                            <Link href={tokenCta.link}>
+                              <a className="font-semibold text-white text-sm">
+                                {tokenCta.text}
+                              </a>
+                            </Link>
+                          </div>
+                        </div>
                       </>
                     )}
-                    <div className="mt-2">
-                      <div className="mt-2 w-full text-center">
-                        <Link href={tokenCta.link}>
-                          <a className="font-semibold text-white text-sm">
-                            {tokenCta.text}
-                          </a>
-                        </Link>
-                      </div>
-                    </div>
-                    <div className="flex flex-wrap items-center justify-between -mb-4">
+                    <div className="flex flex-wrap items-center justify-between -mb-2 md:-mb-4">
                       <div className="mt-4 w-full">
                         <ShareComponent
                           title="Read this comic"

@@ -106,7 +106,6 @@ const ChapterView = () => {
         active={chapterData?.status !== 'read' || false}
         data={chapterData}
         hideCloseButton={true}
-        backToOverview
       />
       <CommentListModal />
     </Layout>

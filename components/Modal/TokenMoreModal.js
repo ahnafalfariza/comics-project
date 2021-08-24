@@ -1,12 +1,7 @@
 import { useState } from 'react'
 import ListModal from './ListModal'
 
-const TokenDetailMoreModal = ({
-  show,
-  onClose,
-  onClickShare,
-  onClickUpdate,
-}) => {
+const TokenMoreModal = ({ show, onClose, onClickShare, onClickUpdate }) => {
   const [copyLink, setCopyLink] = useState(false)
 
   const onClickCopy = () => {
@@ -20,12 +15,12 @@ const TokenDetailMoreModal = ({
   const listModalItem = [
     { name: copyLink ? 'Copied' : 'Copy Link', onClick: onClickCopy },
     { name: 'Share to...', onClick: onClickShare },
-    { name: 'Update Listing', onClick: onClickUpdate },
-    { name: 'Transfer Card', onClick: () => {} },
-    { name: 'Burn Card', onClick: () => {} },
+    // { name: 'Update Listing', onClick: onClickUpdate },
+    // { name: 'Transfer Card', onClick: () => {} },
+    // { name: 'Burn Card', onClick: () => {} },
   ]
 
   return <ListModal list={listModalItem} show={show} onClose={onClose} />
 }
 
-export default TokenDetailMoreModal
+export default TokenMoreModal
