@@ -12,18 +12,19 @@ export default function Home() {
     <Layout>
       <Head />
       <div className="py-12 md:px-8">
-        <div className="max-w-6xl m-auto py-16 px-4 md:flex md:flex-row-reverse">
+        <div className="max-w-6xl m-auto px-4 md:flex md:flex-row-reverse items-center">
           <div
-            className="flex-1 h-64 mb-8"
-            style={{
-              backgroundImage:
-                'url("https://ipfs.fleek.co/ipfs/bafybeifcszvyf5rkpjzuugjejdj3g4jbizzedq7yprbu33s3eokvyd6tbm")',
-              backgroundPositionX: 'right',
-              backgroundSize: 'contain',
-              backgroundRepeat: 'no-repeat',
-            }}
-          />
-          <div className="flex-1">
+            className="w-full md:w-2/5"
+            // style={{
+            //   backgroundImage: 'url("/hero.png")',
+            //   backgroundPositionX: 'right',
+            //   backgroundSize: 'contain',
+            //   backgroundRepeat: 'no-repeat',
+            // }}
+          >
+            <img className="max-w-full" src="/hero.svg" />
+          </div>
+          <div className="w-full md:w-3/5 pr-0 md:pr-4 pt-8 md:pt-0">
             <div className="text-5xl font-bold mb-4 text-white md:w-96 leading-normal">
               Digital Comic and Beyond
             </div>
@@ -32,9 +33,25 @@ export default function Home() {
               support the creators through collectibles NFTs. Tipping is now
               interactive!
             </div>
-            <Button size="lg" onClick={() => router.push('/comics')}>
-              Read Comics
-            </Button>
+            <div className="flex flex-wrap">
+              <Button
+                className="w-64"
+                size="lg"
+                onClick={() => router.push('/comics')}
+              >
+                Read Comics
+              </Button>
+              <div className="mt-4 lg:mt-0 pl-0 lg:pl-4">
+                <Button
+                  className="w-64"
+                  variant="ghost"
+                  size="lg"
+                  onClick={() => router.push('/faq')}
+                >
+                  Learn More
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -60,12 +77,14 @@ export default function Home() {
           </div>
           <div className="md:flex">
             <div className="text-center flex-1 p-4 font-medium">
+              <img src={`/yours.svg`} />
               <p className="text-xl text-white mb-3">Comic is 100% yours</p>
               <p className="text-gray-200">
                 Read, lend, and sell your digital comic anytime you want
               </p>
             </div>
             <div className="text-center flex-1 p-4 font-medium">
+              <img src={`/support.svg`} />
               <p className="text-xl text-white mb-3">
                 Collecting is Supporting Creators
               </p>
@@ -75,6 +94,7 @@ export default function Home() {
               </p>
             </div>
             <div className="text-center flex-1 p-4 font-medium">
+              <img src={`/community.svg`} />
               <p className="text-xl text-white mb-3">
                 Reading with The Community
               </p>
@@ -87,19 +107,27 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="max-w-6xl m-auto py-16 px-4">
+        <div
+          className="max-w-6xl m-auto py-16 h-96 w-full"
+          style={{
+            backgroundImage: `url(/draft.png)`,
+            backgroundPosition: `center`,
+            backgroundSize: `cover`,
+          }}
+        ></div>
+        <div className="max-w-3xl -mt-12 px-4 mx-auto">
           <div className="text-5xl font-bold mb-4 text-white leading-normal">
             Create Now!
           </div>
-          <div className="text-gray-200 md:w-1/2 mb-8">
+          <div className="text-gray-200 mb-8 text-lg">
             Publishing your title with Paras Comic is quick and easy. Sell your
             digital collectibles of your IP and interact with your fans
             directly.
           </div>
-          <div className="text-gray-200 md:w-1/2 mb-8">
+          <div className="text-gray-200 mb-8">
             Build your community and share your work with comic buffs!
           </div>
-          <Button size="lg">Join with us</Button>
+          <Button size="lg">Create with us</Button>
         </div>
       </div>
     </Layout>

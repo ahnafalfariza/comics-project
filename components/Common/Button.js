@@ -18,18 +18,18 @@ const Button = ({
   let buttonVariantStyle
   switch (variant) {
     case 'primary':
-      buttonVariantStyle = `bg-primary text-white ${
+      buttonVariantStyle = `bg-primary text-gray-900 ${
         !isDisabled && 'hover:bg-opacity-70'
       }`
       break
     case 'secondary':
-      buttonVariantStyle = `bg-blueGray-800 text-white ${
+      buttonVariantStyle = `bg-blueGray-800 text-gray-900 ${
         !isDisabled && 'hover:bg-opacity-70'
       }`
       break
     case 'ghost':
-      buttonVariantStyle = `bg-transparent border border-blueGray-200 text-white ${
-        !isDisabled && 'hover:bg-blueGray-100 hover:bg-opacity-10'
+      buttonVariantStyle = `bg-transparent border border-electricLime-600 text-electricLime-600 ${
+        !isDisabled && 'hover:bg-electricLime-600 hover:bg-opacity-10'
       }`
       break
     default:

@@ -42,7 +42,7 @@ const ChapterList = ({
   const listCoverBaseStyle =
     'bg-no-repeat bg-center bg-cover rounded-lg absolute'
   const listBadgeBaseStyle =
-    'text-sm font-semibold text-white py-1 px-3 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full uppercase tracking-wider leading-none'
+    'text-sm font-semibold text-gray-900 py-1 px-3 bg-gradient-to-br from-electricLime-300 to-electricLime-600 rounded-full uppercase tracking-wider leading-none'
 
   const listWrapperResponsiveStyle = 'flex items-center sm:py-4 sm:pr-6 py-3'
   const listCoverResponsiveStyle =

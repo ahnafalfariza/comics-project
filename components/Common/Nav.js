@@ -124,20 +124,50 @@ const Nav = () => {
             />
           </div>
           <div className="flex space-x-16 text-xl font-normal text-white items-center">
-            <div className="w-10 h-10 text-white flex justify-center items-center bg-primary my-auto rounded-full">
-              <div>P</div>
+            <div className="w-32">
+              <Link href="/">
+                <a>
+                  <img src="/logo.svg" />
+                </a>
+              </Link>
             </div>
             <Link href="/">
-              <a className="hidden md:block">Home</a>
+              <a className="hidden md:block font-semibold hover:text-primary">
+                <span className={router.pathname === '/' ? `text-primary` : ''}>
+                  Home
+                </span>
+              </a>
             </Link>
             <Link href="/comics">
-              <a className="hidden md:block">Comics</a>
+              <a className="hidden md:block font-semibold hover:text-primary">
+                <span
+                  className={
+                    router.pathname.includes('/comics') ? `text-primary` : ''
+                  }
+                >
+                  Comics
+                </span>
+              </a>
             </Link>
             <Link href="/market">
-              <a className="hidden md:block">Market</a>
+              <a className="hidden md:block font-semibold hover:text-primary">
+                <span
+                  className={
+                    router.pathname.includes('/market') ? `text-primary` : ''
+                  }
+                >
+                  Market
+                </span>
+              </a>
             </Link>
             <Link href="/faq">
-              <a className="hidden md:block">FAQ</a>
+              <a className="hidden md:block font-semibold hover:text-primary">
+                <span
+                  className={router.pathname === '/faq' ? `text-primary` : ''}
+                >
+                  FAQ
+                </span>
+              </a>
             </Link>
           </div>
           {near.isLoggedIn() ? (
@@ -166,22 +196,56 @@ const Nav = () => {
             <div className="text-center text-white pb-3">
               <div className="p-3">
                 <Link href="/">
-                  <a>Home</a>
+                  <a className="font-semibold hover:text-primary">
+                    <span
+                      className={router.pathname === '/' ? `text-primary` : ''}
+                    >
+                      Home
+                    </span>
+                  </a>
                 </Link>
               </div>
               <div className="p-3">
                 <Link href="/comics">
-                  <a>Comics</a>
+                  <a className="font-semibold hover:text-primary">
+                    <span
+                      className={
+                        router.pathname.includes('/comics')
+                          ? `text-primary`
+                          : ''
+                      }
+                    >
+                      Comics
+                    </span>
+                  </a>
                 </Link>
               </div>
               <div className="p-3">
                 <Link href="/market">
-                  <a>Market</a>
+                  <a className="font-semibold hover:text-primary">
+                    <span
+                      className={
+                        router.pathname.includes('/market')
+                          ? `text-primary`
+                          : ''
+                      }
+                    >
+                      Market
+                    </span>
+                  </a>
                 </Link>
               </div>
               <div className="p-3">
                 <Link href="/faq">
-                  <a>FAQ</a>
+                  <a className="font-semibold hover:text-primary">
+                    <span
+                      className={
+                        router.pathname === '/faq' ? `text-primary` : ''
+                      }
+                    >
+                      FAQ
+                    </span>
+                  </a>
                 </Link>
               </div>
             </div>

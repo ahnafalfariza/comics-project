@@ -12,7 +12,7 @@ const Avatar = ({
   onClick,
 }) => {
   const avatarBaseStyle =
-    'rounded-full overflow-hidden select-none inline-flex items-center justify-center relative text-white'
+    'rounded-full overflow-hidden select-none inline-flex items-center justify-center relative text-gray-900'
 
   let avatarSizeStyle
   switch (size) {
