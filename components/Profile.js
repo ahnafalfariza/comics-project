@@ -49,12 +49,7 @@ const Profile = ({ userData, setUserData }) => {
             punch={1}
           />
         </div>
-        <img
-          src={parseImgUrl(
-            'bafybeihjydufqanles3dh7zctbbxaljhduapkmmzk3f55zzebcuj2sn32y'
-          )}
-          className="object-cover w-full h-full"
-        />
+        <img src={`/header.png`} className="object-cover w-full h-full" />
       </div>
       <div className="max-w-5xl m-auto px-4">
         <div className="md:flex">

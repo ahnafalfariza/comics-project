@@ -157,7 +157,7 @@ const ChapterListProfile = ({
         <Link href={`/comics/${comicId}/chapter`}>
           <a>
             <div
-              className="w-full h-full rounded-md bg-no-repeat bg-center bg-cover shadow-2xl hover:opacity-75 transition-all duration-200"
+              className="w-full h-full rounded-md bg-no-repeat bg-center bg-cover shadow-2xl hover:opacity-75 hover:rotate-3 hover:-translate-y-3 transform transition-all duration-200"
               style={{
                 backgroundImage: `url(${parseImgUrl(comicCover)})`,
               }}
@@ -220,8 +220,7 @@ const ChapterListProfile = ({
                   <div
                     className="absolute inset-0 rounded-md flex flex-col justify-end p-3 text-white"
                     style={{
-                      background:
-                        'linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0) 31.93%, #18162B 100%), url(image.png)',
+                      background: `linear-gradient(180.17deg, rgb(0 0 0 / 0%) 20%, rgb(0 0 0 / 60%) 80.88%, rgb(0 0 0 / 80%) 100%)`,
                     }}
                   >
                     <p className="text-lg md:text-xl">Ch. {token.chapter_id}</p>
