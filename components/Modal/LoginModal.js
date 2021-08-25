@@ -6,7 +6,7 @@ import near from 'lib/near'
 const LoginModal = ({ show, onClose, title = 'Login to buy this chapter' }) => {
   return (
     <Modal isShow={show} close={onClose}>
-      <div className="max-w-sm m-4 md:m-auto relative bg-blueGray-800 px-4 py-8 text-center rounded-md">
+      <div className="max-w-sm m-4 md:m-auto w-full relative bg-blueGray-800 px-4 py-8 text-center rounded-md">
         <div className="flex-1 h-48 md:h-64 mb-4">
           <img className="h-full mx-auto" src="/login.png" />
         </div>
@@ -19,7 +19,12 @@ const LoginModal = ({ show, onClose, title = 'Login to buy this chapter' }) => {
           <p className="text-blueGray-400 text-xs mb-2 text-center">
             You will be redirected to NEAR Wallet
           </p>
-          <Button className="mt-2" size="lg" onClick={() => near.signIn()}>
+          <Button
+            className="mt-2 px-1"
+            size="md"
+            isFullWidth
+            onClick={() => near.signIn()}
+          >
             Login with NEAR
           </Button>
         </div>
