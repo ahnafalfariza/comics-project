@@ -9,7 +9,7 @@ const MenuTop = forwardRef(({ showMenu, data }, ref) => {
   const [showShare, setShowShare] = useState(false)
 
   const onClickBack = () => {
-    router.push(`/overview/${router.query.comicId}`)
+    router.push(`/comics/${router.query.comicId}`)
   }
 
   const onClickShare = () => {
