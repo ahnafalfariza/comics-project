@@ -133,7 +133,9 @@ export default function Home() {
           <div className="text-gray-200 mb-8">
             Build your community and share your work with comic buffs!
           </div>
-          <Button size="lg">Create with us</Button>
+          <Button onClick={() => router.push('/partner-with-us')} size="lg">
+            Create with us
+          </Button>
         </div>
       </div>
     </Layout>

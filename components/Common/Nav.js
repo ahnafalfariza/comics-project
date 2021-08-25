@@ -117,20 +117,27 @@ const Nav = () => {
       />
       <div ref={mobileMenuRef} className="bg-background sticky z-30 top-0">
         <div className="relative bg-background max-w-6xl m-auto flex p-4 items-center justify-between z-40">
-          <div className="block md:hidden">
+          <div className="flex items-center md:hidden">
             <HamburgerMenu
               isOpen={showHamburgerMenu}
               menuClicked={onClickHamburger}
               width={21}
               height={15}
-              strokeWidth={1}
+              strokeWidth={2}
               rotate={0}
               color="white"
               borderRadius={0}
               animationDuration={0.3}
             />
+            <div className="pl-4">
+              <Link href="/">
+                <a className="block w-24">
+                  <img className="hover:opacity-80" src="/logo.svg" />
+                </a>
+              </Link>
+            </div>
           </div>
-          <div className="flex space-x-16 text-xl font-normal text-white items-center">
+          <div className="hidden md:flex space-x-16 text-xl font-normal text-white items-center">
             <div className="w-32">
               <Link href="/">
                 <a>
@@ -139,14 +146,14 @@ const Nav = () => {
               </Link>
             </div>
             <Link href="/">
-              <a className="hidden md:block font-semibold hover:text-primary">
+              <a className="block font-semibold hover:text-primary">
                 <span className={router.pathname === '/' ? `text-primary` : ''}>
                   Home
                 </span>
               </a>
             </Link>
             <Link href="/comics">
-              <a className="hidden md:block font-semibold hover:text-primary">
+              <a className="block font-semibold hover:text-primary">
                 <span
                   className={
                     router.pathname.split('/')[1] === 'comics'
@@ -159,7 +166,7 @@ const Nav = () => {
               </a>
             </Link>
             <Link href="/market">
-              <a className="hidden md:block font-semibold hover:text-primary">
+              <a className="block font-semibold hover:text-primary">
                 <span
                   className={
                     router.pathname.includes('/market') ? `text-primary` : ''
@@ -170,7 +177,7 @@ const Nav = () => {
               </a>
             </Link>
             <Link href="/partner-with-us">
-              <a className="hidden md:block font-semibold hover:text-primary">
+              <a className="block font-semibold hover:text-primary">
                 <span
                   className={
                     router.pathname === '/partner-with-us' ? `text-primary` : ''
@@ -270,14 +277,16 @@ const Nav = () => {
                 </Link>
               </div>
               <div className="p-3">
-                <Link href="/faq">
+                <Link href="/partner-with-us">
                   <a className="font-semibold hover:text-primary">
                     <span
                       className={
-                        router.pathname === '/faq' ? `text-primary` : ''
+                        router.pathname === '/partner-with-us'
+                          ? `text-primary`
+                          : ''
                       }
                     >
-                      FAQ
+                      Partner
                     </span>
                   </a>
                 </Link>
