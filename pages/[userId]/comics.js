@@ -63,6 +63,16 @@ const ProfilePageComics = ({ profile }) => {
       <Head title={`${profile.accountId} - Comics by Paras`} />
       <Profile userData={userData} setUserData={setUserData} />
       <div className="max-w-5xl mx-auto pt-8 pb-16 -mt-8">
+        {comics.length === 0 && !hasMore && (
+          <div className="w-full">
+            <div className="m-auto text-2xl text-gray-600 font-semibold py-32 text-center">
+              <div className="w-40 m-auto">
+                <img src="/cardstack.png" className="opacity-75" />
+              </div>
+              <p className="mt-4">No Comics</p>
+            </div>
+          </div>
+        )}
         <InfiniteScroll
           dataLength={comics.length}
           next={fetchOwnerComics}

@@ -86,7 +86,7 @@ const TokenList = ({
             <div className="w-40 m-auto">
               <img src="/cardstack.png" className="opacity-75" />
             </div>
-            <p className="mt-4">No Cards</p>
+            <p className="mt-4">No Collectibles</p>
           </div>
         </div>
       )}

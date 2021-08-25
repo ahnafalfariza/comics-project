@@ -72,15 +72,9 @@ const Market = () => {
   return (
     <Layout>
       <Head title="Market - Comics by Paras" />
-      <div className="max-w-6xl m-auto py-8 md:p-4 md:py-8">
-        <p className="text-white font-bold text-4xl mb-4 ml-4 md:ml-16">
-          Market
-        </p>
-        <Tabs
-          className="md:mx-12"
-          onTabsChange={onTabsChange}
-          defaultIndex={defaultIndex()}
-        >
+      <div className="max-w-6xl m-auto py-8 md:px-0 md:py-8">
+        <p className="text-white font-bold text-4xl mb-4 ml-4">Market</p>
+        <Tabs onTabsChange={onTabsChange} defaultIndex={defaultIndex()}>
           <TabList>
             <Tab>Chapter</Tab>
             <Tab>Collectibles</Tab>

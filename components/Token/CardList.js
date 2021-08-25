@@ -20,7 +20,7 @@ const CardList = ({
   const containerRef = useRef()
 
   return (
-    <div ref={containerRef} className="overflow-x-hidden max-w-5xl mx-auto">
+    <div ref={containerRef} className="overflow-x-hidden max-w-6xl mx-auto">
       <TokenDetailModal tokens={tokens} />
       {tokens.length === 0 && !hasMore && (
         <div className="w-full">
@@ -28,7 +28,7 @@ const CardList = ({
             <div className="w-40 m-auto">
               <img src="/cardstack.png" className="opacity-75" />
             </div>
-            <p className="mt-4">No Cards</p>
+            <p className="mt-4">No Tokens</p>
           </div>
         </div>
       )}

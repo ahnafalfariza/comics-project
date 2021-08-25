@@ -169,12 +169,14 @@ const Nav = () => {
                 </span>
               </a>
             </Link>
-            <Link href="/faq">
+            <Link href="/partner-with-us">
               <a className="hidden md:block font-semibold hover:text-primary">
                 <span
-                  className={router.pathname === '/faq' ? `text-primary` : ''}
+                  className={
+                    router.pathname === '/partner-with-us' ? `text-primary` : ''
+                  }
                 >
-                  FAQ
+                  Partner
                 </span>
               </a>
             </Link>

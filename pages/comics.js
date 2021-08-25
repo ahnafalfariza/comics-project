@@ -9,6 +9,7 @@ import { parseImgUrl } from 'utils/common'
 import Token from 'components/Token/Token'
 
 import { FETCH_COMICS_LIMIT } from 'constants/constant'
+import ContentLoader from 'react-content-loader'
 
 const Comics = () => {
   const router = useRouter()
@@ -57,31 +58,54 @@ const Comics = () => {
           dataLength={comics.length}
           next={fetchComics}
           hasMore={hasMore}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8"
+          loader={<ComicLoader />}
         >
-          {comics.map((data, i) => (
-            <div
-              className="cursor-pointer shadow-2xl "
-              key={i}
-              onClick={() => router.push(`/comics/${data.comic_id}`)}
-            >
-              <Token
-                imgUrl={parseImgUrl(data.media, null, {
-                  width: `300`,
-                })}
-                imgBlur="U0Csjj-;fQ-;%MfQfQfQfQfQfQfQ%MfQfQfQ"
-                hoverMouse={false}
-                initialRotate={{ x: 0, y: 0 }}
-                shadow="none"
-                borderRadius="8px"
-                disableFlip
-              />
-            </div>
-          ))}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {comics.map((data, i) => (
+              <div
+                className="cursor-pointer shadow-2xl "
+                key={i}
+                onClick={() => router.push(`/comics/${data.comic_id}`)}
+              >
+                <Token
+                  imgUrl={parseImgUrl(data.media, null, {
+                    width: `300`,
+                  })}
+                  imgBlur="U0Csjj-;fQ-;%MfQfQfQfQfQfQfQ%MfQfQfQ"
+                  hoverMouse={false}
+                  initialRotate={{ x: 0, y: 0 }}
+                  shadow="none"
+                  borderRadius="8px"
+                  disableFlip
+                />
+              </div>
+            ))}
+          </div>
         </InfiniteScroll>
       </div>
     </Layout>
   )
 }
+
+const ComicLoader = () => (
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+    {Array(8)
+      .fill('')
+      .map((item, idx) => (
+        <div key={idx}>
+          <ContentLoader
+            speed={2}
+            width="100%"
+            height="100%"
+            viewBox="0 0 275 380"
+            backgroundColor="#1D1D1D"
+            foregroundColor="#282828"
+          >
+            <rect x="0" y="0" rx="20" ry="20" width="275" height="380" />
+          </ContentLoader>
+        </div>
+      ))}
+  </div>
+)
 
 export default Comics
