@@ -31,7 +31,7 @@ const ChapterListMarket = ({
           return (
             <div
               key={token.token_id}
-              className={`w-1/2 md:w-1/3 lg:w-1/4 flex-shrink-0 p-2 md:p-4 relative ${containerClassName}`}
+              className={`w-full md:w-1/3 lg:w-1/4 flex-shrink-0 p-8 md:p-4 relative ${containerClassName}`}
             >
               <div className="w-full m-auto">
                 <Token
