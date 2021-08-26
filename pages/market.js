@@ -3,8 +3,9 @@ import Head from 'components/Common/Head'
 import { Tab, TabList, Tabs } from 'components/Common/Tabs'
 import Layout from 'components/Layout'
 import CardList from 'components/Token/CardList'
-import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import ChapterListMarket from 'components/Chapter/ChapterListMarket'
+import { useRouter } from 'next/router'
 
 const FETCH_TOKENS_LIMIT = 8
 
@@ -80,13 +81,23 @@ const Market = () => {
             <Tab>Collectibles</Tab>
           </TabList>
         </Tabs>
-        <div className="mt-4">
-          <CardList
-            tokens={tokens}
-            hasMore={hasMore}
-            fetchTokens={fetchTokens}
-          />
-        </div>
+        {router.query.category ? (
+          <div className="mt-4 p-2 md:p-0">
+            <CardList
+              tokens={tokens}
+              hasMore={hasMore}
+              fetchTokens={fetchTokens}
+            />
+          </div>
+        ) : (
+          <div className="mt-4 p-2 md:p-0">
+            <ChapterListMarket
+              tokens={tokens}
+              hasMore={hasMore}
+              fetchTokens={fetchTokens}
+            />
+          </div>
+        )}
       </div>
     </Layout>
   )

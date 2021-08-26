@@ -1,9 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 import { parseImgUrl } from 'utils/common'
 import { useRouter } from 'next/router'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import TokenDetailModal from './TokenDetailModal'
-import axios from 'axios'
 import Card from './Card'
 import CardListLoader from './CardListLoader'
 
@@ -14,7 +13,6 @@ const CardList = ({
   hasMore,
   fetchTokens,
   containerClassName = '',
-  toggleOwnership = false,
 }) => {
   const router = useRouter()
   const containerRef = useRef()
@@ -48,7 +46,7 @@ const CardList = ({
             return (
               <div
                 key={token.token_id}
-                className={`w-1/2 md:w-1/3 lg:w-1/4 flex-shrink-0 p-4 relative ${containerClassName}`}
+                className={`w-1/2 md:w-1/3 lg:w-1/4 flex-shrink-0 p-2 md:p-4 relative ${containerClassName}`}
               >
                 <div className="w-full m-auto">
                   <Card

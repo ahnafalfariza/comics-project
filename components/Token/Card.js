@@ -4,7 +4,7 @@ import { Blurhash } from 'react-blurhash'
 const Card = ({
   imgUrl,
   imgWidth = 640,
-  imgHeight = 1080,
+  imgHeight = 890,
   token,
   borderRadius = '10px',
   onClick = () => {},
@@ -137,6 +137,11 @@ const Card = ({
                   src={imgLoaded}
                 />
                 <div className="absolute inset-0 z-0">
+                  <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-60 backdrop-filter backdrop-blur-lg backdrop-saturate-200 z-10" />
+                  <div
+                    className="absolute top-0 left-0 w-full h-full bg-cover"
+                    style={{ backgroundImage: `url(${imgLoaded})` }}
+                  />
                   {/* <Blurhash
                     hash={imgBlur || 'UZ9ZtPzmpHv;R]ONJ6bKQ-l7Z.S_bow5$-nh'}
                     width={`100%`}
@@ -170,6 +175,9 @@ const Card = ({
                     </p>
                   </div>
                 </div>
+              </div>
+              <div className="text-electricLime-600 font-bold text-sm px-2 text-right">
+                Price 10 Ⓝ
               </div>
             </div>
           </div>
