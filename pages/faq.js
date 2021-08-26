@@ -24,7 +24,7 @@ const Faq = () => {
             <p className="text-lg font-bold mb-2 -ml">{item.question}</p>
             {item.answer.map((answer, idx) => (
               <p key={idx} className="ml-4 mb-2 opacity-80">
-                {answer}
+                <div dangerouslySetInnerHTML={{ __html: answer }}></div>
               </p>
             ))}
             {item.answerList &&
@@ -35,9 +35,50 @@ const Faq = () => {
               ))}
           </div>
         ))}
-        <p className="text-white mt-8">
-          If your questions are not listed on the above, please hit us up on our
-          Discord channel.
+
+        <div className="text-center text-white font-bold text-4xl mb-8 mt-16 ">
+          Paradigm
+        </div>
+        <p className="text-white mb-4 text-lg">
+          '“Paradigm” is a fantasy, action, and sci-fi comic inspired by the
+          lore of “Pillars of Paras”. It is a tale of an adventure, discovery,
+          and risky endeavour.',
+        </p>
+        <p className="text-white mt-4 mb-4 text-lg">
+          '“Paradigm” is our first comic on Paras Comic platform. “Paradigm” is
+          an original IP created by Paras. It represents our goal to create and
+          support crypto-native IP. The comic and its integration to NFTs will
+          be the early standard for any project to come.',
+        </p>
+        <p className="text-white mt-4 mb-4 text-lg">
+          'There are two important aspects for every comic title on Paras Comic:
+          Chapter NFTs and Collectibles NFTs',
+        </p>
+        {data2.map((item, idx) => (
+          <div key={idx} className="text-white mb-8">
+            <p className="text-lg font-bold mb-2 -ml">{item.question}</p>
+            {item.answer.map((answer, idx) => (
+              <p key={idx} className="ml-4 mb-2 opacity-80">
+                <div dangerouslySetInnerHTML={{ __html: answer }}></div>
+              </p>
+            ))}
+            {item.answerList &&
+              item.answerList.map((answer, idx) => (
+                <p key={idx} className="ml-8 opacity-80">
+                  - {answer}
+                </p>
+              ))}
+          </div>
+        ))}
+        <p className="text-white mt-4 mb-8">
+          If your questions are not listed on the above, please hit us up on our{' '}
+          <a
+            href="https://discord.paras.id"
+            className=" hover:opacity-75 underline"
+          >
+            Discord
+          </a>{' '}
+          channel.
         </p>
       </div>
     </Layout>
@@ -50,7 +91,7 @@ const data = [
   {
     question: 'What is Paras Comic?',
     answer: [
-      'Paras Comic is an NFT project built upon Paras marketplace. Paras Comic is a one stop platform for readers, collectors, authors to communicate within one another, hence improving comic reading experience.',
+      'Paras Comic is an NFT project built upon <a href="https://paras.id" class=" hover:opacity-75 underline">Paras marketplace</a>. Paras Comic is a one stop platform for readers, collectors, authors to communicate within one another, hence improving comic reading experience.',
       'All comics in Paras Comic are published with NFTs technology and smart contract capabilities. We enable open interaction between collectors and authors.',
     ],
   },
@@ -71,13 +112,13 @@ const data = [
     img: `/resell.png`,
     question: 'Can I resell my Paras Comic?',
     answer: [
-      'Absolutely! Every chapter of NFT can be resold in the Paras marketplace. To recreate our childhood experience, you can lend your chapter NFT to your friend by transferring it; enabling them to read the comic.',
+      'Absolutely! Every chapter of NFT can be resold in the <a href="https://paras.id" class=" hover:opacity-75 underline">Paras marketplace</a>. To recreate our childhood experience, you can lend your chapter NFT to your friend by transferring it; enabling them to read the comic.',
     ],
   },
   {
     question: 'What is so special about the Paras Comic NFT collection?',
     answer: [
-      'Paras Comic is a new vertical and our method to enhance collecting NFTs experience through Web 3.0. All comics in Paras Comic are exclusive to the platform. Meet your fellow comic buff!',
+      'Paras Comic is a new <a>vertical</a> and our method to enhance collecting NFTs experience through Web 3.0. All comics in Paras Comic are exclusive to the platform. Meet your fellow comic buff!',
       'You can gain access to the heads and the world of the author through the collectibles NFTs. We provide the gateway to the crypto-native comic IP for you!',
     ],
   },
@@ -85,26 +126,26 @@ const data = [
     question:
       'What are you doing about the environmental impact of your NFT collection?',
     answer: [
-      'We are building our platform on top of the NEAR Protocol. The NEAR Protocol awarded the climate neutral product label.',
+      'We are building our platform on top of the <a href="https://near.org" class=" hover:opacity-75 underline">NEAR Protocol</a>. The <a href="https://near.org" class=" hover:opacity-75 underline">NEAR Protocol</a> awarded the climate neutral product label.',
     ],
   },
   {
     question: 'How do I purchase a Paras Comic NFT?',
     answer: [
-      'In order to read the comic, you need a NEAR wallet and $NEAR. To create a new wallet, you can visit wallet.near.org.',
-      'To buy $NEAR, you can purchase it through OkCoin and Binance. For some countries, you might need a local exchange beforehand.',
+      'In order to read the comic, you need a <a href="https://wallet.near.org" class=" hover:opacity-75 underline">NEAR wallet</a> and $NEAR. To create a new wallet, you can visit wallet.near.org.',
+      'To buy $NEAR, you can purchase it through <a href="https://www.okcoin.com/" class=" hover:opacity-75 underline">OkCoin</a> and <a href="https://www.binance.com/" class=" hover:opacity-75 underline">Binance</a>. For some countries, you might need a local exchange beforehand.',
       'To gain access to the comic chapter, you can buy the chapter NFT on our platform. The collectibles NFT will be accessible for purchase on our marketplace.',
     ],
   },
   {
     question: 'Where can I interact with other Paras Comic NFT collectors?',
     answer: [
-      'Come join us to our big community of artists and collectors on our Discord channel!',
-      '“Paradigm” is a fantasy, action, and sci-fi comic inspired by the lore of “Pillars of Paras”. It is a tale of an adventure, discovery, and risky endeavour.',
-      '“Paradigm” is our first comic on Paras Comic platform. “Paradigm” is an original IP created by Paras. It represents our goal to create and support crypto-native IP. The comic and its integration to NFTs will be the early standard for any project to come.',
-      'There are two important aspects for every comic title on Paras Comic: Chapter NFTs and Collectibles NFTs',
+      'Come join us to our big community of artists and collectors on our <a href="https://discord.paras.id" class=" hover:opacity-75 underline">Discord</a> channel!',
     ],
   },
+]
+
+const data2 = [
   {
     question: 'What’s Chapter NFTs and Collectibles NFTs?',
     answer: [

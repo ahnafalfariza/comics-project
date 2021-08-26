@@ -73,7 +73,9 @@ export default function Home() {
               new companies, Abee will take part in an adventure, discover new
               knowledge, and commit risky endeavors.”
             </div>
-            <Button size="lg">Read Now</Button>
+            <Button size="lg" onClick={() => router.push('/comics/paradigm')}>
+              Read Now
+            </Button>
           </div>
         </div>
 
