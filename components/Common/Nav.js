@@ -137,7 +137,7 @@ const Nav = () => {
               </Link>
             </div>
           </div>
-          <div className="hidden md:flex space-x-16 text-xl font-normal text-white items-center">
+          <div className="hidden md:flex space-x-12 text-xl font-normal text-white items-center">
             <div className="w-32">
               <Link href="/">
                 <a>
