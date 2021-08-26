@@ -52,9 +52,9 @@ const ChapterListMarket = ({
                 />
               </div>
               <div className="text-center">
-                <div className="mt-2 md:mt-4">
+                <div className="mt-4">
                   <div className="p-2">
-                    <div className="text-gray-100 text-xl md:text-2xl">
+                    <div className="text-gray-100 text-2xl">
                       {token.price !== '0' ? (
                         <div>
                           <p className="text-gray-400 text-xs">Start From</p>
@@ -75,7 +75,7 @@ const ChapterListMarket = ({
                   scroll={false}
                   shallow
                 >
-                  <a className="inline-block text-gray-100 cursor-pointer text-xs md:text-base font-semibold border-b-2 border-gray-100 mb-4">
+                  <a className="inline-block text-gray-100 cursor-pointer text-base font-semibold border-b-2 border-gray-100 mb-4">
                     See Details
                   </a>
                 </Link>
