@@ -78,7 +78,7 @@ const App = ({ Component, pageProps }) => {
           <Loading className="w-screen h-screen m-auto flex justify-center items-center" />
         </div>
       )}
-      <Component {...pageProps} />
+      <Component {...pageProps} isLoading={isLoading} />
     </ToastProvider>
   )
 }

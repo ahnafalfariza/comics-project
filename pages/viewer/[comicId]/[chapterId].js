@@ -11,7 +11,7 @@ import Head from 'components/Common/Head'
 import BuyChapterModal from 'components/Modal/BuyChapterModal'
 import ChapterImagePage from 'components/ViewerMenu/ChapterImagePage'
 
-const ChapterView = () => {
+const ChapterView = ({ isLoading }) => {
   const menuTopRef = useRef()
   const menuBottomRef = useRef()
   const router = useRouter()
@@ -55,11 +55,11 @@ const ChapterView = () => {
   }, [menuTopRef, menuBottomRef, showMenu, showComment, chapterData?.status])
 
   useEffect(() => {
-    if (comicId && chapterId) {
+    if (comicId && chapterId && !isLoading) {
       setChapterPageUrl([])
       fetchChapterData(comicId, chapterId)
     }
-  }, [chapterId, comicId])
+  }, [chapterId, comicId, isLoading])
 
   const fetchChapterData = async (comicId, chapterId) => {
     const response = await axios.get(`${process.env.COMIC_API_URL}/chapters`, {
