@@ -1,6 +1,6 @@
 import Button from 'components/Common/Button'
 import Head from 'components/Common/Head'
-import Layout from 'components/Layout'
+import Layout from 'components/Common/Layout'
 import { useRouter } from 'next/router'
 
 import HomeStyles from 'styles/Home.module.css'

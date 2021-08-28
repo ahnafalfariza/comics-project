@@ -1,6 +1,6 @@
-import Layout from 'components/Layout'
+import Layout from 'components/Common/Layout'
 import Head from 'components/Common/Head'
-import Profile from 'components/Profile'
+import Profile from 'components/Common/Profile'
 import ChapterListProfile from 'components/Chapter/ChapterListProfile'
 import { useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
@@ -60,7 +60,7 @@ const ProfilePageComics = ({ profile }) => {
 
   return (
     <Layout>
-      <Head title={`${profile.accountId} - Comics by Paras`} />
+      <Head title={`${profile.accountId}`} />
       <Profile userData={userData} setUserData={setUserData} />
       <div className="max-w-5xl mx-auto pt-8 pb-16 -mt-8">
         {comics.length === 0 && !hasMore && (

@@ -9,19 +9,19 @@ const Head = ({
 }) => {
   return (
     <NextHead>
-      <title>{title}</title>
-      <meta name="title" content={title} />
+      <title>{`${title} - Comics by Paras`}</title>
+      <meta name="title" content={`${title} - Comics by Paras`} />
       <meta name="description" content={description} />
       <meta property="og:type" content="website" />
       <meta property="og:url" content={url} />
-      <meta property="og:title" content={title} />
+      <meta property="og:title" content={`${title} - Comics by Paras`} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
       <meta name="keywords" content={keywords} />
       <meta name="robots" content="index, follow" />
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:url" content={url} />
-      <meta property="twitter:title" content={title} />
+      <meta property="twitter:title" content={`${title} - Comics by Paras`} />
       <meta property="twitter:description" content={description} />
       <meta property="twitter:image" content={image} />
     </NextHead>

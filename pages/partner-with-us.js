@@ -3,7 +3,7 @@ import Button from 'components/Common/Button'
 import { InputTextarea } from 'components/Common/form'
 import InputText from 'components/Common/form/components/InputText/InputText'
 import Head from 'components/Common/Head'
-import Layout from 'components/Layout'
+import Layout from 'components/Common/Layout'
 import useStore from 'lib/store'
 import { useState } from 'react'
 
@@ -50,7 +50,7 @@ const PartnerWithUs = () => {
 
   return (
     <Layout>
-      <Head title="Frequently Asked Question - Comics by Paras" />
+      <Head title="Partner with Us" />
       <div className="max-w-xl m-auto py-12 px-4">
         <div className="text-center text-white font-bold text-4xl mb-8">
           Partner with Us

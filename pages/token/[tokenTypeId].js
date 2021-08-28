@@ -1,11 +1,17 @@
 import axios from 'axios'
+import Head from 'components/Common/Head'
 
-import Layout from 'components/Layout'
+import Layout from 'components/Common/Layout'
 import TokenTypeDetail from 'components/Token/TokenTypeDetail'
+import { parseImgUrl } from 'utils/common'
 
 const TokenPage = ({ errorCode, token }) => {
   return (
     <Layout>
+      <Head
+        title={token.metadata.title}
+        image={parseImgUrl(token.metadata.media)}
+      />
       <div className="p-4">
         <TokenTypeDetail
           token={token}

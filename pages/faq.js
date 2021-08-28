@@ -1,10 +1,10 @@
 import Head from 'components/Common/Head'
-import Layout from 'components/Layout'
+import Layout from 'components/Common/Layout'
 
 const Faq = () => {
   return (
     <Layout>
-      <Head title="Frequently Asked Question - Comics by Paras" />
+      <Head title="Frequently Asked Question" />
       <div className="max-w-4xl m-auto py-12 px-4">
         <div className="text-center text-white font-bold text-4xl mb-8">
           Frequently Asked Question

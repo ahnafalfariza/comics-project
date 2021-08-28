@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 import Head from 'components/Common/Head'
-import Layout from 'components/Layout'
+import Layout from 'components/Common/Layout'
 import axios from 'axios'
 import { parseImgUrl } from 'utils/common'
 import Token from 'components/Token/Token'
@@ -51,7 +51,7 @@ const Comics = () => {
 
   return (
     <Layout>
-      <Head title="Comics - Comics by Paras" />
+      <Head title="Comics" />
       <div className="max-w-6xl m-auto p-4 py-8">
         <p className="text-white font-bold text-4xl mb-8">Comics</p>
         <InfiniteScroll

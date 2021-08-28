@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-import Layout from 'components/Layout'
+import Layout from 'components/Common/Layout'
 import MenuTop from 'components/ViewerMenu/MenuTop'
 import MenuBottom from 'components/ViewerMenu/MenuBottom'
 import CommentListModal from 'components/Comment/CommentListModal'

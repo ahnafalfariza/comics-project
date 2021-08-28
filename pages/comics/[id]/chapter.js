@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-import Layout from 'components/Layout'
+import Layout from 'components/Common/Layout'
 import Head from 'components/Common/Head'
 import ComicInfo from 'components/Comic/ComicInfo'
 import ChapterLists from 'components/Chapter/ChapterLists'
@@ -19,6 +19,7 @@ const Collection = ({
     media: 'bafybeiahl55gjwifng26oya77sw5nvtiqevc5jcxai3u7atupyiyyry2ji',
     media_cover: 'bafybeiahl55gjwifng26oya77sw5nvtiqevc5jcxai3u7atupyiyyry2ji',
   },
+  chapterInfo,
 }) => {
   const router = useRouter()
   const scrollChapter = `${router.query.id}::collection`
@@ -63,9 +64,15 @@ const Collection = ({
   return (
     <Layout>
       <Head
-        title={comicInfo.title}
-        description={comicInfo.description}
-        image={parseImgUrl(comicInfo.media)}
+        title={chapterInfo ? chapterInfo.metadata.title : comicInfo.title}
+        description={
+          chapterInfo ? chapterInfo.metadata.description : comicInfo.description
+        }
+        image={
+          chapterInfo
+            ? parseImgUrl(chapterInfo.metadata.media)
+            : parseImgUrl(comicInfo.media)
+        }
       />
       <ComicInfo data={comicInfo} />
       <ChapterLists
@@ -80,13 +87,24 @@ const Collection = ({
 
 export default Collection
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params, query }) {
   const response = await axios.get(
     `${process.env.COMIC_API_URL}/comics?comic_id=${params.id}`
   )
   const comicInfo = response.data.data.results[0] || null
 
+  let chapterInfo = null
+  if (query.chapterId) {
+    const response = await axios.get(`${process.env.COMIC_API_URL}/chapters`, {
+      params: {
+        comic_id: params.id,
+        chapter_id: query.chapterId,
+      },
+    })
+    chapterInfo = response.data.data.results[0] || null
+  }
+
   return {
-    props: { comicInfo },
+    props: { comicInfo, chapterInfo },
   }
 }

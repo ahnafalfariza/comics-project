@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-import Layout from 'components/Layout'
+import Layout from 'components/Common/Layout'
 import Head from 'components/Common/Head'
 import ComicInfo from 'components/Comic/ComicInfo'
 
@@ -57,7 +57,7 @@ const Collectibles = ({ comicInfo }) => {
   return (
     <Layout>
       <Head
-        title={comicInfo.title}
+        title={'Get collectibles from ' + comicInfo.title}
         description={comicInfo.description}
         image={parseImgUrl(comicInfo.media)}
       />

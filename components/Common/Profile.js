@@ -3,10 +3,10 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { Blurhash } from 'react-blurhash'
 import { parseImgUrl } from 'utils/common'
-import Avatar from './Common/Avatar'
-import Button from './Common/Button'
-import { Tab, TabList, Tabs } from './Common/Tabs'
-import EditProfileModal from './Modal/EditProfileModal'
+import Avatar from './Avatar'
+import Button from './Button'
+import { Tab, TabList, Tabs } from './Tabs'
+import EditProfileModal from '../Modal/EditProfileModal'
 
 const Profile = ({ userData, setUserData }) => {
   const router = useRouter()

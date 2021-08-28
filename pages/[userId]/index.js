@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
-import Profile from 'components/Profile'
-import Layout from 'components/Layout'
+import Profile from 'components/Common/Profile'
+import Layout from 'components/Common/Layout'
 import Head from 'components/Common/Head'
 import axios from 'axios'
 
@@ -16,7 +16,7 @@ const ProfilePage = ({ profile }) => {
 
   return (
     <Layout>
-      <Head title={`${profile.accountId} - Comics by Paras`} />
+      <Head title={`${profile.accountId}`} />
       <Profile userData={userData} setUserData={setUserData} />
     </Layout>
   )
