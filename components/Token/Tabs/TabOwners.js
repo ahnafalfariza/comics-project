@@ -51,7 +51,7 @@ const TabOwners = ({ localToken }) => {
       <InfiniteScroll
         dataLength={tokens.length}
         next={fetchTokens}
-        hasMore={true}
+        hasMore={hasMore}
       >
         {tokens.map((token) => (
           <Owner token={token} key={token.token_id} />
