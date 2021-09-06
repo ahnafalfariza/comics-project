@@ -106,7 +106,7 @@ const TokenTypeDetail = ({ token, metadata, className }) => {
             className="h-full"
             universal={true}
             renderView={(props) => (
-              <div {...props} id="activityListScroll" className="p-4" />
+              <div {...props} id="TokenScroll" className="p-4" />
             )}
           >
             <div>

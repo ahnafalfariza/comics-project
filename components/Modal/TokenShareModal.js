@@ -13,7 +13,7 @@ const TokenShareModal = ({ show, onClose }) => {
     {
       name: (
         <FacebookShareButton
-          url={window.location.href}
+          url={typeof window !== 'undefined' && window.location.href}
           className="flex text-white"
         >
           <FacebookIcon size={24} round />
@@ -26,7 +26,7 @@ const TokenShareModal = ({ show, onClose }) => {
       name: (
         <TwitterShareButton
           title={`Test Share`}
-          url={window.location.href}
+          url={typeof window !== 'undefined' && window.location.href}
           className="flex text-white"
         >
           <TwitterIcon size={24} round />
@@ -38,7 +38,7 @@ const TokenShareModal = ({ show, onClose }) => {
     {
       name: (
         <TelegramShareButton
-          url={window.location.href}
+          url={typeof window !== 'undefined' && window.location.href}
           className="flex text-white"
         >
           <TelegramIcon size={24} round />
