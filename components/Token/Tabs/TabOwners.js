@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { parseImgUrl } from 'utils/common'
 
-const FETCH_TOKENS_LIMIT = 12
+const FETCH_TOKENS_LIMIT = 30
 
 const TabOwners = ({ localToken }) => {
   const [tokens, setTokens] = useState([])
