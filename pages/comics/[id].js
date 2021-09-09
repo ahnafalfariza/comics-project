@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-import Layout from 'components/Layout'
+import Layout from 'components/Common/Layout'
 import Head from 'components/Common/Head'
 
 import axios from 'axios'

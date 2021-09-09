@@ -5,7 +5,11 @@ import { useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { parseImgUrl } from 'utils/common'
 
+<<<<<<< HEAD
 const FETCH_TOKENS_LIMIT = 30
+=======
+const FETCH_TOKENS_LIMIT = 10
+>>>>>>> a69ac1da69b13bc40045277cf17c5d60a0e56ba5
 
 const TabOwners = ({ localToken }) => {
   const [tokens, setTokens] = useState([])
@@ -51,7 +55,8 @@ const TabOwners = ({ localToken }) => {
       <InfiniteScroll
         dataLength={tokens.length}
         next={fetchTokens}
-        hasMore={true}
+        hasMore={hasMore}
+        scrollableTarget="TokenScroll"
       >
         {tokens.map((token) => (
           <Owner token={token} key={token.token_id} />

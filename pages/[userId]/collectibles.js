@@ -1,6 +1,6 @@
 import Head from 'components/Common/Head'
-import Layout from 'components/Layout'
-import Profile from 'components/Profile'
+import Layout from 'components/Common/Layout'
+import Profile from 'components/Common/Profile'
 
 import { useState } from 'react'
 import axios from 'axios'
@@ -11,7 +11,7 @@ const ProfilePageCollectibles = ({ profile }) => {
 
   return (
     <Layout>
-      <Head title={`${profile.accountId} - Comics by Paras`} />
+      <Head title={`${profile.accountId}`} />
       <Profile userData={userData} setUserData={setUserData} />
       <div className="max-w-5xl m-auto pb-16">
         <CardList tokens={[]} />

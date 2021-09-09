@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Head from 'components/Common/Head'
 import { Tab, TabList, Tabs } from 'components/Common/Tabs'
-import Layout from 'components/Layout'
+import Layout from 'components/Common/Layout'
 import CardList from 'components/Token/CardList'
 import { useEffect, useState } from 'react'
 import ChapterListMarket from 'components/Chapter/ChapterListMarket'
@@ -17,10 +17,16 @@ const Market = () => {
   const [hasMore, setHasMore] = useState(true)
   const [isFetching, setIsFetching] = useState(false)
 
+  const [activeTab, setActiveTab] = useState('chapter')
+
   const onTabsChange = (idx) => {
     if (idx === 0) {
+      setActiveTab('chapter')
+      setTokens([])
       router.push(`/market`)
     } else if (idx === 1) {
+      setActiveTab('collectibles')
+      setTokens([])
       router.push(`/market?category=collectibles`)
     }
   }
@@ -72,7 +78,7 @@ const Market = () => {
 
   return (
     <Layout>
-      <Head title="Market - Comics by Paras" />
+      <Head title="Market" />
       <div className="max-w-6xl m-auto py-8 md:px-0 md:py-8">
         <p className="text-white font-bold text-4xl mb-4 ml-4">Market</p>
         <Tabs onTabsChange={onTabsChange} defaultIndex={defaultIndex()}>
@@ -81,7 +87,7 @@ const Market = () => {
             <Tab>Collectibles</Tab>
           </TabList>
         </Tabs>
-        {router.query.category ? (
+        {activeTab === 'collectibles' ? (
           <div className="mt-4 p-2 md:p-0">
             <CardList
               tokens={tokens}

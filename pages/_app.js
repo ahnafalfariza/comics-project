@@ -71,15 +71,14 @@ const App = ({ Component, pageProps }) => {
     init()
   }, [])
 
-  if (isLoading) {
-    return (
-      <Loading className="w-screen h-screen m-auto flex justify-center items-center" />
-    )
-  }
-
   return (
     <ToastProvider>
-      <Component {...pageProps} />
+      {isLoading && (
+        <div className="fixed inset-0 bg-background z-50">
+          <Loading className="w-screen h-screen m-auto flex justify-center items-center" />
+        </div>
+      )}
+      <Component {...pageProps} isLoading={isLoading} />
     </ToastProvider>
   )
 }

@@ -13,7 +13,6 @@ const ChapterListMarket = ({
   hasMore,
   containerClassName = '',
 }) => {
-  console.log('sss', tokens)
   return (
     <InfiniteScroll
       dataLength={tokens.length}
