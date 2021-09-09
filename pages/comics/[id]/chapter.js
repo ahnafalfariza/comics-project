@@ -8,6 +8,7 @@ import ComicInfo from 'components/Comic/ComicInfo'
 import ChapterLists from 'components/Chapter/ChapterLists'
 import { FETCH_CHAPTERS_LIMIT } from 'constants/constant'
 import { parseImgUrl } from 'utils/common'
+import near from 'lib/near'
 
 const Collection = ({
   comicInfo = {
@@ -33,10 +34,14 @@ const Collection = ({
     if (router.query.id) {
       fetchChapter(true)
     }
-  }, [router.query.id])
+  }, [router.query.id, near.token])
 
-  const fetchChapter = async () => {
-    if (!hasMore || isFetching) {
+  const fetchChapter = async (initial = false) => {
+    const _hasMore = initial ? true : hasMore
+    const _page = initial ? 0 : page
+    const _chapters = initial ? [] : chapters
+
+    if (!_hasMore || isFetching) {
       return
     }
 
@@ -44,14 +49,14 @@ const Collection = ({
     const response = await axios.get(`${process.env.COMIC_API_URL}/chapters`, {
       params: {
         comic_id: router.query.id,
-        __skip: page * FETCH_CHAPTERS_LIMIT,
+        __skip: _page * FETCH_CHAPTERS_LIMIT,
         __limit: FETCH_CHAPTERS_LIMIT,
       },
     })
     const newData = response.data.data
-    const newChapters = [...chapters, ...newData.results]
+    const newChapters = [..._chapters, ...newData.results]
     setChapters(newChapters)
-    setPage(page + 1)
+    setPage(_page + 1)
 
     if (newData.results.length < FETCH_CHAPTERS_LIMIT) {
       setHasMore(false)

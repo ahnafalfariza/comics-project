@@ -6,6 +6,7 @@ import axios from 'axios'
 import ChapterList from 'components/Chapter/ChapterList'
 import ChapterListLoader from 'components/Chapter/ChapterListLoader'
 import BuyChapterModal from 'components/Modal/BuyChapterModal'
+import near from 'lib/near'
 
 const Overview = ({ chapters, hasMore, fetchData }) => {
   const [chapterOpen, setChapterOpen] = useState(null)
@@ -15,11 +16,11 @@ const Overview = ({ chapters, hasMore, fetchData }) => {
   useEffect(() => {
     if (!router.query.chapterId) {
       setChapterOpen(null)
-    } else if (router.query.chapterId && chapterOpen === null) {
+    } else if (router.query.chapterId) {
       getChapter(router.query.id, router.query.chapterId)
     }
     // eslint-disable-next-line
-  }, [router.query.chapterId])
+  }, [router.query.chapterId, near.token])
 
   const getChapter = async (comicId, chapterId) => {
     const response = await axios.get(`${process.env.COMIC_API_URL}/chapters`, {
