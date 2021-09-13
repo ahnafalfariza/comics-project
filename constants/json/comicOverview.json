@@ -1,0 +1,16 @@
+{
+  "data": {
+    "results": [
+      {
+        "title": "Paradigm",
+        "authors": "John Doe, Doe John",
+        "published": 1627876815709,
+        "summary": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet nesciunt nemo nulla ex delectus nisi incidunt, deserunt expedita, dolor atque, quas reprehenderit dolores est? Praesentium, minus? Esse ullam illo in.",
+        "cover": "https://d30womf5coomej.cloudfront.net/sa/62/7b09e240-fd2a-4e9c-ac85-d4b54ea39778_z.jpg",
+        "imgBlur": "ULDmwQt6pIxAxvwJx^VDpfIpS1RkyDIoIVRk"
+      }
+    ],
+    "skip": 0,
+    "limit": 10
+  }
+}
