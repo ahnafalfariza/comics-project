@@ -29,8 +29,11 @@ const TokenTypeDetail = ({ token, metadata, className }) => {
   const fetchOwned = useStore((state) => state.fetchOwned)
 
   useEffect(() => {
-    fetchOwned(token.token_type)
-  }, [fetchOwned, token.token_type])
+    if (near.currentUser) {
+      fetchOwned(token.token_type)
+    }
+    // eslint-disable-next-line
+  }, [fetchOwned, token.token_type, near.currentUser])
 
   const changeActiveTab = (tab) => {
     setActiveTab(tab)
