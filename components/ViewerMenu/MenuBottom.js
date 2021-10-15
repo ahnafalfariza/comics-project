@@ -13,15 +13,19 @@ const MenuBottom = forwardRef(({ showMenu, data, hasNext }, ref) => {
   const onClickNextChapter = () => {
     if (hasNext) {
       router.push({
-        pathname: `/viewer/${data.comic_id}/${data.chapter_id + 1}`,
+        pathname: `/viewer/${data.metadata.comic_id}/${
+          data.metadata.chapter_id + 1
+        }`,
       })
     }
   }
 
   const onClickPrevChapter = () => {
-    if (data.chapter_id !== 1) {
+    if (data.metadata.chapter_id !== 1) {
       router.push({
-        pathname: `/viewer/${data.comic_id}/${data.chapter_id - 1}`,
+        pathname: `/viewer/${data.metadata.comic_id}/${
+          data.metadata.chapter_id - 1
+        }`,
       })
     }
   }
@@ -55,11 +59,11 @@ const MenuBottom = forwardRef(({ showMenu, data, hasNext }, ref) => {
               transform="scale(-1,1)"
               color="#ffffff"
               className={`cursor-pointer ${
-                data?.chapter_id === 1 ? 'opacity-40' : ''
+                data?.metadata.chapter_id === 1 ? 'opacity-40' : ''
               }`}
               onClick={onClickPrevChapter}
             />
-            <p className="text-white">Ch {data?.chapter_id}</p>
+            <p className="text-white">Ch {data?.metadata.chapter_id}</p>
             <IconChevron
               color="#ffffff"
               className={`cursor-pointer ${!hasNext ? 'opacity-40' : ''}`}

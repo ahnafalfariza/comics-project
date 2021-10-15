@@ -54,7 +54,7 @@ const BuyChapterModal = ({
 
   const onClickReadNow = () => {
     router.push({
-      pathname: `/viewer/${data.comic_id}/${data.chapter_id}`,
+      pathname: `/viewer/${data.metadata.comic_id}/${data.metadata.chapter_id}`,
     })
   }
 
@@ -63,18 +63,18 @@ const BuyChapterModal = ({
       setShowLogin(true)
       return
     }
-    buyChapter(data.token_type, data.price)
+    buyChapter(data.token_series_id, data.price)
   }
 
   if (!data) return null
 
   const tokenCta = tokenId
     ? {
-        link: `/token/${data.token_type}/${tokenId}`,
+        link: `/token/${data.token_series_id}/${tokenId}`,
         text: `See Token Edition`,
       }
     : {
-        link: `/token/${data.token_type}`,
+        link: `/token/${data.token_series_id}`,
         text: `See Token Details`,
       }
 
@@ -107,7 +107,7 @@ const BuyChapterModal = ({
                 <div className="-mt-16 md:mt-0 w-full relative p-4 md:p-6 flex flex-col justify-between md:h-96 overflow-y-auto">
                   <div className="w-full">
                     <p className="text-blueGray-400 text-lg">
-                      Chapter {data.chapter_id}
+                      Chapter {data.metadata.chapter_id}
                     </p>
                     <p className="text-2xl text-gray-50">
                       {data.metadata.subtitle}

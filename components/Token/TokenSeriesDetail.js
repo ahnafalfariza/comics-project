@@ -15,12 +15,12 @@ import TokenBuyModal from 'components/Modal/TokenBuyModal'
 import TokenMoreModal from 'components/Modal/TokenMoreModal'
 import TokenShareModal from 'components/Modal/TokenShareModal'
 import TokenDetailUpdateModal from 'components/Modal/TokenDetailUpdateModal'
-import TokenType from './TokenType'
+import TokenSeries from './TokenSeries'
 import useStore from 'lib/store'
 import LoginModal from 'components/Modal/LoginModal'
 import near from 'lib/near'
 
-const TokenTypeDetail = ({ token, metadata, className }) => {
+const TokenSeriesDetail = ({ token, metadata, className }) => {
   const [activeTab, setActiveTab] = useState('info')
   const [showModal, setShowModal] = useState(null)
   const router = useRouter()
@@ -30,10 +30,10 @@ const TokenTypeDetail = ({ token, metadata, className }) => {
 
   useEffect(() => {
     if (near.currentUser) {
-      fetchOwned(token.token_type)
+      fetchOwned(token.token_series_id)
     }
     // eslint-disable-next-line
-  }, [fetchOwned, token.token_type, near.currentUser])
+  }, [fetchOwned, token.token_series_id, near.currentUser])
 
   const changeActiveTab = (tab) => {
     setActiveTab(tab)
@@ -76,7 +76,7 @@ const TokenTypeDetail = ({ token, metadata, className }) => {
 
   const onClickRead = () => {
     router.push({
-      pathname: `/viewer/${token.comic_id}/${token.chapter_id}`,
+      pathname: `/viewer/${token.metadata.comic_id}/${token.metadata.chapter_id}`,
     })
   }
 
@@ -101,7 +101,7 @@ const TokenTypeDetail = ({ token, metadata, className }) => {
             />
           </div>
           <div className="h-full flex items-center">
-            <TokenType metadata={metadata} />
+            <TokenSeries metadata={metadata} />
           </div>
         </div>
         <div className="flex flex-col w-full h-3/5 lg:h-full lg:w-2/5 bg-blueGray-800">
@@ -184,4 +184,4 @@ const TokenTypeDetail = ({ token, metadata, className }) => {
   )
 }
 
-export default TokenTypeDetail
+export default TokenSeriesDetail
