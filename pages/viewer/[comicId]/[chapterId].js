@@ -101,7 +101,11 @@ const ChapterView = ({ isLoading }) => {
     <Layout showNav={false} showFooter={false} className="bg-black">
       <Head />
       <ChapterNotAvailableModal
-        show={chapterData?.lang && Object.keys(chapterData.lang).length === 0}
+        show={
+          chapterData &&
+          chapterData.lang &&
+          Object.keys(chapterData.lang).length === 0
+        }
       />
       <MenuTop
         ref={menuTopRef}
