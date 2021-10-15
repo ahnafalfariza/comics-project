@@ -10,6 +10,7 @@ import { useRouter } from 'next/router'
 import Head from 'components/Common/Head'
 import BuyChapterModal from 'components/Modal/BuyChapterModal'
 import ChapterImagePage from 'components/ViewerMenu/ChapterImagePage'
+import ChapterNotAvailableModal from 'components/Modal/ChapterNotAvailableModal'
 
 const ChapterView = ({ isLoading }) => {
   const menuTopRef = useRef()
@@ -63,7 +64,12 @@ const ChapterView = ({ isLoading }) => {
   }, [chapterId, comicId, isLoading])
 
   useEffect(() => {
-    if (chapterData && chapterData.status === 'read' && activeLang) {
+    if (
+      chapterData &&
+      chapterData.status === 'read' &&
+      chapterData.lang &&
+      activeLang
+    ) {
       fetchChapterPage(chapterData.lang[activeLang], comicId, chapterId)
     }
   }, [chapterData, activeLang])
@@ -94,6 +100,9 @@ const ChapterView = ({ isLoading }) => {
   return (
     <Layout showNav={false} showFooter={false} className="bg-black">
       <Head />
+      <ChapterNotAvailableModal
+        show={chapterData?.lang && Object.keys(chapterData.lang).length === 0}
+      />
       <MenuTop
         ref={menuTopRef}
         showMenu={showMenu}
