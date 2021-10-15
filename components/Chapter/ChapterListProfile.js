@@ -185,8 +185,8 @@ const ChapterListProfile = ({
                 onClick={() =>
                   openChapterModal(
                     token.token_id,
-                    token.comic_id,
-                    token.chapter_id
+                    token.metadata.comic_id,
+                    token.metadata.chapter_id
                   )
                 }
               >
@@ -223,7 +223,9 @@ const ChapterListProfile = ({
                       background: `linear-gradient(180.17deg, rgb(0 0 0 / 0%) 20%, rgb(0 0 0 / 60%) 80.88%, rgb(0 0 0 / 80%) 100%)`,
                     }}
                   >
-                    <p className="text-lg md:text-xl">Ch. {token.chapter_id}</p>
+                    <p className="text-lg md:text-xl">
+                      Ch. {token.metadata.chapter_id}
+                    </p>
                     <p className="text-xs">Edition {token.edition_id}</p>
                   </div>
                 </div>

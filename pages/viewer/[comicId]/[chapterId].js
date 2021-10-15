@@ -20,6 +20,7 @@ const ChapterView = ({ isLoading }) => {
   const [chapterData, setChapterData] = useState(null)
   const [chapterPageUrl, setChapterPageUrl] = useState([])
   const [hasNext, setHasNext] = useState(null)
+  const [activeLang, setActiveLang] = useState('en')
 
   const showComment = useStore((state) => state.showComment)
 
@@ -61,6 +62,12 @@ const ChapterView = ({ isLoading }) => {
     }
   }, [chapterId, comicId, isLoading])
 
+  useEffect(() => {
+    if (chapterData && chapterData.status === 'read' && activeLang) {
+      fetchChapterPage(chapterData.lang[activeLang], comicId, chapterId)
+    }
+  }, [chapterData, activeLang])
+
   const fetchChapterData = async (comicId, chapterId) => {
     const response = await axios.get(`${process.env.COMIC_API_URL}/chapters`, {
       params: {
@@ -72,16 +79,13 @@ const ChapterView = ({ isLoading }) => {
 
     const _chapterData = response.data.data.results[0]
     setChapterData(_chapterData || null)
-    if (_chapterData && _chapterData.status === 'read') {
-      fetchChapterPage(_chapterData.metadata.page_count, comicId, chapterId)
-    }
   }
 
   const fetchChapterPage = async (numPage, comicId, chapterId) => {
     let url = []
     for (let i = 1; i <= numPage; i++) {
       url.push(
-        `${process.env.COMIC_API_URL}/pages/${comicId}/${chapterId}/${i}`
+        `${process.env.COMIC_API_URL}/pages/${comicId}/${chapterId}/${i}/${activeLang}`
       )
     }
     setChapterPageUrl(url)
@@ -90,7 +94,13 @@ const ChapterView = ({ isLoading }) => {
   return (
     <Layout showNav={false} showFooter={false} className="bg-black">
       <Head />
-      <MenuTop ref={menuTopRef} showMenu={showMenu} data={chapterData} />
+      <MenuTop
+        ref={menuTopRef}
+        showMenu={showMenu}
+        data={chapterData}
+        activeLang={activeLang}
+        setActiveLang={setActiveLang}
+      />
       <MenuBottom
         ref={menuBottomRef}
         showMenu={showMenu}

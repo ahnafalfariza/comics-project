@@ -11,7 +11,7 @@ import TabHistory from './Tabs/TabHistory'
 import TokenMoreModal from 'components/Modal/TokenMoreModal'
 import TokenShareModal from 'components/Modal/TokenShareModal'
 import TokenDetailUpdateModal from 'components/Modal/TokenDetailUpdateModal'
-import TokenType from './TokenType'
+import TokenSeries from './TokenSeries'
 import near from 'lib/near'
 import TokenTransfer from 'components/Modal/TokenTransfer'
 
@@ -71,7 +71,7 @@ const TokenDetail = ({ token, metadata, className }) => {
             />
           </div>
           <div className="h-full flex items-center">
-            <TokenType metadata={metadata} />
+            <TokenSeries metadata={metadata} />
           </div>
         </div>
         <div className="flex flex-col w-full h-3/5 lg:h-full lg:w-2/5 bg-blueGray-800">

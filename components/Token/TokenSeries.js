@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Blurhash } from 'react-blurhash'
 import { parseImgUrl } from 'utils/common'
 
-const TokenType = ({
+const TokenSeries = ({
   metadata,
   imgWidth = 640,
   imgHeight = 890,
@@ -147,4 +147,4 @@ const TokenType = ({
   )
 }
 
-export default TokenType
+export default TokenSeries

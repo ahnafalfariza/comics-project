@@ -61,7 +61,7 @@ const TabInfo = ({ localToken, isNFT }) => {
       <div className="flex bg-blueGray-900 border border-blueGray-700 mt-4 p-3 rounded-md shadow-md">
         <div>
           <p className="text-sm text-white font-bold">Edition</p>
-          <Link href={`/token/${localToken.token_type}`}>
+          <Link href={`/token/${localToken.token_series_id}`}>
             <a className="text-gray-100 font-semibold hover:opacity-80">
               #{localToken.edition_id} of {supply}
             </a>
