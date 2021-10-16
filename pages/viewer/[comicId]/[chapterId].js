@@ -121,8 +121,8 @@ const ChapterView = ({ isLoading }) => {
         hasNext={hasNext}
       />
       <div className="max-w-xl m-auto relative">
-        {chapterPageUrl.map((url, i) => (
-          <ChapterImagePage key={i} url={url} />
+        {chapterPageUrl.map((url) => (
+          <ChapterImagePage key={url} url={url} />
         ))}
       </div>
       <BuyChapterModal

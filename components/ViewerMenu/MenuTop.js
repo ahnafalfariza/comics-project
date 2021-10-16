@@ -4,6 +4,12 @@ import { IconArrow, IconShare } from 'components/Icons'
 import { useRouter } from 'next/router'
 import BuyChapterModal from 'components/Modal/BuyChapterModal'
 
+const LANG_LIST = {
+  en: 'English',
+  zh: '简体中文',
+  ru: 'Русский',
+}
+
 const MenuTop = forwardRef(
   ({ showMenu, data, activeLang, setActiveLang }, ref) => {
     const router = useRouter()
@@ -46,7 +52,7 @@ const MenuTop = forwardRef(
                   {Object.keys(data?.lang).map((lang, idx) => {
                     return (
                       <option key={idx} value={lang}>
-                        {lang}
+                        {LANG_LIST[lang]}
                       </option>
                     )
                   })}
