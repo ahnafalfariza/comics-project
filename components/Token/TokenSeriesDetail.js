@@ -161,6 +161,17 @@ const TokenSeriesDetail = ({ token, metadata, className }) => {
               </Button>
             )}
           </div>
+          <div className="p-3">
+            <Button variant="ghost" isFullWidth>
+              <a
+                href={`${process.env.NEXT_PUBLIC_PARAS_MARKETPLACE_URL}/token/${token.contract_id}::${token.token_series_id}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Trade on Paras Marketplace
+              </a>
+            </Button>
+          </div>
         </div>
       </div>
       <TokenBuyModal

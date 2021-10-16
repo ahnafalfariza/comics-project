@@ -129,11 +129,14 @@ const TokenDetail = ({ token, metadata, className }) => {
               </Button>
             ) : (
               <>
-                <p className="text-blueGray-400 text-xs mb-2 text-center">
-                  Secondary marketplace coming soon
-                </p>
-                <Button onClick={() => {}} isFullWidth>
-                  Coming Soon
+                <Button variant="ghost" isFullWidth>
+                  <a
+                    href={`${process.env.NEXT_PUBLIC_PARAS_MARKETPLACE_URL}/token/${token.contract_id}::${token.token_series_id}/${token.token_id}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Trade on Paras Marketplace
+                  </a>
                 </Button>
               </>
             )}
