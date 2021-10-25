@@ -25,7 +25,7 @@ const TokenShareModal = ({ show, onClose }) => {
     {
       name: (
         <TwitterShareButton
-          title={`Test Share`}
+          title={``}
           url={typeof window !== 'undefined' && window.location.href}
           className="flex text-white"
         >
