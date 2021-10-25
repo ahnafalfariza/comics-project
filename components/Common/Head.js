@@ -3,7 +3,7 @@ import NextHead from 'next/head'
 const Head = ({
   title = 'Paras Comic',
   description = 'New way to collect digital comics. Read and truly own your digital comics. Engage and support the creators like never before.',
-  image = '',
+  image = 'http://cdn.paras.id/bafybeib4qnakufuktntyagioruvcjbyyvggjn4mfemy4gxk37nrjytrtw4',
   url = 'https://comics.paras.com',
   keywords = 'comics, blockchain, near',
 }) => {
