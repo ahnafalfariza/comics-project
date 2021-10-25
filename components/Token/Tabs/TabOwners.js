@@ -15,7 +15,7 @@ const TabOwners = ({ localToken }) => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
-    if (localToken.token_type) {
+    if (localToken.token_series_id) {
       await fetchTokens()
     }
   }, [localToken])
@@ -28,7 +28,7 @@ const TabOwners = ({ localToken }) => {
     setIsFetching(true)
     const resp = await axios.get(`${process.env.COMIC_API_URL}/tokens`, {
       params: {
-        token_type: localToken.token_type,
+        token_series_id: localToken.token_series_id,
         __skip: page * FETCH_TOKENS_LIMIT,
         __limit: FETCH_TOKENS_LIMIT,
       },
@@ -105,7 +105,7 @@ const Owner = ({ token = {} }) => {
           </Link>
         </div>
         <div className="flex">
-          <Link href={`/token/${token.token_type}/${token.token_id}`}>
+          <Link href={`/token/${token.token_series_id}/${token.token_id}`}>
             <a className="hover:opacity-80">
               <p className="text-white font-semibold">
                 Edition #{token.edition_id}

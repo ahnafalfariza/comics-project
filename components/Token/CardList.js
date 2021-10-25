@@ -54,7 +54,7 @@ const CardList = ({
                       width: `300`,
                     })}
                     onClick={() => {
-                      router.push(`/token/${token.token_type}`)
+                      router.push(`/token/${token.token_series_id}`)
                     }}
                     imgBlur={token.metadata.blurhash}
                     token={token}

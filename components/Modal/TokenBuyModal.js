@@ -44,7 +44,7 @@ const TokenBuyModal = ({
       setShowLogin(true)
       return
     }
-    buyChapter(data.token_type, data.price)
+    buyChapter(data.token_series_id, data.price)
   }
 
   return (

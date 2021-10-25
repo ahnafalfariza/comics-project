@@ -60,7 +60,7 @@ const Market = () => {
       __limit: FETCH_TOKENS_LIMIT,
     }
 
-    const resp = await axios.get(`${process.env.COMIC_API_URL}/token_types`, {
+    const resp = await axios.get(`${process.env.COMIC_API_URL}/token-series`, {
       params,
     })
     const newData = resp.data.data

@@ -46,7 +46,7 @@ const Overview = ({ chapters, hasMore, fetchData }) => {
       {
         query: {
           ...router.query,
-          chapterId: data.chapter_id,
+          chapterId: data.metadata.chapter_id,
         },
       },
       '',
@@ -78,7 +78,7 @@ const Overview = ({ chapters, hasMore, fetchData }) => {
         {chapters.map((data) => {
           return (
             <ChapterList
-              key={data.chapter_id}
+              key={data.metadata.chapter_id}
               data={data}
               onClick={() => onClickChapter(data)}
             />

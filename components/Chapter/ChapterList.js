@@ -70,7 +70,7 @@ const ChapterList = ({
         <div className="sm:ml-36 ml-24 pl-1 w-full flex flex-col sm:flex-row sm:items-center items-start justify-between">
           <div className="mr-4">
             <h5 className="sm:text-sm text-xs  text-blueGray-400 mb-1 uppercase">
-              Chapter {data.chapter_id}
+              Chapter {data.metadata.chapter_id}
             </h5>
             <h3 className="text-white text-sm sm:text-xl">
               {data.metadata.subtitle}

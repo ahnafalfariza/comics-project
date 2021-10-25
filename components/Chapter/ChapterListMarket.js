@@ -38,7 +38,7 @@ const ChapterListMarket = ({
                     width: `300`,
                   })}
                   onClick={() => {
-                    router.push(`/token/${token.token_type}`)
+                    router.push(`/token/${token.token_series_id}`)
                   }}
                   disableFlip
                   shadow="none"
@@ -70,7 +70,7 @@ const ChapterListMarket = ({
               </div>
               <div className="text-center mt-2 text-sm">
                 <Link
-                  href={`/token/${token.token_type}`}
+                  href={`/token/${token.token_series_id}`}
                   scroll={false}
                   shallow
                 >
