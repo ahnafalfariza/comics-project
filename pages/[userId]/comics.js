@@ -81,9 +81,9 @@ const ProfilePageComics = ({ profile }) => {
         >
           {comics.map((comic) => {
             return (
-              <div className="pt-8 px-4" key={comic.metadata.comic_id}>
+              <div className="pt-8 px-4" key={comic.comic_id}>
                 <ChapterListProfile
-                  comicId={comic.metadata.comic_id}
+                  comicId={comic.comic_id}
                   comicCover={comic.media}
                   comicTitle={comic.title}
                 />
