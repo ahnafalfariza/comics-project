@@ -37,7 +37,7 @@ export const parseImgUrl = (url, defaultValue = '', opts = {}) => {
   if (url.includes('://')) {
     const [protocol, path] = url.split('://')
     if (protocol === 'ipfs') {
-      if (opts.useOriginal || process.env.APP_ENV !== 'production') {
+      if (opts.useOriginal || process.env.APP_ENV !== 'mainnet') {
         const cid = new CID(path)
         if (cid.version === 0) {
           return `https://ipfs-gateway.paras.id/ipfs/${path}`
@@ -58,7 +58,7 @@ export const parseImgUrl = (url, defaultValue = '', opts = {}) => {
   } else {
     try {
       const cid = new CID(url)
-      if (opts.useOriginal || process.env.APP_ENV !== 'production') {
+      if (opts.useOriginal || process.env.APP_ENV !== 'mainnet') {
         if (cid.version === 0) {
           return `https://ipfs-gateway.paras.id/ipfs/${cid}`
         } else if (cid.version === 1) {
