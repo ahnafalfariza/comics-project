@@ -70,7 +70,9 @@ const TokenBuyModal = ({
               <div className="text-white my-1">
                 <div className="flex justify-between">
                   <div className="text-sm">Total</div>
-                  <div className="text">{formatNearAmount(data.price)} Ⓝ</div>
+                  {data.price && (
+                    <div className="text">{formatNearAmount(data.price)} Ⓝ</div>
+                  )}
                 </div>
                 <div className="flex justify-between">
                   <div className="text-sm">Transaction Fee</div>
@@ -86,8 +88,17 @@ const TokenBuyModal = ({
               transaction.
             </p>
             <div className="mt-6">
-              <Button size="md" isFullWidth onClick={onBuyToken}>
-                {data.price !== '0' ? 'Buy' : 'Get for Free'}
+              <Button
+                isDisabled={!data.price}
+                size="md"
+                isFullWidth
+                onClick={onBuyToken}
+              >
+                {data.price
+                  ? data.price !== '0'
+                    ? 'Buy'
+                    : 'Get for Free'
+                  : 'Not Available'}
               </Button>
               <Button
                 variant="ghost"

@@ -149,10 +149,16 @@ const TokenSeriesDetail = ({ token, metadata, className }) => {
           </Scrollbars>
           <div className="p-3">
             {isOwned && isOwned === 'not_owned' && (
-              <Button onClick={onClickBuy} isFullWidth>
-                {token.price === '0'
-                  ? 'Free'
-                  : `Buy for ${formatNearAmount(token.price)} Ⓝ`}
+              <Button
+                isDisabled={!token.price}
+                onClick={onClickBuy}
+                isFullWidth
+              >
+                {token.price
+                  ? token.price === '0'
+                    ? 'Free'
+                    : `Buy for ${formatNearAmount(token.price)} Ⓝ`
+                  : 'Not Available'}
               </Button>
             )}
             {isOwned && isOwned === 'owned' && (

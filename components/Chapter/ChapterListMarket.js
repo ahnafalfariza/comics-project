@@ -54,14 +54,20 @@ const ChapterListMarket = ({
                 <div className="mt-4">
                   <div className="p-2">
                     <div className="text-gray-100 text-2xl">
-                      {token.price !== '0' ? (
-                        <div>
-                          <p className="text-gray-400 text-xs">Start From</p>
-                          <div>{`${formatNearAmount(token.price)} Ⓝ`}</div>
-                        </div>
+                      {token.price ? (
+                        token.price !== '0' ? (
+                          <div>
+                            <p className="text-gray-400 text-xs">Start From</p>
+                            <div>{`${formatNearAmount(token.price)} Ⓝ`}</div>
+                          </div>
+                        ) : (
+                          <div>
+                            <span className="text-gray-100">Free</span>
+                          </div>
+                        )
                       ) : (
                         <div>
-                          <span className="text-gray-100">Free</span>
+                          <span className="text-gray-100">Not Available</span>
                         </div>
                       )}
                     </div>

@@ -138,10 +138,13 @@ const BuyChapterModal = ({
                               size="md"
                               isFullWidth
                               onClick={onBuyChapter}
+                              isDisabled={!data.price}
                             >
-                              {data.price === '0'
-                                ? 'Free'
-                                : `Buy for ${formatNearAmount(data.price)} Ⓝ`}
+                              {data.price
+                                ? data.price === '0'
+                                  ? 'Free'
+                                  : `Buy for ${formatNearAmount(data.price)} Ⓝ`
+                                : 'Not Available'}
                             </Button>
                           </div>
                         )}
