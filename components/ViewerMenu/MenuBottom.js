@@ -14,17 +14,17 @@ const MenuBottom = forwardRef(({ showMenu, data, hasNext }, ref) => {
     if (hasNext) {
       router.push({
         pathname: `/viewer/${data.metadata.comic_id}/${
-          data.metadata.chapter_id + 1
+          parseInt(data.metadata.chapter_id) + 1
         }`,
       })
     }
   }
 
   const onClickPrevChapter = () => {
-    if (data.metadata.chapter_id !== 1) {
+    if (parseInt(data.metadata.chapter_id) !== 1) {
       router.push({
         pathname: `/viewer/${data.metadata.comic_id}/${
-          data.metadata.chapter_id - 1
+          parseInt(data.metadata.chapter_id) - 1
         }`,
       })
     }
