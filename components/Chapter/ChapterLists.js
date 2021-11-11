@@ -14,9 +14,7 @@ const Overview = ({ chapters, hasMore, fetchData }) => {
   const router = useRouter()
 
   useEffect(() => {
-    if (!router.query.chapterId) {
-      setChapterOpen(null)
-    } else if (router.query.chapterId) {
+    if (router.query.chapterId) {
       getChapter(router.query.id, router.query.chapterId)
     }
     // eslint-disable-next-line
@@ -78,7 +76,7 @@ const Overview = ({ chapters, hasMore, fetchData }) => {
         {chapters.map((data) => {
           return (
             <ChapterList
-              key={data.metadata.chapter_id}
+              key={data.token_series_id}
               data={data}
               onClick={() => onClickChapter(data)}
             />
@@ -86,7 +84,7 @@ const Overview = ({ chapters, hasMore, fetchData }) => {
         })}
       </InfiniteScroll>
       <BuyChapterModal
-        active={chapterOpen !== null}
+        active={router.query.chapterId}
         data={chapterOpen}
         onClose={onCloseChapterDetail}
       />

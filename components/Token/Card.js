@@ -120,7 +120,7 @@ const Card = ({
                     fontSize: `.85em`,
                   }}
                 >
-                  {token.metadata.subtitle}
+                  {token.metadata.title}
                 </p>
                 <p
                   className="text-white truncate"
@@ -163,7 +163,7 @@ const Card = ({
                         fontSize: `.6em`,
                       }}
                     >
-                      {token.metadata.author_ids}
+                      {token.creator_id || token.metadata.author_ids}
                     </p>
                   </div>
                   <div className="w-1/2 text-right">
