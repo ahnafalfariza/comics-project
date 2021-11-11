@@ -58,6 +58,18 @@ const TabInfo = ({ localToken, isNFT }) => {
           </div>
         </div>
       )}
+      {localToken.royalty && Object.keys(localToken.royalty).length !== 0 && (
+        <div className="flex bg-blueGray-900 border border-blueGray-700 mt-4 p-3 rounded-md shadow-md">
+          <div>
+            <p className="text-sm text-white font-bold">Royalty</p>
+            <p className="text-gray-100 font-semibold">
+              {Object.keys(localToken.royalty).length !== 0
+                ? `${Object.values(localToken.royalty)[0] / 100} %`
+                : `None`}
+            </p>
+          </div>
+        </div>
+      )}
       <div className="flex bg-blueGray-900 border border-blueGray-700 mt-4 p-3 rounded-md shadow-md">
         <div>
           <p className="text-sm text-white font-bold">Edition</p>
