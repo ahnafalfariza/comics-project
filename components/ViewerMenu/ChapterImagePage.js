@@ -31,7 +31,7 @@ const ChapterImagePage = ({ url }) => {
 
   return imageCh !== '' ? (
     <div
-      className={isLandscape ? 'max-w-5xl m-auto' : 'max-w-6xl m-auto relative'}
+      className={isLandscape ? 'max-w-6xl m-auto' : 'max-w-4xl m-auto relative'}
     >
       <img src={imageCh} className="m-auto" />
       <div className="absolute inset-0 bg-transparent z-0" />
