@@ -24,7 +24,7 @@ const Overview = ({ chapters, hasMore, fetchData }) => {
     const response = await axios.get(`${process.env.COMIC_API_URL}/chapters`, {
       params: {
         comic_id: comicId,
-        token_series_id: chapterId,
+        chapter_id: chapterId,
       },
     })
     setChapterOpen(response.data.data.results[0] || null)
@@ -44,7 +44,7 @@ const Overview = ({ chapters, hasMore, fetchData }) => {
       {
         query: {
           ...router.query,
-          chapterId: data.token_series_id,
+          chapterId: data.metadata.chapter_id,
         },
       },
       '',
