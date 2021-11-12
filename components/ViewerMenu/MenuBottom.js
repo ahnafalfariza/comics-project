@@ -59,11 +59,13 @@ const MenuBottom = forwardRef(({ showMenu, data, hasNext }, ref) => {
               transform="scale(-1,1)"
               color="#ffffff"
               className={`cursor-pointer ${
-                data?.metadata.chapter_id === 1 ? 'opacity-40' : ''
+                parseInt(data?.metadata.chapter_id) === 1 ? 'opacity-40' : ''
               }`}
               onClick={onClickPrevChapter}
             />
-            <p className="text-white">Ch {data?.metadata.chapter_id}</p>
+            <p className="text-white">
+              Ch {parseInt(data?.metadata.chapter_id)}
+            </p>
             <IconChevron
               color="#ffffff"
               className={`cursor-pointer ${!hasNext ? 'opacity-40' : ''}`}
