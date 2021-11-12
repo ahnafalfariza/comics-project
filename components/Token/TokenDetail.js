@@ -14,6 +14,7 @@ import TokenDetailUpdateModal from 'components/Modal/TokenDetailUpdateModal'
 import TokenSeries from './TokenSeries'
 import near from 'lib/near'
 import TokenTransfer from 'components/Modal/TokenTransfer'
+import { parseImgUrl } from 'utils/common'
 
 const TokenDetail = ({ token, metadata, className }) => {
   const [activeTab, setActiveTab] = useState('info')
@@ -71,7 +72,11 @@ const TokenDetail = ({ token, metadata, className }) => {
             />
           </div>
           <div className="h-full flex items-center">
-            <TokenSeries metadata={metadata} />
+            <img
+              className="object-contain w-full h-full relative z-10"
+              src={parseImgUrl(token.metadata.media)}
+            />
+            {/* <TokenSeries metadata={metadata} /> */}
           </div>
         </div>
         <div className="flex flex-col w-full h-3/5 lg:h-full lg:w-2/5 bg-blueGray-800">
@@ -91,11 +96,25 @@ const TokenDetail = ({ token, metadata, className }) => {
                   <p className="mt-1 text-white">
                     by{' '}
                     <span className="font-semibold">
-                      <Link href={`/${token.metadata.author_ids[0]}`}>
-                        <a className="text-white font-semibold border-b-2 border-transparent hover:border-white">
-                          {token.metadata.author_ids[0]}
-                        </a>
-                      </Link>
+                      {token.metadata.author_ids ? (
+                        <Link href={`/${token.metadata.author_ids[0]}`}>
+                          <a className="text-white font-semibold border-b-2 border-transparent hover:border-white">
+                            {token.metadata.author_ids[0]}
+                          </a>
+                        </Link>
+                      ) : token.metadata.creator_id ? (
+                        <Link href={`/${token.metadata.creator_id}`}>
+                          <a className="text-white font-semibold border-b-2 border-transparent hover:border-white">
+                            {token.metadata.creator_id}
+                          </a>
+                        </Link>
+                      ) : (
+                        <Link href={`/${token.contract_id}`}>
+                          <a className="text-white font-semibold border-b-2 border-transparent hover:border-white">
+                            {token.contract_id}
+                          </a>
+                        </Link>
+                      )}
                     </span>
                   </p>
                 </div>

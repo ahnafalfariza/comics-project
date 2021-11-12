@@ -224,7 +224,7 @@ const ChapterListProfile = ({
                     }}
                   >
                     <p className="text-lg md:text-xl">
-                      Ch. {token.metadata.chapter_id}
+                      Ch. {parseInt(token.metadata.chapter_id)}
                     </p>
                     <p className="text-xs">Edition {token.edition_id}</p>
                   </div>

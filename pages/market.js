@@ -17,7 +17,7 @@ const Market = () => {
   const [hasMore, setHasMore] = useState(true)
   const [isFetching, setIsFetching] = useState(false)
 
-  const [activeTab, setActiveTab] = useState('chapter')
+  const [activeTab, setActiveTab] = useState(router.query.category || 'chapter')
 
   const onTabsChange = (idx) => {
     if (idx === 0) {

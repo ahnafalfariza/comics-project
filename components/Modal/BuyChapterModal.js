@@ -107,7 +107,7 @@ const BuyChapterModal = ({
                 <div className="-mt-16 md:mt-0 w-full relative p-4 md:p-6 flex flex-col justify-between md:h-96 overflow-y-auto">
                   <div className="w-full">
                     <p className="text-blueGray-400 text-lg">
-                      Chapter {data.metadata.chapter_id}
+                      Chapter {parseInt(data.metadata.chapter_id)}
                     </p>
                     <p className="text-2xl text-gray-50">
                       {data.metadata.subtitle}

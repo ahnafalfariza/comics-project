@@ -120,7 +120,7 @@ const Card = ({
                     fontSize: `.85em`,
                   }}
                 >
-                  {token.metadata.subtitle}
+                  {token.metadata.title}
                 </p>
                 <p
                   className="text-white truncate"
@@ -140,7 +140,9 @@ const Card = ({
                   <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-60 backdrop-filter backdrop-blur-lg backdrop-saturate-200 z-10" />
                   <div
                     className="absolute top-0 left-0 w-full h-full bg-cover"
-                    style={{ backgroundImage: `url(${imgLoaded})` }}
+                    style={
+                      imgLoaded && { backgroundImage: `url(${imgLoaded})` }
+                    }
                   />
                   {/* <Blurhash
                     hash={imgBlur || 'UZ9ZtPzmpHv;R]ONJ6bKQ-l7Z.S_bow5$-nh'}
@@ -161,7 +163,7 @@ const Card = ({
                         fontSize: `.6em`,
                       }}
                     >
-                      {token.metadata.author_ids}
+                      {token.creator_id || token.metadata.author_ids}
                     </p>
                   </div>
                   <div className="w-1/2 text-right">
