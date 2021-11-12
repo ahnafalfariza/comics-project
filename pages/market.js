@@ -9,7 +9,7 @@ import { useRouter } from 'next/router'
 
 const FETCH_TOKENS_LIMIT = 8
 
-const Market = () => {
+const Market = ({ qCategory }) => {
   const router = useRouter()
 
   const [tokens, setTokens] = useState([])
@@ -17,7 +17,7 @@ const Market = () => {
   const [hasMore, setHasMore] = useState(true)
   const [isFetching, setIsFetching] = useState(false)
 
-  const [activeTab, setActiveTab] = useState(router.query.category || 'chapter')
+  const [activeTab, setActiveTab] = useState(qCategory || 'chapter')
 
   const onTabsChange = (idx) => {
     if (idx === 0) {
@@ -32,10 +32,7 @@ const Market = () => {
   }
 
   const defaultIndex = () => {
-    if (router.asPath.includes('collectibles')) {
-      return 1
-    }
-    return 0
+    return activeTab === 'chapter' ? 0 : 1
   }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -110,3 +107,11 @@ const Market = () => {
 }
 
 export default Market
+
+export async function getServerSideProps({ query }) {
+  return {
+    props: {
+      qCategory: query.category || null,
+    },
+  }
+}

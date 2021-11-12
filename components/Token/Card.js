@@ -1,3 +1,4 @@
+import { formatNearAmount } from 'near-api-js/lib/utils/format'
 import { useEffect, useRef, useState } from 'react'
 import { Blurhash } from 'react-blurhash'
 
@@ -179,7 +180,9 @@ const Card = ({
                 </div>
               </div>
               <div className="text-electricLime-600 font-bold text-sm px-2 text-right">
-                Price 10 Ⓝ
+                {token.price
+                  ? `Price ${formatNearAmount(token.price)} Ⓝ`
+                  : 'Not for sale'}
               </div>
             </div>
           </div>
