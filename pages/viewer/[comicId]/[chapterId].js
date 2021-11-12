@@ -120,11 +120,9 @@ const ChapterView = ({ isLoading }) => {
         data={chapterData}
         hasNext={hasNext}
       />
-      <div className="max-w-xl m-auto relative">
-        {chapterPageUrl.map((url) => (
-          <ChapterImagePage key={url} url={url} />
-        ))}
-      </div>
+      {chapterPageUrl.map((url) => (
+        <ChapterImagePage key={url} url={url} />
+      ))}
       <BuyChapterModal
         active={chapterData?.status !== 'read' || false}
         data={chapterData}

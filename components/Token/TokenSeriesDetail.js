@@ -77,9 +77,7 @@ const TokenSeriesDetail = ({ token, metadata, className }) => {
 
   const onClickRead = () => {
     router.push({
-      pathname: `/viewer/${token.metadata.comic_id}/${parseInt(
-        token.metadata.chapter_id
-      )}`,
+      pathname: `/viewer/${token.metadata.comic_id}/${token.metadata.chapter_id}`,
     })
   }
 
