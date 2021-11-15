@@ -63,7 +63,7 @@ const Nav = () => {
   }
 
   const onClickViewProfile = () => {
-    router.push(`/${near.getAccount().accountId}`)
+    router.push(`/${near.getAccount()?.accountId}`)
   }
 
   const ProfileModal = () => {
@@ -74,15 +74,15 @@ const Nav = () => {
             <Avatar
               size="lg"
               className="mr-3"
-              entityName={near.getAccount().accountId}
+              entityName={near.getAccount()?.accountId}
               src={parseImgUrl(currentUser.imgUrl || '')}
             />
             <div>
               <p className="font-medium text-white">
-                {near.getAccount().accountId}
+                {near.getAccount()?.accountId}
               </p>
               <p className="font-light text-sm text-white opacity-75">
-                {prettyBalance(near.getAccount().balance.available, 24, 4)} Ⓝ
+                {prettyBalance(near.getAccount()?.balance.available, 24, 4)} Ⓝ
               </p>
             </div>
           </div>
