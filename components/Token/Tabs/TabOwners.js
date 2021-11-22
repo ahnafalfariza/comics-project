@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Avatar from 'components/Common/Avatar'
+import { sentryCaptureException } from 'lib/sentry'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
@@ -81,7 +82,7 @@ const Owner = ({ token = {} }) => {
       const newData = resp.data.data.results[0] || {}
       setProfile(newData)
     } catch (err) {
-      console.log(err)
+      sentryCaptureException(err)
     }
   }
 
