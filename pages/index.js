@@ -10,14 +10,6 @@ export default function Home() {
 
   return (
     <Layout>
-      <button
-        type="button"
-        onClick={() => {
-          throw new Error('Sentry Frontend Error')
-        }}
-      >
-        Throw error
-      </button>
       <Head />
       <div className="py-12 md:px-8">
         <div className="max-w-6xl m-auto px-4 md:flex md:flex-row-reverse items-center">
