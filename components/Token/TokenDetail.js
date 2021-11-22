@@ -11,12 +11,11 @@ import TabHistory from './Tabs/TabHistory'
 import TokenMoreModal from 'components/Modal/TokenMoreModal'
 import TokenShareModal from 'components/Modal/TokenShareModal'
 import TokenDetailUpdateModal from 'components/Modal/TokenDetailUpdateModal'
-import TokenSeries from './TokenSeries'
 import near from 'lib/near'
 import TokenTransfer from 'components/Modal/TokenTransfer'
 import { parseImgUrl } from 'utils/common'
 
-const TokenDetail = ({ token, metadata, className }) => {
+const TokenDetail = ({ token, className }) => {
   const [activeTab, setActiveTab] = useState('info')
   const [showModal, setShowModal] = useState(null)
 
