@@ -56,9 +56,8 @@ const MenuBottom = forwardRef(({ showMenu, data, hasNext }, ref) => {
           </div>
           <div className="flex items-center space-x-2">
             <IconChevron
-              transform="scale(-1,1)"
               color="#ffffff"
-              className={`cursor-pointer ${
+              className={`cursor-pointer transform rotate-180 ${
                 parseInt(data?.metadata.chapter_id) === 1 ? 'opacity-40' : ''
               }`}
               onClick={onClickPrevChapter}

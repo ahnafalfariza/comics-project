@@ -35,9 +35,8 @@ const MenuTop = forwardRef(
             <div className="flex max-w-xl m-auto p-4 items-center">
               <IconArrow
                 size={20}
-                transform="scale(-1,1)"
                 color="#ffffff"
-                className="cursor-pointer"
+                className="cursor-pointer transform rotate-180"
                 onClick={onClickBack}
               />
               <p className="text-white ml-4 flex-1 md:text-base lg:text-lg">
