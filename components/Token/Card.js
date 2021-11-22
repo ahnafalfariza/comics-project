@@ -1,6 +1,6 @@
 import { formatNearAmount } from 'near-api-js/lib/utils/format'
 import { useEffect, useRef, useState } from 'react'
-import { Blurhash } from 'react-blurhash'
+// import { Blurhash } from 'react-blurhash'
 
 const Card = ({
   imgUrl,

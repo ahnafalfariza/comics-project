@@ -15,13 +15,12 @@ import TokenBuyModal from 'components/Modal/TokenBuyModal'
 import TokenMoreModal from 'components/Modal/TokenMoreModal'
 import TokenShareModal from 'components/Modal/TokenShareModal'
 import TokenDetailUpdateModal from 'components/Modal/TokenDetailUpdateModal'
-import TokenSeries from './TokenSeries'
 import useStore from 'lib/store'
 import LoginModal from 'components/Modal/LoginModal'
 import near from 'lib/near'
 import { parseImgUrl } from 'utils/common'
 
-const TokenSeriesDetail = ({ token, metadata, className }) => {
+const TokenSeriesDetail = ({ token, className }) => {
   const [activeTab, setActiveTab] = useState('info')
   const [showModal, setShowModal] = useState(null)
   const router = useRouter()

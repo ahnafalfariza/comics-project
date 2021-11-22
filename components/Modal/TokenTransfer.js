@@ -4,6 +4,7 @@ import { InputText } from 'components/Common/form/index'
 import Modal from 'components/Common/Modal'
 import getConfig from 'lib/config/near'
 import near from 'lib/near'
+import { sentryCaptureException } from 'lib/sentry'
 import useStore from 'lib/store'
 import { useState } from 'react'
 
@@ -69,7 +70,7 @@ const TokenTransfer = ({
       }
       near.contract.nft_transfer(params, '50000000000000', '1')
     } catch (err) {
-      console.log(err)
+      sentryCaptureException(err)
       const message = err.message || 'Something went wrong, try again later'
       setToastConfig({
         text: (

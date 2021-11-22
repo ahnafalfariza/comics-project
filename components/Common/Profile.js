@@ -67,7 +67,7 @@ const Profile = ({ userData, setUserData }) => {
                 </p>
               </div>
               {near.getAccount() &&
-                near.getAccount().accountId === userData?.accountId && (
+                near.getAccount()?.accountId === userData?.accountId && (
                   <div>
                     <Button
                       onClick={() => setShowModal('editProfile')}

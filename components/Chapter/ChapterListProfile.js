@@ -8,6 +8,7 @@ import { parseImgUrl } from 'utils/common'
 import comicsStyles from 'styles/Comics.module.css'
 import Link from 'next/link'
 import BuyChapterModal from 'components/Modal/BuyChapterModal'
+import { sentryCaptureException } from 'lib/sentry'
 
 const LIMIT = 8
 
@@ -147,7 +148,7 @@ const ChapterListProfile = ({
         setIsFetchingChapter(false)
       }
     } catch (err) {
-      console.log(err)
+      sentryCaptureException(err)
     }
   }
 

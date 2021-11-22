@@ -4,6 +4,7 @@ import { InputTextarea } from 'components/Common/form'
 import InputText from 'components/Common/form/components/InputText/InputText'
 import Head from 'components/Common/Head'
 import Layout from 'components/Common/Layout'
+import { sentryCaptureException } from 'lib/sentry'
 import useStore from 'lib/store'
 import { useState } from 'react'
 
@@ -44,6 +45,7 @@ const PartnerWithUs = () => {
       _showToast('success', "Thank you for your interest, We'll be in touch!")
     } catch (err) {
       console.log(err)
+      sentryCaptureException(err)
       _showToast('error', 'Something wrong happened, please try again!')
     }
   }

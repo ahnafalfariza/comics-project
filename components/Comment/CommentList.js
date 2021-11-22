@@ -117,7 +117,7 @@ const Comment = ({
       setUserData(response.data.data.results[0])
     }
     fetchUser()
-  }, [])
+  }, [data.account_id])
 
   const _likeAction = () => {
     setUserLikes(userLikes === 'likes' ? null : 'likes')

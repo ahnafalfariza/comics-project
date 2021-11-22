@@ -11,6 +11,7 @@ import 'croppie/croppie.css'
 import '../styles/globals.css'
 import useStore from 'lib/store'
 import axios from 'axios'
+import { sentryCaptureException } from 'lib/sentry'
 
 const App = ({ Component, pageProps }) => {
   const router = useRouter()
@@ -57,13 +58,14 @@ const App = ({ Component, pageProps }) => {
               setCurrentUser(resp.data.data)
             } catch (err) {
               setCurrentUser({})
+              sentryCaptureException(err)
             }
           } else {
             const userProfile = userProfileResults[0]
             setCurrentUser(userProfile)
           }
         } catch (err) {
-          console.log(err)
+          sentryCaptureException(err)
         }
       }
       setIsLoading(false)

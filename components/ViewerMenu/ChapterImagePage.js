@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { sentryCaptureException } from 'lib/sentry'
 import { useEffect, useState } from 'react'
 import { BounceLoader } from 'react-spinners'
 
@@ -22,6 +23,7 @@ const ChapterImagePage = ({ url }) => {
         }
       } catch (error) {
         setUnauthorized(true)
+        sentryCaptureException(error)
       }
     }
     fetchImage()
