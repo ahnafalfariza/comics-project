@@ -74,7 +74,7 @@ const Nav = () => {
             <Avatar
               size="lg"
               className="mr-3"
-              entityName={near.getAccount()?.accountId}
+              entityName={near.getAccount()?.accountId || ''}
               src={parseImgUrl(currentUser?.imgUrl || '')}
             />
             <div>
@@ -197,7 +197,7 @@ const Nav = () => {
                 <Avatar
                   className="w-10 h-10 align-middle"
                   size="md"
-                  entityName={currentUser?.accountId}
+                  entityName={currentUser?.accountId || ''}
                   src={parseImgUrl(currentUser?.imgUrl || '')}
                 />
                 <svg
