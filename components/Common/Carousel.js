@@ -67,18 +67,6 @@ const Carousel = () => {
             />
           </a>
         </div>
-        <div className="w-60 h-30">
-          <a
-            href="https://ipfs.fleek.co/ipfs/bafybeiaam3zvrf6ar57peyn7n2z2yevfiddsaor5yiaphbfwbmvahw53nq"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <img
-              className="m-auto w-full h-full object-cover focus:outline-none active:outline-none"
-              src="https://ipfs.fleek.co/ipfs/bafybeieplac4arkilsdbxymdc3wlwgujbpqdics4jkcfg4g2o364n27cpu"
-            />
-          </a>
-        </div>
       </Slider>
     </div>
   )
