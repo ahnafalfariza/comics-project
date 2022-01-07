@@ -1,6 +1,7 @@
 import Button from 'components/Common/Button'
 import Head from 'components/Common/Head'
 import Layout from 'components/Common/Layout'
+import Carousel from 'components/Common/Carousel'
 import { useRouter } from 'next/router'
 
 import HomeStyles from 'styles/Home.module.css'
@@ -12,6 +13,7 @@ export default function Home() {
     <Layout>
       <Head />
       <div className="py-12 md:px-8">
+        <Carousel />
         <div className="max-w-6xl m-auto px-4 md:flex md:flex-row-reverse items-center">
           <div
             className="w-full md:w-2/5"
