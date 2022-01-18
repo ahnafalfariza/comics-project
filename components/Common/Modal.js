@@ -14,7 +14,7 @@ const Modal = ({
 
   useEffect(() => {
     const onKeydown = (e) => {
-      if (e.key === 'Escape') {
+      if (e.key === 'Escape' && isShow) {
         close()
       }
     }
@@ -28,7 +28,7 @@ const Modal = ({
   }, [close, closeOnEscape])
 
   const bgClick = (e) => {
-    if (e.target === modalRef.current && closeOnBgClick) {
+    if (e.target === modalRef.current && closeOnBgClick && isShow) {
       close()
     }
   }
