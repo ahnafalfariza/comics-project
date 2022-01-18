@@ -1,9 +1,9 @@
 .chapterListProfile::-webkit-scrollbar {
   width: 10px;
-  height: 8px;
+  height: 4px;
 }
 .chapterListProfile::-webkit-scrollbar-thumb {
-  background: rgb(10, 10, 10);
+  background: #e4e4e7;
   border-radius: 10px;
 }
 .chapterListProfile::-webkit-scrollbar-track {
