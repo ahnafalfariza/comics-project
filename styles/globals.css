@@ -2,7 +2,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  background: #18162b;
+  background: #ffffff;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -104,7 +104,7 @@ svg {
 
 .input-text {
   transition: all 0.2s ease-in-out;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(145, 145, 145, 0.7);
 }
 
 .input-text::placeholder {
@@ -112,7 +112,7 @@ svg {
 }
 
 .input-text::placeholder {
-  color: rgba(255, 255, 255, 0.3);
+  color: rgb(145, 145, 145, 0.7);
 }
 
 .input-text:not(:disabled):hover {
@@ -148,6 +148,8 @@ svg {
 
 .select-wrapper::after {
   color: white;
+  -moz-appearance: none;
+  appearance: none;
   content: '▾';
   pointer-events: none;
   position: absolute;
@@ -159,9 +161,20 @@ svg {
 
 .input-select {
   -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   padding-right: 24px;
 }
 
 .input-select::-ms-expand {
   display: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.submission-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
 }
