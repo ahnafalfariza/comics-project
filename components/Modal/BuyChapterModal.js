@@ -159,14 +159,14 @@ const BuyChapterModal = ({
                         </div>
                       </>
                     )}
-                    {/* <div className="flex flex-wrap items-center justify-between -mb-2 md:-mb-4">
+                    <div className="flex flex-wrap items-center justify-between -mb-2 md:-mb-4">
                       <div className="mt-4 w-full">
                         <ShareComponent
                           title="Read this comic"
                           shareUrl={window.location.href}
                         />
                       </div>
-                    </div> */}
+                    </div>
                   </div>
                 </div>
               </>
