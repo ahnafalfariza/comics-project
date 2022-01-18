@@ -28,8 +28,8 @@ const Button = ({
       }`
       break
     case 'ghost':
-      buttonVariantStyle = `bg-transparent border border-electricLime-600 text-electricLime-600 ${
-        !isDisabled && 'hover:bg-electricLime-600 hover:bg-opacity-10'
+      buttonVariantStyle = `bg-transparent border border-primary text-primary ${
+        !isDisabled && 'hover:bg-primary hover:bg-opacity-10'
       }`
       break
     default:
