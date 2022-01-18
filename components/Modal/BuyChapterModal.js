@@ -82,7 +82,7 @@ const BuyChapterModal = ({
     <>
       <Modal closeOnBgClick closeOnEscape isShow={active} close={onClose}>
         <div className="relative max-w-2xl w-full my-auto mx-4 md:mx-auto">
-          <div className="w-full md:flex bg-blueGray-800 rounded-lg overflow-hidden">
+          <div className="w-full md:flex bg-white rounded-lg overflow-hidden">
             {isLoading ? (
               <div className="mx-auto w-full h-96 flex items-center justify-center">
                 <BounceLoader
@@ -94,7 +94,7 @@ const BuyChapterModal = ({
             ) : (
               <>
                 <div
-                  className="md:block md:w-64 h-64 md:h-auto overflow-hidden flex-shrink-0"
+                  className="md:block md:w-64 h-80 md:h-auto overflow-hidden flex-shrink-0"
                   style={{
                     backgroundImage: `url(${parseImgUrl(data.metadata.media)})`,
                     backgroundSize: 'cover',
@@ -102,17 +102,17 @@ const BuyChapterModal = ({
                     backgroundPosition: 'center',
                   }}
                 >
-                  <div className="w-full h-full bg-gradient-to-b from-transparent via-transparent to-blueGray-800 md:to-transparent flex items-end"></div>
+                  <div className="w-full h-full bg-gradient-to-t from-white to-transparent md:bg-none flex items-end"></div>
                 </div>
                 <div className="-mt-16 md:mt-0 w-full relative p-4 md:p-6 flex flex-col justify-between md:h-96 overflow-y-auto">
                   <div className="w-full">
-                    <p className="text-blueGray-400 text-lg">
+                    <p className="text-black text-lg">
                       Chapter {parseInt(data.metadata.chapter_id)}
                     </p>
-                    <p className="text-2xl text-gray-50">
+                    <p className="text-2xl text-black">
                       {data.metadata.subtitle}
                     </p>
-                    <p className="text-gray-200 mt-4 text-sm mb-6">
+                    <p className="text-black mt-4 text-sm mb-6">
                       {data.metadata.description}
                     </p>
                   </div>
@@ -131,7 +131,7 @@ const BuyChapterModal = ({
                           </div>
                         ) : (
                           <div>
-                            <p className="text-blueGray-400 text-xs mb-2 text-center">
+                            <p className="text-black text-xs mb-2 text-center">
                               Small transaction fee is applied of 0.01832 Ⓝ
                             </p>
                             <Button
@@ -151,7 +151,7 @@ const BuyChapterModal = ({
                         <div className="mt-2">
                           <div className="mt-2 w-full text-center">
                             <Link href={tokenCta.link}>
-                              <a className="font-semibold text-white text-sm">
+                              <a className="font-semibold text-black text-sm">
                                 {tokenCta.text}
                               </a>
                             </Link>
@@ -159,14 +159,14 @@ const BuyChapterModal = ({
                         </div>
                       </>
                     )}
-                    <div className="flex flex-wrap items-center justify-between -mb-2 md:-mb-4">
+                    {/* <div className="flex flex-wrap items-center justify-between -mb-2 md:-mb-4">
                       <div className="mt-4 w-full">
                         <ShareComponent
                           title="Read this comic"
                           shareUrl={window.location.href}
                         />
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </>
