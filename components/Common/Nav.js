@@ -183,7 +183,7 @@ const Nav = () => {
                     router.pathname === '/partner-with-us' ? `text-primary` : ''
                   }
                 >
-                  Partner
+                  Submission
                 </span>
               </a>
             </Link>
@@ -286,7 +286,7 @@ const Nav = () => {
                           : ''
                       }
                     >
-                      Partner
+                      Submission
                     </span>
                   </a>
                 </Link>

@@ -41,7 +41,7 @@ const ChapterListMarket = ({
                     router.push(`/token/${token.token_series_id}`)
                   }}
                   disableFlip
-                  shadow="none"
+                  shadow="special"
                   imgBlur={token.metadata.blurhash}
                   token={token}
                   initialRotate={{
@@ -53,21 +53,21 @@ const ChapterListMarket = ({
               <div className="text-center">
                 <div className="mt-4">
                   <div className="p-2">
-                    <div className="text-gray-100 text-2xl">
+                    <div className="text-black text-2xl">
                       {token.price ? (
                         token.price !== '0' ? (
                           <div>
-                            <p className="text-gray-400 text-xs">Start From</p>
+                            <p className="text-black text-xs">Start From</p>
                             <div>{`${formatNearAmount(token.price)} Ⓝ`}</div>
                           </div>
                         ) : (
                           <div>
-                            <span className="text-gray-100">Free</span>
+                            <span className="text-black">Free</span>
                           </div>
                         )
                       ) : (
                         <div>
-                          <span className="text-gray-100">Not Available</span>
+                          <span className="text-black">Not Available</span>
                         </div>
                       )}
                     </div>
@@ -80,7 +80,7 @@ const ChapterListMarket = ({
                   scroll={false}
                   shallow
                 >
-                  <a className="inline-block text-gray-100 cursor-pointer text-base font-semibold border-b-2 border-gray-100 mb-4">
+                  <a className="inline-block text-black cursor-pointer text-base font-semibold mb-4">
                     See Details
                   </a>
                 </Link>

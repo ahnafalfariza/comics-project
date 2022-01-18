@@ -83,12 +83,11 @@ svg {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 50%;
+  left: 25%;
   transform: translateX(-50%);
-  width: 75%;
-  height: 4px;
+  width: 45%;
+  height: 5px;
   z-index: 1;
-  border-radius: 9999px;
   background-color: #00bbdbe6;
 }
 
