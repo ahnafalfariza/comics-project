@@ -6,8 +6,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#C6FF00',
-        background: '#18162b',
+        primary: '#00BBDB',
+        background: '#FFFFFF',
         blueGray: colors.blueGray,
         electricLime: {
           DEFAULT: '#C6FF00',
