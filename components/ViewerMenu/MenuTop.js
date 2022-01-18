@@ -27,26 +27,26 @@ const MenuTop = forwardRef(
       <>
         <div
           ref={showShare ? null : ref}
-          className={`fixed inset-x-0 overflow-hidden transform z-10 transition-transform ease-in-out duration-300 shadow ${
+          className={`fixed inset-x-0 overflow-hidden transform z-10 transition-transform ease-in-out duration-300 ${
             showMenu ? 'translate-y-0' : '-translate-y-20'
           }`}
         >
-          <div className="bg-white relative border-black">
+          <div className="bg-background relative">
             <div className="flex max-w-xl m-auto p-4 items-center">
               <IconArrow
                 size={20}
-                color="#000000"
+                color="#ffffff"
                 className="cursor-pointer transform rotate-180"
                 onClick={onClickBack}
               />
-              <p className="text-black ml-4 flex-1 md:text-base lg:text-lg">
+              <p className="text-white ml-4 flex-1 md:text-base lg:text-lg">
                 {data?.metadata.title}
               </p>
               {data?.lang && (
                 <select
                   value={activeLang}
                   onChange={(e) => setActiveLang(e.target.value)}
-                  className="outline-none rounded-md bg-white px-2 mr-2 border"
+                  className="outline-none rounded-md bg-white px-2 mr-2"
                 >
                   {Object.keys(data?.lang).map((lang, idx) => {
                     return (
@@ -59,8 +59,8 @@ const MenuTop = forwardRef(
               )}
               <IconShare
                 size={20}
-                color="#000000"
-                className="cursor-pointer opacity-80"
+                color="#ffffff"
+                className="cursor-pointer"
                 onClick={onClickShare}
               />
             </div>

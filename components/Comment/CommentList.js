@@ -37,14 +37,10 @@ const CommentList = () => {
   }, [clearCommentData])
 
   return (
-    <div className="w-full md:max-w-lg bg-white p-3 h-2/3 flex flex-col m-auto">
+    <div className="w-full md:max-w-lg bg-blueGray-800 p-3 h-2/3 flex flex-col m-auto">
       <div className="flex items-center justify-between p-3">
-        <p className="text-xl font-medium text-black">Comments</p>
-        <IconX
-          onClick={setShowComment}
-          className="cursor-pointer"
-          color="#A1A1AA"
-        />
+        <p className="text-xl font-medium text-white">Comments</p>
+        <IconX onClick={setShowComment} className="cursor-pointer" />
       </div>
       <hr className="my-2 -mx-3 opacity-20" />
       <Scrollbars
@@ -64,7 +60,7 @@ const CommentList = () => {
             ))}
           </InfiniteScroll>
         ) : (
-          <div className="p-4 text-black text-center">
+          <div className="p-4 text-white text-center">
             Be the first to comment
           </div>
         )}
@@ -142,41 +138,39 @@ const Comment = ({
   return (
     <div className="p-4">
       <div className="flex items-center">
-        <div>
-          <Avatar
-            size="md"
-            src={parseImgUrl(userData?.imgUrl || '')}
-            onClick={redirectToProfile}
-            entityName={data.account_id}
-            className="cursor-pointer"
-          />
-        </div>
+        <Avatar
+          size="md"
+          src={parseImgUrl(userData?.imgUrl || '')}
+          onClick={redirectToProfile}
+          entityName={data.account_id}
+          className="cursor-pointer"
+        />
         <p
-          className="font-bold mx-3 text-black cursor-pointer"
+          className="font-bold mx-3 text-white cursor-pointer"
           onClick={redirectToProfile}
         >
           {data.account_id}
         </p>
-        <p className="text-gray-500 text-xs">
+        <p className="text-blueGray-400 text-xs">
           {formatTimeAgo(new Date(data.issued_at))}
         </p>
       </div>
-      <p className="my-3 text-gray-600">{data.body}</p>
+      <p className="text-blueGray-200 my-3">{data.body}</p>
       <div className="flex items-center">
         <IconThumbUp
           className="cursor-pointer"
           onClick={_likeAction}
           {...(userLikes === 'likes' && { color: '#60A5FA' })}
         />
-        <p className="text-xs text-black">{numLikes}</p>
+        <p className="text-xs text-blueGray-200">{numLikes}</p>
         <IconThumbDown
           onClick={_unlikeAction}
           className="ml-3 cursor-pointer"
           {...(userLikes === 'dislikes' && { color: '#60A5FA' })}
         />
-        {data.account_id === near.currentUser?.accountId && (
+        {data.account_id === near.currentUser.accountId && (
           <p
-            className="text-black ml-2 text-xs cursor-pointer"
+            className="text-white ml-2 text-xs cursor-pointer"
             onClick={() => deleteComment(data.comment_id)}
           >
             Delete

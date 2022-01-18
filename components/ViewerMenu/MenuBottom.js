@@ -33,25 +33,25 @@ const MenuBottom = forwardRef(({ showMenu, data, hasNext }, ref) => {
   return (
     <div
       ref={ref}
-      className={`fixed inset-x-0 bottom-0 overflow-hidden transform z-10 transition-transform ease-in-out duration-300 border-t-2 ${
+      className={`fixed inset-x-0 bottom-0 overflow-hidden transform z-10 transition-transform ease-in-out duration-300 ${
         showMenu ? 'translate-y-0' : 'translate-y-20'
       }`}
     >
-      <div className="bg-white relative">
+      <div className="bg-background relative">
         <div className="flex max-w-xl m-auto p-4 items-center justify-between">
           <div className="flex items-center">
             {SHOW_SUPPORT && (
               <div className="flex items-center cursor-pointer mr-4">
                 <IconGift size={20} color="#ffffff" />
-                <p className="text-black ml-2 text-sm">Support</p>
+                <p className="text-white ml-2 text-sm">Support</p>
               </div>
             )}
             <div
               className="flex items-center cursor-pointer"
               onClick={setShowComment}
             >
-              <IconMessageCircle size={20} color="#000000" />
-              <p className="text-black ml-2 text-sm">Comment</p>
+              <IconMessageCircle size={20} color="#ffffff" />
+              <p className="text-white ml-2 text-sm">Comment</p>
             </div>
           </div>
           <div className="flex items-center space-x-2">
@@ -62,7 +62,7 @@ const MenuBottom = forwardRef(({ showMenu, data, hasNext }, ref) => {
               }`}
               onClick={onClickPrevChapter}
             />
-            <p className="text-black">
+            <p className="text-white">
               Ch {parseInt(data?.metadata.chapter_id)}
             </p>
             <IconChevron
