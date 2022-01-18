@@ -38,7 +38,7 @@ const ChapterList = ({
   }
 
   const listWrapperBaseStyle =
-    'bg-white border border-black border-opacity-20 shadow-lg relative rounded-lg w-full cursor-pointer hover:shadow-xl hover:bg-gray-100 hover:border-opacity-30'
+    'bg-gray-50 border border-black border-opacity-20 shadow-lg relative rounded-lg w-full cursor-pointer hover:shadow-xl hover:bg-gray-100 hover:border-opacity-30'
   const listCoverBaseStyle =
     'bg-no-repeat bg-center bg-cover rounded-lg absolute'
   const listBadgeBaseStyle =
