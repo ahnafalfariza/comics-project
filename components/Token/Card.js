@@ -179,7 +179,7 @@ const Card = ({
                   </div>
                 </div>
               </div>
-              <div className="text-electricLime-600 font-bold text-sm px-2 text-right">
+              <div className="text-primary font-bold text-sm px-2 text-right">
                 {token.price
                   ? `Price ${formatNearAmount(token.price)} Ⓝ`
                   : 'Not for sale'}

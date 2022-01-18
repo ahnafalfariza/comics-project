@@ -34,7 +34,7 @@ const ComicInfo = ({
   return (
     <div>
       <div className="flex items-center bg-no-repeat bg-center bg-cover w-screen relative">
-        <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-60 backdrop-filter backdrop-blur-lg backdrop-saturate-200 z-10" />
+        <div className="absolute top-0 left-0 w-full h-full bg-white bg-opacity-40 backdrop-filter backdrop-blur-lg backdrop-saturate-200 z-10" />
         <div
           className="absolute top-0 left-0 w-full h-full bg-cover"
           style={{ backgroundImage: `url(${parseImgUrl(data.media_cover)})` }}
