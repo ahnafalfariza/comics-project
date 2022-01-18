@@ -18,7 +18,7 @@ const Button = ({
   let buttonVariantStyle
   switch (variant) {
     case 'primary':
-      buttonVariantStyle = `bg-primary text-gray-900 ${
+      buttonVariantStyle = `bg-primary text-white ${
         !isDisabled && 'hover:bg-opacity-70'
       }`
       break
