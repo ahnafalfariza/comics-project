@@ -78,8 +78,13 @@ const Comics = () => {
                   />
                 </div>
                 <div className="ml-1">
-                  <h4 className="text-black font-bold text-xl md:text-2xl truncate">
-                    {data.comic_id}
+                  <h4
+                    className="text-black font-bold text-xl md:text-2xl truncate cursor-pointer hover:text-opacity-80"
+                    onClick={() =>
+                      router.push(`/comics/${data.comic_id}/chapter`)
+                    }
+                  >
+                    {data.title}
                   </h4>
                   <p className="text-comic-gray-primary font-bold text-xs mb-3 truncate">
                     {data.author_ids}

@@ -77,7 +77,7 @@ const Market = ({ qCategory }) => {
     <Layout>
       <Head title="Market" />
       <div className="max-w-6xl m-auto py-8 md:px-0 md:py-8">
-        <p className="text-white font-bold text-4xl mb-4 ml-4">Market</p>
+        <p className="text-black font-bold text-4xl mb-10 ml-4">Market</p>
         <Tabs onTabsChange={onTabsChange} defaultIndex={defaultIndex()}>
           <TabList>
             <Tab>Chapter</Tab>
@@ -85,7 +85,7 @@ const Market = ({ qCategory }) => {
           </TabList>
         </Tabs>
         {activeTab === 'collectibles' ? (
-          <div className="mt-4 p-2 md:p-0">
+          <div className="mt-10 p-2 md:p-0">
             <CardList
               tokens={tokens}
               hasMore={hasMore}
@@ -93,7 +93,7 @@ const Market = ({ qCategory }) => {
             />
           </div>
         ) : (
-          <div className="mt-4 p-2 md:p-0">
+          <div className="mt-10 p-2 md:p-0">
             <ChapterListMarket
               tokens={tokens}
               hasMore={hasMore}
