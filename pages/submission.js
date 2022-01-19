@@ -12,11 +12,16 @@ const Submission = () => {
   const [items, setItems] = useState([])
   const [modalGenre, setModalGenre] = useState(false)
   const methods = useForm()
-  const { register, handleSubmit, formState } = methods
+  const { register, handleSubmit, formState, reset, clearErrors } = methods
   const genreList = ['Romance', 'Superhero', 'Horror', 'Non-Fiction']
   const [errorMessage, setErrorMessage] = useState(false)
   const genreModalRef = useRef()
   const setToastConfig = useStore((state) => state.setToastConfig)
+
+  useEffect(() => {
+    console.log('coverComic: ', coverComic)
+    console.log('items: ', items)
+  }, [coverComic, items])
 
   const _showToast = (type, msg) => {
     setToastConfig({
@@ -47,6 +52,12 @@ const Submission = () => {
     Promise.resolve('Success')
       .then(() => {
         console.log('data submission: ', data)
+        data.coverComic = ''
+        data.coverContent = ''
+        setCoverComic('')
+        setItems([])
+        reset()
+        clearErrors()
         _showToast('success', "Thank you for your interest, We'll be in touch!")
       })
       .catch(_showToast('error', 'Something wrong happened, please try again!'))
@@ -87,7 +98,7 @@ const Submission = () => {
     // change background colour if dragging
     background: isDragging ? 'lightgreen' : 'grey',
 
-    width: 400,
+    width: window.innerWidth > 768 ? 400 : 290,
     right: 340,
     left: 0,
 
@@ -142,9 +153,11 @@ const Submission = () => {
 
   return (
     <Layout>
-      <Head title="Submission" />
+      <Head title="Artist Submission" />
       <div className="max-w-6xl m-auto p-4 py-8">
-        <h1 className="text-center font-bold text-3xl mb-9">Submission</h1>
+        <h1 className="text-center font-bold text-3xl mb-9">
+          Artist Submission
+        </h1>
         <div className="max-w-3xl m-auto p-4 py-8">
           <FormProvider {...methods}>
             <form
@@ -161,7 +174,9 @@ const Submission = () => {
                     } overflow-hidden rounded-md mt-2 hover:opacity-80`}
                   >
                     <input
-                      {...register('coverComic', { required: true })}
+                      label="coverComic"
+                      register={register}
+                      required
                       className="cursor-pointer w-full opacity-0 absolute inset-0 z-20"
                       onChange={(event) => inputFileCoverComic(event)}
                       type="file"
@@ -175,6 +190,7 @@ const Submission = () => {
                       <img
                         src={coverComic === '' ? null : coverComic}
                         className="w-full h-full object-cover cover-comic"
+                        style={{ textIndent: '-10000px' }}
                       />
                       {coverComic === '' ? (
                         <svg
@@ -219,10 +235,12 @@ const Submission = () => {
                 <div className="mt-8 mb-2">
                   <label className="font-bold text-md">Comic Title</label>
                   <InputText
+                    label="comicTitle"
+                    register={register}
+                    required
                     type="text"
                     placeholder="Paradigm"
                     className="mt-3 mr-64"
-                    {...register('comicTitle', { required: true })}
                   />
                   {formState.errors.comicTitle && (
                     <span className="text-red-500">This field is required</span>
@@ -253,12 +271,14 @@ const Submission = () => {
                 </div>
               </div>
               <div className="mt-8 mb-2">
-                <label className="font-bold text-md">Premise</label>
+                <label className="font-bold text-md">Synopsis</label>
                 <InputTextarea
+                  label="premise"
+                  register={register}
+                  required
                   className="resize-none h-40 mt-3"
                   type="text"
-                  placeholder="Synoosis of your comic"
-                  {...register('premise', { required: true })}
+                  placeholder="Synopsis of your comic"
                 />
                 {formState.errors.premise && (
                   <span className="text-red-500">This field is required</span>
@@ -267,11 +287,13 @@ const Submission = () => {
               <div className="mt-8 mb-2">
                 <label className="font-bold text-md">Email</label>
                 <InputText
+                  label="email"
+                  register={register}
+                  required
                   className="mt-3"
                   type="email"
                   placeholder="paradigm@paras.id"
                   width="80"
-                  {...register('email', { required: true })}
                 />
                 {formState.errors.email && (
                   <span className="text-red-500">This field is required</span>
@@ -287,6 +309,7 @@ const Submission = () => {
                       <input
                         multiple
                         type="file"
+                        accept="image/*"
                         {...register('comicContent', {
                           required: true,
                           onChange: addImages,
