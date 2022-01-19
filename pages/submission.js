@@ -18,11 +18,6 @@ const Submission = () => {
   const genreModalRef = useRef()
   const setToastConfig = useStore((state) => state.setToastConfig)
 
-  useEffect(() => {
-    console.log('coverComic: ', coverComic)
-    console.log('items: ', items)
-  }, [coverComic, items])
-
   const _showToast = (type, msg) => {
     setToastConfig({
       text: (
