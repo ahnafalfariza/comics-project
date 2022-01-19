@@ -69,7 +69,7 @@ const Nav = () => {
   const ProfileModal = () => {
     return (
       <div className="absolute right-0 mt-3 z-30">
-        <div className="min-w-max w-64 bg-blueGray-800 p-3 rounded-md shadow-xl">
+        <div className="min-w-max w-64 bg-white p-3 rounded-md shadow-xl">
           <div className="flex items-center">
             <Avatar
               size="lg"
@@ -81,7 +81,7 @@ const Nav = () => {
               <p className="font-medium text-primary">
                 {near.getAccount()?.accountId}
               </p>
-              <p className="font-light text-sm text-white opacity-75">
+              <p className="font-light text-sm text-black opacity-75">
                 {prettyBalance(near.getAccount()?.balance.available, 24, 4)} Ⓝ
               </p>
             </div>
@@ -100,8 +100,12 @@ const Nav = () => {
             className="flex flex-shrink-0 items-center space-x-2 cursor-pointer"
             onClick={() => near.signOut()}
           >
-            <IconLogout size={18} className="text-white opacity-80" />
-            <p className="text-white opacity-80">Logout</p>
+            <IconLogout
+              size={18}
+              className="text-black opacity-80"
+              color="#000000"
+            />
+            <p className="text-black opacity-80">Logout</p>
           </div>
         </div>
       </div>

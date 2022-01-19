@@ -6,8 +6,8 @@ const CommentLoader = (props) => (
     width={488}
     height={184}
     viewBox="0 0 488 184"
-    backgroundColor="#1D1D1D"
-    foregroundColor="#282828"
+    backgroundColor="#F4F4F5"
+    foregroundColor="#E4E4E7"
     {...props}
   >
     <circle cx="18" cy="18" r="18" />

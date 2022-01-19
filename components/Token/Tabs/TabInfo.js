@@ -51,7 +51,7 @@ const TabInfo = ({ localToken, isNFT }) => {
           <div>
             <p className="text-sm text-black font-bold">Owner</p>
             <Link href={`/${localToken.owner_id}`}>
-              <a className="text-gray-100 font-semibold hover:opacity-80">
+              <a className="text-black font-semibold hover:opacity-80">
                 {localToken.owner_id}
               </a>
             </Link>
