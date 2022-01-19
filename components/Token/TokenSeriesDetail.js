@@ -113,7 +113,7 @@ const TokenSeriesDetail = ({ token, className }) => {
             className="h-full"
             universal={true}
             renderView={(props) => (
-              <div {...props} id="TokenScroll" className="p-4" />
+              <div {...props} id="TokenSeriesScroll" className="p-4" />
             )}
           >
             <div>
@@ -149,7 +149,7 @@ const TokenSeriesDetail = ({ token, className }) => {
                 </div>
                 <div>
                   <IconDots
-                    color="#ffffff"
+                    color="#000000"
                     className="cursor-pointer"
                     onClick={() => setShowModal('more')}
                   />

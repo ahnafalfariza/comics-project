@@ -20,11 +20,11 @@ const ListModal = ({
 }) => {
   return (
     <Modal isShow={show} close={onClose} closeOnBgClick closeOnEscape>
-      <div className="px-4 py-2 bg-blueGray-800 max-w-xs w-full rounded-md m-auto">
+      <div className="px-4 py-2 bg-white max-w-xs w-full rounded-md m-auto shadow-xl">
         {list.map((item, index) => (
           <div
             key={index}
-            className="py-2 text-white cursor-pointer"
+            className="py-2 text-black cursor-pointer"
             onClick={item.onClick}
           >
             {item.name}

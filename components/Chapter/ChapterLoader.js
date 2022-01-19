@@ -6,8 +6,8 @@ const ChapterLoader = (props) => (
     speed={2}
     width="100%"
     height="150px"
-    backgroundColor="#1D1D1D"
-    foregroundColor="#282828"
+    backgroundColor="#F4F4F5"
+    foregroundColor="#E4E4E7"
     {...props}
   >
     <rect x="0" y="0" rx="4" ry="4" width="100%" height="100%" />
