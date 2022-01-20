@@ -83,17 +83,11 @@ const ArtistSubmission = ({ title }) => {
   const grid = 8
 
   const getItemStyle = (isDragging, draggableStyle) => ({
-    // some basic styles to make the items look a bit nicer
     userSelect: 'none',
-
-    // change background colour if dragging
     background: isDragging ? 'lightgreen' : 'grey',
-
     width: window.innerWidth > 768 ? 400 : 290,
     right: 340,
     left: 0,
-
-    // styles we need to apply on draggables
     ...draggableStyle,
   })
 
@@ -106,7 +100,6 @@ const ArtistSubmission = ({ title }) => {
   })
 
   const onDragEnd = (result) => {
-    // dropped outside the list
     if (!result.destination) {
       return
     }
@@ -157,7 +150,7 @@ const ArtistSubmission = ({ title }) => {
                 <label className="font-bold text-md">Cover Comic</label>
                 <div
                   className={`relative cursor-pointer ${
-                    coverComic === '' ? 'w-40 h-40 ' : 'w-60 h-80'
+                    !coverComic ? 'w-40 h-40 ' : 'w-60 h-80'
                   } overflow-hidden rounded-md mt-2 hover:opacity-80`}
                 >
                   <input
@@ -171,7 +164,7 @@ const ArtistSubmission = ({ title }) => {
                   />
                   <div
                     className={`${
-                      coverComic === '' ? 'w-40 h-40 ' : 'w-full h-full'
+                      !coverComic ? 'w-40 h-40 ' : 'w-full h-full'
                     } overflow-hidden bg-comic-gray-secondary shadow-inner relative input-text`}
                   >
                     <img
@@ -179,7 +172,7 @@ const ArtistSubmission = ({ title }) => {
                       className="w-full h-full object-cover cover-comic"
                       style={{ textIndent: '-10000px' }}
                     />
-                    {coverComic === '' ? (
+                    {!coverComic && (
                       <svg
                         className="w-14 h-14 text-comic-gray-tertiary absolute inset-0 mx-auto my-auto"
                         fill="none"
@@ -194,8 +187,6 @@ const ArtistSubmission = ({ title }) => {
                           d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                         ></path>
                       </svg>
-                    ) : (
-                      ''
                     )}
                   </div>
                 </div>
@@ -362,9 +353,7 @@ const ArtistSubmission = ({ title }) => {
               </DragDropContext>
               {formState.errors.comicContent && (
                 <span
-                  className={`${
-                    items.length !== 0 ? 'hidden ' : 'text-red-500'
-                  }`}
+                  className={items.length !== 0 ? 'hidden ' : 'text-red-500'}
                 >
                   This field is required
                 </span>
