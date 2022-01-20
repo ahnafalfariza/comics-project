@@ -8,27 +8,23 @@ const Submission = () => {
     <Layout>
       <Head title="Submission" />
       <div className="max-w-6xl m-auto p-4 py-8">
-        <p className="text-black font-bold text-4xl mt-10 mb-10">Submission</p>
+        <p className="text-black font-bold text-4xl mb-14">Submission</p>
         <div className="md:flex gap-14">
           <div className="px-2 mb-10">
-            <div className="bg-gray-100 p-40 rounded-3xl"></div>
             <Link href="/artist-submission">
-              <a>
-                <h4 className="mt-3 font-bold cursor-pointer hover:opacity-70">
-                  Artist Submission
-                </h4>
+              <a className="cursor-pointer">
+                <div className="bg-gray-100 hover:bg-opacity-80 p-40 rounded-3xl mb-3"></div>
               </a>
             </Link>
+            <h4 className="font-bold">Artist Submission</h4>
           </div>
           <div className="px-2">
-            <div className="bg-gray-100 p-40 rounded-3xl"></div>
             <Link href="/valentine-competition-submission">
-              <a>
-                <h4 className="mt-3 font-bold cursor-pointer hover:opacity-70">
-                  Valentine Competition Submission
-                </h4>
+              <a className="cursor-pointer">
+                <div className="bg-gray-100 hover:bg-opacity-80 p-40 rounded-3xl mb-3"></div>
               </a>
             </Link>
+            <h4 className="font-bold">Valentine Competition Submission</h4>
           </div>
         </div>
       </div>

@@ -80,7 +80,7 @@ const ChapterListMarket = ({
                   scroll={false}
                   shallow
                 >
-                  <a className="inline-block text-black cursor-pointer text-base font-semibold mb-4">
+                  <a className="inline-block text-black cursor-pointer hover:text-opacity-80 text-base font-semibold mb-4">
                     See Details
                   </a>
                 </Link>
