@@ -23,7 +23,7 @@ const Button = ({
       }`
       break
     case 'secondary':
-      buttonVariantStyle = `bg-blueGray-800 text-gray-200 ${
+      buttonVariantStyle = `bg-comic-gray-primary text-white ${
         !isDisabled && 'hover:bg-opacity-70'
       }`
       break
@@ -39,7 +39,7 @@ const Button = ({
   let buttonSizeStyle
   switch (size) {
     case 'lg':
-      buttonSizeStyle = 'py-3 px-20 text-base'
+      buttonSizeStyle = 'py-3 px-10 text-base'
       break
     case 'md':
       buttonSizeStyle = 'py-3 px-8 text-sm'
