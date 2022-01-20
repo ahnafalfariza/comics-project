@@ -62,7 +62,7 @@ const Profile = ({ userData, setUserData }) => {
           <div className="w-full md:ml-8 md:mt-4">
             <div className="w-full flex justify-between items-center">
               <div>
-                <p className="text-white text-xl md:text-3xl font-bold">
+                <p className="text-black text-xl md:text-3xl font-bold">
                   {userData?.accountId}
                 </p>
               </div>
@@ -88,7 +88,7 @@ const Profile = ({ userData, setUserData }) => {
                   </div>
                 )}
             </div>
-            <p className="mt-2 text-white opacity-80">{userData?.bio}</p>
+            <p className="mt-2 text-black opacity-80">{userData?.bio}</p>
           </div>
         </div>
       </div>
