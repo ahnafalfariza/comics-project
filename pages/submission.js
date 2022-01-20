@@ -9,8 +9,8 @@ const Submission = () => {
       <Head title="Submission" />
       <div className="max-w-6xl m-auto p-4 py-8">
         <p className="text-black font-bold text-4xl mt-10 mb-10">Submission</p>
-        <div className="flex gap-14">
-          <div>
+        <div className="md:flex gap-14">
+          <div className="px-2 mb-10">
             <div className="bg-gray-100 p-40 rounded-3xl"></div>
             <Link href="/artist-submission">
               <a>
@@ -20,7 +20,7 @@ const Submission = () => {
               </a>
             </Link>
           </div>
-          <div>
+          <div className="px-2">
             <div className="bg-gray-100 p-40 rounded-3xl"></div>
             <Link href="/valentine-competition-submission">
               <a>
