@@ -176,11 +176,11 @@ const Nav = () => {
                 </span>
               </a>
             </Link>
-            <Link href="/partner-with-us">
+            <Link href="/submission">
               <a className="block font-semibold hover:text-primary">
                 <span
                   className={
-                    router.pathname === '/partner-with-us' ? `text-primary` : ''
+                    router.pathname === '/submission' ? `text-primary` : ''
                   }
                 >
                   Submission
@@ -277,13 +277,11 @@ const Nav = () => {
                 </Link>
               </div>
               <div className="p-3">
-                <Link href="/partner-with-us">
+                <Link href="/submission">
                   <a className="font-semibold hover:text-primary">
                     <span
                       className={
-                        router.pathname === '/partner-with-us'
-                          ? `text-primary`
-                          : ''
+                        router.pathname === '/submission' ? `text-primary` : ''
                       }
                     >
                       Submission
