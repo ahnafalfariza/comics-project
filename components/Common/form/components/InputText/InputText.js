@@ -1,11 +1,12 @@
 import * as React from 'react'
-import { useFormContext } from 'react-hook-form'
 
 const InputText = ({
   className = '',
   isError = false,
   width = 'full',
-  name = '',
+  label,
+  register = () => {},
+  required,
   ...rest
 }) => {
   const inputBaseStyle = `${className} input-text flex items-center relative w-full md:w-${width} px-3 py-2 rounded-lg`
@@ -17,9 +18,13 @@ const InputText = ({
     isError ? 'input-text--error' : ''
   }`
 
-  const { register } = useFormContext()
-
-  return <input className={inputStyle} {...register(name)} {...rest} />
+  return (
+    <input
+      className={inputStyle}
+      {...register(label, { required })}
+      {...rest}
+    />
+  )
 }
 
 InputText.displayName = 'InputText'

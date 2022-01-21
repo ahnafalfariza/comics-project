@@ -58,6 +58,9 @@ const ComicInfo = ({
             <p className="text-blueGray-200 mb-4">
               {parseDate(data.issued_at)}
             </p>
+            <h4 className="text-white mb-1 font-semibold ">Genre:</h4>
+            <p className="text-blueGray-200 mb-4">Romance</p>
+            <h4 className="text-white mb-1 font-semibold ">Synopsis:</h4>
             <p className="text-blueGray-200">{data.description}</p>
           </div>
         </div>
