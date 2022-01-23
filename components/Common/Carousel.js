@@ -53,16 +53,16 @@ const settings = {
 
 const Carousel = () => {
   return (
-    <div className="group w-full mx-auto -mt-12">
+    <div className="w-full mx-auto -mt-12 max-w-6xl px-2">
       <Slider {...settings}>
-        <div className="w-full h-52 md:h-64">
+        <div className="w-full">
           <a
             href="https://ipfs.fleek.co/ipfs/bafybeiaam3zvrf6ar57peyn7n2z2yevfiddsaor5yiaphbfwbmvahw53nq"
             target="_blank"
             rel="noreferrer"
           >
             <img
-              className="m-auto w-full h-full object-fill focus:outline-none active:outline-none"
+              className="m-auto object-fill focus:outline-none active:outline-none"
               src="https://dummyimage.com/1200x300/000/fff"
             />
           </a>
