@@ -4,6 +4,7 @@ import Carousel from 'components/Common/Carousel'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import ComicItem from 'components/Comic/ComicItem'
+import ComicMostLiked from 'components/Comic/ComicMostLiked'
 
 export default function Home() {
   const [editorial, setEditorial] = useState([])
@@ -49,7 +50,7 @@ export default function Home() {
           <div className="ml-3 w-16 h-2 mb-4 md:w-16 md:h-3 md:mb-10 bg-primary"></div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 overflow-hidden mx-4">
             {editorial.map((data, i) => (
-              <ComicItem data={data} key={i} showLike={true} />
+              <ComicMostLiked data={data} key={i} />
             ))}
           </div>
         </div>
