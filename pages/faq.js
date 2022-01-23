@@ -6,21 +6,21 @@ const Faq = () => {
     <Layout>
       <Head title="Frequently Asked Question" />
       <div className="max-w-4xl m-auto py-12 px-4">
-        <div className="text-center text-white font-bold text-4xl mb-8">
+        <div className="text-center text-black font-bold text-4xl mb-8">
           Frequently Asked Question
         </div>
-        <p className="text-white opacity-80 text-center md:w-1/2 m-auto text-sm">
+        <p className="text-black opacity-80 text-center md:w-1/2 m-auto text-sm">
           "Until I feared I would lose it, I never loved to read. One does not
           love breathing.” ~ To Kill A Mockingbird
         </p>
-        <p className="text-white mt-8 mb-16 text-lg">
+        <p className="text-black mt-8 mb-16 text-lg">
           Introducing Paras Comic, an NFT project that integrates NFTs to enrich
           comic reading experience. Before we start, let’s answer some of the
           questions you might have! Below we have lists of important and
           frequently asked questions when you want to read Paras Comic.
         </p>
         {data.map((item, idx) => (
-          <div key={idx} className="text-white mb-8">
+          <div key={idx} className="text-black mb-8">
             <p className="text-lg font-bold mb-2 -ml">{item.question}</p>
             {item.answer.map((answer, idx) => (
               <p key={idx} className="ml-4 mb-2 opacity-80">
@@ -36,26 +36,26 @@ const Faq = () => {
           </div>
         ))}
 
-        <div className="text-center text-white font-bold text-4xl mb-8 mt-16 ">
+        <div className="text-center text-black font-bold text-4xl mb-8 mt-16 ">
           Paradigm
         </div>
-        <p className="text-white mb-4 text-lg">
+        <p className="text-black mb-4 text-lg">
           '“Paradigm” is a fantasy, action, and sci-fi comic inspired by the
           lore of “Pillars of Paras”. It is a tale of an adventure, discovery,
           and risky endeavour.',
         </p>
-        <p className="text-white mt-4 mb-4 text-lg">
+        <p className="text-black mt-4 mb-4 text-lg">
           '“Paradigm” is our first comic on Paras Comic platform. “Paradigm” is
           an original IP created by Paras. It represents our goal to create and
           support crypto-native IP. The comic and its integration to NFTs will
           be the early standard for any project to come.',
         </p>
-        <p className="text-white mt-4 mb-4 text-lg">
+        <p className="text-black mt-4 mb-4 text-lg">
           'There are two important aspects for every comic title on Paras Comic:
           Chapter NFTs and Collectibles NFTs',
         </p>
         {data2.map((item, idx) => (
-          <div key={idx} className="text-white mb-8">
+          <div key={idx} className="text-black mb-8">
             <p className="text-lg font-bold mb-2 -ml">{item.question}</p>
             {item.answer.map((answer, idx) => (
               <p key={idx} className="ml-4 mb-2 opacity-80">
@@ -70,7 +70,7 @@ const Faq = () => {
               ))}
           </div>
         ))}
-        <p className="text-white mt-4 mb-8">
+        <p className="text-black mt-4 mb-8">
           If your questions are not listed on the above, please hit us up on our{' '}
           <a
             href="https://discord.paras.id"
