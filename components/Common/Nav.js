@@ -120,7 +120,7 @@ const Nav = () => {
         onClose={() => setShowLoginModal(false)}
       />
       <div ref={mobileMenuRef} className="bg-background sticky z-30 top-0">
-        <div className="relative bg-background max-w-6xl m-auto flex p-4 items-center justify-between z-40">
+        <div className="relative bg-background max-w-6xl m-auto flex py-2 px-4 items-center justify-between z-40">
           <div className="flex items-center md:hidden">
             <HamburgerMenu
               isOpen={showHamburgerMenu}
@@ -141,23 +141,26 @@ const Nav = () => {
               </Link>
             </div>
           </div>
-          <div className="hidden md:flex space-x-12 text-xl font-normal text-black items-center">
-            <div className="w-32">
+          <div className="hidden md:flex space-x-6 text-xl font-normal text-black items-center">
+            <div className="w-24 mr-4">
               <Link href="/">
                 <a>
-                  <img className="hover:opacity-80" src="/paras-comic.png" />
+                  <img
+                    className="hover:opacity-80 p-1"
+                    src="/paras-comic.png"
+                  />
                 </a>
               </Link>
             </div>
             <Link href="/">
-              <a className="block font-semibold hover:text-primary">
+              <a className="block font-semibold hover:text-primary text-base">
                 <span className={router.pathname === '/' ? `text-primary` : ''}>
                   Home
                 </span>
               </a>
             </Link>
             <Link href="/comics">
-              <a className="block font-semibold hover:text-primary">
+              <a className="block font-semibold hover:text-primary text-base">
                 <span
                   className={
                     router.pathname.split('/')[1] === 'comics'
@@ -170,7 +173,7 @@ const Nav = () => {
               </a>
             </Link>
             <Link href="/market">
-              <a className="block font-semibold hover:text-primary">
+              <a className="block font-semibold hover:text-primary text-base">
                 <span
                   className={
                     router.pathname.includes('/market') ? `text-primary` : ''
@@ -181,7 +184,7 @@ const Nav = () => {
               </a>
             </Link>
             <Link href="/submission">
-              <a className="block font-semibold hover:text-primary">
+              <a className="block font-semibold hover:text-primary text-base">
                 <span
                   className={
                     router.pathname === '/submission' ? `text-primary` : ''
