@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { parseImgUrl } from 'utils/common'
 import Token from 'components/Token/Token'
 
-const ComicItem = ({ data, key }) => {
+const ComicItem = ({ data, key, showLike = false }) => {
   const router = useRouter()
 
   return (
@@ -33,6 +33,13 @@ const ComicItem = ({ data, key }) => {
         <p className="text-comic-gray-primary font-bold text-xs mb-3 truncate">
           {data.author_ids}
         </p>
+        {showLike && (
+          <div className="flex flex-row">
+            <p className="text-gray-800 text-sm font-bold md:text-xs">
+              3.1 Likes
+            </p>
+          </div>
+        )}
         <p
           className="text-primary font-bold text-sm cursor-pointer hover:opacity-80 w-1 whitespace-nowrap"
           onClick={() => router.push(`/comics/${data.comic_id}/chapter`)}

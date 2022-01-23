@@ -49,7 +49,7 @@ export default function Home() {
           <div className="ml-3 w-16 h-2 mb-4 md:w-16 md:h-3 md:mb-10 bg-primary"></div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 overflow-hidden mx-4">
             {editorial.map((data, i) => (
-              <ComicItem data={data} key={i} />
+              <ComicItem data={data} key={i} showLike={true} />
             ))}
           </div>
         </div>
