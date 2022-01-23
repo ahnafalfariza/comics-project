@@ -53,7 +53,7 @@ const settings = {
 
 const Carousel = () => {
   return (
-    <div className="group w-full mx-auto -mt-12">
+    <div className="w-full mx-auto -mt-12 max-w-6xl px-2">
       <Slider {...settings}>
         <div className="w-full">
           <a

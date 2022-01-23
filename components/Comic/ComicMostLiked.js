@@ -8,7 +8,7 @@ const ComicMostLiked = ({ data, key }) => {
   return (
     <div key={key} className="block md:flex md:flex-row md:w-full">
       <div
-        className="w-full md:h-40 cursor-pointer hover:opacity-90 transition ease-in-out duration-300 md:w-1/2"
+        className="w-full cursor-pointer hover:opacity-90 transition ease-in-out duration-300 md:w-1/2"
         onClick={() => router.push(`/comics/${data.comic_id}/chapter`)}
       >
         <Token
@@ -23,7 +23,7 @@ const ComicMostLiked = ({ data, key }) => {
           disableFlip
         />
       </div>
-      <div className="ml-1 w-full md:w-1/2 md:flex md:flex-col md:justify-between">
+      <div className="ml-2 w-full md:w-1/2 md:flex md:flex-col md:justify-between my-2">
         <div>
           <h4
             className="text-black font-bold text-xl md:text-2xl truncate cursor-pointer hover:text-opacity-80"
