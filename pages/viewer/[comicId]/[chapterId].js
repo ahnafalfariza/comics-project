@@ -136,9 +136,9 @@ const ChapterView = ({ isLoading }) => {
         hasNext={hasNext}
       />
       <div ref={viewerRef} className="min-h-screen">
-        {/* {chapterPageUrl.map((url) => (
+        {chapterPageUrl.map((url) => (
           <ChapterImagePage key={url} url={url} />
-        ))} */}
+        ))}
       </div>
       <div className="mt-8 mb-20 mx-4">
         <div className="flex items-center justify-center">
