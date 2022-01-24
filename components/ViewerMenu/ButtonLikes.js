@@ -42,7 +42,9 @@ const ButtonLikes = ({ comicId, chapterId, isLoading }) => {
   return (
     <Button className="flex items-center mr-8" size="md" onClick={onClickLikes}>
       <IconLove color={isLiked ? 'white' : 'none'} />
-      <div className="ml-3 text-white text-xl">Like</div>
+      <div className="ml-3 text-white text-xl">
+        {isLiked ? 'Liked' : 'Like'}
+      </div>
     </Button>
   )
 }
