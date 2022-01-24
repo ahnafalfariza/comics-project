@@ -10,10 +10,12 @@ import { useRouter } from 'next/router'
 
 export default function Home() {
   const [editorial, setEditorial] = useState([])
+  const [mostLiked, setMostLiked] = useState([])
   const router = useRouter()
 
   useEffect(() => {
     fetchEditorial()
+    fetchMostLiked()
   }, [])
 
   const fetchEditorial = async () => {
@@ -25,6 +27,18 @@ export default function Home() {
     })
     const newRes = res.data.data.results
     setEditorial(newRes)
+  }
+
+  const fetchMostLiked = async () => {
+    const res = await axios.get(`${process.env.COMIC_API_URL}/comics`, {
+      params: {
+        __skip: 0,
+        __limit: 4,
+        __sort: 'totalLikes::-1',
+      },
+    })
+    const newRes = res.data.data.results
+    setMostLiked(newRes)
   }
 
   return (
@@ -52,7 +66,7 @@ export default function Home() {
           </h2>
           <div className="ml-3 w-12 h-2 mb-4 md:mb-6 bg-primary"></div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 overflow-hidden mx-4">
-            {editorial.map((data, i) => (
+            {mostLiked.map((data, i) => (
               <ComicMostLiked data={data} key={i} />
             ))}
           </div>
