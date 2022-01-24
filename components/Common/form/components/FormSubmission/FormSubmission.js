@@ -17,6 +17,7 @@ const ArtistSubmission = ({ title }) => {
   const [cover, setCover] = useState('')
   const [coverPreview, setCoverPreview] = useState('')
   const [items, setItems] = useState([])
+  const [isOverDimensions, setIsOverDimensions] = useState(false)
   const [sizeComic, setSizeComic] = useState(0)
   const [modalGenre, setModalGenre] = useState(false)
   const methods = useForm()
@@ -57,9 +58,13 @@ const ArtistSubmission = ({ title }) => {
   }, [getGenreList, getSubGenreList])
 
   useEffect(() => {
+    if (cover === undefined) setCoverPreview(cover)
+  }, [cover])
+
+  useEffect(() => {
     let size = 0
 
-    items.filter((item) => (size += item.file.size))
+    items.forEach((item) => (size += item.file.size))
     setSizeComic(size)
   }, [sizeComic, items])
 
@@ -74,8 +79,8 @@ const ArtistSubmission = ({ title }) => {
     return () => document.body.removeEventListener('click', onClickEv)
   }, [modalGenre])
 
-  function formatBytes(bytes, decimals = 0) {
-    var sizeInMB = (bytes / (1024 * 1024)).toFixed(decimals)
+  const formatBytes = (bytes, decimals = 0) => {
+    const sizeInMB = (bytes / (1024 * 1024)).toFixed(decimals)
 
     return (
       <span className={sizeInMB > 20.0 ? 'text-red-500' : 'text-primary'}>
@@ -90,12 +95,19 @@ const ArtistSubmission = ({ title }) => {
     const checkSizeofFile = formatBytes(sizeComic).props.children > 20.0
     const checkNumberOfFile = items.length > 100
 
-    if (checkNumberOfFile || checkSizeofFile) {
+    const errorCheckNumberOfFile = 'The maximum number of files is 100.'
+    const errorCheckSizeOfFile = 'The maximum number of sizes is 20 MB'
+    const errorDimensions = 'The maximum dimensions of cover comic is 640 x 890'
+
+    if (checkNumberOfFile || checkSizeofFile || isOverDimensions) {
+      window.scrollTo(0, 0)
       _showToast(
         'error',
         checkNumberOfFile
-          ? 'The maximum number of files is 100.'
-          : 'The maximum number of sizes is 20 MB'
+          ? errorCheckNumberOfFile
+          : checkSizeofFile
+          ? errorCheckSizeOfFile
+          : errorDimensions
       )
     } else {
       setLoading(true)
@@ -136,6 +148,7 @@ const ArtistSubmission = ({ title }) => {
         .post(`${process.env.COMIC_API_URL}/submission`, form)
         .then((response) => {
           setCover('')
+          setCoverPreview('')
           setItems([])
           reset()
           clearErrors()
@@ -156,7 +169,7 @@ const ArtistSubmission = ({ title }) => {
 
   const addImages = async (e) => {
     let size = 0
-    items.filter((item) => (size += item.file.size))
+    items.forEach((item) => (size += item.file.size))
     setSizeComic(size)
 
     if (e.target.files && e.target.files.length > 0) {
@@ -224,12 +237,13 @@ const ArtistSubmission = ({ title }) => {
   }
 
   const inputFilecover = (event) => {
-    const img = event.target.files[0]
+    let img = event.target.files[0]
+    let checkDimensions = false
     setCover(img)
 
     if (typeof img !== 'undefined') {
       let size = img.size / (1024 * 1024).toFixed(10)
-      if (size < 10) {
+      if (size < 10 || checkDimensions) {
         let binaryData = []
         binaryData.push(img)
         setCoverPreview(
@@ -240,6 +254,24 @@ const ArtistSubmission = ({ title }) => {
         setErrorMessage(true)
       }
     }
+
+    const fileReader = new FileReader()
+    fileReader.onload = () => {
+      const img = new Image()
+
+      img.onload = () => {
+        if (img.width > 640 || img.height > 890) {
+          checkDimensions = true
+          setIsOverDimensions(checkDimensions)
+        } else {
+          checkDimensions = false
+          setIsOverDimensions(checkDimensions)
+        }
+      }
+
+      img.src = fileReader.result
+    }
+    if (typeof img !== 'undefined') fileReader.readAsDataURL(img)
   }
 
   return (
@@ -265,7 +297,7 @@ const ArtistSubmission = ({ title }) => {
                 <label className="font-bold text-md">Cover Comic</label>
                 <div
                   className={`relative cursor-pointer ${
-                    !cover ? 'w-40 h-40 ' : 'w-60 h-80'
+                    !cover && !coverPreview ? 'w-40 h-40 ' : 'w-60 h-80'
                   } overflow-hidden rounded-md mt-2 hover:opacity-80`}
                 >
                   <input
@@ -279,7 +311,7 @@ const ArtistSubmission = ({ title }) => {
                   />
                   <div
                     className={`${
-                      !cover ? 'w-40 h-40 ' : 'w-full h-full'
+                      !cover && !coverPreview ? 'w-40 h-40 ' : 'w-full h-full'
                     } overflow-hidden bg-comic-gray-secondary shadow-inner relative input-text`}
                   >
                     <img
@@ -287,7 +319,7 @@ const ArtistSubmission = ({ title }) => {
                       className={'w-full h-full object-cover cover-comic'}
                       style={{ textIndent: '-10000px' }}
                     />
-                    {!cover && (
+                    {!cover && !coverPreview && (
                       <svg
                         className="w-14 h-14 text-comic-gray-tertiary absolute inset-0 mx-auto my-auto"
                         fill="none"
@@ -318,7 +350,7 @@ const ArtistSubmission = ({ title }) => {
                 )}
                 <div>
                   <p className="text-comic-gray-tertiary text-sm font-normal mt-4 mb-8">
-                    Image size must be 1000x1000, <br /> Image must be less than
+                    Image size must be 640 x 890, <br /> Image must be less than
                     10mb
                   </p>
                 </div>
