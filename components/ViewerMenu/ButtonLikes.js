@@ -14,8 +14,6 @@ const ButtonLikes = ({ comicId, chapterId, isLoading }) => {
           params: {
             comic_id: comicId,
             chapter_id: chapterId,
-            //temp
-            account_id: 'johncena.testnet',
           },
         }
       )
@@ -28,13 +26,15 @@ const ButtonLikes = ({ comicId, chapterId, isLoading }) => {
 
   const onClickLikes = async () => {
     setIsLiked(!isLiked)
-    await axios.put(`${process.env.COMIC_API_URL}/like-chapter`, null, {
-      params: {
-        comic_id: comicId,
-        chapter_id: chapterId,
-        user_action: !isLiked,
-        //temp
-        account_id: 'johncena.testnet',
+
+    const body = new FormData()
+    body.append('comic_id', comicId)
+    body.append('chapter_id', chapterId)
+    body.append('user_action', !isLiked)
+
+    await axios.put(`${process.env.COMIC_API_URL}/like-chapter`, body, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
       },
     })
   }
