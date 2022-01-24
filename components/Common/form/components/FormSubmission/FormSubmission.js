@@ -97,18 +97,15 @@ const ArtistSubmission = ({ title }) => {
 
     const errorCheckNumberOfFile = 'The maximum number of files is 100.'
     const errorCheckSizeOfFile = 'The maximum number of sizes is 20 MB'
-    const errorDimensions = 'The maximum dimensions of cover comic is 640 x 890'
 
     if (checkNumberOfFile || checkSizeofFile || isOverDimensions) {
       window.scrollTo(0, 0)
-      _showToast(
-        'error',
-        checkNumberOfFile
-          ? errorCheckNumberOfFile
-          : checkSizeofFile
-          ? errorCheckSizeOfFile
-          : errorDimensions
-      )
+      if (!isOverDimensions) {
+        _showToast(
+          'error',
+          checkNumberOfFile ? errorCheckNumberOfFile : errorCheckSizeOfFile
+        )
+      }
     } else {
       setLoading(true)
       window.scrollTo(0, 0)
@@ -237,7 +234,7 @@ const ArtistSubmission = ({ title }) => {
   }
 
   const inputFilecover = (event) => {
-    let img = event.target.files[0]
+    const img = event.target.files[0]
     let checkDimensions = false
     setCover(img)
 
@@ -249,8 +246,10 @@ const ArtistSubmission = ({ title }) => {
         setCoverPreview(
           window.URL.createObjectURL(new Blob(binaryData, { type: 'image/*' }))
         )
+        setIsOverDimensions(false)
         setErrorMessage(false)
       } else {
+        setIsOverDimensions(true)
         setErrorMessage(true)
       }
     }
@@ -262,10 +261,7 @@ const ArtistSubmission = ({ title }) => {
       img.onload = () => {
         if (img.width > 640 || img.height > 890) {
           checkDimensions = true
-          setIsOverDimensions(checkDimensions)
-        } else {
-          checkDimensions = false
-          setIsOverDimensions(checkDimensions)
+          setIsOverDimensions(true)
         }
       }
 
@@ -337,14 +333,20 @@ const ArtistSubmission = ({ title }) => {
                     )}
                   </div>
                 </div>
-                {(formState.errors.cover || errorMessage) && (
+                {(formState.errors.cover ||
+                  errorMessage ||
+                  isOverDimensions) && (
                   <span
                     className={`${
-                      !coverPreview || errorMessage ? 'text-red-500' : 'hidden'
+                      !coverPreview || errorMessage || isOverDimensions
+                        ? 'text-red-500'
+                        : 'hidden'
                     }`}
                   >
                     {errorMessage
                       ? 'Image must be less than 10mb'
+                      : isOverDimensions
+                      ? 'The maximum dimensions of cover comic is 640 x 890'
                       : 'This field is required'}
                   </span>
                 )}
