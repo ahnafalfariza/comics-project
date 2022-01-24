@@ -106,7 +106,7 @@ const Card = ({
           }}
         >
           <div
-            className="card bg-gray-900 w-full h-full cursor-pointer"
+            className="card bg-white w-full h-full cursor-pointer"
             style={{
               fontSize: `${dimension.width / 14}px`,
               transform: `rotateY(${rotate.x}deg) rotateX(${rotate.y}deg)`,
@@ -116,7 +116,7 @@ const Card = ({
             <div className="h-full py-2 flex flex-col">
               <div className="text-center px-2">
                 <p
-                  className="text-white font-bold truncate"
+                  className="text-black font-bold truncate"
                   style={{
                     fontSize: `.85em`,
                   }}
@@ -124,7 +124,7 @@ const Card = ({
                   {token.metadata.title}
                 </p>
                 <p
-                  className="text-white truncate"
+                  className="text-black truncate"
                   style={{
                     fontSize: `.6em`,
                   }}
@@ -159,7 +159,7 @@ const Card = ({
                 <div className="flex justify-between">
                   <div className="w-1/2">
                     <p
-                      className="text-white truncate"
+                      className="text-black truncate"
                       style={{
                         fontSize: `.6em`,
                       }}
@@ -169,7 +169,7 @@ const Card = ({
                   </div>
                   <div className="w-1/2 text-right">
                     <p
-                      className="text-white"
+                      className="text-black"
                       style={{
                         fontSize: `.6em`,
                       }}
