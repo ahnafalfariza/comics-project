@@ -1,7 +1,7 @@
 import { Tab, TabList, Tabs } from 'components/Common/Tabs'
 import { useRouter } from 'next/router'
 import { parseDate } from 'utils/dateHelper'
-import { parseImgUrl } from 'utils/common'
+import { parseImgUrl, nFormatter } from 'utils/common'
 
 const ComicInfo = ({
   data = {
@@ -33,10 +33,10 @@ const ComicInfo = ({
 
   return (
     <div>
-      <div className="flex items-center bg-no-repeat bg-center bg-cover w-screen relative">
-        <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-60 backdrop-filter backdrop-blur-lg backdrop-saturate-200 z-10" />
+      <div className="flex items-center bg-no-repeat bg-center bg-cover w-full relative">
+        <div className="absolute top-0 left-0 w-full h-full bg-white bg-opacity-40 backdrop-filter backdrop-blur-lg backdrop-saturate-200 z-10" />
         <div
-          className="absolute top-0 left-0 w-full h-full bg-cover"
+          className="absolute top-0 left-0 w-full h-full bg-cover bg-white"
           style={{ backgroundImage: `url(${parseImgUrl(data.media_cover)})` }}
         />
         <div className="flex w-full items-center sm:items-start flex-col sm:flex-row sm:px-6 py-12 sm:py-24 max-w-5xl mx-auto relative z-20">
@@ -45,19 +45,37 @@ const ComicInfo = ({
             style={chapterImage}
           />
           <div className="p-4 sm:ml-6 lg:ml-12 w-full">
-            <h3 className="text-white text-center sm:text-left font-semibold text-2xl sm:text-4xl lg:text-5xl mb-8 sm:mb-4">
+            <h3 className="text-white text-center sm:text-left font-semibold text-2xl sm:text-4xl lg:text-5xl mb-4">
               {data.title}
             </h3>
-            <h4 className="text-white mb-1 font-semibold ">Author: </h4>
-            {data.author_ids.map((author) => (
-              <p key={author} className="text-blueGray-200 mb-4">
-                {author}
-              </p>
-            ))}
-            <h4 className="text-white mb-1 font-semibold ">Published:</h4>
-            <p className="text-blueGray-200 mb-4">
-              {parseDate(data.issued_at)}
-            </p>
+            {/* <p className="text-white text-center font-bold mb-8 sm:mb-4 md:text-left">
+              {nFormatter(data.totalLikes) || 0} Likes
+            </p> */}
+            <div className="grid grid-cols-2">
+              <div>
+                <h4 className="text-white mb-1 font-semibold ">Author</h4>
+                {data.author_ids.map((author) => (
+                  <p key={author} className="text-blueGray-200 mb-4">
+                    {author}
+                  </p>
+                ))}
+              </div>
+              <div>
+                <h4 className="text-white mb-1 font-semibold ">Published</h4>
+                <p className="text-blueGray-200 mb-4">
+                  {parseDate(data.issued_at)}
+                </p>
+              </div>
+            </div>
+            <div className="grid grid-cols-2">
+              <div>
+                <h4 className="text-white mb-1 font-semibold ">Genre</h4>
+                <p className="text-blueGray-200 mb-4">
+                  {data.genre}, {data.subgenre}
+                </p>
+              </div>
+            </div>
+            <h4 className="text-white mb-1 font-semibold ">Synopsis:</h4>
             <p className="text-blueGray-200">{data.description}</p>
           </div>
         </div>

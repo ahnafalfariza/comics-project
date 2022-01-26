@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 const TabList = ({ children, className, style }) => {
-  const tabListStyle = `tab-list-border flex items-start relative gap-3 ${className}`
+  const tabListStyle = `flex items-start relative gap-3 ${className}`
 
   return (
     <div className={tabListStyle} style={style}>

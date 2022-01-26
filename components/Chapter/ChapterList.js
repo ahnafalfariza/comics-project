@@ -38,11 +38,11 @@ const ChapterList = ({
   }
 
   const listWrapperBaseStyle =
-    'bg-blueGray-800 border border-blueGray-700  relative rounded-lg w-full cursor-pointer'
+    'bg-gray-50 border-opacity-20 shadow-md relative rounded-lg w-full cursor-pointer hover:bg-gray-100 transition ease-in-out duration-300'
   const listCoverBaseStyle =
     'bg-no-repeat bg-center bg-cover rounded-lg absolute'
   const listBadgeBaseStyle =
-    'text-sm font-semibold text-gray-900 py-1 px-3 bg-gradient-to-br from-electricLime-300 to-electricLime-600 rounded-full uppercase tracking-wider leading-none'
+    'text-sm font-semibold bg-primary rounded-full uppercase tracking-wider leading-none px-5 py-2 text-white'
 
   const listWrapperResponsiveStyle = 'flex items-center sm:py-4 sm:pr-6 py-3'
   const listCoverResponsiveStyle =
@@ -71,13 +71,13 @@ const ChapterList = ({
         <div className={listCoverStyle} style={chapterImage} />
         <div className="sm:ml-36 ml-24 pl-1 w-full flex flex-col sm:flex-row sm:items-center items-start justify-between">
           <div className="mr-4">
-            <h5 className="sm:text-sm text-xs  text-blueGray-400 mb-1 uppercase">
+            <h5 className="sm:text-sm text-xs font-semibold text-gray-500 mb-1 uppercase">
               Chapter {parseInt(data.metadata.chapter_id)}
             </h5>
-            <h3 className="text-white text-sm sm:text-xl">
-              {data.metadata.subtitle}
+            <h3 className="text-black font-semibold text-sm sm:text-lg">
+              {data.metadata.title}
             </h3>
-            <h5 className="text-blueGray-300 sm:text-sm text-xs">
+            <h5 className="text-gray-800 sm:text-sm text-xs">
               {parseDate(data.metadata.issued_at)}
             </h5>
           </div>

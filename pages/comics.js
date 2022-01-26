@@ -5,8 +5,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import Head from 'components/Common/Head'
 import Layout from 'components/Common/Layout'
 import axios from 'axios'
-import { parseImgUrl } from 'utils/common'
-import Token from 'components/Token/Token'
+import ComicItem from 'components/Comic/ComicItem'
 
 import { FETCH_COMICS_LIMIT } from 'constants/constant'
 import ContentLoader from 'react-content-loader'
@@ -53,32 +52,17 @@ const Comics = () => {
     <Layout>
       <Head title="Comics" />
       <div className="max-w-6xl m-auto p-4 py-8">
-        <p className="text-white font-bold text-4xl mb-8">Comics</p>
+        <p className="text-black font-bold text-4xl mb-3">Comics</p>
+        <div className="w-16 h-3 mb-14 bg-primary"></div>
         <InfiniteScroll
           dataLength={comics.length}
           next={fetchComics}
           hasMore={hasMore}
           loader={<ComicLoader />}
         >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 overflow-hidden">
             {comics.map((data, i) => (
-              <div
-                className="cursor-pointer shadow-2xl "
-                key={i}
-                onClick={() => router.push(`/comics/${data.comic_id}`)}
-              >
-                <Token
-                  imgUrl={parseImgUrl(data.media, null, {
-                    width: `300`,
-                  })}
-                  imgBlur="U0Csjj-;fQ-;%MfQfQfQfQfQfQfQ%MfQfQfQ"
-                  hoverMouse={false}
-                  initialRotate={{ x: 0, y: 0 }}
-                  shadow="none"
-                  borderRadius="8px"
-                  disableFlip
-                />
-              </div>
+              <ComicItem data={data} key={i} />
             ))}
           </div>
         </InfiniteScroll>
@@ -98,10 +82,10 @@ const ComicLoader = () => (
             width="100%"
             height="100%"
             viewBox="0 0 275 380"
-            backgroundColor="#1D1D1D"
-            foregroundColor="#282828"
+            backgroundColor="#F4F4F5"
+            foregroundColor="#E4E4E7"
           >
-            <rect x="0" y="0" rx="20" ry="20" width="275" height="380" />
+            <rect x="0" y="0" rx="0" ry="0" width="275" height="380" />
           </ContentLoader>
         </div>
       ))}

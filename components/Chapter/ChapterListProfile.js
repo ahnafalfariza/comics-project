@@ -158,7 +158,7 @@ const ChapterListProfile = ({
         <Link href={`/comics/${comicId}/chapter`}>
           <a>
             <div
-              className="w-full h-full rounded-md bg-no-repeat bg-center bg-cover shadow-2xl hover:opacity-75 hover:rotate-3 hover:-translate-y-3 transform transition-all duration-200"
+              className="w-full h-full rounded-md bg-no-repeat bg-center bg-cover shadow-md hover:opacity-75 hover:rotate-3 hover:-translate-y-3 transform transition-all duration-200"
               style={{
                 backgroundImage: `url(${parseImgUrl(comicCover)})`,
               }}
@@ -167,7 +167,7 @@ const ChapterListProfile = ({
         </Link>
       </div>
       <div className="md:w-96 flex-1 pl-0 md:pl-8">
-        <div className="text-white text-xl md:text-3xl font-bold">
+        <div className="text-black text-xl md:text-3xl font-bold">
           <Link href={`/comics/${comicId}/chapter`}>
             <a className="hover:opacity-50 transition-all duration-200">
               {comicTitle}
@@ -195,7 +195,7 @@ const ChapterListProfile = ({
                   className="w-full cursor-pointer"
                   style={{
                     filter:
-                      'drop-shadow(-4px 0px 8px rgba(0, 0, 0, 0.25)) drop-shadow(-8px 0px 16px rgba(0, 0, 0, 0.25))',
+                      'drop-shadow(-4px 0px 8px rgba(255, 255, 255, 0.25)) drop-shadow(-8px 0px 16px rgba(255, 255, 255, 0.25))',
                   }}
                 >
                   <Token

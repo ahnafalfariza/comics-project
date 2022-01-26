@@ -1,16 +1,29 @@
 import * as React from 'react'
 
-const InputText = ({ className = '', isError = false, ...rest }) => {
+const InputText = ({
+  className = '',
+  isError = false,
+  label,
+  register = () => {},
+  required,
+  ...rest
+}) => {
   const inputBaseStyle = `${className} input-text flex items-center relative w-full px-3 py-2 rounded-lg`
-  const inputBgStyle = 'bg-white bg-opacity-10'
+  const inputBgStyle = 'bg-comic-gray-secondary'
   const inputBorderStyle = 'outline-none '
-  const inputTextStyle = 'text-white text-opacity-90 text-body text-base '
+  const inputTextStyle = 'text-black text-opacity-90 text-body text-base '
 
   const inputStyle = `${inputBaseStyle} ${inputBgStyle} ${inputBorderStyle} ${inputTextStyle} ${
     isError ? 'input-text--error' : ''
   }`
 
-  return <textarea className={inputStyle} {...rest} />
+  return (
+    <textarea
+      className={inputStyle}
+      {...register(label, { required })}
+      {...rest}
+    />
+  )
 }
 
 InputText.displayName = 'InputText'

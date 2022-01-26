@@ -1,19 +1,51 @@
-import Button from 'components/Common/Button'
 import Head from 'components/Common/Head'
 import Layout from 'components/Common/Layout'
 import Carousel from 'components/Common/Carousel'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+import ComicItem from 'components/Comic/ComicItem'
+import ComicMostLiked from 'components/Comic/ComicMostLiked'
+import Button from 'components/Common/Button'
 import { useRouter } from 'next/router'
 
-import HomeStyles from 'styles/Home.module.css'
-
 export default function Home() {
+  const [editorial, setEditorial] = useState([])
+  const [mostLiked, setMostLiked] = useState([])
   const router = useRouter()
+
+  useEffect(() => {
+    fetchEditorial()
+    fetchMostLiked()
+  }, [])
+
+  const fetchEditorial = async () => {
+    const res = await axios.get(`${process.env.COMIC_API_URL}/comics`, {
+      params: {
+        __skip: 0,
+        __limit: 4,
+      },
+    })
+    const newRes = res.data.data.results
+    setEditorial(newRes)
+  }
+
+  const fetchMostLiked = async () => {
+    const res = await axios.get(`${process.env.COMIC_API_URL}/comics`, {
+      params: {
+        __skip: 0,
+        __limit: 4,
+        __sort: 'totalLikes::-1',
+      },
+    })
+    const newRes = res.data.data.results
+    setMostLiked(newRes)
+  }
 
   return (
     <Layout>
       <Head />
-      <div className="py-12 md:px-8">
-        <Carousel />
+      <div className="py-12 bg-white">
+        {/* <Carousel /> */}
         <div className="max-w-6xl m-auto px-4 md:flex md:flex-row-reverse items-center">
           <div
             className="w-full md:w-2/5"
@@ -24,13 +56,13 @@ export default function Home() {
             //   backgroundRepeat: 'no-repeat',
             // }}
           >
-            <img className="max-w-full" src="/hero.svg" />
+            <img className="max-w-full" src="/hero2.png" />
           </div>
           <div className="w-full md:w-3/5 pr-0 md:pr-4 pt-8 md:pt-0">
-            <div className="text-5xl font-bold mb-4 text-white md:w-96 leading-normal">
+            <div className="text-5xl font-bold mb-4 text-black md:w-96 leading-normal">
               Digital Comic and Beyond
             </div>
-            <div className="text-xl mb-12 text-gray-200">
+            <div className="text-xl mb-12 text-black">
               Read and truly own your digital comics. Interact, engage, and
               support the creators through collectibles NFTs. Tipping is now
               interactive!
@@ -56,59 +88,59 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        <div className="px-4 text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white leading-normal md:text-center pt-16">
-          Latest Comic
-        </div>
-        <div className={`pb-16 md:py-36 ${HomeStyles.latestComic}`}>
-          <div className="max-w-6xl m-auto px-4">
-            <img
-              className="md:hidden h-72 mx-auto rounded-lg"
-              src="https://ipfs.fleek.co/ipfs/bafybeidf6pg3g65nx2kzirjy37rlwh7sfjmsc4lqlhoiiggng3g3j4ouj4"
-            />
-            <div className="text-5xl font-medium mt-4 md:mt-0 mb-4 text-white">
-              Paradigm
-            </div>
-            <div className="text-gray-200 md:w-1/2 mb-8">
-              “In desolate and sequestered lands, Abee wakes up remembering
-              nothing but the hackathon he just participated in. Alongside three
-              new companies, Abee will take part in an adventure, discover new
-              knowledge, and commit risky endeavors.”
-            </div>
-            <Button size="lg" onClick={() => router.push('/comics/paradigm')}>
-              Read Now
-            </Button>
+        {/* Editorial List */}
+        <div className="w-full h-full mx-auto mt-6 md:max-w-6xl md:mt-16">
+          <h2 className="text-2xl text-black font-bold mx-3 md:mb-1 md:text-3xl">
+            Editorial
+          </h2>
+          <div className="ml-3 w-12 h-2 mb-4 md:mb-6 bg-primary"></div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 overflow-hidden mx-4">
+            {editorial.map((data, i) => (
+              <ComicItem data={data} key={i} />
+            ))}
           </div>
         </div>
 
+        {/* Most Liked List */}
+        <div className="w-full h-full mx-auto mt-12 md:max-w-6xl md:mt-16">
+          <h2 className="text-2xl text-black font-bold mx-3 md:mb-1 md:text-3xl">
+            Most Liked
+          </h2>
+          <div className="ml-3 w-12 h-2 mb-4 md:mb-6 bg-primary"></div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 overflow-hidden mx-4">
+            {mostLiked.map((data, i) => (
+              <ComicMostLiked data={data} key={i} />
+            ))}
+          </div>
+        </div>
         <div className="max-w-6xl m-auto py-16 px-4">
-          <div className="text-5xl font-bold mb-4 text-white leading-normal text-center">
+          <div className="text-5xl font-bold mb-4 text-black leading-normal text-center">
             Feature
           </div>
           <div className="md:flex">
             <div className="text-center flex-1 p-4 font-medium">
               <img src={`/yours.svg`} />
-              <p className="text-xl text-white mb-3">Comic is 100% yours</p>
-              <p className="text-gray-200">
+              <p className="text-xl text-black mb-3">Comic is 100% yours</p>
+              <p className="text-gray-800">
                 Read, lend, and sell your digital comic anytime you want
               </p>
             </div>
             <div className="text-center flex-1 p-4 font-medium">
               <img src={`/support.svg`} />
-              <p className="text-xl text-white mb-3">
+              <p className="text-xl text-black mb-3">
                 Collecting is Supporting Creators
               </p>
-              <p className="text-gray-200">
+              <p className="text-gray-800">
                 Collect the collectibles NFTs by the authors to support them
-                exppandig the universe they built
+                expanding the universe they built
               </p>
             </div>
             <div className="text-center flex-1 p-4 font-medium">
               <img src={`/community.svg`} />
-              <p className="text-xl text-white mb-3">
+              <p className="text-xl text-black mb-3">
                 Reading with The Community
               </p>
-              <p className="text-gray-200">
+              <p className="text-gray-800">
                 Enter the exclusive community of the title and embark on a
                 journey with fellow comic buffs to the author's world through
                 Q&A and discussions
@@ -125,19 +157,19 @@ export default function Home() {
             backgroundSize: `cover`,
           }}
         ></div>
-        <div className="max-w-3xl -mt-12 px-4 mx-auto">
-          <div className="text-5xl font-bold mb-4 text-white leading-normal">
+        <div className="max-w-3xl px-4 mx-auto">
+          <div className="text-5xl font-bold mb-4 text-primary leading-normal inline-block">
             Create Now!
           </div>
-          <div className="text-gray-200 mb-8 text-lg">
+          <div className="text-gray-800 mb-8 text-lg">
             Publishing your title with Paras Comic is quick and easy. Sell your
             digital collectibles of your IP and interact with your fans
             directly.
           </div>
-          <div className="text-gray-200 mb-8">
+          <div className="text-gray-800 mb-8">
             Build your community and share your work with comic buffs!
           </div>
-          <Button onClick={() => router.push('/partner-with-us')} size="lg">
+          <Button onClick={() => router.push('/artist-submission')} size="lg">
             Create with us
           </Button>
         </div>

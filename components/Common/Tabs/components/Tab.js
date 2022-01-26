@@ -5,12 +5,12 @@ const Tab = ({ children, index = 0, className, style }) => {
   const { currentPage, setPage } = useTabs()
 
   const buttonBaseStyle =
-    'inline-flex relative items-center px-4 gap-3 outline-none font-medium text-base font-body z-10'
+    'inline-flex relative items-center px-4 gap-3 outline-none font-medium text-lg md:text-2xl font-body z-10'
   const buttonTransition = 'transition duration-300 ease-in-out'
 
-  let buttonActiveStyle = 'text-blueGray-400'
+  let buttonActiveStyle = 'text-gray-400 hover:text-gray-600'
   if (currentPage === index) {
-    buttonActiveStyle = 'text-white tab-border'
+    buttonActiveStyle = 'text-black font-bold tab-border'
   }
 
   const buttonStyle = `${buttonBaseStyle} ${className}`

@@ -18,18 +18,18 @@ const Button = ({
   let buttonVariantStyle
   switch (variant) {
     case 'primary':
-      buttonVariantStyle = `bg-primary text-gray-900 ${
+      buttonVariantStyle = `bg-primary text-white ${
         !isDisabled && 'hover:bg-opacity-70'
       }`
       break
     case 'secondary':
-      buttonVariantStyle = `bg-blueGray-800 text-gray-200 ${
+      buttonVariantStyle = `bg-comic-gray-primary text-white ${
         !isDisabled && 'hover:bg-opacity-70'
       }`
       break
     case 'ghost':
-      buttonVariantStyle = `bg-transparent border border-electricLime-600 text-electricLime-600 ${
-        !isDisabled && 'hover:bg-electricLime-600 hover:bg-opacity-10'
+      buttonVariantStyle = `bg-transparent border border-primary text-primary ${
+        !isDisabled && 'hover:bg-primary hover:bg-opacity-10'
       }`
       break
     default:
@@ -39,7 +39,7 @@ const Button = ({
   let buttonSizeStyle
   switch (size) {
     case 'lg':
-      buttonSizeStyle = 'py-3 px-20 text-base'
+      buttonSizeStyle = 'py-3 px-10 text-base'
       break
     case 'md':
       buttonSizeStyle = 'py-3 px-8 text-sm'

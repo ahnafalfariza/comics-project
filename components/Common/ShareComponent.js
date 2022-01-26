@@ -7,10 +7,12 @@ import {
   TwitterShareButton,
 } from 'react-share'
 
-const ShareComponent = ({ title, shareUrl }) => {
+const ShareComponent = ({ title, shareUrl, withText = true }) => {
   return (
     <div className="flex items-center space-x-2 justify-between">
-      <div className="text-white text-sm opacity-80 pr-4">Share Now</div>
+      {withText && (
+        <div className="text-black text-sm opacity-80 pr-4">Share Now</div>
+      )}
       <div className="flex space-x-3">
         <FacebookShareButton
           url={shareUrl}

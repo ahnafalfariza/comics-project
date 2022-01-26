@@ -69,7 +69,7 @@ const Nav = () => {
   const ProfileModal = () => {
     return (
       <div className="absolute right-0 mt-3 z-30">
-        <div className="min-w-max w-64 bg-blueGray-800 p-3 rounded-md shadow-xl">
+        <div className="min-w-max w-64 bg-white p-3 rounded-md shadow-xl">
           <div className="flex items-center">
             <Avatar
               size="lg"
@@ -78,10 +78,10 @@ const Nav = () => {
               src={parseImgUrl(currentUser?.imgUrl || '')}
             />
             <div>
-              <p className="font-medium text-white">
+              <p className="font-medium text-black">
                 {near.getAccount()?.accountId}
               </p>
-              <p className="font-light text-sm text-white opacity-75">
+              <p className="font-light text-sm text-black opacity-75">
                 {prettyBalance(near.getAccount()?.balance.available, 24, 4)} Ⓝ
               </p>
             </div>
@@ -100,8 +100,12 @@ const Nav = () => {
             className="flex flex-shrink-0 items-center space-x-2 cursor-pointer"
             onClick={() => near.signOut()}
           >
-            <IconLogout size={18} className="text-white opacity-80" />
-            <p className="text-white opacity-80">Logout</p>
+            <IconLogout
+              size={18}
+              className="text-black opacity-80"
+              color="#000000"
+            />
+            <p className="text-black opacity-80">Logout</p>
           </div>
         </div>
       </div>
@@ -116,7 +120,7 @@ const Nav = () => {
         onClose={() => setShowLoginModal(false)}
       />
       <div ref={mobileMenuRef} className="bg-background sticky z-30 top-0">
-        <div className="relative bg-background max-w-6xl m-auto flex p-4 items-center justify-between z-40">
+        <div className="relative bg-background max-w-6xl m-auto flex py-2 px-4 items-center justify-between z-40">
           <div className="flex items-center md:hidden">
             <HamburgerMenu
               isOpen={showHamburgerMenu}
@@ -125,35 +129,38 @@ const Nav = () => {
               height={15}
               strokeWidth={2}
               rotate={0}
-              color="white"
+              color="#000000"
               borderRadius={0}
               animationDuration={0.3}
             />
             <div className="pl-4">
               <Link href="/">
                 <a className="block w-24">
-                  <img className="hover:opacity-80" src="/logo.svg" />
+                  <img className="hover:opacity-80" src="/paras-comic.png" />
                 </a>
               </Link>
             </div>
           </div>
-          <div className="hidden md:flex space-x-12 text-xl font-normal text-white items-center">
-            <div className="w-32">
+          <div className="hidden md:flex space-x-6 text-xl font-normal text-black items-center">
+            <div className="w-24 mr-4">
               <Link href="/">
                 <a>
-                  <img className="hover:opacity-80" src="/logo.svg" />
+                  <img
+                    className="hover:opacity-80 p-1"
+                    src="/paras-comic.png"
+                  />
                 </a>
               </Link>
             </div>
             <Link href="/">
-              <a className="block font-semibold hover:text-primary">
+              <a className="block font-semibold hover:text-primary text-base">
                 <span className={router.pathname === '/' ? `text-primary` : ''}>
                   Home
                 </span>
               </a>
             </Link>
             <Link href="/comics">
-              <a className="block font-semibold hover:text-primary">
+              <a className="block font-semibold hover:text-primary text-base">
                 <span
                   className={
                     router.pathname.split('/')[1] === 'comics'
@@ -166,7 +173,7 @@ const Nav = () => {
               </a>
             </Link>
             <Link href="/market">
-              <a className="block font-semibold hover:text-primary">
+              <a className="block font-semibold hover:text-primary text-base">
                 <span
                   className={
                     router.pathname.includes('/market') ? `text-primary` : ''
@@ -176,17 +183,17 @@ const Nav = () => {
                 </span>
               </a>
             </Link>
-            <Link href="/partner-with-us">
-              <a className="block font-semibold hover:text-primary">
+            {/* <Link href="/submission">
+              <a className="block font-semibold hover:text-primary text-base">
                 <span
                   className={
-                    router.pathname === '/partner-with-us' ? `text-primary` : ''
+                    router.pathname === '/submission' ? `text-primary` : ''
                   }
                 >
-                  Partner
+                  Submission
                 </span>
               </a>
-            </Link>
+            </Link> */}
           </div>
           {near.isLoggedIn() ? (
             <div ref={profileModalRef} className="relative h-auto">
@@ -211,7 +218,7 @@ const Nav = () => {
                     fillRule="evenodd"
                     clipRule="evenodd"
                     d="M5.29303 7.29299C5.48056 7.10552 5.73487 7.0002 6.00003 7.0002C6.26519 7.0002 6.5195 7.10552 6.70703 7.29299L10 10.586L13.293 7.29299C13.3853 7.19748 13.4956 7.1213 13.6176 7.06889C13.7396 7.01648 13.8709 6.98889 14.0036 6.98774C14.1364 6.98659 14.2681 7.01189 14.391 7.06217C14.5139 7.11245 14.6255 7.1867 14.7194 7.28059C14.8133 7.37449 14.8876 7.48614 14.9379 7.60904C14.9881 7.73193 15.0134 7.86361 15.0123 7.99639C15.0111 8.12917 14.9835 8.26039 14.9311 8.38239C14.8787 8.5044 14.8025 8.61474 14.707 8.70699L10.707 12.707C10.5195 12.8945 10.2652 12.9998 10 12.9998C9.73487 12.9998 9.48056 12.8945 9.29303 12.707L5.29303 8.70699C5.10556 8.51946 5.00024 8.26515 5.00024 7.99999C5.00024 7.73483 5.10556 7.48052 5.29303 7.29299Z"
-                    fill="white"
+                    fill="#000000"
                   />
                 </svg>
               </div>
@@ -234,7 +241,7 @@ const Nav = () => {
               showHamburgerMenu ? 'translate-y-0' : '-translate-y-96'
             }`}
           >
-            <div className="text-center text-white pb-3">
+            <div className="text-center text-black pb-3">
               <div className="p-3">
                 <Link href="/">
                   <a className="font-semibold hover:text-primary">
@@ -276,21 +283,19 @@ const Nav = () => {
                   </a>
                 </Link>
               </div>
-              <div className="p-3">
-                <Link href="/partner-with-us">
+              {/* <div className="p-3">
+                <Link href="/submission">
                   <a className="font-semibold hover:text-primary">
                     <span
                       className={
-                        router.pathname === '/partner-with-us'
-                          ? `text-primary`
-                          : ''
+                        router.pathname === '/submission' ? `text-primary` : ''
                       }
                     >
-                      Partner
+                      Submission
                     </span>
                   </a>
                 </Link>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

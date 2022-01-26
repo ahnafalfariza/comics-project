@@ -11,10 +11,13 @@ import Head from 'components/Common/Head'
 import BuyChapterModal from 'components/Modal/BuyChapterModal'
 import ChapterImagePage from 'components/ViewerMenu/ChapterImagePage'
 import ChapterNotAvailableModal from 'components/Modal/ChapterNotAvailableModal'
+import ShareComponent from 'components/Common/ShareComponent'
+import ButtonLikes from 'components/ViewerMenu/ButtonLikes'
 
 const ChapterView = ({ isLoading }) => {
   const menuTopRef = useRef()
   const menuBottomRef = useRef()
+  const viewerRef = useRef()
   const router = useRouter()
 
   const [showMenu, setShowMenu] = useState(true)
@@ -30,10 +33,9 @@ const ChapterView = ({ isLoading }) => {
   useEffect(() => {
     const handleClickOutsideMenu = (event) => {
       if (
-        menuTopRef.current &&
-        menuBottomRef.current &&
-        !menuTopRef.current.contains(event.target) &&
-        !menuBottomRef.current.contains(event.target) &&
+        !menuTopRef?.current?.contains(event.target) &&
+        !menuBottomRef?.current?.contains(event.target) &&
+        viewerRef?.current?.contains(event.target) &&
         !showComment &&
         chapterData?.status === 'read'
       ) {
@@ -54,7 +56,14 @@ const ChapterView = ({ isLoading }) => {
       document.removeEventListener('mousedown', handleClickOutsideMenu)
       document.removeEventListener('scroll', handleScroll)
     }
-  }, [menuTopRef, menuBottomRef, showMenu, showComment, chapterData?.status])
+  }, [
+    menuTopRef,
+    menuBottomRef,
+    viewerRef,
+    showMenu,
+    showComment,
+    chapterData?.status,
+  ])
 
   useEffect(() => {
     if (comicId && chapterId && !isLoading) {
@@ -98,7 +107,7 @@ const ChapterView = ({ isLoading }) => {
   }
 
   return (
-    <Layout showNav={false} showFooter={false} className="bg-black">
+    <Layout showNav={false} showFooter={false} className="bg-white">
       <Head />
       <ChapterNotAvailableModal
         show={
@@ -107,6 +116,12 @@ const ChapterView = ({ isLoading }) => {
           Object.keys(chapterData.lang).length === 0
         }
       />
+      <BuyChapterModal
+        active={chapterData?.status !== 'read' || false}
+        data={chapterData}
+        hideCloseButton={true}
+      />
+      <CommentListModal />
       <MenuTop
         ref={menuTopRef}
         showMenu={showMenu}
@@ -120,15 +135,30 @@ const ChapterView = ({ isLoading }) => {
         data={chapterData}
         hasNext={hasNext}
       />
-      {chapterPageUrl.map((url) => (
-        <ChapterImagePage key={url} url={url} />
-      ))}
-      <BuyChapterModal
-        active={chapterData?.status !== 'read' || false}
-        data={chapterData}
-        hideCloseButton={true}
-      />
-      <CommentListModal />
+      <div ref={viewerRef} className="min-h-screen">
+        {chapterPageUrl.map((url) => (
+          <ChapterImagePage key={url} url={url} />
+        ))}
+      </div>
+      <div className="mt-8 mb-20 mx-4">
+        <div className="flex items-center justify-center">
+          <ButtonLikes
+            chapterId={chapterId}
+            comicId={comicId}
+            isLoading={isLoading}
+          />
+          <div>
+            <div>Share Now</div>
+            <ShareComponent
+              title="Read this comic"
+              withText={false}
+              shareUrl={
+                typeof window !== 'undefined' ? window?.location?.href : ''
+              }
+            />
+          </div>
+        </div>
+      </div>
     </Layout>
   )
 }

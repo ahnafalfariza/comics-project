@@ -84,13 +84,13 @@ const TokenTransfer = ({
 
   return (
     <Modal isShow={show} close={onClose}>
-      <div className="max-w-sm w-full p-4 bg-blueGray-800 m-4 md:m-auto rounded-md">
+      <div className="max-w-sm w-full p-4 bg-white m-4 md:m-auto rounded-md shadow-lg">
         <div>
-          <h1 className="text-2xl font-bold text-white tracking-tight">
+          <h1 className="text-2xl font-bold text-black tracking-tight">
             Confirm Transfer
           </h1>
           <div className="mt-4">
-            <label className="block text-sm text-white opacity-90 mb-2">
+            <label className="block text-sm text-black opacity-90 mb-2">
               Address (Account ID)
             </label>
             <InputText
@@ -101,7 +101,7 @@ const TokenTransfer = ({
             />
             <div className="mt-2 text-sm text-red-500"></div>
           </div>
-          <p className="mt-4 text-sm text-center text-white opacity-90 mb-2">
+          <p className="mt-4 text-sm text-center text-black opacity-90 mb-2">
             You will be transfering <b>{data.metadata.title}</b>
             {receiverId && ` to `}
             <b>{receiverId}</b>

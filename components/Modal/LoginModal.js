@@ -6,12 +6,12 @@ import near from 'lib/near'
 const LoginModal = ({ show, onClose, title = 'Login to buy this chapter' }) => {
   return (
     <Modal isShow={show} close={onClose}>
-      <div className="max-w-sm m-4 md:m-auto w-full relative bg-blueGray-800 px-4 py-8 text-center rounded-md">
+      <div className="max-w-sm m-4 md:m-auto w-full relative bg-white px-4 py-8 text-center rounded-md shadow-xl">
         <div className="flex-1 h-48 md:h-64 mb-4">
           <img className="h-full mx-auto" src="/login.png" />
         </div>
-        <h3 className="mb-4 text-2xl text-white font-semibold">{title}</h3>
-        <p className="mt-1 text-white opacity-80">
+        <h3 className="mb-4 text-2xl text-black font-semibold">{title}</h3>
+        <p className="mt-1 text-black opacity-80">
           Read and truly own your digital comics. Interact, engage, and support
           the creators through collectibles NFTs.
         </p>

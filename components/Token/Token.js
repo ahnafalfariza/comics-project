@@ -39,14 +39,14 @@ const Token = ({
       let h =
         containerRef.current.parentNode.offsetWidth * (imgHeight / imgWidth)
 
-      if (
-        containerRef.current.parentNode.offsetHeight !== 0 &&
-        h > containerRef.current.parentNode.offsetHeight
-      ) {
-        w =
-          (imgWidth * containerRef.current.parentNode.offsetHeight) / imgHeight
-        h = containerRef.current.parentNode.offsetHeight
-      }
+      // if (
+      //   containerRef.current.parentNode.offsetHeight !== 0 &&
+      //   h > containerRef.current.parentNode.offsetHeight
+      // ) {
+      //   w =
+      //     (imgWidth * containerRef.current.parentNode.offsetHeight) / imgHeight
+      //   h = containerRef.current.parentNode.offsetHeight
+      // }
 
       setDimension({
         width: w,
@@ -97,7 +97,7 @@ const Token = ({
 
   const boxShadow = () => {
     if (shadow === 'special') {
-      return 'rgba(255, 255, 255, 0.2) 0 0 40px 5px, white 0 0 0 1px,rgba(0, 0, 0, 0.66) 0 30px 60px 0'
+      return 'rgba(0, 0, 0, 0.50) -3px 3px 8px 3px,rgba(0, 0, 0, 0) 0 30px 60px 0'
     } else if (shadow === 'none') {
       return 'none'
     }

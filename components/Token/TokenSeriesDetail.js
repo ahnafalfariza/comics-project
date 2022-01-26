@@ -44,8 +44,8 @@ const TokenSeriesDetail = ({ token, className }) => {
       <div
         className={`cursor-pointer relative text-center overflow-hidden ${
           activeTab === tab
-            ? 'text-gray-100 border-b-2 border-white font-semibold'
-            : 'hover:bg-opacity-15 text-gray-100'
+            ? 'text-black border-b-2 border-primary font-semibold'
+            : 'hover:bg-opacity-15 text-black'
         }`}
         onClick={() => changeActiveTab(tab)}
       >
@@ -108,38 +108,38 @@ const TokenSeriesDetail = ({ token, className }) => {
             {/* <TokenSeries metadata={metadata} /> */}
           </div>
         </div>
-        <div className="flex flex-col w-full h-3/5 lg:h-full lg:w-2/5 bg-blueGray-800">
+        <div className="flex flex-col w-full h-3/5 lg:h-full lg:w-2/5 bg-white">
           <Scrollbars
             className="h-full"
             universal={true}
             renderView={(props) => (
-              <div {...props} id="TokenScroll" className="p-4" />
+              <div {...props} id="TokenSeriesScroll" className="p-4" />
             )}
           >
             <div>
               <div className="flex justify-between">
                 <div>
-                  <h1 className="text-xl md:text-2xl font-bold text-white tracking-tight pr-4 break-all">
+                  <h1 className="text-xl md:text-2xl font-bold text-black tracking-tight pr-4 break-all">
                     {token.metadata.title}
                   </h1>
-                  <p className="mt-1 text-white">
+                  <p className="mt-1 text-black">
                     by{' '}
                     <span className="font-semibold">
                       {token.metadata.author_ids ? (
                         <Link href={`/${token.metadata.author_ids[0]}`}>
-                          <a className="text-white font-semibold border-b-2 border-transparent hover:border-white">
+                          <a className="text-black font-semibold border-b-2 border-transparent hover:border-white">
                             {token.metadata.author_ids[0]}
                           </a>
                         </Link>
                       ) : token.metadata.creator_id ? (
                         <Link href={`/${token.metadata.creator_id}`}>
-                          <a className="text-white font-semibold border-b-2 border-transparent hover:border-white">
+                          <a className="text-black font-semibold border-b-2 border-transparent hover:border-white">
                             {token.metadata.creator_id}
                           </a>
                         </Link>
                       ) : (
                         <Link href={`/${token.contract_id}`}>
-                          <a className="text-white font-semibold border-b-2 border-transparent hover:border-white">
+                          <a className="text-black font-semibold border-b-2 border-transparent hover:border-white">
                             {token.contract_id}
                           </a>
                         </Link>
@@ -149,7 +149,7 @@ const TokenSeriesDetail = ({ token, className }) => {
                 </div>
                 <div>
                   <IconDots
-                    color="#ffffff"
+                    color="#000000"
                     className="cursor-pointer"
                     onClick={() => setShowModal('more')}
                   />
