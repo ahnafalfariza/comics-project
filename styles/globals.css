@@ -47,7 +47,6 @@ a {
   border-radius: 10px;
   -webkit-transition: transform 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
   transition: transform 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
-  @apply shadow-lg border-2 border-primary;
 }
 
 .card-bg {
