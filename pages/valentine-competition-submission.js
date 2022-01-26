@@ -4,6 +4,7 @@ import Layout from 'components/Common/Layout'
 
 const ValentineCompetitionSubmission = () => {
   const title = 'Valentine Competition Submission'
+
   return (
     <Layout>
       <Head title={title} />

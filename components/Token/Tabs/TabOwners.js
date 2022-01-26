@@ -53,6 +53,7 @@ const TabOwners = ({ localToken }) => {
         dataLength={tokens.length}
         next={fetchTokens}
         hasMore={hasMore}
+        className="pb-4"
         scrollableTarget="TokenScroll"
       >
         {tokens.map((token) => (

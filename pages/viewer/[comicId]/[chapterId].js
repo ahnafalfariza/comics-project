@@ -11,9 +11,8 @@ import Head from 'components/Common/Head'
 import BuyChapterModal from 'components/Modal/BuyChapterModal'
 import ChapterImagePage from 'components/ViewerMenu/ChapterImagePage'
 import ChapterNotAvailableModal from 'components/Modal/ChapterNotAvailableModal'
-import Button from 'components/Common/Button'
-import { IconLove } from 'components/Icons'
 import ShareComponent from 'components/Common/ShareComponent'
+import ButtonLikes from 'components/ViewerMenu/ButtonLikes'
 
 const ChapterView = ({ isLoading }) => {
   const menuTopRef = useRef()
@@ -107,10 +106,6 @@ const ChapterView = ({ isLoading }) => {
     setChapterPageUrl(url)
   }
 
-  const onClickLikes = () => {
-    // TODO
-  }
-
   return (
     <Layout showNav={false} showFooter={false} className="bg-white">
       <Head />
@@ -147,14 +142,11 @@ const ChapterView = ({ isLoading }) => {
       </div>
       <div className="mt-8 mb-20 mx-4">
         <div className="flex items-center justify-center">
-          <Button
-            className="flex items-center mr-8"
-            size="md"
-            onClick={onClickLikes}
-          >
-            <IconLove color={'none'} />
-            <div className="ml-3 text-white text-xl">Like</div>
-          </Button>
+          <ButtonLikes
+            chapterId={chapterId}
+            comicId={comicId}
+            isLoading={isLoading}
+          />
           <div>
             <div>Share Now</div>
             <ShareComponent
