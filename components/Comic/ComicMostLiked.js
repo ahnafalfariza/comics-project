@@ -1,6 +1,7 @@
 import { parseImgUrl } from 'utils/common'
 import { useRouter } from 'next/router'
 import Token from 'components/Token/Token'
+import { nFormatter } from '../../utils/common'
 
 const ComicMostLiked = ({ data, key }) => {
   const router = useRouter()
@@ -38,7 +39,7 @@ const ComicMostLiked = ({ data, key }) => {
         <div>
           <div className="flex flex-row">
             <p className="text-gray-800 text-sm font-bold md:text-xs">
-              3.1 Likes
+              {nFormatter(data.totalLikes)} Likes
             </p>
           </div>
           <p
