@@ -157,8 +157,8 @@ export default function Home() {
             backgroundSize: `cover`,
           }}
         ></div>
-        <div className="max-w-3xl -mt-12 px-4 mx-auto">
-          <div className="text-5xl font-bold mb-4 text-white leading-normal bg-primary inline-block">
+        <div className="max-w-3xl px-4 mx-auto">
+          <div className="text-5xl font-bold mb-4 text-primary leading-normal inline-block">
             Create Now!
           </div>
           <div className="text-gray-800 mb-8 text-lg">

@@ -45,12 +45,12 @@ const ComicInfo = ({
             style={chapterImage}
           />
           <div className="p-4 sm:ml-6 lg:ml-12 w-full">
-            <h3 className="text-white text-center sm:text-left font-semibold text-2xl sm:text-4xl lg:text-5xl">
+            <h3 className="text-white text-center sm:text-left font-semibold text-2xl sm:text-4xl lg:text-5xl mb-4">
               {data.title}
             </h3>
-            <p className="text-white text-center font-bold mb-8 sm:mb-4 md:text-left">
+            {/* <p className="text-white text-center font-bold mb-8 sm:mb-4 md:text-left">
               {nFormatter(data.totalLikes) || 0} Likes
-            </p>
+            </p> */}
             <div className="grid grid-cols-2">
               <div>
                 <h4 className="text-white mb-1 font-semibold ">Author</h4>
@@ -70,11 +70,9 @@ const ComicInfo = ({
             <div className="grid grid-cols-2">
               <div>
                 <h4 className="text-white mb-1 font-semibold ">Genre</h4>
-                <p className="text-blueGray-200 mb-4">{data.genre}</p>
-              </div>
-              <div>
-                <h4 className="text-white mb-1 font-semibold ">Subgenre</h4>
-                <p className="text-blueGray-200 mb-4">{data.subgenre}</p>
+                <p className="text-blueGray-200 mb-4">
+                  {data.genre}, {data.subgenre}
+                </p>
               </div>
             </div>
             <h4 className="text-white mb-1 font-semibold ">Synopsis:</h4>
