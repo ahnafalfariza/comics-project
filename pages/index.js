@@ -45,13 +45,55 @@ export default function Home() {
     <Layout>
       <Head />
       <div className="py-12 bg-white">
-        <Carousel />
+        {/* <Carousel /> */}
+        <div className="max-w-6xl m-auto px-4 md:flex md:flex-row-reverse items-center">
+          <div
+            className="w-full md:w-2/5"
+            // style={{
+            //   backgroundImage: 'url("/hero.png")',
+            //   backgroundPositionX: 'right',
+            //   backgroundSize: 'contain',
+            //   backgroundRepeat: 'no-repeat',
+            // }}
+          >
+            <img className="max-w-full" src="/hero2.png" />
+          </div>
+          <div className="w-full md:w-3/5 pr-0 md:pr-4 pt-8 md:pt-0">
+            <div className="text-5xl font-bold mb-4 text-black md:w-96 leading-normal">
+              Digital Comic and Beyond
+            </div>
+            <div className="text-xl mb-12 text-black">
+              Read and truly own your digital comics. Interact, engage, and
+              support the creators through collectibles NFTs. Tipping is now
+              interactive!
+            </div>
+            <div className="flex flex-wrap">
+              <Button
+                className="w-64"
+                size="lg"
+                onClick={() => router.push('/comics')}
+              >
+                Read Comics
+              </Button>
+              <div className="mt-4 lg:mt-0 pl-0 lg:pl-4">
+                <Button
+                  className="w-64"
+                  variant="ghost"
+                  size="lg"
+                  onClick={() => router.push('/faq')}
+                >
+                  Learn More
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
         {/* Editorial List */}
         <div className="w-full h-full mx-auto mt-6 md:max-w-6xl md:mt-16">
-          <h2 className="text-2xl text-black font-bold mx-3 md:mb-4 md:text-3xl">
+          <h2 className="text-2xl text-black font-bold mx-3 md:mb-1 md:text-3xl">
             Editorial
           </h2>
-          <div className="ml-3 w-16 h-2 mb-4 md:w-16 md:h-3 md:mb-10 bg-primary"></div>
+          <div className="ml-3 w-12 h-2 mb-4 md:mb-6 bg-primary"></div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 overflow-hidden mx-4">
             {editorial.map((data, i) => (
               <ComicItem data={data} key={i} />
@@ -127,7 +169,7 @@ export default function Home() {
           <div className="text-gray-800 mb-8">
             Build your community and share your work with comic buffs!
           </div>
-          <Button onClick={() => router.push('/partner-with-us')} size="lg">
+          <Button onClick={() => router.push('/artist-submission')} size="lg">
             Create with us
           </Button>
         </div>

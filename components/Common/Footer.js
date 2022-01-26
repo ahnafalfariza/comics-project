@@ -27,7 +27,7 @@ const Footer = () => {
           </div>
           <div className="flex items-center pt-2 px-6">
             <a
-              href="https://instagram.com/paras.hq"
+              href="https://instagram.com/paras.comic"
               target="_blank"
               className="flex cursor-pointer "
               rel="noreferrer"
