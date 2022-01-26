@@ -132,7 +132,7 @@ export default function Home() {
               </p>
               <p className="text-gray-800">
                 Collect the collectibles NFTs by the authors to support them
-                exppandig the universe they built
+                expanding the universe they built
               </p>
             </div>
             <div className="text-center flex-1 p-4 font-medium">
