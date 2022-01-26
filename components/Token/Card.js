@@ -106,7 +106,7 @@ const Card = ({
           }}
         >
           <div
-            className="card bg-white w-full h-full cursor-pointer"
+            className="card bg-white w-full h-full cursor-pointer shadow-lg border-2 border-primary"
             style={{
               fontSize: `${dimension.width / 14}px`,
               transform: `rotateY(${rotate.x}deg) rotateX(${rotate.y}deg)`,
