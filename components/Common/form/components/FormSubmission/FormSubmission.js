@@ -12,22 +12,26 @@ import {
   postPagesComic,
 } from 'services/submission'
 import { readFileAsUrl } from 'utils/common'
+import { InputDropdown } from '../InputDropdown'
 
-const ArtistSubmission = ({ title }) => {
+const FormSubmission = ({ title }) => {
   const [cover, setCover] = useState('')
   const [coverPreview, setCoverPreview] = useState('')
   const [items, setItems] = useState([])
   const [isOverDimensions, setIsOverDimensions] = useState(false)
   const [sizeComic, setSizeComic] = useState(0)
-  const [modalGenre, setModalGenre] = useState(false)
   const methods = useForm()
   const { register, handleSubmit, formState, setValue, reset, clearErrors } =
     methods
   const [genreList, setGenreList] = useState([])
+  const [genreSelect, setGenreSelect] = useState('')
   const [subGenreList, setSubGenreList] = useState([])
+  const [subGenreSelect, setSubGenreSelect] = useState('')
   const [errorMessage, setErrorMessage] = useState(false)
   const genreModalRef = useRef()
+  const subGenreModalRef = useRef()
   const [loading, setLoading] = useState(false)
+  const [isSubmit, setIsSubmit] = useState(false)
   const setToastConfig = useStore((state) => state.setToastConfig)
 
   const _showToast = (type, msg) => {
@@ -45,11 +49,13 @@ const ArtistSubmission = ({ title }) => {
   const getGenreList = useCallback(async () => {
     const data = await getGenres()
     setGenreList(data)
+    setGenreSelect(data[0].genre)
   }, [])
 
   const getSubGenreList = useCallback(async () => {
     const data = await getSubGenres()
     setSubGenreList(data)
+    setSubGenreSelect(data[0].subgenre)
   }, [])
 
   useEffect(() => {
@@ -67,17 +73,6 @@ const ArtistSubmission = ({ title }) => {
     items.forEach((item) => (size += item.file.size))
     setSizeComic(size)
   }, [sizeComic, items])
-
-  useEffect(() => {
-    const onClickEv = (e) => {
-      if (genreModalRef && !genreModalRef?.current?.contains(e.target))
-        setModalGenre(false)
-      else setModalGenre(false)
-    }
-    if (modalGenre) document.body.addEventListener('click', onClickEv)
-
-    return () => document.body.removeEventListener('click', onClickEv)
-  }, [modalGenre])
 
   const formatBytes = (bytes, decimals = 0) => {
     const sizeInMB = (bytes / (1024 * 1024)).toFixed(decimals)
@@ -133,8 +128,8 @@ const ArtistSubmission = ({ title }) => {
       form.append('submission', title)
       form.append('cover', data.cover)
       form.append('title', data.title)
-      form.append('genre', data.genre)
-      form.append('subgenre', data.subgenre)
+      form.append('genre', genreSelect)
+      form.append('subgenre', subGenreSelect)
       form.append('synopsis', data.synopsis)
       form.append('email', data.email)
       data.pages.forEach((page) => {
@@ -147,6 +142,9 @@ const ArtistSubmission = ({ title }) => {
           setCover('')
           setCoverPreview('')
           setItems([])
+          setIsSubmit(true)
+          setGenreSelect(genreList[0].genre)
+          setSubGenreSelect(subGenreList[0].subgenre)
           reset()
           clearErrors()
           setLoading(false)
@@ -200,7 +198,7 @@ const ArtistSubmission = ({ title }) => {
     userSelect: 'none',
     background: isDragging ? 'lightgreen' : 'grey',
     width: window.innerWidth > 768 ? 400 : 290,
-    right: 340,
+    right: 605,
     left: 0,
     ...draggableStyle,
   })
@@ -374,49 +372,25 @@ const ArtistSubmission = ({ title }) => {
                 )}
               </div>
             </div>
-            <div className="flex justify-start gap-2 md:gap-20">
-              <div className="mt-8 mb-2">
-                <label className="font-bold text-md">Genre</label>
-                <div>
-                  <select
-                    className="flex justify-between items-center w-32 relative md:w-64 mt-3 px-2 py-2 rounded-lg bg-comic-gray-secondary cursor-pointer input-text"
-                    {...register('genre')}
-                  >
-                    {genreList.map((item, index) => {
-                      return (
-                        <option
-                          key={index}
-                          className="bg-blue-600"
-                          value={item.genre}
-                        >
-                          {item.genre}
-                        </option>
-                      )
-                    })}
-                  </select>
-                </div>
-              </div>
-              <div className="mt-8 mb-2">
-                <label className="font-bold text-md">Sub-Genre</label>
-                <div>
-                  <select
-                    className="flex justify-between items-center relative w-full md:w-64 mt-3 px-2 py-2 rounded-lg bg-comic-gray-secondary cursor-pointer input-text"
-                    {...register('subgenre')}
-                  >
-                    {subGenreList.map((item, index) => {
-                      return (
-                        <option
-                          key={index}
-                          className="bg-blue-600"
-                          value={item.subgenre}
-                        >
-                          {item.subgenre}
-                        </option>
-                      )
-                    })}
-                  </select>
-                </div>
-              </div>
+            <div className="md:flex justify-start gap-2 md:gap-20">
+              <InputDropdown
+                title="Genre"
+                ref={genreModalRef}
+                data={genreList}
+                register={register}
+                label="genre"
+                selectItem={setGenreSelect}
+                submit={isSubmit}
+              />
+              <InputDropdown
+                title="Sub Genre"
+                ref={subGenreModalRef}
+                data={subGenreList}
+                register={register}
+                label="subgenre"
+                selectItem={setSubGenreSelect}
+                submit={isSubmit}
+              />
             </div>
             <div className="mt-8 mb-2">
               <label className="font-bold text-md">Synopsis</label>
@@ -557,4 +531,4 @@ const ArtistSubmission = ({ title }) => {
   )
 }
 
-export default ArtistSubmission
+export default FormSubmission
