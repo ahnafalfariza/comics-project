@@ -414,7 +414,6 @@ const FormSubmission = ({ title }) => {
                 required
                 className="mt-3"
                 type="email"
-                placeholder="paradigm@paras.id"
                 width="80"
               />
               {formState.errors.email && (
@@ -464,6 +463,11 @@ const FormSubmission = ({ title }) => {
                       style={getListStyle(snapshot.isDraggingOver)}
                       className="rounded-md overflow-auto"
                     >
+                      {items.length === 0 && (
+                        <div className="flex justify-center items-center h-full text-[#BBBBBB]">
+                          You can add more than 1 file at a time
+                        </div>
+                      )}
                       {items.map((item, index) => (
                         <Draggable
                           key={item.id}
