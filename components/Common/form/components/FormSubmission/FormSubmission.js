@@ -37,7 +37,11 @@ const FormSubmission = ({ title }) => {
   const _showToast = (type, msg) => {
     setToastConfig({
       text: (
-        <div className="text-sm font-semibold text-gray-900 text-center">
+        <div
+          className={`text-sm font-semibold text-gray-900 ${
+            type === 'error' && 'bg-red-300 border-red-500'
+          } text-center`}
+        >
           <p>{msg}</p>
         </div>
       ),
@@ -254,7 +258,7 @@ const FormSubmission = ({ title }) => {
       const img = new Image()
 
       img.onload = () => {
-        if (img.width > 640 || img.height > 890) {
+        if (img.width !== 640 || img.height !== 890) {
           checkDimensions = true
           setIsOverDimensions(true)
         }
