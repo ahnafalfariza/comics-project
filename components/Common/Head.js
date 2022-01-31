@@ -3,7 +3,8 @@ import NextHead from 'next/head'
 const Head = ({
   title = 'Paras Comic',
   description = 'New way to collect digital comics. Read and truly own your digital comics. Engage and support the creators like never before.',
-  image = 'http://cdn.paras.id/bafybeib4qnakufuktntyagioruvcjbyyvggjn4mfemy4gxk37nrjytrtw4',
+  image = 'https://paras-cdn.imgix.net/bafybeibc2xscw4begswofhkac7fyf26vpb6dalcxqzl7hx6utorwsve7wq',
+  imageTwitter = '',
   url = 'https://comics.paras.com',
   keywords = 'comics, blockchain, near',
 }) => {
@@ -26,7 +27,7 @@ const Head = ({
       <meta property="twitter:url" content={url} />
       <meta property="twitter:title" content={_title} />
       <meta property="twitter:description" content={description} />
-      <meta property="twitter:image" content={image} />
+      <meta property="twitter:image" content={imageTwitter || image} />
     </NextHead>
   )
 }
