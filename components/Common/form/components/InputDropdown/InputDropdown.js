@@ -68,8 +68,8 @@ const InputDropdown = ({ title, label, ref, data, selectItem, submit }) => {
                     className={`${
                       item[label] === select
                         ? 'text-white bg-primary hover:bg-primary'
-                        : 'hover:bg-opacity-5'
-                    } px-3 py-2 cursor-pointer hover:bg-black`}
+                        : 'hover:bg-opacity-5 hover:bg-black'
+                    } px-3 py-2 cursor-pointer`}
                     onClick={() => {
                       setSelect(item[label])
                       selectItem(item[label])
