@@ -192,13 +192,12 @@ const FormSubmission = ({ title }) => {
     return result
   }
 
-  const grid = 8
-
   const getItemStyle = (isDragging, draggableStyle) => ({
     userSelect: 'none',
-    background: isDragging ? 'lightgreen' : 'grey',
-    width: window.innerWidth > 768 ? 400 : 290,
-    right: 605,
+    background: isDragging ? 'lightgreen' : '#b8b8b9',
+    width: '100%',
+    margin: `0 0 4px 0`,
+    right: 340,
     left: 0,
     ...draggableStyle,
   })
@@ -206,8 +205,6 @@ const FormSubmission = ({ title }) => {
   const getListStyle = (isDraggingOver) => ({
     background: isDraggingOver ? 'rgb (30, 41, 59)' : '#F4F4F5',
     border: '1px solid rgba(145, 145, 145, 0.7)',
-    padding: grid,
-    width: '100%',
     height: 400,
   })
 
@@ -462,7 +459,7 @@ const FormSubmission = ({ title }) => {
                       {...provided.droppableProps}
                       ref={provided.innerRef}
                       style={getListStyle(snapshot.isDraggingOver)}
-                      className="rounded-md overflow-auto"
+                      className="rounded-md overflow-auto px-40"
                     >
                       {items.length === 0 && (
                         <div className="flex justify-center items-center h-full text-[#BBBBBB]">
@@ -477,7 +474,7 @@ const FormSubmission = ({ title }) => {
                         >
                           {(provided, snapshot) => (
                             <div
-                              className="mx-auto relative"
+                              className="relative"
                               ref={provided.innerRef}
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
