@@ -413,6 +413,7 @@ const FormSubmission = ({ title }) => {
                 register={register}
                 required
                 className="mt-3"
+                placeholder="Please input your email"
                 type="email"
                 width="80"
               />
