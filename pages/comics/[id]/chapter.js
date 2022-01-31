@@ -78,6 +78,7 @@ const Collection = ({
             ? parseImgUrl(chapterInfo.metadata.media)
             : parseImgUrl(comicInfo.media)
         }
+        imageTwitter={parseImgUrl(chapterInfo?.metadata.media_twitter)}
       />
       <ComicInfo data={comicInfo} />
       <ChapterLists
