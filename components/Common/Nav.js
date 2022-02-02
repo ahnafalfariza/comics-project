@@ -183,7 +183,7 @@ const Nav = () => {
                 </span>
               </a>
             </Link>
-            {/* <Link href="/submission">
+            <Link href="/submission">
               <a className="block font-semibold hover:text-primary text-base">
                 <span
                   className={
@@ -193,7 +193,7 @@ const Nav = () => {
                   Submission
                 </span>
               </a>
-            </Link> */}
+            </Link>
           </div>
           {near.isLoggedIn() ? (
             <div ref={profileModalRef} className="relative h-auto">
@@ -283,7 +283,7 @@ const Nav = () => {
                   </a>
                 </Link>
               </div>
-              {/* <div className="p-3">
+              <div className="p-3">
                 <Link href="/submission">
                   <a className="font-semibold hover:text-primary">
                     <span
@@ -295,7 +295,7 @@ const Nav = () => {
                     </span>
                   </a>
                 </Link>
-              </div> */}
+              </div>
             </div>
           </div>
         </div>
