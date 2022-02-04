@@ -11,7 +11,7 @@ const Submission = ({ submissions }) => {
       <Head title="Submission" />
       <div className="max-w-6xl m-auto p-4 py-8">
         <p className="text-black font-bold text-4xl mb-14">Submission</p>
-        <div className="md:flex gap-14">
+        <div className="md:flex justify-center gap-14">
           {submissions.map((submission) => (
             <div key={submission._id} className="px-2 mb-10">
               <Link
@@ -25,13 +25,18 @@ const Submission = ({ submissions }) => {
               >
                 <a className="cursor-pointer">
                   <img
-                    className="shadow-xl hover:shadow-md transition duration-500 ease-in-out rounded-3xl mb-3"
+                    className="shadow-xl hover:shadow-md transition duration-500 ease-in-out rounded-3xl mb-3 mx-auto"
                     src={`${parseImgUrl(submission.cover)}`}
                     width={300}
                   />
                 </a>
               </Link>
-              <h4 className="font-bold">{submission.title}</h4>
+              <div className="md:flex items-center gap-4">
+                <h4 className="font-bold text-center md:text-left">
+                  {submission.title}
+                </h4>
+                <div className="hidden md:block w-full h-2 bg-primary" />
+              </div>
             </div>
           ))}
         </div>
