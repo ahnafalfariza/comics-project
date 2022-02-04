@@ -425,7 +425,7 @@ const FormSubmission = () => {
                   label="email"
                   register={register}
                   required
-                  className="mt-3"
+                  className="mt-3 md:w-96"
                   placeholder="Please input your email"
                   type="email"
                   width="80"
@@ -478,7 +478,7 @@ const FormSubmission = () => {
                         className="rounded-md overflow-auto px-40"
                       >
                         {items.length === 0 && (
-                          <div className="flex justify-center items-center h-full text-[#BBBBBB]">
+                          <div className="flex justify-center items-center mt-10 h-80 text-[#BBBBBB] absolute md:static px-7 text-center left-0">
                             You can add more than 1 file at a time
                           </div>
                         )}

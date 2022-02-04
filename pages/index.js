@@ -1,6 +1,5 @@
 import Head from 'components/Common/Head'
 import Layout from 'components/Common/Layout'
-import Carousel from 'components/Common/Carousel'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import ComicItem from 'components/Comic/ComicItem'
@@ -169,7 +168,7 @@ export default function Home() {
           <div className="text-gray-800 mb-8">
             Build your community and share your work with comic buffs!
           </div>
-          <Button onClick={() => router.push('/artist-submission')} size="lg">
+          <Button onClick={() => router.push('/submission')} size="lg">
             Create with us
           </Button>
         </div>
