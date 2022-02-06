@@ -11,7 +11,7 @@ const Submission = ({ submissions }) => {
       <Head title="Submission" />
       <div className="max-w-6xl m-auto p-4 py-8">
         <p className="text-black font-bold text-4xl mb-14">Submission</p>
-        <div className="md:flex justify-center gap-14">
+        <div className="md:flex gap-14">
           {submissions.map((submission) => (
             <div key={submission._id} className="px-2 mb-10">
               <Link
