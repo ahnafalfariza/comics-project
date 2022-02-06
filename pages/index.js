@@ -6,6 +6,7 @@ import ComicItem from 'components/Comic/ComicItem'
 import ComicMostLiked from 'components/Comic/ComicMostLiked'
 import Button from 'components/Common/Button'
 import { useRouter } from 'next/router'
+import Carousel from 'components/Common/Carousel'
 
 export default function Home() {
   const [editorial, setEditorial] = useState([])
