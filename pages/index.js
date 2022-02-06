@@ -45,8 +45,8 @@ export default function Home() {
     <Layout>
       <Head />
       <div className="py-12 bg-white">
-        {/* <Carousel /> */}
-        <div className="max-w-6xl m-auto px-4 md:flex md:flex-row-reverse items-center">
+        <Carousel />
+        <div className="max-w-6xl m-auto px-4 md:flex md:flex-row-reverse items-center mt-8">
           <div
             className="w-full md:w-2/5"
             // style={{
@@ -89,7 +89,7 @@ export default function Home() {
           </div>
         </div>
         {/* Editorial List */}
-        <div className="w-full h-full mx-auto mt-6 md:max-w-6xl md:mt-16">
+        <div className="w-full h-full mx-auto md:max-w-6xl md:mt-16 mt-12">
           <h2 className="text-2xl text-black font-bold mx-3 md:mb-1 md:text-3xl">
             Editorial Pick
           </h2>
