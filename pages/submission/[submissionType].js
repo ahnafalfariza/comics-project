@@ -475,7 +475,7 @@ const FormSubmission = () => {
                         {...provided.droppableProps}
                         ref={provided.innerRef}
                         style={getListStyle(snapshot.isDraggingOver)}
-                        className="rounded-md overflow-auto px-40"
+                        className="rounded-md overflow-auto px-4 md:px-40"
                       >
                         {items.length === 0 && (
                           <div className="flex justify-center items-center mt-10 h-80 text-[#BBBBBB] absolute md:static px-7 text-center left-0">
