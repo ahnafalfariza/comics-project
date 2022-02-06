@@ -1,7 +1,28 @@
-/* eslint-disable react/display-name */
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import { parseImgUrl } from 'utils/common'
+
+// Temporary, later will use from the API
+const bannerData = [
+  {
+    bannerDestop: 'bafkreictpj6ilj7q45c6agk24lodo5kwfrgo6np4pxhmyhenpz2r6blyeq',
+    bannerMobile: '',
+    openLink: 'https://www.instagram.com/p/CYoRYKep-5F/',
+  },
+  {
+    bannerDestop: 'bafybeibjx4oixk3kcqxhtwlkwymnpnvnvju2swio737ax5kls6oqccrdp4',
+    bannerMobile: '',
+    openLink:
+      'https://ipfs.fleek.co/ipfs/bafybeiaam3zvrf6ar57peyn7n2z2yevfiddsaor5yiaphbfwbmvahw53nq',
+  },
+  {
+    bannerDestop: 'bafkreidlneo32hgod2vxbtsosugcdyti533zbuiumbra6vgevo6s5brvni',
+    bannerMobile: 'bafybeigvbovollwy5zxsiug4qjxwywx4k3dgwdkcq7fcurxn5ksi2u7bzm',
+    openLink:
+      'https://ipfs.fleek.co/ipfs/bafybeifk36itrr3axxejjftknzci35fafvu5yigp65wb4tcmq3vpdp4qw4',
+  },
+]
 
 const SampleNextArrow = (props) => {
   const { onClick } = props
@@ -30,12 +51,13 @@ function SamplePrevArrow(props) {
 const settings = {
   dots: true,
   infinite: true,
-  speed: 500,
+  speed: 700,
   slidesToShow: 1,
   slidesToScroll: 1,
   adaptiveHeight: true,
   nextArrow: <SampleNextArrow />,
   prevArrow: <SamplePrevArrow />,
+  /* eslint-disable react/display-name */
   appendDots: (dots) => (
     <div
       style={{
@@ -48,27 +70,51 @@ const settings = {
     </div>
   ),
   autoplay: true,
-  autoplaySpeed: 3000,
+  autoplaySpeed: 5000,
 }
 
 const Carousel = () => {
   return (
-    <div className="w-full mx-auto -mt-12 max-w-6xl md:px-2">
-      <Slider {...settings}>
-        <div className="w-full">
-          <a
-            href="https://ipfs.fleek.co/ipfs/bafybeiaam3zvrf6ar57peyn7n2z2yevfiddsaor5yiaphbfwbmvahw53nq"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <img
-              className="m-auto object-fill focus:outline-none active:outline-none"
-              src="https://dummyimage.com/1200x300/000/fff"
-            />
-          </a>
-        </div>
-      </Slider>
-    </div>
+    <>
+      {/* Desktop */}
+      <div className="w-full mx-auto -mt-12 max-w-6xl md:px-2 hidden md:block">
+        <Slider {...settings}>
+          {bannerData.map((banner, idx) => (
+            <div className="w-full md:hidden" key={idx}>
+              <a href={banner.openLink} target="_blank" rel="noreferrer">
+                <img
+                  className="m-auto object-fill focus:outline-none active:outline-none"
+                  src={parseImgUrl(banner.bannerDestop, null, {
+                    width: 1200,
+                  })}
+                />
+              </a>
+            </div>
+          ))}{' '}
+        </Slider>
+      </div>
+
+      {/* Mobile */}
+      <div className="w-full mx-auto -mt-12 max-w-6xl md:px-2 md:hidden">
+        <Slider {...settings}>
+          {bannerData.map(
+            (banner, idx) =>
+              banner.bannerMobile && (
+                <div className="w-full md:hidden" key={idx}>
+                  <a href={banner.openLink} target="_blank" rel="noreferrer">
+                    <img
+                      className="m-auto object-fill focus:outline-none active:outline-none"
+                      src={parseImgUrl(banner.bannerMobile, null, {
+                        width: 1200,
+                      })}
+                    />
+                  </a>
+                </div>
+              )
+          )}{' '}
+        </Slider>
+      </div>
+    </>
   )
 }
 
