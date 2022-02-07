@@ -311,19 +311,21 @@ const FormSubmission = () => {
           </div>
         )}
         <div className="max-w-3xl m-auto p-4 py-8">
-          <div className="mb-4">
-            <h4>
-              Read Submission Guideline{' '}
-              <a
-                href="https://ipfs.fleek.co/ipfs/bafybeifsnzqdzce2ts3nczlfpopxdvkbsijuhnvyyyyxjoyxrscxddx5c4"
-                target="_blank"
-                rel="noreferrer"
-                className="text-[#F5A1DB] border-b-2 border-transparent active:border-primary"
-              >
-                here
-              </a>
-            </h4>
-          </div>
+          {router.query.submissionType === 'valentine' && (
+            <div className="mb-4">
+              <h4>
+                Read Submission Guideline{' '}
+                <a
+                  href="https://ipfs.fleek.co/ipfs/bafybeifsnzqdzce2ts3nczlfpopxdvkbsijuhnvyyyyxjoyxrscxddx5c4"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[#F5A1DB] border-b-2 border-transparent active:border-primary"
+                >
+                  here
+                </a>
+              </h4>
+            </div>
+          )}
           <FormProvider {...methods}>
             <form
               id="form-submission"
