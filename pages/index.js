@@ -8,7 +8,7 @@ import Button from 'components/Common/Button'
 import { useRouter } from 'next/router'
 import Carousel from 'components/Common/Carousel'
 
-export default function Home() {
+export default function Home({ dataBanner }) {
   const [editorial, setEditorial] = useState([])
   const [mostLiked, setMostLiked] = useState([])
   const router = useRouter()
@@ -45,7 +45,7 @@ export default function Home() {
     <Layout>
       <Head />
       <div className="py-12 bg-white">
-        <Carousel />
+        <Carousel banner={dataBanner} />
         <div className="max-w-6xl m-auto px-4 md:flex md:flex-row-reverse items-center mt-8">
           <div
             className="w-full md:w-2/5"
@@ -178,4 +178,14 @@ export default function Home() {
       </div>
     </Layout>
   )
+}
+
+export const getServerSideProps = async () => {
+  const response = await axios.get(`${process.env.COMIC_API_URL}/banner`)
+
+  const dataBanner = response.data.result
+
+  return {
+    props: { dataBanner },
+  }
 }
