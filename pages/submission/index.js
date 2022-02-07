@@ -35,7 +35,7 @@ const Submission = ({ submissions }) => {
                 <h4 className="font-bold text-center md:text-left">
                   {submission.title}
                 </h4>
-                <div className="hidden md:block w-full h-2 bg-primary" />
+                <div className="hidden md:block w-full h-2 bg-[#F5A1DB]" />
               </div>
             </div>
           ))}

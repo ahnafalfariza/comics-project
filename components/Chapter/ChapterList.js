@@ -58,7 +58,7 @@ const ChapterList = ({
       ? 'Read'
       : data.price
       ? `${data.price === '0' ? 'Free' : `${formatNearAmount(data.price)} Ⓝ`}`
-      : 'Not Available'
+      : 'Coming Soon'
   }
 
   return (
