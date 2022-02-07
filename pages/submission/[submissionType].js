@@ -286,13 +286,46 @@ const FormSubmission = () => {
             </div>
           </div>
         )}
-        <h1 className="text-center font-bold text-3xl mb-2">
-          {router.query.title}
-        </h1>
-        <p className="text-primary text-sm text-center mb-9">
-          {router.query.description}
-        </p>
+        {router.query.submissionType === 'valentine' ? (
+          <div className="border-4 border-dotted border-[#F5A1DB] mb-9 p-4 rounded-md md:mx-36 relative">
+            <img
+              src={'/ribbon.png'}
+              className="absolute -left-4 md:-left-5 -top-5 -rotate-45"
+              width={60}
+            />
+            <h1 className="text-center font-bold text-3xl mb-2">
+              {router.query.title}
+            </h1>
+            <p className="text-primary text-sm text-center">
+              {router.query.description}
+            </p>
+          </div>
+        ) : (
+          <div>
+            <h1 className="text-center font-bold text-3xl mb-2">
+              {router.query.title}
+            </h1>
+            <p className="text-primary text-sm text-center mb-9">
+              {router.query.description}
+            </p>
+          </div>
+        )}
         <div className="max-w-3xl m-auto p-4 py-8">
+          {router.query.submissionType === 'valentine' && (
+            <div className="mb-4">
+              <h4>
+                Read Submission Guideline{' '}
+                <a
+                  href="https://ipfs.fleek.co/ipfs/bafybeifsnzqdzce2ts3nczlfpopxdvkbsijuhnvyyyyxjoyxrscxddx5c4"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[#F5A1DB] border-b-2 border-transparent active:border-primary"
+                >
+                  here
+                </a>
+              </h4>
+            </div>
+          )}
           <FormProvider {...methods}>
             <form
               id="form-submission"

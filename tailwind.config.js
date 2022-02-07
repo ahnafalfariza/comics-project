@@ -33,8 +33,8 @@ module.exports = {
       },
     },
     fontFamily: {
-      title: ['Poppins'],
-      body: ['Poppins'],
+      title: ['Montserrat'],
+      body: ['Montserrat'],
     },
   },
   variants: {

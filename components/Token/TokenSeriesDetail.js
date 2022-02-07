@@ -176,7 +176,7 @@ const TokenSeriesDetail = ({ token, className }) => {
                   ? token.price === '0'
                     ? 'Free'
                     : `Buy for ${formatNearAmount(token.price)} Ⓝ`
-                  : 'Not Available'}
+                  : 'Coming Soon'}
               </Button>
             )}
             {isOwned && isOwned === 'owned' && (

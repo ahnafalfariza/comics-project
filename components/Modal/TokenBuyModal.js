@@ -98,7 +98,7 @@ const TokenBuyModal = ({
                   ? data.price !== '0'
                     ? 'Buy'
                     : 'Get for Free'
-                  : 'Not Available'}
+                  : 'Coming Soon'}
               </Button>
               <Button
                 variant="ghost"
