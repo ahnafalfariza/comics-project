@@ -113,6 +113,9 @@ export default function Home() {
             ))}
           </div>
         </div>
+        <div className="max-w-6xl m-auto py-16 px-4 mt-6">
+          <img src={'/step-by-step.jpg'} />
+        </div>
         <div className="max-w-6xl m-auto py-16 px-4">
           <div className="text-5xl font-bold mb-4 text-black leading-normal text-center">
             Feature
@@ -148,7 +151,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-
         <div
           className="max-w-6xl m-auto py-16 h-96 w-full"
           style={{

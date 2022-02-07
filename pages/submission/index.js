@@ -32,8 +32,8 @@ const Submission = ({ submissions }) => {
                 </a>
               </Link>
               <div className="md:flex items-center gap-4">
-                <h4 className="font-bold text-center md:text-left">
-                  {submission.title}
+                <h4 className="font-bold text-center md:text-left capitalize">
+                  {submission.type_submission} submission
                 </h4>
                 <div className="hidden md:block w-full h-2 bg-[#F5A1DB]" />
               </div>
