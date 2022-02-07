@@ -39,6 +39,22 @@ const FormSubmission = () => {
 
   const setToastConfig = useStore((state) => state.setToastConfig)
 
+  const dataSubmission = [
+    {
+      title: 'Artist Submission',
+      description: 'Comic Submission for all artists',
+      openLink:
+        'https://ipfs.fleek.co/ipfs/bafybeiaam3zvrf6ar57peyn7n2z2yevfiddsaor5yiaphbfwbmvahw53nq',
+    },
+    {
+      title: 'Comic Festival: Valentine #1 Submission',
+      description:
+        'Share your heartfelt love story and create your best One-shot comic with theme of: "Love is…?!"\nJoin this Comic Competition, and WIN a total prize of $2000!\nSubmission Period: Feb 7th - Feb 25th, 2022',
+      openLink:
+        'https://ipfs.fleek.co/ipfs/bafybeifsnzqdzce2ts3nczlfpopxdvkbsijuhnvyyyyxjoyxrscxddx5c4',
+    },
+  ]
+
   const _showToast = (type, msg) => {
     setToastConfig({
       text: (
@@ -289,10 +305,12 @@ const FormSubmission = () => {
         {router.query.submissionType === 'valentine' ? (
           <div className="border-4 border-dotted border-[#F5A1DB] mb-9 p-4 rounded-md md:mx-36 relative">
             <h1 className="text-center font-bold text-3xl mb-2">
-              {router.query.title}
+              {router.query.submissionType === 'valentine'
+                ? dataSubmission[1].title
+                : dataSubmission[0].title}
             </h1>
-            <p className="text-primary text-sm text-center">
-              {router.query.description}
+            <p className="text-primary text-sm text-center whitespace-pre-line">
+              {dataSubmission[1].description}
             </p>
           </div>
         ) : (
@@ -301,26 +319,28 @@ const FormSubmission = () => {
               {router.query.title}
             </h1>
             <p className="text-primary text-sm text-center mb-9">
-              {router.query.description}
+              {dataSubmission[0].description}
             </p>
           </div>
         )}
         <div className="max-w-3xl m-auto p-4 py-8">
-          {router.query.submissionType === 'valentine' && (
-            <div className="mb-4">
-              <h4>
-                Read Submission Guideline{' '}
-                <a
-                  href="https://ipfs.fleek.co/ipfs/bafybeifsnzqdzce2ts3nczlfpopxdvkbsijuhnvyyyyxjoyxrscxddx5c4"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-[#F5A1DB] border-b-2 border-transparent active:border-primary"
-                >
-                  here
-                </a>
-              </h4>
-            </div>
-          )}
+          <div className="mb-4">
+            <h4>
+              Read Submission Guideline{' '}
+              <a
+                href={
+                  router.query.submissionType === 'valentine'
+                    ? dataSubmission[1].openLink
+                    : dataSubmission[0].openLink
+                }
+                target="_blank"
+                rel="noreferrer"
+                className="text-primary border-b-2 border-transparent active:border-primary"
+              >
+                here
+              </a>
+            </h4>
+          </div>
           <FormProvider {...methods}>
             <form
               id="form-submission"
