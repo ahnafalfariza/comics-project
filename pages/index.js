@@ -91,7 +91,7 @@ export default function Home() {
         {/* Editorial List */}
         <div className="w-full h-full mx-auto md:max-w-6xl md:mt-16 mt-12">
           <h2 className="text-2xl text-black font-bold mx-3 md:mb-1 md:text-3xl">
-            Editorial
+            Editorial Pick
           </h2>
           <div className="ml-3 w-12 h-2 mb-4 md:mb-6 bg-primary"></div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 overflow-hidden mx-4">
