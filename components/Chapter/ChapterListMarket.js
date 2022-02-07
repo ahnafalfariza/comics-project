@@ -67,7 +67,7 @@ const ChapterListMarket = ({
                         )
                       ) : (
                         <div>
-                          <span className="text-black">Not Available</span>
+                          <span className="text-black">Coming Soon</span>
                         </div>
                       )}
                     </div>

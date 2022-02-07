@@ -144,7 +144,7 @@ const BuyChapterModal = ({
                                 ? data.price === '0'
                                   ? 'Free'
                                   : `Buy for ${formatNearAmount(data.price)} Ⓝ`
-                                : 'Not Available'}
+                                : 'Coming Soon'}
                             </Button>
                           </div>
                         )}
