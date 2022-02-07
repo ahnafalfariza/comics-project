@@ -6,9 +6,10 @@ import { parseImgUrl } from 'utils/common'
 // Temporary, later will use from the API
 const bannerData = [
   {
-    bannerDestop: 'bafkreictpj6ilj7q45c6agk24lodo5kwfrgo6np4pxhmyhenpz2r6blyeq',
-    bannerMobile: '',
-    openLink: 'https://www.instagram.com/p/CYoRYKep-5F/',
+    bannerDestop: 'bafkreidlneo32hgod2vxbtsosugcdyti533zbuiumbra6vgevo6s5brvni',
+    bannerMobile: 'bafybeigvbovollwy5zxsiug4qjxwywx4k3dgwdkcq7fcurxn5ksi2u7bzm',
+    openLink:
+      'https://ipfs.fleek.co/ipfs/bafybeifsnzqdzce2ts3nczlfpopxdvkbsijuhnvyyyyxjoyxrscxddx5c4',
   },
   {
     bannerDestop: 'bafybeibjx4oixk3kcqxhtwlkwymnpnvnvju2swio737ax5kls6oqccrdp4',
@@ -17,10 +18,9 @@ const bannerData = [
       'https://ipfs.fleek.co/ipfs/bafybeiaam3zvrf6ar57peyn7n2z2yevfiddsaor5yiaphbfwbmvahw53nq',
   },
   {
-    bannerDestop: 'bafkreidlneo32hgod2vxbtsosugcdyti533zbuiumbra6vgevo6s5brvni',
-    bannerMobile: 'bafybeigvbovollwy5zxsiug4qjxwywx4k3dgwdkcq7fcurxn5ksi2u7bzm',
-    openLink:
-      'https://ipfs.fleek.co/ipfs/bafybeifk36itrr3axxejjftknzci35fafvu5yigp65wb4tcmq3vpdp4qw4',
+    bannerDestop: 'bafkreictpj6ilj7q45c6agk24lodo5kwfrgo6np4pxhmyhenpz2r6blyeq',
+    bannerMobile: '',
+    openLink: 'https://www.instagram.com/p/CYoRYKep-5F/',
   },
 ]
 
