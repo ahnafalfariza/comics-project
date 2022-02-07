@@ -288,11 +288,6 @@ const FormSubmission = () => {
         )}
         {router.query.submissionType === 'valentine' ? (
           <div className="border-4 border-dotted border-[#F5A1DB] mb-9 p-4 rounded-md md:mx-36 relative">
-            <img
-              src={'/ribbon.png'}
-              className="absolute -left-4 md:-left-5 -top-5 -rotate-45"
-              width={60}
-            />
             <h1 className="text-center font-bold text-3xl mb-2">
               {router.query.title}
             </h1>

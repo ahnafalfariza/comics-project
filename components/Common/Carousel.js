@@ -9,18 +9,21 @@ const bannerData = [
     bannerDestop: 'bafkreidlneo32hgod2vxbtsosugcdyti533zbuiumbra6vgevo6s5brvni',
     bannerMobile: 'bafybeigvbovollwy5zxsiug4qjxwywx4k3dgwdkcq7fcurxn5ksi2u7bzm',
     openLink:
-      'https://ipfs.fleek.co/ipfs/bafybeifsnzqdzce2ts3nczlfpopxdvkbsijuhnvyyyyxjoyxrscxddx5c4',
+      '/submission/valentine?title=Comic+Festival%3A+Valentine+%231+Submission&description=Share+your+heartfelt+love+story+and+create+your+best+One-shot+comic+with+theme+of%3A+%22Love+is%E2%80%A6%3F%21%22%0AJoin+this+Comic+Competition%2C+and+WIN+a+total+prize+of+%242000%21%0ASubmission+Period%3A+Feb+7th+-+Feb+25th%2C+2022',
+    target: '',
   },
   {
     bannerDestop: 'bafybeibjx4oixk3kcqxhtwlkwymnpnvnvju2swio737ax5kls6oqccrdp4',
     bannerMobile: '',
     openLink:
-      'https://ipfs.fleek.co/ipfs/bafybeiaam3zvrf6ar57peyn7n2z2yevfiddsaor5yiaphbfwbmvahw53nq',
+      '/submission/artist?title=Artist+Submission&description=Comic+Submission+for+all+artists',
+    target: '',
   },
   {
     bannerDestop: 'bafkreictpj6ilj7q45c6agk24lodo5kwfrgo6np4pxhmyhenpz2r6blyeq',
     bannerMobile: '',
     openLink: 'https://www.instagram.com/p/CYoRYKep-5F/',
+    target: '_blank',
   },
 ]
 
@@ -70,7 +73,7 @@ const settings = {
     </div>
   ),
   autoplay: true,
-  autoplaySpeed: 5000,
+  autoplaySpeed: 3000,
 }
 
 const Carousel = () => {
@@ -81,7 +84,7 @@ const Carousel = () => {
         <Slider {...settings}>
           {bannerData.map((banner, idx) => (
             <div className="w-full md:hidden" key={idx}>
-              <a href={banner.openLink} target="_blank" rel="noreferrer">
+              <a href={banner.openLink} target={banner.target} rel="noreferrer">
                 <img
                   className="m-auto object-fill focus:outline-none active:outline-none"
                   src={parseImgUrl(banner.bannerDestop, null, {
