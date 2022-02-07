@@ -9,7 +9,7 @@ const bannerData = [
     bannerDestop: 'bafkreidlneo32hgod2vxbtsosugcdyti533zbuiumbra6vgevo6s5brvni',
     bannerMobile: 'bafybeigvbovollwy5zxsiug4qjxwywx4k3dgwdkcq7fcurxn5ksi2u7bzm',
     openLink:
-      'https://ipfs.fleek.co/ipfs/bafybeifk36itrr3axxejjftknzci35fafvu5yigp65wb4tcmq3vpdp4qw4',
+      'https://ipfs.fleek.co/ipfs/bafybeifsnzqdzce2ts3nczlfpopxdvkbsijuhnvyyyyxjoyxrscxddx5c4',
   },
   {
     bannerDestop: 'bafybeibjx4oixk3kcqxhtwlkwymnpnvnvju2swio737ax5kls6oqccrdp4',
