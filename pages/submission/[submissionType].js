@@ -287,7 +287,7 @@ const FormSubmission = () => {
           </div>
         )}
         {router.query.submissionType === 'valentine' ? (
-          <div className="border-4 border-dashed border-[#F5A1DB] mb-9 p-4 rounded-md md:mx-36 relative">
+          <div className="border-4 border-dotted border-[#F5A1DB] mb-9 p-4 rounded-md md:mx-36 relative">
             <img
               src={'/ribbon.png'}
               className="absolute -left-4 md:-left-5 -top-5 -rotate-45"
@@ -312,15 +312,17 @@ const FormSubmission = () => {
         )}
         <div className="max-w-3xl m-auto p-4 py-8">
           <div className="mb-4">
-            <a
-              href="https://ipfs.fleek.co/ipfs/bafybeifk36itrr3axxejjftknzci35fafvu5yigp65wb4tcmq3vpdp4qw4"
-              target="_blank"
-              rel="noreferrer"
-              className="border-b-2 border-transparent active:border-black"
-            >
+            <h4>
               Read Submission Guideline{' '}
-              <span className="text-[#F5A1DB]">here</span>
-            </a>
+              <a
+                href="https://ipfs.fleek.co/ipfs/bafybeifsnzqdzce2ts3nczlfpopxdvkbsijuhnvyyyyxjoyxrscxddx5c4"
+                target="_blank"
+                rel="noreferrer"
+                className="text-[#F5A1DB] border-b-2 border-transparent active:border-primary"
+              >
+                here
+              </a>
+            </h4>
           </div>
           <FormProvider {...methods}>
             <form
