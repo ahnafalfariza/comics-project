@@ -286,13 +286,42 @@ const FormSubmission = () => {
             </div>
           </div>
         )}
-        <h1 className="text-center font-bold text-3xl mb-2">
-          {router.query.title}
-        </h1>
-        <p className="text-primary text-sm text-center mb-9">
-          {router.query.description}
-        </p>
+        {router.query.submissionType === 'valentine' ? (
+          <div className="border-4 border-dashed border-[#F5A1DB] mb-9 p-4 rounded-md md:mx-36 relative">
+            <img
+              src={'/ribbon.png'}
+              className="absolute -left-4 md:-left-5 -top-5 -rotate-45"
+              width={60}
+            />
+            <h1 className="text-center font-bold text-3xl mb-2">
+              {router.query.title}
+            </h1>
+            <p className="text-primary text-sm text-center">
+              {router.query.description}
+            </p>
+          </div>
+        ) : (
+          <div>
+            <h1 className="text-center font-bold text-3xl mb-2">
+              {router.query.title}
+            </h1>
+            <p className="text-primary text-sm text-center mb-9">
+              {router.query.description}
+            </p>
+          </div>
+        )}
         <div className="max-w-3xl m-auto p-4 py-8">
+          <div className="mb-4">
+            <a
+              href="https://ipfs.fleek.co/ipfs/bafybeifk36itrr3axxejjftknzci35fafvu5yigp65wb4tcmq3vpdp4qw4"
+              target="_blank"
+              rel="noreferrer"
+              className="border-b-2 border-transparent active:border-black"
+            >
+              Read Submission Guideline{' '}
+              <span className="text-[#F5A1DB]">here</span>
+            </a>
+          </div>
           <FormProvider {...methods}>
             <form
               id="form-submission"
