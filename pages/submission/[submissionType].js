@@ -2,7 +2,6 @@ import axios from 'axios'
 import { InputText, InputTextarea } from 'components/Common/form'
 import useStore from 'lib/store'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { useRouter } from 'next/router'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { FormProvider, useForm } from 'react-hook-form'
 import { MoonLoader } from 'react-spinners'
@@ -18,7 +17,6 @@ import Layout from 'components/Common/Layout'
 import Head from 'components/Common/Head'
 
 const FormSubmission = ({ dataSubmission }) => {
-  const router = useRouter()
   const [cover, setCover] = useState('')
   const [coverPreview, setCoverPreview] = useState('')
   const [items, setItems] = useState([])
@@ -587,6 +585,15 @@ export async function getServerSideProps({ params }) {
     },
   })
   const dataSubmission = res.data.result[0] || null
+  if (!dataSubmission) {
+    return {
+      redirect: {
+        destination: '/submission/artist',
+        permanent: false,
+      },
+    }
+  }
+
   return {
     props: {
       dataSubmission,
