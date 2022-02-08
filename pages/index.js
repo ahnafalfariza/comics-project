@@ -8,14 +8,16 @@ import Button from 'components/Common/Button'
 import { useRouter } from 'next/router'
 import Carousel from 'components/Common/Carousel'
 
-export default function Home({ dataBanner }) {
+export default function Home() {
   const [editorial, setEditorial] = useState([])
   const [mostLiked, setMostLiked] = useState([])
+  const [dataBanner, setDataBanner] = useState([])
   const router = useRouter()
 
   useEffect(() => {
     fetchEditorial()
     fetchMostLiked()
+    getBanner()
   }, [])
 
   const fetchEditorial = async () => {
@@ -39,6 +41,12 @@ export default function Home({ dataBanner }) {
     })
     const newRes = res.data.data.results
     setMostLiked(newRes)
+  }
+
+  const getBanner = async () => {
+    const response = await axios.get(`${process.env.COMIC_API_URL}/banner`)
+    const results = response.data.result
+    setDataBanner(results)
   }
 
   return (
@@ -178,14 +186,4 @@ export default function Home({ dataBanner }) {
       </div>
     </Layout>
   )
-}
-
-export const getServerSideProps = async () => {
-  const response = await axios.get(`${process.env.COMIC_API_URL}/banner`)
-
-  const dataBanner = response.data.result
-
-  return {
-    props: { dataBanner },
-  }
 }
