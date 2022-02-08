@@ -316,7 +316,7 @@ const FormSubmission = () => {
         ) : (
           <div>
             <h1 className="text-center font-bold text-3xl mb-2">
-              {router.query.title}
+              {dataSubmission[0].title}
             </h1>
             <p className="text-primary text-sm text-center mb-9">
               {dataSubmission[0].description}

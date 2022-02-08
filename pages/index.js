@@ -11,11 +11,13 @@ import Carousel from 'components/Common/Carousel'
 export default function Home() {
   const [editorial, setEditorial] = useState([])
   const [mostLiked, setMostLiked] = useState([])
+  const [dataBanner, setDataBanner] = useState([])
   const router = useRouter()
 
   useEffect(() => {
     fetchEditorial()
     fetchMostLiked()
+    getBanner()
   }, [])
 
   const fetchEditorial = async () => {
@@ -41,11 +43,17 @@ export default function Home() {
     setMostLiked(newRes)
   }
 
+  const getBanner = async () => {
+    const response = await axios.get(`${process.env.COMIC_API_URL}/banner`)
+    const results = response.data.result
+    setDataBanner(results)
+  }
+
   return (
     <Layout>
       <Head />
       <div className="py-12 bg-white">
-        <Carousel />
+        <Carousel banner={dataBanner} />
         <div className="max-w-6xl m-auto px-4 md:flex md:flex-row-reverse items-center mt-8">
           <div
             className="w-full md:w-2/5"
