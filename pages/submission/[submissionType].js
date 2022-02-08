@@ -2,7 +2,6 @@ import axios from 'axios'
 import { InputText, InputTextarea } from 'components/Common/form'
 import useStore from 'lib/store'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { useRouter } from 'next/router'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { FormProvider, useForm } from 'react-hook-form'
 import { MoonLoader } from 'react-spinners'
@@ -17,8 +16,7 @@ import { InputDropdown } from '../../components/Common/form/components/InputDrop
 import Layout from 'components/Common/Layout'
 import Head from 'components/Common/Head'
 
-const FormSubmission = () => {
-  const router = useRouter()
+const FormSubmission = ({ dataSubmission }) => {
   const [cover, setCover] = useState('')
   const [coverPreview, setCoverPreview] = useState('')
   const [items, setItems] = useState([])
@@ -38,22 +36,6 @@ const FormSubmission = () => {
   const [isSubmit, setIsSubmit] = useState(false)
 
   const setToastConfig = useStore((state) => state.setToastConfig)
-
-  const dataSubmission = [
-    {
-      title: 'Artist Submission',
-      description: 'Comic Submission for all artists',
-      openLink:
-        'https://ipfs.fleek.co/ipfs/bafybeiaam3zvrf6ar57peyn7n2z2yevfiddsaor5yiaphbfwbmvahw53nq',
-    },
-    {
-      title: 'Comic Festival: Valentine #1 Submission',
-      description:
-        'Share your heartfelt love story and create your best One-shot comic with theme of: "Love is…?!"\nJoin this Comic Competition, and WIN a total prize of $2000!\nSubmission Period: Feb 7th - Feb 25th, 2022',
-      openLink:
-        'https://ipfs.fleek.co/ipfs/bafybeifsnzqdzce2ts3nczlfpopxdvkbsijuhnvyyyyxjoyxrscxddx5c4',
-    },
-  ]
 
   const _showToast = (type, msg) => {
     setToastConfig({
@@ -150,7 +132,7 @@ const FormSubmission = () => {
         })
 
       const form = new FormData()
-      form.append('type_submission', router.query.submissionType)
+      form.append('type_submission', dataSubmission.type_submission)
       form.append('cover', data.cover)
       form.append('title', data.title)
       form.append('genre', genreSelect)
@@ -292,7 +274,7 @@ const FormSubmission = () => {
 
   return (
     <Layout>
-      <Head title={router.query.title} />
+      <Head title={dataSubmission.title} />
       <div className="max-w-4xl m-auto p-4 py-8">
         {loading && (
           <div className="h-full w-full fixed top-0 right-0 bg-black bg-opacity-70 z-50">
@@ -302,24 +284,22 @@ const FormSubmission = () => {
             </div>
           </div>
         )}
-        {router.query.submissionType === 'valentine' ? (
+        {dataSubmission.type_submission === 'valentine' ? (
           <div className="border-4 border-dotted border-[#F5A1DB] mb-9 p-4 rounded-md md:mx-36 relative">
             <h1 className="text-center font-bold text-3xl mb-2">
-              {router.query.submissionType === 'valentine'
-                ? dataSubmission[1].title
-                : dataSubmission[0].title}
+              {dataSubmission.title}
             </h1>
             <p className="text-primary text-sm text-center whitespace-pre-line">
-              {dataSubmission[1].description}
+              {dataSubmission.description}
             </p>
           </div>
         ) : (
           <div>
             <h1 className="text-center font-bold text-3xl mb-2">
-              {dataSubmission[0].title}
+              {dataSubmission.title}
             </h1>
             <p className="text-primary text-sm text-center mb-9">
-              {dataSubmission[0].description}
+              {dataSubmission.description}
             </p>
           </div>
         )}
@@ -328,14 +308,10 @@ const FormSubmission = () => {
             <h4>
               Read Submission Guideline{' '}
               <a
-                href={
-                  router.query.submissionType === 'valentine'
-                    ? dataSubmission[1].openLink
-                    : dataSubmission[0].openLink
-                }
+                href={`https://ipfs.fleek.co/ipfs/${dataSubmission.guideline}`}
                 target="_blank"
                 rel="noreferrer"
-                className="text-primary border-b-2 border-transparent active:border-primary"
+                className="text-primary border-b-2 border-transparent cursor-pointer active:border-primary"
               >
                 here
               </a>
@@ -601,3 +577,26 @@ const FormSubmission = () => {
 }
 
 export default FormSubmission
+
+export async function getServerSideProps({ params }) {
+  const res = await axios.get(`${process.env.COMIC_API_URL}/submission-types`, {
+    params: {
+      type_submission: params.submissionType,
+    },
+  })
+  const dataSubmission = res.data.result[0] || null
+  if (!dataSubmission) {
+    return {
+      redirect: {
+        destination: '/submission/artist',
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: {
+      dataSubmission,
+    },
+  }
+}

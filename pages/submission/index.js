@@ -4,8 +4,21 @@ import React from 'react'
 import Link from 'next/link'
 import axios from 'axios'
 import { parseImgUrl } from 'utils/common'
+import { useEffect, useState } from 'react'
 
-const Submission = ({ submissions }) => {
+const Submission = () => {
+  const [submissions, setSubmissions] = useState([])
+
+  useEffect(() => {
+    const fetchSubmssions = async () => {
+      const res = await axios.get(
+        `${process.env.COMIC_API_URL}/submission-types`
+      )
+      setSubmissions(res.data.result)
+    }
+    fetchSubmssions()
+  }, [])
+
   return (
     <Layout>
       <Head title="Submission" />
@@ -17,10 +30,6 @@ const Submission = ({ submissions }) => {
               <Link
                 href={{
                   pathname: `/submission/${submission.type_submission}`,
-                  query: {
-                    title: submission.title,
-                    description: submission.description,
-                  },
                 }}
               >
                 <a className="cursor-pointer">
@@ -46,14 +55,3 @@ const Submission = ({ submissions }) => {
 }
 
 export default Submission
-
-export async function getServerSideProps() {
-  const response = await axios.get(
-    `${process.env.COMIC_API_URL}/submission-types`
-  )
-  const submissions = response.data.result || null
-
-  return {
-    props: { submissions },
-  }
-}
