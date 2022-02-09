@@ -44,7 +44,7 @@ const FormSubmission = () => {
       title: 'Artist Submission',
       description: 'Comic Submission for all artists',
       openLink:
-        'https://ipfs.fleek.co/ipfs/bafybeiaam3zvrf6ar57peyn7n2z2yevfiddsaor5yiaphbfwbmvahw53nq',
+        'https://ipfs.fleek.co/ipfs/bafybeiba3iorggsh4bondxngsdmt3hvqr2ndxvbr74nmb5r2xekbknmvva',
     },
     {
       title: 'Comic Festival: Valentine #1 Submission',
