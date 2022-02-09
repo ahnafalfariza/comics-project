@@ -144,6 +144,8 @@ const BuyChapterModal = ({
                                 ? data.price === '0'
                                   ? 'Free'
                                   : `Buy for ${formatNearAmount(data.price)} Ⓝ`
+                                : data.is_non_mintable
+                                ? 'Sold Out'
                                 : 'Coming Soon'}
                             </Button>
                           </div>
