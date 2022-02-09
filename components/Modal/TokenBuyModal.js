@@ -98,6 +98,8 @@ const TokenBuyModal = ({
                   ? data.price !== '0'
                     ? 'Buy'
                     : 'Get for Free'
+                  : data.is_non_mintable
+                  ? 'Sold Out'
                   : 'Coming Soon'}
               </Button>
               <Button
