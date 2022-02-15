@@ -583,14 +583,20 @@ const FormSubmission = () => {
                   This field is required
                 </span>
               )}
-              <p className="text-sm text-gray-500 text-justify mt-16 mb-6 md:w-3/4">
+              <p className="text-sm text-gray-500 text-justify mt-16 md:w-3/4">
                 *Submission results will be sent by Paras Editor Team within 14
                 working days after the submission is received.
               </p>
+              {router.query.submissionType !== 'artist' && (
+                <p className="text-sm text-gray-500 text-justify mt-2 mb-6 md:w-3/4">
+                  *Top 10 best submitted comics will be published in Paras Comic
+                  for free
+                </p>
+              )}
               <input
                 type="submit"
                 value="Submit"
-                className="flex py-3 px-12 md:px-14 mt-4 text-sm text-white bg-primary font-thin rounded-full hover:opacity-80 cursor-pointer"
+                className="flex py-3 px-12 md:px-14 mt-8 text-sm text-white bg-primary font-thin rounded-full hover:opacity-80 cursor-pointer"
               />
             </form>
           </FormProvider>
