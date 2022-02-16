@@ -176,6 +176,8 @@ const TokenSeriesDetail = ({ token, className }) => {
                   ? token.price === '0'
                     ? 'Free'
                     : `Buy for ${formatNearAmount(token.price)} Ⓝ`
+                  : token.is_non_mintable
+                  ? 'Sold Out'
                   : 'Coming Soon'}
               </Button>
             )}
