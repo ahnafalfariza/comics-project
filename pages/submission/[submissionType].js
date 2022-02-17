@@ -316,7 +316,7 @@ const FormSubmission = ({ dataSubmission }) => {
                 here
               </a>
             </h4>
-            {router.query.submissionType !== 'artist' && (
+            {dataSubmission.type_submission !== 'artist' && (
               <p className="text-justify mt-2 mb-6">
                 *Top 10 best submitted comics will be published in Paras Comic
                 for free
@@ -565,7 +565,7 @@ const FormSubmission = ({ dataSubmission }) => {
                   This field is required
                 </span>
               )}
-              {router.query.submissionType === 'artist' && (
+              {dataSubmission.type_submission === 'artist' && (
                 <p className="text-sm text-gray-500 text-justify mt-16 md:w-3/4">
                   *Submission results will be sent by Paras Editor Team within
                   14 working days after the submission is received.
