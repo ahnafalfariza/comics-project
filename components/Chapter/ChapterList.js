@@ -58,6 +58,8 @@ const ChapterList = ({
       ? 'Read'
       : data.price
       ? `${data.price === '0' ? 'Free' : `${formatNearAmount(data.price)} Ⓝ`}`
+      : data.is_non_mintable
+      ? 'Sold Out'
       : 'Coming Soon'
   }
 

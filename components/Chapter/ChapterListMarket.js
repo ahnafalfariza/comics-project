@@ -67,7 +67,9 @@ const ChapterListMarket = ({
                         )
                       ) : (
                         <div>
-                          <span className="text-black">Coming Soon</span>
+                          <span className="text-black">
+                            {token.is_non_mintable ? 'Sold Out' : 'Coming Soon'}
+                          </span>
                         </div>
                       )}
                     </div>
