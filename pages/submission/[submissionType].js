@@ -113,7 +113,7 @@ const FormSubmission = ({ dataSubmission }) => {
       window.scrollTo(0, 0)
 
       const cover = new FormData()
-      if (dataSubmission.type_submission === 'valentine') {
+      if (dataSubmission.type_submission !== 'artist') {
         cover.append('files', data.cover)
       }
       const pages = new FormData()
@@ -121,7 +121,7 @@ const FormSubmission = ({ dataSubmission }) => {
         pages.append('files', page.file)
       })
 
-      if (dataSubmission.type_submission === 'valentine') {
+      if (dataSubmission.type_submission !== 'artist') {
         await axios
           .all([postCoverComic(cover), postPagesComic(pages)])
           .then((results) => {
@@ -148,7 +148,7 @@ const FormSubmission = ({ dataSubmission }) => {
 
       const form = new FormData()
       form.append('type_submission', dataSubmission.type_submission)
-      if (dataSubmission.type_submission === 'valentine') {
+      if (dataSubmission.type_submission !== 'artist') {
         form.append('cover', data.cover)
       }
       form.append('title', data.title)
@@ -302,7 +302,7 @@ const FormSubmission = ({ dataSubmission }) => {
             </div>
           </div>
         )}
-        {dataSubmission.type_submission === 'valentine' ? (
+        {dataSubmission.type_submission !== 'artist' ? (
           <div className="border-4 border-dotted border-[#F5A1DB] mb-9 p-4 rounded-md md:mx-36 relative">
             <h1 className="text-center font-bold text-3xl mb-2">
               {dataSubmission.title}
@@ -347,7 +347,7 @@ const FormSubmission = ({ dataSubmission }) => {
               onSubmit={handleSubmit(onSubmit)}
               method="post"
             >
-              {dataSubmission.type_submission === 'valentine' && (
+              {dataSubmission.type_submission !== 'artist' && (
                 <div className="md:flex justify-between">
                   <div>
                     <label className="font-bold text-md">Cover Comic</label>
