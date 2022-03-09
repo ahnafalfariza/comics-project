@@ -47,10 +47,17 @@ const BuyChapterModal = ({
   tokenId,
   hideCloseButton,
   hideActionButton,
+  isPreview,
 }) => {
   const router = useRouter()
   const buyChapter = useStore((state) => state.buyChapter)
   const [showLogin, setShowLogin] = useState(false)
+
+  const onClickPreview = () => {
+    router.push({
+      pathname: `/preview/${router.query.id}/${router.query.chapterId}`,
+    })
+  }
 
   const onClickReadNow = () => {
     router.push({
@@ -102,7 +109,16 @@ const BuyChapterModal = ({
                     backgroundPosition: 'center',
                   }}
                 >
-                  <div className="w-full h-full bg-gradient-to-t from-white to-transparent md:bg-none flex items-end"></div>
+                  <div className="w-full h-full bg-gradient-to-t from-white to-transparent md:bg-none flex items-end">
+                    {!isPreview && (
+                      <div
+                        className="absolute md:relative right-0 m-4 px-3 py-1 text-sm rounded-full text-black bg-white cursor-pointer hover:bg-opacity-95"
+                        onClick={onClickPreview}
+                      >
+                        Preview
+                      </div>
+                    )}
+                  </div>
                 </div>
                 <div className="-mt-16 md:mt-0 w-full relative p-4 md:p-6 flex flex-col justify-between md:h-96 overflow-y-auto">
                   <div className="w-full">
