@@ -14,7 +14,8 @@ const Submission = () => {
       const res = await axios.get(
         `${process.env.COMIC_API_URL}/submission-types`
       )
-      setSubmissions(res.data.result)
+      const resSubmission = res.data.result.filter((sub) => sub.is_active)
+      setSubmissions(resSubmission)
     }
     fetchSubmssions()
   }, [])
