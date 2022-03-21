@@ -1,0 +1,318 @@
+import React, { useRef, useState } from 'react'
+import Editor from '@draft-js-plugins/editor'
+import { RichUtils, getDefaultKeyBinding } from 'draft-js'
+import {
+  ItalicButton,
+  BoldButton,
+  UnderlineButton,
+  CodeButton,
+  HeadlineOneButton,
+  HeadlineTwoButton,
+  HeadlineThreeButton,
+  UnorderedListButton,
+  OrderedListButton,
+  BlockquoteButton,
+  CodeBlockButton,
+} from '@draft-js-plugins/buttons'
+
+import {
+  imagePlugin,
+  InlineToolbar,
+  linkPlugin,
+  dividerPlugin,
+  plugins,
+  Toolbar,
+  videoPlugin,
+} from './TextEditorPlugin'
+import { checkUrl, compressImg, readFileAsUrl } from 'utils/common'
+import Modal from '../Modal'
+import useStore from 'lib/store'
+const TextEditor = ({
+  content,
+  readOnly = false,
+  title,
+  hideTitle = false,
+  setTitle = () => {},
+  showChapterModal,
+  showComicModal,
+  setContent = () => {},
+}) => {
+  const editor = useRef(null)
+  const setToastConfig = useStore((state) => state.setToastConfig)
+
+  const _showToast = (type, msg) => {
+    setToastConfig({
+      text: (
+        <div
+          className={`text-sm font-semibold text-gray-900 ${
+            type === 'error' && 'bg-red-300 border-red-500'
+          } text-center`}
+        >
+          <p>{msg}</p>
+        </div>
+      ),
+      type: type,
+      duration: 2500,
+    })
+  }
+
+  let className = 'RichEditor-editor text-lg'
+  var contentState = content.getCurrentContent()
+  if (!contentState.hasText()) {
+    if (contentState.getBlockMap().first().getType() !== 'unstyled') {
+      className += ' RichEditor-hidePlaceholder'
+    }
+  }
+
+  const onAddLocalImage = async (e) => {
+    let imgUrl
+    if (e.target.files[0]) {
+      if (e.target.files[0].size > 3 * 1024 * 1024) {
+        _showToast('error', 'Maximum size is 30MB')
+        return
+      }
+      const compressedImg =
+        e.target.files[0].type === 'image/gif'
+          ? e.target.files[0]
+          : await compressImg(e.target.files[0])
+      imgUrl = await readFileAsUrl(compressedImg)
+    }
+    setContent(imagePlugin.addImage(content, imgUrl))
+  }
+
+  const onAddVideo = async (src) => {
+    setContent(
+      videoPlugin.addVideo(content, {
+        src: src,
+      })
+    )
+  }
+
+  const handleKeyCommand = (command, editorState) => {
+    const newState = RichUtils.handleKeyCommand(editorState, command)
+    if (newState) {
+      setContent(newState)
+      return true
+    }
+    return false
+  }
+
+  const mapKeyToEditorCommand = (e) => {
+    if (e.keyCode === 9) {
+      const newEditorState = RichUtils.onTab(e, content, 4)
+      if (newEditorState !== content) {
+        setContent(newEditorState)
+      }
+      return
+    }
+    return getDefaultKeyBinding(e)
+  }
+
+  return (
+    <div>
+      {!hideTitle && (
+        <div className="titleNews text-4xl font-bold pb-0 text-white">
+          <Editor
+            editorKey={'title'}
+            placeholder="Title"
+            editorState={title}
+            onChange={setTitle}
+            handleReturn={() => 'handled'}
+            readOnly={readOnly}
+          />
+        </div>
+      )}
+      <div className="RichEditor-root text-black">
+        <div className={className} onClick={editor.focus}>
+          <Editor
+            editorKey={'content'}
+            blockStyleFn={getBlockStyle}
+            customStyleMap={styleMap}
+            editorState={content}
+            handleKeyCommand={handleKeyCommand}
+            keyBindingFn={mapKeyToEditorCommand}
+            onChange={setContent}
+            placeholder="Tell a story..."
+            plugins={plugins}
+            readOnly={readOnly}
+            ref={editor}
+          />
+          <InlineToolbar>
+            {(externalProps) => (
+              <div className="inline-block md:flex items-center">
+                <BoldButton {...externalProps} />
+                <ItalicButton {...externalProps} />
+                <UnderlineButton {...externalProps} />
+                <linkPlugin.LinkButton {...externalProps} />
+              </div>
+            )}
+          </InlineToolbar>
+        </div>
+        {!readOnly && (
+          <Toolbar className="flex">
+            {(externalProps) => (
+              <div className="inline-block md:flex px-1 items-center">
+                <BoldButton {...externalProps} />
+                <ItalicButton {...externalProps} />
+                <UnderlineButton {...externalProps} />
+                <CodeButton {...externalProps} />
+                <HeadlineOneButton {...externalProps} />
+                <HeadlineTwoButton {...externalProps} />
+                <HeadlineThreeButton {...externalProps} />
+                <UnorderedListButton {...externalProps} />
+                <OrderedListButton {...externalProps} />
+                <BlockquoteButton {...externalProps} />
+                <CodeBlockButton {...externalProps} />
+                <linkPlugin.LinkButton
+                  {...externalProps}
+                  onOverrideContent={() => {}}
+                />
+                <DividerButton {...externalProps} />
+                <ImageButton {...externalProps} onChange={onAddLocalImage} />
+                <VideoButton {...externalProps} onAddVideo={onAddVideo} />
+                <ChapterButton {...externalProps} onClick={showChapterModal} />
+                <ComicButton {...externalProps} onClick={showComicModal} />
+              </div>
+            )}
+          </Toolbar>
+        )}
+      </div>
+    </div>
+  )
+}
+
+let { DividerButton } = dividerPlugin
+
+const ImageButton = ({ theme, onChange }) => {
+  return (
+    <div
+      className={`${theme.customButton} ${theme.button} relative overflow-hidden cursor-pointer px-2`}
+    >
+      Image
+      <input
+        className="cursor-pointer w-full opacity-0 absolute inset-0"
+        type="file"
+        accept="image/*"
+        onChange={onChange}
+        onClick={(e) => {
+          e.target.value = null
+        }}
+      />
+    </div>
+  )
+}
+
+const ChapterButton = ({ theme, onClick }) => {
+  return (
+    <button
+      className={`${theme.customButton} ${theme.button} px-2`}
+      onClick={onClick}
+    >
+      Chapter
+    </button>
+  )
+}
+
+const ComicButton = ({ theme, onClick }) => {
+  return (
+    <button
+      className={`${theme.customButton} ${theme.button} px-2`}
+      onClick={onClick}
+    >
+      Comic
+    </button>
+  )
+}
+
+const VideoButton = ({ theme, onAddVideo }) => {
+  const [url, setUrl] = useState('')
+  const [showVideoModal, setShowVideoModal] = useState(false)
+
+  const triggerModal = () => {
+    setShowVideoModal(!showVideoModal)
+    setUrl('')
+  }
+
+  return (
+    <>
+      <button
+        className={`${theme.customButton} ${theme.button} px-2`}
+        onClick={triggerModal}
+      >
+        Video
+      </button>
+      {showVideoModal && (
+        <Modal close={triggerModal} closeOnBgClick={true} closeOnEscape={true}>
+          <div className="w-full max-w-md p-4 m-auto bg-white rounded-md overflow-hidden">
+            <div className="m-auto">
+              <label className="mb-4 block text-black text-2xl font-bold">
+                Embedd video
+              </label>
+              <input
+                type="text"
+                name="video"
+                onChange={(e) => setUrl(e.target.value)}
+                value={url}
+                className={`resize-none h-auto bg-gray-300 w-full rounded-md py-3 px-2 focus:border-gray-500 mb-4 text-black`}
+                placeholder="Video url"
+              />
+              <p className="text-gray-500 text-sm italic">
+                Please enter link of youtube video
+              </p>
+              <button
+                className={`font-semibold mt-4 py-3 w-full rounded-md ${
+                  !url
+                    ? 'bg-gray-200 cursor-default text-white'
+                    : 'bg-primary text-white'
+                }`}
+                disabled={!checkUrl(url)}
+                onClick={() => {
+                  onAddVideo(url)
+                  triggerModal()
+                }}
+              >
+                Add Video
+              </button>
+            </div>
+          </div>
+        </Modal>
+      )}
+    </>
+  )
+}
+
+const styleMap = {
+  CODE: {
+    backgroundColor: 'rgba(0, 0, 0, 0.05)',
+    fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
+    fontSize: 16,
+    padding: 2,
+  },
+}
+
+const getBlockStyle = (block) => {
+  switch (block.getType()) {
+    case 'blockquote':
+      return 'RichEditor-blockquote'
+    case 'header-one':
+      return 'text-3xl font-bold my-6'
+    case 'header-two':
+      return 'text-2xl font-semibold my-5'
+    case 'header-three':
+      return 'text-xl font-semibold my-4'
+    case 'unordered-list-item':
+      return 'RichEditor-unorderedList'
+    case 'ordered-list-item':
+      return 'RichEditor-orderedList'
+    case 'unstyled':
+      return 'mb-4'
+    case 'code-block':
+      return 'bg-gray-900'
+    case 'atomic':
+      return 'my-4'
+    default:
+      return null
+  }
+}
+
+export default TextEditor
