@@ -276,7 +276,7 @@ const NewsEditor = ({
     try {
       const url = `${process.env.PARAS_API_URL}/publications`
       axios.defaults.headers.common['Authorization'] = await near.authToken()
-      const res = await axios(
+      await axios(
         !isNewsDetail && draftDetail.length > 0
           ? {
               url: url,
