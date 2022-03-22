@@ -5,13 +5,13 @@ import { parseImgUrl } from 'utils/common'
 
 const NewsList = ({ data }) => {
   return (
-    <div className="news-card rounded-md overflow-hidden border-dashed border-2 border-primary">
+    <div className="news-card rounded-md overflow-hidden shadow-xl drop-shadow-xl">
       <div className="relative z-10 bg-primary">
         <Link href={`/news/${data.slug}-${data._id}`}>
           <a>
-            <div className="h-64 overflow-hidden m-auto cursor-pointer shadow-inner">
+            <div className="h-40 overflow-hidden m-auto cursor-pointer shadow-inner">
               <img
-                className="h-64 w-full object-cover"
+                className="h-40 w-full object-cover"
                 src={parseImgUrl(data.thumbnail, null, {
                   width: `600`,
                 })}
@@ -30,7 +30,7 @@ const NewsList = ({ data }) => {
                   maxHeight: `3.75rem`,
                 }}
               >
-                <h1 className="text-black text-xl font-bold line-clamp-2 border-b-2 border-transparent">
+                <h1 className="text-black text-lg font-bold line-clamp-2 border-b-2 border-transparent">
                   {data.title}
                 </h1>
               </div>
@@ -40,13 +40,15 @@ const NewsList = ({ data }) => {
                   maxHeight: `3.2rem`,
                 }}
               >
-                <p className="text-black line-clamp-2">{data.description}</p>
+                <p className="text-black line-clamp-2 text-xs">
+                  {data.description}
+                </p>
               </div>
             </div>
           </a>
         </Link>
         <div className="flex mt-auto">
-          <p className="text-black">
+          <p className="text-black text-sm">
             <span className="capitalize">
               <a className="font-semibold">{data.type}</a>
             </span>

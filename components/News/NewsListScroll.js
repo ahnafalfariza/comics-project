@@ -27,7 +27,7 @@ const NewsListScroll = ({ data, fetchData, hasMore }) => {
     >
       <div className="flex flex-wrap">
         {data?.map((news, idx) => (
-          <div key={idx} className="w-full md:w-1/2 p-4">
+          <div key={idx} className="w-full md:w-1/3 p-3">
             <NewsList key={news._id} data={news} />
           </div>
         ))}
