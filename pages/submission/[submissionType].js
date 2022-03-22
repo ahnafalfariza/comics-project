@@ -637,7 +637,7 @@ export async function getServerSideProps({ params }) {
     },
   })
   const dataSubmission = res.data.result[0] || null
-  if (!dataSubmission) {
+  if (!dataSubmission || !dataSubmission?.is_active) {
     return {
       redirect: {
         destination: '/submission/artist',
