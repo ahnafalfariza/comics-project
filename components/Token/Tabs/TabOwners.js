@@ -22,6 +22,8 @@ const TabOwners = ({ localToken }) => {
   }, [localToken])
 
   const fetchTokens = async () => {
+    console.log('masuk fetch token')
+
     if (!hasMore || isFetching) {
       return
     }
@@ -54,7 +56,7 @@ const TabOwners = ({ localToken }) => {
         next={fetchTokens}
         hasMore={hasMore}
         className="pb-4"
-        scrollableTarget="TokenScroll"
+        scrollableTarget="TokenSeriesScroll"
       >
         {tokens.map((token) => (
           <Owner token={token} key={token.token_id} />
