@@ -104,7 +104,11 @@ const Footer = () => {
           </div>
         </div>
         <div className="mt-2 flex flex-row justify-center text-black text-opacity-40">
-          <p>2021 Paras</p>
+          <p>2022 Paras</p>
+          <p className="mx-2">|</p>
+          <Link href="/privacy">
+            <a>Privacy</a>
+          </Link>
           <p className="mx-2">|</p>
           <div className="flex items-center text-sm">
             <p>Powered by</p>
