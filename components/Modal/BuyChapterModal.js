@@ -110,7 +110,7 @@ const BuyChapterModal = ({
                   }}
                 >
                   <div className="w-full h-full bg-gradient-to-t from-white to-transparent md:bg-none flex items-end">
-                    {!isPreview && (
+                    {!isPreview && data.preview_limit && (
                       <div
                         className="absolute md:relative right-0 m-4 px-3 py-1 text-sm rounded-full text-black bg-white cursor-pointer hover:bg-opacity-95"
                         onClick={onClickPreview}
