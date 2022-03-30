@@ -25,8 +25,9 @@ import {
   videoPlugin,
 } from './TextEditorPlugin'
 import { checkUrl, compressImg, readFileAsUrl } from 'utils/common'
-import Modal from '../Modal'
 import useStore from 'lib/store'
+import Modal from 'components/Common/Modal'
+
 const TextEditor = ({
   content,
   readOnly = false,

@@ -12,13 +12,13 @@ import {
   readFileAsUrl,
 } from 'utils/common'
 import TextEditor from './TextEditor'
-import Modal from '../Modal'
 import useStore from 'lib/store'
 import usePreventRouteChangeIf from 'hooks/usePreventRouteChange'
 import { sentryCaptureException } from 'lib/sentry'
 import { v4 as uuidv4 } from 'uuid'
 import DraftPublication from 'components/Draft/DraftPublication'
 import near from 'lib/near'
+import Modal from 'components/Common/Modal'
 
 let redirectUrl = null
 
