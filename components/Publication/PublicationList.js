@@ -9,9 +9,9 @@ const PublicationList = ({ data }) => {
       <div className="relative z-10 bg-primary">
         <Link href={`/publication/${data.slug}-${data._id}`}>
           <a>
-            <div className="h-40 overflow-hidden m-auto cursor-pointer shadow-inner">
+            <div className="aspect-[2/1] overflow-hidden m-auto cursor-pointer shadow-inner">
               <img
-                className="h-40 w-full object-cover"
+                className="aspect-[2/1] w-full object-cover"
                 src={parseImgUrl(data.thumbnail, null, {
                   width: `600`,
                 })}
@@ -40,7 +40,7 @@ const PublicationList = ({ data }) => {
                   maxHeight: `3.2rem`,
                 }}
               >
-                <p className="text-black line-clamp-2 text-xs">
+                <p className="text-black line-clamp-2 text-sm">
                   {data.description}
                 </p>
               </div>
