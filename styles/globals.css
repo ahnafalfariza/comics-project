@@ -167,22 +167,22 @@ svg {
   cursor: pointer;
 }
 
-.titleNews {
+.titlePublication {
   background: transparent;
   color: black;
   border: none;
 }
 
-.titleNews:focus {
+.titlePublication:focus {
   background: transparent;
   color: black;
   border: none;
 }
 
-.titleNews::-webkit-input-placeholder {
+.titlePublication::-webkit-input-placeholder {
   color: #9197a3;
 }
-.titleNews:focus::-webkit-input-placeholder {
+.titlePublication:focus::-webkit-input-placeholder {
   color: #bdc1c9;
 }
 

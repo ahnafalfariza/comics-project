@@ -1,18 +1,18 @@
 import axios from 'axios'
 
-import NewsEditor from 'components/News/NewsEditor'
+import PublicationEditor from 'components/Publication/PublicationEditor'
 import Layout from 'components/Common/Layout'
 import Head from 'components/Common/Head'
 
-const Edit = ({ newsDetail }) => {
+const Edit = ({ publicationDetail }) => {
   return (
     <Layout>
-      <Head title="Edit News — Paras Comic" />
+      <Head title="Edit Publication — Paras Comic" />
       <div className="relative">
         {typeof window !== 'undefined' && (
-          <NewsEditor
+          <PublicationEditor
             isEdit={true}
-            newsDetail={newsDetail}
+            publicationDetail={publicationDetail}
             draftDetail={JSON.parse(localStorage.getItem('edit-draft'))}
           />
         )}
@@ -26,9 +26,9 @@ export async function getServerSideProps({ params }) {
   const resp = await axios(
     `${process.env.PARAS_API_URL}/publications?_id=${newId}`
   )
-  const newsDetail = (await resp.data?.data?.results[0]) || null
+  const publicationDetail = (await resp.data?.data?.results[0]) || null
 
-  return { props: { newsDetail } }
+  return { props: { publicationDetail } }
 }
 
 export default Edit

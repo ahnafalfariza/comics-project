@@ -17,20 +17,20 @@ import useStore from 'lib/store'
 import usePreventRouteChangeIf from 'hooks/usePreventRouteChange'
 import { sentryCaptureException } from 'lib/sentry'
 import { v4 as uuidv4 } from 'uuid'
-import DraftNews from 'components/Draft/DraftNews'
+import DraftPublication from 'components/Draft/DraftPublication'
 import near from 'lib/near'
 
 let redirectUrl = null
 
-const NewsEditor = ({
+const PublicationEditor = ({
   isEdit = false,
-  newsDetail = null,
+  publicationDetail = null,
   draftDetail = [],
 }) => {
   const router = useRouter()
   const [preventLeaving, setPreventLeaving] = useState(true)
   const [showLeavingConfirmation, setShowLeavingConfirmation] = useState(false)
-  const [isNewsDetail, setIsNewsDetail] = useState(false)
+  const [isPublicationDetail, setIsPublicationDetail] = useState(false)
 
   const setToastConfig = useStore((state) => state.setToastConfig)
 
@@ -56,16 +56,16 @@ const NewsEditor = ({
   })
 
   const [title, setTitle] = useState(
-    convertTextToEditorState(newsDetail?.title || draftDetail[0]?.title)
+    convertTextToEditorState(publicationDetail?.title || draftDetail[0]?.title)
   )
   const [subTitle, setSubTitle] = useState(
-    newsDetail?.description || draftDetail[0]?.description || ''
+    publicationDetail?.description || draftDetail[0]?.description || ''
   )
   const [thumbnail, setThumbnail] = useState(
-    newsDetail?.thumbnail || draftDetail[0]?.thumbnail
+    publicationDetail?.thumbnail || draftDetail[0]?.thumbnail
   )
   const [content, setContent] = useState(
-    generateEditorState(newsDetail?.content || draftDetail[0]?.content)
+    generateEditorState(publicationDetail?.content || draftDetail[0]?.content)
   )
   const [showAlertErr, setShowAlertErr] = useState(false)
   const [embeddedChapter, setEmbeddedChapter] = useState([])
@@ -81,7 +81,7 @@ const NewsEditor = ({
   const uid = uuidv4()
 
   useEffect(() => {
-    if (newsDetail !== null) setIsNewsDetail(true)
+    if (publicationDetail !== null) setIsPublicationDetail(true)
   }, [])
 
   useEffect(() => {
@@ -101,7 +101,7 @@ const NewsEditor = ({
 
   const fetchToken = async () => {
     let token = []
-    newsDetail?.contract_token_ids?.map(async (tokenId) => {
+    publicationDetail?.contract_token_ids?.map(async (tokenId) => {
       const [contractTokenId, token_id] = tokenId.split('/')
       const [contractId, tokenSeriesId] = contractTokenId.split('::')
 
@@ -127,7 +127,7 @@ const NewsEditor = ({
 
   const fetchComic = async () => {
     let comic = []
-    newsDetail?.collection_ids?.map(async (comicId) => {
+    publicationDetail?.collection_ids?.map(async (comicId) => {
       const url = `${process.env.COMIC_API_URL}`
       const res = await axios({
         url: url + `/comics`,
@@ -244,7 +244,7 @@ const NewsEditor = ({
       : setShowModal('comic')
   }
 
-  const postNews = async () => {
+  const postPublication = async () => {
     if (!thumbnail || !subTitle) {
       let error = []
       if (!thumbnail) error.push('Thumbnail')
@@ -277,21 +277,21 @@ const NewsEditor = ({
       const url = `${process.env.PARAS_API_URL}/publications`
       axios.defaults.headers.common['Authorization'] = await near.authToken()
       await axios(
-        !isNewsDetail && draftDetail.length > 0
+        !isPublicationDetail && draftDetail.length > 0
           ? {
               url: url,
               method: 'post',
               data: data,
             }
           : {
-              url: isEdit ? url + `/${newsDetail._id}` : url,
+              url: isEdit ? url + `/${publicationDetail._id}` : url,
               method: isEdit ? 'put' : 'post',
               data: data,
             }
       )
-      if (!isNewsDetail && draftDetail.length > 0)
+      if (!isPublicationDetail && draftDetail.length > 0)
         deleteDraft(draftDetail[0]._id)
-      const routerUrl = `/news`
+      const routerUrl = `/publication`
       setTimeout(() => {
         router.push(routerUrl)
       }, 1000)
@@ -365,7 +365,7 @@ const NewsEditor = ({
       localStorage.setItem('draft-publication', JSON.stringify(draftStorage))
     }
 
-    const routerUrl = `/news`
+    const routerUrl = `/publication`
     router.push(routerUrl)
   }
 
@@ -511,7 +511,7 @@ const NewsEditor = ({
           <div className="w-full max-w-md p-4 m-auto bg-white rounded-md overflow-hidden">
             <div className="m-auto">
               <label className="mb-4 block text-black text-2xl font-bold">
-                Add comic to your news
+                Add comic to your publication
               </label>
               <input
                 type="text"
@@ -551,7 +551,7 @@ const NewsEditor = ({
           <div className="w-full max-h-screen max-w-3xl p-4 m-auto bg-white rounded-md overflow-hidden overflow-y-auto">
             <div className="flex justify-between">
               <h1 className="mb-4 block text-black text-2xl font-bold">
-                {isEdit ? 'Edit News' : 'Preview News'}
+                {isEdit ? 'Edit Publication' : 'Preview Publication'}
               </h1>
               <div onClick={() => setShowModal(null)}>
                 <svg
@@ -644,11 +644,11 @@ const NewsEditor = ({
                   <button
                     className="font-semibold mt-3 py-3 w-40 rounded-md bg-primary text-white"
                     disabled={isSubmitting}
-                    onClick={postNews}
+                    onClick={postPublication}
                   >
                     {isSubmitting ? 'Publishing...' : 'Publish'}
                   </button>
-                  {!isNewsDetail && (
+                  {!isPublicationDetail && (
                     <button
                       className="font-semibold mt-3 py-3 w-40 rounded-md border-2 border-black text-black"
                       disabled={isDraftIn}
@@ -700,7 +700,7 @@ const NewsEditor = ({
         <Modal close={() => setShowAlertErr(false)}>
           <div className="w-full max-w-xs p-4 m-auto bg-gray-100 rounded-md overflow-y-auto max-h-screen">
             <div className="w-full">
-              You are about to delete {newsDetail?.title}
+              You are about to delete {publicationDetail?.title}
             </div>
             <button
               className="w-full outline-none h-12 mt-4 rounded-md bg-transparent text-sm font-semibold border-2 px-4 py-2 border-primary bg-primary text-gray-100"
@@ -739,7 +739,7 @@ const NewsEditor = ({
                   key={key}
                   className="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 p-4"
                 >
-                  <ComicNews
+                  <ComicPublication
                     localComic={com}
                     onDelete={() => {
                       const temp = embeddedComic.filter(
@@ -770,7 +770,7 @@ const NewsEditor = ({
                   key={chapter?._id}
                   className="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 p-8"
                 >
-                  <ChapterNews
+                  <ChapterPublication
                     localToken={chapter}
                     deleteChapter={() => {
                       const temp = embeddedChapter.filter(
@@ -797,7 +797,7 @@ const NewsEditor = ({
         >
           Continue
         </button>
-        <DraftNews onCreatePublication />
+        <DraftPublication onCreatePublication />
       </div>
     </div>
   )
@@ -835,7 +835,7 @@ const convertTextToEditorState = (text = '') =>
     })
   )
 
-const ChapterNews = ({ localToken, deleteChapter }) => {
+const ChapterPublication = ({ localToken, deleteChapter }) => {
   return (
     <Fragment>
       <div className="w-full m-auto">
@@ -873,7 +873,7 @@ const ChapterNews = ({ localToken, deleteChapter }) => {
   )
 }
 
-const ComicNews = ({ localComic, onDelete }) => {
+const ComicPublication = ({ localComic, onDelete }) => {
   return (
     <div className="flex flex-col">
       <div className="w-full h-full rounded">
@@ -914,4 +914,4 @@ const ComicNews = ({ localComic, onDelete }) => {
   )
 }
 
-export default NewsEditor
+export default PublicationEditor

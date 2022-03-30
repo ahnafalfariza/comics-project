@@ -101,10 +101,10 @@ const Nav = () => {
             <>
               <div
                 className="flex flex-shrink-0 items-center space-x-2 cursor-pointer"
-                onClick={() => router.push('/news/create')}
+                onClick={() => router.push('/publication/create')}
               >
                 <IconPencil size={18} className="text-black opacity-80" />
-                <p className="text-black opacity-80">Create News</p>
+                <p className="text-black opacity-80">Create Publication</p>
               </div>
               <hr className="opacity-90 -mx-2 my-3" />
             </>
@@ -192,14 +192,16 @@ const Nav = () => {
                 </span>
               </a>
             </Link>
-            <Link href="/news">
+            <Link href="/publication">
               <a className="block font-semibold hover:text-primary text-base">
                 <span
                   className={
-                    router.pathname.includes('/news') ? `text-primary` : ''
+                    router.pathname.includes('/publication')
+                      ? `text-primary`
+                      : ''
                   }
                 >
-                  News
+                  Publication
                 </span>
               </a>
             </Link>
@@ -304,14 +306,16 @@ const Nav = () => {
                 </Link>
               </div>
               <div className="p-3">
-                <Link href="/news">
+                <Link href="/publication">
                   <a className="font-semibold hover:text-primary">
                     <span
                       className={
-                        router.pathname.includes('/news') ? `text-primary` : ''
+                        router.pathname.includes('/publication')
+                          ? `text-primary`
+                          : ''
                       }
                     >
-                      News
+                      Publication
                     </span>
                   </a>
                 </Link>

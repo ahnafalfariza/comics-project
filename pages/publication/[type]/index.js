@@ -13,23 +13,23 @@ import {
 import { useRouter } from 'next/router'
 
 import Error from '../../404'
-import TextEditor from 'components/News/TextEditor'
+import TextEditor from 'components/Publication/TextEditor'
 import LinkToProfile from 'components/Common/LinkToProfile'
 import { parseDate, parseImgUrl } from 'utils/common'
 import Modal from 'components/Modal'
 import useStore from 'lib/store'
 import { sentryCaptureException } from 'lib/sentry'
 import Layout from 'components/Common/Layout'
-import EmbeddedComic from 'components/News/EmbeddedComic'
-import EmbeddedChapter from 'components/News/EmbeddedChapter'
+import EmbeddedComic from 'components/Publication/EmbeddedComic'
+import EmbeddedChapter from 'components/Publication/EmbeddedChapter'
 
-const ComicDetailPage = ({ errorCode, newsDetail, userProfile }) => {
+const ComicDetailPage = ({ errorCode, publicationDetail, userProfile }) => {
   const store = useStore()
   const router = useRouter()
   const textAreaRef = useRef(null)
   const [content, setContent] = useState(
-    newsDetail?.content
-      ? EditorState.createWithContent(convertFromRaw(newsDetail.content))
+    publicationDetail?.content
+      ? EditorState.createWithContent(convertFromRaw(publicationDetail.content))
       : null
   )
   const [showModal, setShowModal] = useState('')
@@ -60,7 +60,7 @@ const ComicDetailPage = ({ errorCode, newsDetail, userProfile }) => {
 
   useEffect(() => {
     if (errorCode) {
-      router.push('/news')
+      router.push('/publication')
     }
   }, [errorCode])
 
@@ -80,14 +80,14 @@ const ComicDetailPage = ({ errorCode, newsDetail, userProfile }) => {
     }, 1500)
   }
 
-  const _deleteNews = async () => {
+  const _deletePublication = async () => {
     setIsDeleting(true)
     try {
       await axios.delete(
-        `${process.env.PARAS_API_URL}/publications/${newsDetail._id}`
+        `${process.env.PARAS_API_URL}/publications/${publicationDetail._id}`
       )
       setTimeout(() => {
-        router.push('/news')
+        router.push('/publication')
       }, 1000)
     } catch (err) {
       sentryCaptureException(err)
@@ -110,7 +110,7 @@ const ComicDetailPage = ({ errorCode, newsDetail, userProfile }) => {
             backgroundSize: 'cover',
           }}
         ></div>
-        <Head title={newsDetail.title} />
+        <Head title={publicationDetail.title} />
         {isComponentMounted && (
           <div
             className="absolute z-0 opacity-0"
@@ -140,17 +140,17 @@ const ComicDetailPage = ({ errorCode, newsDetail, userProfile }) => {
               >
                 Share to...
               </div>
-              {store.currentUser.accountId === newsDetail.author_id && (
-                <Link href={`/news/edit/${newsDetail._id}`}>
+              {store.currentUser.accountId === publicationDetail.author_id && (
+                <Link href={`/publication/edit/${publicationDetail._id}`}>
                   <div
                     className="py-2 cursor-pointer"
                     onClick={() => setShowModal('confirmTransfer')}
                   >
-                    Update News
+                    Update Publication
                   </div>
                 </Link>
               )}
-              {store.currentUser.accountId === newsDetail.author_id && (
+              {store.currentUser.accountId === publicationDetail.author_id && (
                 <div
                   className="py-2 cursor-pointer"
                   onClick={() => setShowModal('confirmDelete')}
@@ -172,16 +172,16 @@ const ComicDetailPage = ({ errorCode, newsDetail, userProfile }) => {
                 Confirm Delete
               </h1>
               <p className="text-gray-900 mt-2">
-                You are about to delete <b>{newsDetail.title}</b>
+                You are about to delete <b>{publicationDetail.title}</b>
               </p>
               <button
                 className="w-full outline-none h-12 mt-4 rounded-md bg-transparent text-sm font-semibold border-2 px-4 py-2 border-primary text-white"
                 style={{ backgroundColor: '#00BBDB' }}
                 type="submit"
                 disabled={isDeleting}
-                onClick={_deleteNews}
+                onClick={_deletePublication}
               >
-                {isDeleting ? 'Deleting...' : 'Delete my news'}
+                {isDeleting ? 'Deleting...' : 'Delete my publication'}
               </button>
             </div>
           </Modal>
@@ -191,7 +191,7 @@ const ComicDetailPage = ({ errorCode, newsDetail, userProfile }) => {
             <div className="max-w-sm w-full px-4 py-2 bg-gray-100 m-auto rounded-md">
               <div className="py-2 cursor-pointer">
                 <TwitterShareButton
-                  title={`Read ${newsDetail.title} only at @ParasHQ\n\n#paras #cryptoart #digitalart #comic #tradingnft`}
+                  title={`Read ${publicationDetail.title} only at @ParasHQ\n\n#paras #cryptoart #digitalart #comic #tradingnft`}
                   url={window.location.href}
                   className="flex items-center w-full"
                 >
@@ -225,21 +225,21 @@ const ComicDetailPage = ({ errorCode, newsDetail, userProfile }) => {
         )}
         <div className="max-w-5xl relative m-auto pb-12 pt-4">
           <p className="mb-8 px-4 max-w-3xl m-auto text-gray-400">
-            <Link passHref href={`/news`}>
-              <span className="cursor-pointer">News</span>
+            <Link passHref href={`/publication`}>
+              <span className="cursor-pointer">Publication</span>
             </Link>
             {' > '}
             <span className="font-semibold text-primary">
-              {newsDetail.title}
+              {publicationDetail.title}
             </span>
           </p>
-          <h1 className="titleNews text-4xl font-bold pb-0 text-center px-4 md:px-0">
-            {newsDetail.title}
+          <h1 className="titlePublication text-4xl font-bold pb-0 text-center px-4 md:px-0">
+            {publicationDetail.title}
           </h1>
           <div className="m-auto max-w-3xl px-4 pt-8">
             <div className="flex justify-between mb-4">
               <div className="flex space-x-4">
-                <Link href={`/${newsDetail.author_id}`}>
+                <Link href={`/${publicationDetail.author_id}`}>
                   <div className="w-16 h-16 rounded-full overflow-hidden bg-primary cursor-pointer">
                     <img
                       src={parseImgUrl(userProfile?.imgUrl, null, {
@@ -251,11 +251,11 @@ const ComicDetailPage = ({ errorCode, newsDetail, userProfile }) => {
                 </Link>
                 <div className="m-auto">
                   <LinkToProfile
-                    accountId={newsDetail.author_id}
+                    accountId={publicationDetail.author_id}
                     className="font-bold hover:border-primary text-xl"
                   />
                   <p className="text-primary m-auto text-sm">
-                    {parseDate(newsDetail.updated_at)}
+                    {parseDate(publicationDetail.updated_at)}
                   </p>
                 </div>
               </div>
@@ -295,7 +295,7 @@ const ComicDetailPage = ({ errorCode, newsDetail, userProfile }) => {
             </div>
             {content && (
               <TextEditor
-                title={createEditorStateWithText(newsDetail.title)}
+                title={createEditorStateWithText(publicationDetail.title)}
                 hideTitle={true}
                 content={content}
                 setContent={setContent}
@@ -303,32 +303,33 @@ const ComicDetailPage = ({ errorCode, newsDetail, userProfile }) => {
               />
             )}
           </div>
-          {newsDetail.collection_ids && newsDetail.collection_ids.length !== 0 && (
-            <div className="max-w-4xl mx-auto px-4 pt-16">
-              <div className="rounded-md p-2 md:p-4">
-                <h4 className="font-semibold text-3xl md:mb-4 text-center">
-                  Comics
-                </h4>
-                <div
-                  className={`flex flex-wrap ${
-                    newsDetail.contract_token_ids.length <= 3 &&
-                    'justify-center'
-                  }`}
-                >
-                  {newsDetail.collection_ids?.map((comicId, index) => (
-                    <div
-                      key={index}
-                      className="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 p-4"
-                    >
-                      <EmbeddedComic comicId={comicId} />
-                    </div>
-                  ))}
+          {publicationDetail.collection_ids &&
+            publicationDetail.collection_ids.length !== 0 && (
+              <div className="max-w-4xl mx-auto px-4 pt-16">
+                <div className="rounded-md p-2 md:p-4">
+                  <h4 className="font-semibold text-3xl md:mb-4 text-center">
+                    Comics
+                  </h4>
+                  <div
+                    className={`flex flex-wrap ${
+                      publicationDetail.contract_token_ids.length <= 3 &&
+                      'justify-center'
+                    }`}
+                  >
+                    {publicationDetail.collection_ids?.map((comicId, index) => (
+                      <div
+                        key={index}
+                        className="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 p-4"
+                      >
+                        <EmbeddedComic comicId={comicId} />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
-          {newsDetail.contract_token_ids &&
-            newsDetail.contract_token_ids.length !== 0 && (
+            )}
+          {publicationDetail.contract_token_ids &&
+            publicationDetail.contract_token_ids.length !== 0 && (
               <div className="max-w-4xl mx-auto px-4 pt-16">
                 <div className=" border-2 border-dashed border-gray-800 rounded-md p-4 md:p-8">
                   <h4 className="font-semibold text-3xl md:mb-4 text-center">
@@ -336,18 +337,20 @@ const ComicDetailPage = ({ errorCode, newsDetail, userProfile }) => {
                   </h4>
                   <div
                     className={`flex flex-wrap ${
-                      newsDetail.contract_token_ids.length <= 3 &&
+                      publicationDetail.contract_token_ids.length <= 3 &&
                       'justify-center'
                     }`}
                   >
-                    {newsDetail.contract_token_ids?.map((tokenId, index) => (
-                      <div
-                        key={index}
-                        className="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 p-8"
-                      >
-                        <EmbeddedChapter tokenId={tokenId} />
-                      </div>
-                    ))}
+                    {publicationDetail.contract_token_ids?.map(
+                      (tokenId, index) => (
+                        <div
+                          key={index}
+                          className="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 p-8"
+                        >
+                          <EmbeddedChapter tokenId={tokenId} />
+                        </div>
+                      )
+                    )}
                   </div>
                 </div>
               </div>
@@ -367,16 +370,16 @@ export async function getServerSideProps({ params }) {
     `${process.env.PARAS_API_URL}/publications?_id=${id[id.length - 1]}`
   )
 
-  const newsDetail = (await resp.data?.data?.results[0]) || null
+  const publicationDetail = (await resp.data?.data?.results[0]) || null
 
-  const errorCode = newsDetail ? false : 404
+  const errorCode = publicationDetail ? false : 404
 
   const profileRes = await axios(
-    `${process.env.PARAS_API_URL}/profiles?accountId=${newsDetail?.author_id}`
+    `${process.env.PARAS_API_URL}/profiles?accountId=${publicationDetail?.author_id}`
   )
   const userProfile = (await profileRes.data.data.results[0]) || null
 
-  return { props: { newsDetail, errorCode, userProfile, slugName } }
+  return { props: { publicationDetail, errorCode, userProfile, slugName } }
 }
 
 export default ComicDetailPage

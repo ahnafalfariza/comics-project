@@ -3,11 +3,11 @@ import Link from 'next/link'
 
 import { parseImgUrl } from 'utils/common'
 
-const NewsList = ({ data }) => {
+const PublicationList = ({ data }) => {
   return (
-    <div className="news-card rounded-md overflow-hidden shadow-xl drop-shadow-xl">
+    <div className="publication-card rounded-md overflow-hidden shadow-xl drop-shadow-xl">
       <div className="relative z-10 bg-primary">
-        <Link href={`/news/${data.slug}-${data._id}`}>
+        <Link href={`/publication/${data.slug}-${data._id}`}>
           <a>
             <div className="h-40 overflow-hidden m-auto cursor-pointer shadow-inner">
               <img
@@ -21,7 +21,7 @@ const NewsList = ({ data }) => {
         </Link>
       </div>
       <div className="flex flex-col p-4 -mt-1 h-44">
-        <Link href={`/news/${data.slug}-${data._id}`}>
+        <Link href={`/publication/${data.slug}-${data._id}`}>
           <a>
             <div className="cursor-pointer">
               <div
@@ -64,4 +64,4 @@ const NewsList = ({ data }) => {
   )
 }
 
-export default NewsList
+export default PublicationList

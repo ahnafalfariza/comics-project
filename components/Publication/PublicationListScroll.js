@@ -1,17 +1,17 @@
 import InfiniteScroll from 'react-infinite-scroll-component'
-import NewsListLoader from './NewsListLoader'
-import NewsList from './NewsList'
+import PublicationListLoader from './PublicationListLoader'
+import PublicationList from './PublicationList'
 
-const NewsListScroll = ({ data, fetchData, hasMore }) => {
+const PublicationListScroll = ({ data, fetchData, hasMore }) => {
   if (data?.length === 0 && !hasMore) {
     return (
       <div className="w-full">
-        <div className="news-card mx-4 md:w-1/2 md:mx-auto rounded-md overflow-hidden border-dashed border-2 border-primary">
+        <div className="publication-card mx-4 md:w-1/2 md:mx-auto rounded-md overflow-hidden border-dashed border-2 border-primary">
           <div className="m-auto text-2xl text-gray-600 font-semibold py-32 text-center">
             <div className="w-40 m-auto">
               <img src="/cardstack.png" className="opacity-75" />
             </div>
-            <p className="mt-4 text-gray-300">No News</p>
+            <p className="mt-4 text-gray-300">No Publication</p>
           </div>
         </div>
       </div>
@@ -23,16 +23,16 @@ const NewsListScroll = ({ data, fetchData, hasMore }) => {
       dataLength={data?.length || 4}
       next={fetchData}
       hasMore={hasMore}
-      loader={<NewsListLoader />}
+      loader={<PublicationListLoader />}
     >
       <div className="flex flex-wrap">
-        {data?.map((news, idx) => (
+        {data?.map((publication, idx) => (
           <div key={idx} className="w-full md:w-1/3 p-3">
-            <NewsList key={news._id} data={news} />
+            <PublicationList key={publication._id} data={publication} />
           </div>
         ))}
       </div>
     </InfiniteScroll>
   )
 }
-export default NewsListScroll
+export default PublicationListScroll

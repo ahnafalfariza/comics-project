@@ -1,6 +1,6 @@
 import ContentLoader from 'react-content-loader'
 
-const NewsLoader = (props) => (
+const PublicationLoader = (props) => (
   <ContentLoader
     speed={2}
     width="100%"
@@ -8,7 +8,7 @@ const NewsLoader = (props) => (
     viewBox="0 0 612 509"
     backgroundColor="#E8E8E8"
     foregroundColor="#F5F5F5"
-    uniqueKey="news-card-loader"
+    uniqueKey="publication-card-loader"
     {...props}
   >
     <rect x="0" y="0" rx="4" ry="4" width="4" height="509" />
@@ -29,4 +29,4 @@ const NewsLoader = (props) => (
   </ContentLoader>
 )
 
-export default NewsLoader
+export default PublicationLoader

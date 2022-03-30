@@ -111,7 +111,7 @@ const TextEditor = ({
   return (
     <div>
       {!hideTitle && (
-        <div className="titleNews text-4xl font-bold pb-0 text-white">
+        <div className="titlePublication text-4xl font-bold pb-0 text-white">
           <Editor
             editorKey={'title'}
             placeholder="Title"

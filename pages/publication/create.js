@@ -1,14 +1,14 @@
 import Head from 'components/Common/Head'
 import Layout from 'components/Common/Layout'
-import NewsEditor from 'components/News/NewsEditor'
+import PublicationEditor from 'components/Publication/PublicationEditor'
 
 const CreatePublication = () => {
   return (
     <div className="min-h-screen bg-white">
       <Layout>
-        <Head title="Create News - Paras Comic" />
+        <Head title="Create Publication - Paras Comic" />
         <div className="relative">
-          <NewsEditor />
+          <PublicationEditor />
         </div>
       </Layout>
     </div>

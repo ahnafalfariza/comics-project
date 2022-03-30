@@ -1,7 +1,7 @@
 import near from 'lib/near'
 import { useEffect, useRef, useState } from 'react'
 
-const DraftNews = ({ onCreatePublication }) => {
+const DraftPublication = ({ onCreatePublication }) => {
   const draftModalRef = useRef()
   const [showDraftModal, setShowDraftModal] = useState(false)
   const [currentUserDraft, setCurrentUserDraft] = useState()
@@ -99,7 +99,7 @@ const DraftNews = ({ onCreatePublication }) => {
                 return (
                   <div key={index} className="flex mt-2">
                     <div className="rounded-md text-black px-3 py-2 inline-block mb-2 mr-2 border-2 border-primary w-full cursor-pointer hover:bg-primary hover:bg-opacity-10">
-                      <a href={`/news/edit/${draft._id}`}>
+                      <a href={`/publication/edit/${draft._id}`}>
                         <h4
                           key={index}
                           className="truncate"
@@ -153,4 +153,4 @@ const DraftNews = ({ onCreatePublication }) => {
   )
 }
 
-export default DraftNews
+export default DraftPublication
