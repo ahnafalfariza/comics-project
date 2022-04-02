@@ -11,7 +11,7 @@ const PublicationList = ({ data }) => {
           <a>
             <div className="aspect-[2/1] overflow-hidden m-auto cursor-pointer shadow-inner">
               <img
-                className="aspect-[2/1] w-full object-cover"
+                className="aspect-[2/1] w-full h-44 object-cover"
                 src={parseImgUrl(data.thumbnail, null, {
                   width: `600`,
                 })}
