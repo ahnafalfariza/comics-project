@@ -72,7 +72,7 @@ const Comics = () => {
 }
 
 const ComicLoader = () => (
-  <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-8">
     {Array(8)
       .fill('')
       .map((item, idx) => (

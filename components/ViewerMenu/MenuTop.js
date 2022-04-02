@@ -39,7 +39,7 @@ const MenuTop = forwardRef(
                 className="cursor-pointer transform rotate-180"
                 onClick={onClickBack}
               />
-              <p className="text-black ml-4 flex-1 md:text-base lg:text-lg">
+              <p className="text-black ml-4 flex-1 md:text-base lg:text-lg truncate">
                 {data?.metadata.title}
               </p>
               {data?.lang && !isPreview && (
