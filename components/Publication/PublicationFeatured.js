@@ -1,19 +1,41 @@
 import Link from 'next/link'
+import { useRef } from 'react'
+import { useEffect } from 'react'
+import { useState } from 'react'
 import { parseImgUrl } from 'utils/common'
 import PublicationLoader from './PublicationLoader'
 
 const PublicationFeatured = ({ data }) => {
-  if (!data) return <PublicationLoader />
+  const [height, setHeight] = useState(0)
+  const ref = useRef()
+
+  useEffect(() => {
+    if (data && ref.current.clientWidth !== 0) {
+      setHeight((ref.current.clientWidth * 2) / 3)
+    }
+  }, [data, ref])
+
+  if (!data)
+    return (
+      <div className="mb-4">
+        <PublicationLoader />
+      </div>
+    )
 
   return (
     <div className="publication-card rounded-md overflow-hidden shadow-xl drop-shadow-xl">
       <div className="relative z-10 bg-primary">
         <Link href={`/publication/${data.slug}-${data._id}`}>
           <a>
-            <div className="aspect-[3/2] overflow-hidden m-auto cursor-pointer shadow-inner">
+            <div
+              ref={ref}
+              className="aspect-[3/2] overflow-hidden m-auto cursor-pointer shadow-inner w-full"
+              style={{ height }}
+            >
               <img
-                className="aspect-[3/2] w-full object-cover"
+                className="w-full object-cover"
                 src={parseImgUrl(data.thumbnail, null, { width: `600` })}
+                style={{ height }}
               />
             </div>
           </a>
