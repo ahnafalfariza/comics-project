@@ -2,7 +2,7 @@ import { SyncLoader } from 'react-spinners'
 
 const Loading = ({
   loading = true,
-  color = '#ffffff',
+  color = '#00BBDB',
   size = 12,
   className = '',
 }) => {

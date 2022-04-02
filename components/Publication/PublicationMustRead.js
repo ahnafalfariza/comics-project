@@ -1,8 +1,18 @@
 import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
 import { parseImgUrl } from 'utils/common'
 import PublicationLoader from './PublicationLoader'
 
 const PublicationMustRead = ({ data }) => {
+  const [height, setHeight] = useState(0)
+  const ref = useRef()
+
+  useEffect(() => {
+    if (ref.current.clientWidth !== 0) {
+      setHeight(ref.current.clientWidth / 2)
+    }
+  }, [ref])
+
   if (!data) return <PublicationLoader />
 
   return (
@@ -10,9 +20,13 @@ const PublicationMustRead = ({ data }) => {
       <div className="relative z-10 bg-primary">
         <Link href={`/publication/${data.slug}-${data._id}`}>
           <a>
-            <div className="aspect-[2/1] overflow-hidden m-auto cursor-pointer shadow-inner">
+            <div
+              ref={ref}
+              className="aspect-[2/1] overflow-hidden m-auto cursor-pointer shadow-inner"
+              height={{ height }}
+            >
               <img
-                className="aspect-[2/1] w-full h-44 object-cover"
+                className="w-full object-cover"
                 src={parseImgUrl(data.thumbnail, null, { width: `600` })}
               />
             </div>

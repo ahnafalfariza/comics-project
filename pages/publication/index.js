@@ -128,24 +128,31 @@ const Publication = () => {
       <div className="max-w-6xl m-auto py-8 md:px-0 md:py-8">
         <div className="flex items-end"></div>
         <div className="md:flex px-4 gap-6">
-          <div className="md:w-1/2">
-            <p className="w-1/2 text-black font-bold text-3xl mb-4 ">
-              Featured
-            </p>
-            <PublicationFeatured data={editorial?.featured[0]} />
-          </div>
-          <div className="md:w-1/2 mt-8 md:mt-0">
-            <p className="w-1/2 text-black font-bold text-2xl mb-4">
-              Must Read
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 md:grid-row-2 gap-4">
-              {editorial?.mustRead.map((publication) => (
-                <PublicationMustRead key={publication._id} data={publication} />
-              ))}
+          {editorial?.featured[0] && (
+            <div className="md:w-1/2 mb-8">
+              <p className="w-1/2 text-black font-bold text-3xl mb-4 ">
+                Featured
+              </p>
+              <PublicationFeatured data={editorial?.featured[0]} />
             </div>
-          </div>
+          )}
+          {editorial && editorial.mustRead.length !== 0 && (
+            <div className="md:w-1/2 mt-8 md:mt-0 mb-8">
+              <p className="w-1/2 text-black font-bold text-3xl mb-4 ">
+                Must Read
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 md:grid-row-2 gap-4">
+                {editorial?.mustRead.map((publication) => (
+                  <PublicationMustRead
+                    key={publication._id}
+                    data={publication}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
-        <div className="mt-8">
+        <div>
           <p className="text-black font-bold text-3xl mb-4 ml-4">
             Latest Publication
           </p>
