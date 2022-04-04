@@ -113,32 +113,50 @@ const FormSubmission = ({ dataSubmission }) => {
       window.scrollTo(0, 0)
 
       const cover = new FormData()
-      cover.append('files', data.cover)
+      if (dataSubmission.type_submission !== 'artist') {
+        cover.append('files', data.cover)
+      }
       const pages = new FormData()
       data.pages.forEach((page) => {
         pages.append('files', page.file)
       })
 
-      await axios
-        .all([postCoverComic(cover), postPagesComic(pages)])
-        .then((results) => {
-          data.cover = results[0].data
-          data.pages = results[1].data
+      if (dataSubmission.type_submission !== 'artist') {
+        await axios
+          .all([postCoverComic(cover), postPagesComic(pages)])
+          .then((results) => {
+            data.cover = results[0].data
+            data.pages = results[1].data
 
-          return results.data
-        })
-        .catch((error) => {
-          return error
-        })
+            return results.data
+          })
+          .catch((error) => {
+            return error
+          })
+      } else {
+        await axios
+          .all([postPagesComic(pages)])
+          .then((results) => {
+            data.pages = results[0].data
+
+            return results.data
+          })
+          .catch((error) => {
+            return error
+          })
+      }
 
       const form = new FormData()
       form.append('type_submission', dataSubmission.type_submission)
-      form.append('cover', data.cover)
+      if (dataSubmission.type_submission !== 'artist') {
+        form.append('cover', data.cover)
+      }
       form.append('title', data.title)
       form.append('genre', genreSelect)
       form.append('subgenre', subGenreSelect)
       form.append('synopsis', data.synopsis)
       form.append('email', data.email)
+      form.append('portfolio_url', data.portfolio_url)
       data.pages.forEach((page) => {
         form.append('pages[]', page)
       })
@@ -284,7 +302,7 @@ const FormSubmission = ({ dataSubmission }) => {
             </div>
           </div>
         )}
-        {dataSubmission.type_submission === 'valentine' ? (
+        {dataSubmission.type_submission !== 'artist' ? (
           <div className="border-4 border-dotted border-[#F5A1DB] mb-9 p-4 rounded-md md:mx-36 relative">
             <h1 className="text-center font-bold text-3xl mb-2">
               {dataSubmission.title}
@@ -329,76 +347,80 @@ const FormSubmission = ({ dataSubmission }) => {
               onSubmit={handleSubmit(onSubmit)}
               method="post"
             >
-              <div className="md:flex justify-between">
-                <div>
-                  <label className="font-bold text-md">Cover Comic</label>
-                  <div
-                    className={`relative cursor-pointer ${
-                      !cover && !coverPreview ? 'w-40 h-40 ' : 'w-60 h-80'
-                    } overflow-hidden rounded-md mt-2 hover:opacity-80`}
-                  >
-                    <input
-                      type="file"
-                      accept="image/*"
-                      {...register('cover', {
-                        required: true,
-                        onChange: inputFilecover,
-                      })}
-                      className="cursor-pointer w-full opacity-0 absolute inset-0 z-20"
-                    />
+              {dataSubmission.type_submission !== 'artist' && (
+                <div className="md:flex justify-between">
+                  <div>
+                    <label className="font-bold text-md">Cover Comic</label>
                     <div
-                      className={`${
-                        !cover && !coverPreview ? 'w-40 h-40 ' : 'w-full h-full'
-                      } overflow-hidden bg-comic-gray-secondary shadow-inner relative input-text`}
+                      className={`relative cursor-pointer ${
+                        !cover && !coverPreview ? 'w-40 h-40 ' : 'w-60 h-80'
+                      } overflow-hidden rounded-md mt-2 hover:opacity-80`}
                     >
-                      <img
-                        src={cover === '' ? null : coverPreview}
-                        className={'w-full h-full object-cover cover-comic'}
-                        style={{ textIndent: '-10000px' }}
+                      <input
+                        type="file"
+                        accept="image/*"
+                        {...register('cover', {
+                          required: true,
+                          onChange: inputFilecover,
+                        })}
+                        className="cursor-pointer w-full opacity-0 absolute inset-0 z-20"
                       />
-                      {!cover && !coverPreview && (
-                        <svg
-                          className="w-14 h-14 text-comic-gray-tertiary absolute inset-0 mx-auto my-auto"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                          ></path>
-                        </svg>
-                      )}
+                      <div
+                        className={`${
+                          !cover && !coverPreview
+                            ? 'w-40 h-40 '
+                            : 'w-full h-full'
+                        } overflow-hidden bg-comic-gray-secondary shadow-inner relative input-text`}
+                      >
+                        <img
+                          src={cover === '' ? null : coverPreview}
+                          className={'w-full h-full object-cover cover-comic'}
+                          style={{ textIndent: '-10000px' }}
+                        />
+                        {!cover && !coverPreview && (
+                          <svg
+                            className="w-14 h-14 text-comic-gray-tertiary absolute inset-0 mx-auto my-auto"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                            ></path>
+                          </svg>
+                        )}
+                      </div>
+                    </div>
+                    {(formState.errors.cover ||
+                      errorMessage ||
+                      isOverDimensions) && (
+                      <span
+                        className={`${
+                          !coverPreview || errorMessage || isOverDimensions
+                            ? 'text-red-500'
+                            : 'hidden'
+                        }`}
+                      >
+                        {errorMessage
+                          ? 'Image must be less than 10mb'
+                          : isOverDimensions
+                          ? 'The dimensions of the comic cover must be 640 x 890'
+                          : 'This field is required'}
+                      </span>
+                    )}
+                    <div>
+                      <p className="text-comic-gray-tertiary text-sm font-normal mt-4 mb-8">
+                        Image size must be 640 x 890, <br /> Image must be less
+                        than 10mb
+                      </p>
                     </div>
                   </div>
-                  {(formState.errors.cover ||
-                    errorMessage ||
-                    isOverDimensions) && (
-                    <span
-                      className={`${
-                        !coverPreview || errorMessage || isOverDimensions
-                          ? 'text-red-500'
-                          : 'hidden'
-                      }`}
-                    >
-                      {errorMessage
-                        ? 'Image must be less than 10mb'
-                        : isOverDimensions
-                        ? 'The dimensions of the comic cover must be 640 x 890'
-                        : 'This field is required'}
-                    </span>
-                  )}
-                  <div>
-                    <p className="text-comic-gray-tertiary text-sm font-normal mt-4 mb-8">
-                      Image size must be 640 x 890, <br /> Image must be less
-                      than 10mb
-                    </p>
-                  </div>
                 </div>
-              </div>
+              )}
               <div className="md:flex justify-between gap-8">
                 <div className="mb-2">
                   <label className="font-bold text-md">Comic Title</label>
@@ -464,39 +486,61 @@ const FormSubmission = ({ dataSubmission }) => {
                   <span className="text-red-500">This field is required</span>
                 )}
               </div>
+              {dataSubmission.type_submission === 'artist' && (
+                <div className="mt-8 mb-2">
+                  <label className="font-bold text-md">Link Portfolio</label>
+                  <InputText
+                    label="portfolio_url"
+                    register={register}
+                    required
+                    type="text"
+                    placeholder="Link to your comic portfolio"
+                    className="mt-3 md:w-96"
+                    width="80"
+                  />
+                  {formState.errors.portfolio_url && (
+                    <span className="text-red-500">This field is required</span>
+                  )}
+                </div>
+              )}
               <div className="relative">
-                <div className="flex justify-between items-center mb-1">
+                <div className="flex justify-between items-center">
                   <div className="flex gap-4 mt-8 mb-2">
-                    <label className="font-bold text-md">Upload File</label>
-                    <h4>
-                      {' '}
-                      <span
-                        className={
-                          items.length > 100 ? 'text-red-500' : 'text-primary'
-                        }
-                      >
-                        {items.length}
-                      </span>{' '}
-                      / 100
-                    </h4>
-                  </div>
-                  <div>
-                    <label>
-                      <input
-                        multiple
-                        type="file"
-                        accept="image/*"
-                        {...register('pages', {
-                          required: true,
-                          onChange: addImages,
-                        })}
-                        style={{ display: 'none' }}
-                      />
-                      <p className="text-primary font-bold text-sm mt-8 mb-2 cursor-pointer">
-                        + Add File
-                      </p>
+                    <label className="font-bold text-md">
+                      Upload File{' '}
+                      <span className="font-thin">
+                        (for your comic examples)
+                      </span>
                     </label>
                   </div>
+                </div>
+                <div className="flex justify-between items-center mb-3">
+                  <h4>
+                    {' '}
+                    <span
+                      className={
+                        items.length > 100 ? 'text-red-500' : 'text-primary'
+                      }
+                    >
+                      {items.length}
+                    </span>{' '}
+                    / 100
+                  </h4>
+                  <label>
+                    <input
+                      multiple
+                      type="file"
+                      accept="image/*"
+                      {...register('pages', {
+                        required: true,
+                        onChange: addImages,
+                      })}
+                      style={{ display: 'none' }}
+                    />
+                    <p className="text-primary font-bold text-sm cursor-pointer">
+                      + Add File
+                    </p>
+                  </label>
                 </div>
                 <DragDropContext onDragEnd={onDragEnd}>
                   <Droppable droppableId="droppable" className="h-80">

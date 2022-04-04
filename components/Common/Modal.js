@@ -22,10 +22,14 @@ const Modal = ({
       document.addEventListener('keydown', onKeydown)
     }
 
+    if (!isShow) {
+      document.removeEventListener('keydown', onKeydown)
+    }
+
     return () => {
       document.removeEventListener('keydown', onKeydown)
     }
-  }, [close, closeOnEscape])
+  }, [close, closeOnEscape, isShow])
 
   const bgClick = (e) => {
     if (e.target === modalRef.current && closeOnBgClick && isShow) {

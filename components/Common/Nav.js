@@ -11,6 +11,7 @@ import { IconLogout } from 'components/Icons'
 import { parseImgUrl, prettyBalance } from 'utils/common'
 import useStore from 'lib/store'
 import LoginModal from 'components/Modal/LoginModal'
+import IconPencil from 'components/Icons/component/IconPencil'
 
 const Nav = () => {
   const profileModalRef = useRef()
@@ -96,15 +97,23 @@ const Nav = () => {
             View Profile
           </Button>
           <hr className="opacity-10 -mx-2 my-3" />
+          {currentUser.isEditor && (
+            <>
+              <div
+                className="flex flex-shrink-0 items-center space-x-2 cursor-pointer"
+                onClick={() => router.push('/publication/create')}
+              >
+                <IconPencil size={18} className="text-black opacity-80" />
+                <p className="text-black opacity-80">Create Publication</p>
+              </div>
+              <hr className="opacity-90 -mx-2 my-3" />
+            </>
+          )}
           <div
             className="flex flex-shrink-0 items-center space-x-2 cursor-pointer"
             onClick={() => near.signOut()}
           >
-            <IconLogout
-              size={18}
-              className="text-black opacity-80"
-              color="#000000"
-            />
+            <IconLogout size={18} className="text-black opacity-80" />
             <p className="text-black opacity-80">Logout</p>
           </div>
         </div>
@@ -180,6 +189,19 @@ const Nav = () => {
                   }
                 >
                   Market
+                </span>
+              </a>
+            </Link>
+            <Link href="/publication">
+              <a className="block font-semibold hover:text-primary text-base">
+                <span
+                  className={
+                    router.pathname.includes('/publication')
+                      ? `text-primary`
+                      : ''
+                  }
+                >
+                  Publication
                 </span>
               </a>
             </Link>
@@ -279,6 +301,21 @@ const Nav = () => {
                       }
                     >
                       Market
+                    </span>
+                  </a>
+                </Link>
+              </div>
+              <div className="p-3">
+                <Link href="/publication">
+                  <a className="font-semibold hover:text-primary">
+                    <span
+                      className={
+                        router.pathname.includes('/publication')
+                          ? `text-primary`
+                          : ''
+                      }
+                    >
+                      Publication
                     </span>
                   </a>
                 </Link>

@@ -11,7 +11,7 @@ const LANG_LIST = {
 }
 
 const MenuTop = forwardRef(
-  ({ showMenu, data, activeLang, setActiveLang }, ref) => {
+  ({ showMenu, data, activeLang, setActiveLang, isPreview = false }, ref) => {
     const router = useRouter()
     const [showShare, setShowShare] = useState(false)
 
@@ -42,7 +42,7 @@ const MenuTop = forwardRef(
               <p className="text-black ml-4 flex-1 md:text-base lg:text-lg truncate">
                 {data?.metadata.title}
               </p>
-              {data?.lang && (
+              {data?.lang && !isPreview && (
                 <select
                   value={activeLang}
                   onChange={(e) => setActiveLang(e.target.value)}
@@ -71,6 +71,7 @@ const MenuTop = forwardRef(
           data={data}
           onClose={onClickShare}
           hideActionButton
+          isPreview={isPreview}
         />
       </>
     )

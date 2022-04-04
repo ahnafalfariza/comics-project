@@ -1,4 +1,28 @@
 import CID from 'cids'
+import Compressor from 'compressorjs'
+
+const monthNames = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+]
+
+export const parseDate = (ts) => {
+  let dateObj = new Date(ts)
+  let month = monthNames[dateObj.getMonth()].slice(0, 3)
+  let day = String(dateObj.getDate()).padStart(2, '0')
+  let year = dateObj.getFullYear()
+  return `${day} ${month} ${year}`
+}
 
 export const readFileAsUrl = (file) => {
   const temporaryFileReader = new FileReader()
@@ -89,4 +113,61 @@ export const nFormatter = (num) => {
   } else if (Math.abs(num) > 999) {
     return Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + 'k'
   } else return Math.sign(num) * Math.abs(num)
+}
+
+export const compressImg = (file) => {
+  return new Promise((resolve, reject) => {
+    let _file = file
+    const quality = 0.8
+    new Compressor(_file, {
+      quality: quality,
+      maxWidth: 1080,
+      maxHeight: 1080,
+      convertSize: Infinity,
+      success: resolve,
+      error: reject,
+    })
+  })
+}
+
+export const dataURLtoFile = (dataurl, filename) => {
+  let arr = dataurl.split(','),
+    mime = arr[0].match(/:(.*?);/)[1],
+    bstr = atob(arr[1]),
+    n = bstr.length,
+    u8arr = new Uint8Array(n)
+
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n)
+  }
+
+  return new File([u8arr], filename, { type: mime })
+}
+
+export const checkUrl = (str) => {
+  var pattern = new RegExp(
+    '^(https?:\\/\\/)?' +
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' +
+      '((\\d{1,3}\\.){3}\\d{1,3}))' +
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' +
+      '(\\?[;&a-z\\d%_.~+=-]*)?' +
+      '(\\#[-a-z\\d_]*)?$',
+    'i'
+  )
+  return !!pattern.test(str)
+}
+
+export const parseGetTokenIdfromUrl = (url) => {
+  const pathname = new URL(url).pathname.split('/')
+  return {
+    token_series_id: pathname[2],
+    token_id: pathname[3],
+  }
+}
+
+export const parseGetComicIdfromUrl = (url) => {
+  const pathname = new URL(url).pathname.split('/')
+  return {
+    comic_id: pathname[2],
+  }
 }
