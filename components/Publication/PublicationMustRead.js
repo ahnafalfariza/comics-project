@@ -26,7 +26,7 @@ const PublicationMustRead = ({ data }) => {
               style={{ height }}
             >
               <img
-                className="w-full object-cover"
+                className="w-full h-full object-cover"
                 src={parseImgUrl(data.thumbnail, null, { width: `600` })}
               />
             </div>
