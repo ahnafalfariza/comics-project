@@ -22,7 +22,7 @@ const PublicationMustRead = ({ data }) => {
           <a>
             <div
               ref={ref}
-              className="aspect-[2/1] overflow-hidden m-auto cursor-pointer shadow-inner"
+              className="aspect-[2/1] overflow-hidden m-auto cursor-pointer shadow-inner w-full"
               style={{ height }}
             >
               <img
