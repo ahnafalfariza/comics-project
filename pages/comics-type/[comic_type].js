@@ -25,6 +25,7 @@ const ComicType = ({ comic_type }) => {
     const response = await axios.get(`${process.env.COMIC_API_URL}/comics`, {
       params: {
         type: comic_type,
+        __sort: '_id::1',
         __skip: page * FETCH_COMICS_LIMIT,
         __limit: FETCH_COMICS_LIMIT,
       },

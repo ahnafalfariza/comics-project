@@ -28,6 +28,7 @@ const Comics = () => {
       params: {
         __skip: 0,
         __limit: 4,
+        __sort: '_id::1',
         type: 'valentine-one-shot',
       },
     })
