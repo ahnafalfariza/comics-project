@@ -25,6 +25,7 @@ export default function Home() {
       params: {
         __skip: 0,
         __limit: 4,
+        type: 'editorial',
       },
     })
     const newRes = res.data.data.results
