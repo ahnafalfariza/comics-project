@@ -31,6 +31,7 @@ const Comics = () => {
     const response = await axios.get(`${process.env.COMIC_API_URL}/comics`, {
       params: {
         comic_id: router.query.id,
+        type: 'editorial',
         __skip: page * FETCH_COMICS_LIMIT,
         __limit: FETCH_COMICS_LIMIT,
       },
