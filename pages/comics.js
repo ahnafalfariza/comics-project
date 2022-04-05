@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 import Head from 'components/Common/Head'
@@ -8,19 +7,32 @@ import axios from 'axios'
 import ComicItem from 'components/Comic/ComicItem'
 
 import { FETCH_COMICS_LIMIT } from 'constants/constant'
-import ContentLoader from 'react-content-loader'
+import { ComicListLoader } from 'components/Comic/ComicListLoader'
+import ComicList from 'components/Comic/ComicList'
+import Link from 'next/link'
 
 const Comics = () => {
-  const router = useRouter()
-
   const [comics, setComics] = useState([])
+  const [comicsOneShot, setComicsOneShot] = useState([])
   const [page, setPage] = useState(0)
   const [hasMore, setHasMore] = useState(true)
   const [isFetching, setIsFetching] = useState(false)
 
   useEffect(() => {
     fetchComics()
+    fetchComicsOneshot()
   }, [])
+
+  const fetchComicsOneshot = async () => {
+    const response = await axios.get(`${process.env.COMIC_API_URL}/comics`, {
+      params: {
+        __skip: 0,
+        __limit: 4,
+        type: 'valentine-one-shot',
+      },
+    })
+    setComicsOneShot(response.data.data.results)
+  }
 
   const fetchComics = async () => {
     if (!hasMore || isFetching) {
@@ -30,7 +42,6 @@ const Comics = () => {
     setIsFetching(true)
     const response = await axios.get(`${process.env.COMIC_API_URL}/comics`, {
       params: {
-        comic_id: router.query.id,
         type: 'editorial',
         __skip: page * FETCH_COMICS_LIMIT,
         __limit: FETCH_COMICS_LIMIT,
@@ -53,44 +64,41 @@ const Comics = () => {
     <Layout>
       <Head title="Comics" />
       <div className="max-w-6xl m-auto p-4 py-8">
-        <p className="text-black font-bold text-4xl mb-3">Comics</p>
-        <div className="w-16 h-3 mb-14 bg-primary"></div>
-        <InfiniteScroll
-          dataLength={comics.length}
-          next={fetchComics}
-          hasMore={hasMore}
-          loader={<ComicLoader />}
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 overflow-hidden">
-            {comics.map((data, i) => (
-              <ComicItem data={data} key={i} />
-            ))}
+        <div>
+          <p className="text-black font-bold text-4xl mb-3">Comics</p>
+          <div className="w-16 h-3 mb-8 bg-primary"></div>
+          <InfiniteScroll
+            dataLength={comics.length}
+            next={fetchComics}
+            hasMore={hasMore}
+            loader={<ComicListLoader />}
+          >
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 overflow-hidden">
+              {comics.map((data, i) => (
+                <ComicItem data={data} key={i} />
+              ))}
+            </div>
+          </InfiniteScroll>
+        </div>
+
+        {/* Valentine one-shot */}
+        <div className="mt-16">
+          <div className="flex justify-between items-end">
+            <p className="text-black font-bold text-3xl mb-3">
+              Valentine's One-Shot Comics
+            </p>
+            <Link href="/comics-type/valentine-one-shot">
+              <a className="text-primary font-bold text-xl hover:text-opacity-70 cursor-pointer">
+                See more
+              </a>
+            </Link>
           </div>
-        </InfiniteScroll>
+          <div className="w-16 h-3 mb-8 bg-primary"></div>
+          <ComicList comics={comicsOneShot} />
+        </div>
       </div>
     </Layout>
   )
 }
-
-const ComicLoader = () => (
-  <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-8">
-    {Array(8)
-      .fill('')
-      .map((item, idx) => (
-        <div key={idx}>
-          <ContentLoader
-            speed={2}
-            width="100%"
-            height="100%"
-            viewBox="0 0 275 380"
-            backgroundColor="#F4F4F5"
-            foregroundColor="#E4E4E7"
-          >
-            <rect x="0" y="0" rx="0" ry="0" width="275" height="380" />
-          </ContentLoader>
-        </div>
-      ))}
-  </div>
-)
 
 export default Comics
