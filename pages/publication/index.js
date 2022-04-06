@@ -90,7 +90,7 @@ const Publication = () => {
     }
 
     const res = await axios(
-      `${process.env.PARAS_API_URL}/publications?type=editorial&isComic=true`,
+      `${process.env.PARAS_API_URL}/publications?isComic=true`,
       {
         params: {
           __skip: _page * LIMIT,
