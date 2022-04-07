@@ -45,7 +45,10 @@ const ComicType = ({ comic_type }) => {
 
   return (
     <Layout>
-      <Head title="Comics" />
+      <Head
+        title="Valentine's One-Shot Comics"
+        image="https://paras-cdn.imgix.net/bafybeihyd2rbp7aupz5y6v72gdtrhso67a4okhp5z4hvvzemvxj54whg5a"
+      />
       <div className="max-w-6xl m-auto p-4 pb-8">
         <div className=" -mx-4 md:mx-0">
           <img
