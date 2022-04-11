@@ -97,7 +97,7 @@ const Nav = () => {
             View Profile
           </Button>
           <hr className="opacity-10 -mx-2 my-3" />
-          {currentUser.isEditor && (
+          {currentUser.isComicCreator && (
             <>
               <div
                 className="flex flex-shrink-0 items-center space-x-2 cursor-pointer"

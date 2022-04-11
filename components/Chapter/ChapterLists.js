@@ -16,6 +16,8 @@ const Overview = ({ chapters, hasMore, fetchData }) => {
   useEffect(() => {
     if (router.query.chapterId) {
       getChapter(router.query.id, router.query.chapterId)
+    } else if (!router.query.chapterId) {
+      setChapterOpen(null)
     }
     // eslint-disable-next-line
   }, [router.query.chapterId, near.token])

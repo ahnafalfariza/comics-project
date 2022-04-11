@@ -153,7 +153,10 @@ const ChapterView = ({ isLoading }) => {
               title="Read this comic"
               withText={false}
               shareUrl={
-                typeof window !== 'undefined' ? window?.location?.href : ''
+                typeof window !== 'undefined'
+                  ? window?.location?.origin +
+                    `/comics/${comicId}/chapter?chapterId=${chapterId}`
+                  : ''
               }
             />
           </div>
