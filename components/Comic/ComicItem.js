@@ -31,7 +31,7 @@ const ComicItem = ({ data, key, showLike = false }) => {
       </a>
       <div className="ml-1">
         <Link href={`/comics/${data.comic_id}/chapter`}>
-          <a className="text-black font-bold text-xl md:text-2xl truncate cursor-pointer hover:text-opacity-80">
+          <a className="text-black font-bold text-xl md:text-2xl truncate cursor-pointer hover:text-opacity-80 block">
             {data.title}
           </a>
         </Link>
