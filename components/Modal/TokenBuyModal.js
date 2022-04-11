@@ -55,19 +55,19 @@ const TokenBuyModal = ({
         closeOnEscape={false}
         close={onClose}
       >
-        <div className="max-w-sm w-full p-4 bg-blueGray-800 m-4 md:m-auto rounded-md">
+        <div className="max-w-sm w-full p-4 bg-white m-4 md:m-auto rounded-md">
           <div>
-            <h1 className="text-2xl font-bold text-white tracking-tight">
+            <h1 className="text-2xl font-bold text-black tracking-tight">
               Confirm Buy
             </h1>
-            <p className="text-white mt-2">
+            <p className="text-gray-800 mt-2">
               You are about to purchase <b>{data.metadata.title}</b>
             </p>
             <div className="mt-4">
               <div className="mt-2 text-sm text-red-500"></div>
             </div>
             <div className="mt-4 text-center">
-              <div className="text-white my-1">
+              <div className="text-gray-800 my-1">
                 <div className="flex justify-between">
                   <div className="text-sm">Total</div>
                   {data.price && (
@@ -80,10 +80,10 @@ const TokenBuyModal = ({
                 </div>
               </div>
             </div>
-            <p className="text-white mt-4 text-sm text-center opacity-90">
+            <p className="text-gray-800 mt-4 text-sm text-center opacity-90">
               *Small transaction fee is applied
             </p>
-            <p className="text-white mt-2 text-sm text-center opacity-90">
+            <p className="text-gray-800 mt-2 text-sm text-center opacity-90">
               You will be redirected to NEAR Web Wallet to confirm your
               transaction.
             </p>
