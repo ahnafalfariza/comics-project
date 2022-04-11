@@ -1,4 +1,5 @@
 import { formatNearAmount } from 'near-api-js/lib/utils/format'
+import Link from 'next/link'
 import * as React from 'react'
 import { parseImgUrl } from 'utils/common'
 import { parseDate } from 'utils/dateHelper'
@@ -64,27 +65,43 @@ const ChapterList = ({
   }
 
   return (
-    <div
-      className={`sm:h-40 h-36 flex mb-4 items-end ${className}`}
-      onClick={onClick}
-      {...rest}
-    >
+    <div className={`sm:h-40 h-36 flex mb-4 items-end ${className}`} {...rest}>
       <div className={listWrapperStyle}>
-        <div className={listCoverStyle} style={chapterImage} />
-        <div className="sm:ml-36 ml-24 pl-1 w-full flex flex-col sm:flex-row sm:items-center items-start justify-between">
-          <div className="mr-4">
-            <h5 className="sm:text-sm text-xs font-semibold text-gray-500 mb-1 uppercase">
-              Chapter {parseInt(data.metadata.chapter_id)}
-            </h5>
-            <h3 className="text-black font-semibold text-sm sm:text-lg">
-              {data.metadata.title}
-            </h3>
-            <h5 className="text-gray-800 sm:text-sm text-xs">
-              {parseDate(data.metadata.issued_at)}
-            </h5>
-          </div>
-          <h4 className={listBadgeStyle}>{textRight()}</h4>
-        </div>
+        <Link
+          href={`/comics/${data.metadata.comic_id}/chapter?chapterId=${data.metadata.chapter_id}`}
+        >
+          <a onClick={(e) => e.preventDefault()}>
+            <div
+              className={listCoverStyle}
+              style={chapterImage}
+              onClick={onClick}
+            />
+          </a>
+        </Link>
+        <Link
+          href={`/comics/${data.metadata.comic_id}/chapter?chapterId=${data.metadata.chapter_id}`}
+        >
+          <a
+            onClick={(e) => {
+              e.preventDefault()
+              onClick()
+            }}
+            className="sm:ml-36 ml-24 pl-1 w-full flex flex-col sm:flex-row sm:items-center items-start justify-between"
+          >
+            <div className="mr-4">
+              <h5 className="sm:text-sm text-xs font-semibold text-gray-500 mb-1 uppercase">
+                Chapter {parseInt(data.metadata.chapter_id)}
+              </h5>
+              <h3 className="text-black font-semibold text-sm sm:text-lg">
+                {data.metadata.title}
+              </h3>
+              <h5 className="text-gray-800 sm:text-sm text-xs">
+                {parseDate(data.metadata.issued_at)}
+              </h5>
+            </div>
+            <h4 className={listBadgeStyle}>{textRight()}</h4>
+          </a>
+        </Link>
       </div>
     </div>
   )
