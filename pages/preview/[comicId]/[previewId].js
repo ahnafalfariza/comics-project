@@ -25,7 +25,7 @@ const PreviewImagePage = ({ file, isLoading }) => {
   )
 }
 
-const ChapterPreview = () => {
+const ChapterPreview = ({ chapterInfo }) => {
   const menuTopRef = useRef()
   const menuBottomRef = useRef()
   const previewRef = useRef()
@@ -120,7 +120,11 @@ const ChapterPreview = () => {
 
   return (
     <Layout showNav={false} showFooter={false} className="bg-white">
-      <Head />
+      <Head
+        title={`Preview ${chapterInfo.metadata.title}`}
+        description={chapterInfo.metadata.description}
+        image={parseImgUrl(chapterInfo.metadata.media)}
+      />
       <ChapterNotAvailableModal
         show={previewData?.length === (0 || undefined)}
       />
@@ -155,3 +159,17 @@ const ChapterPreview = () => {
 }
 
 export default ChapterPreview
+
+export async function getServerSideProps({ params }) {
+  const response = await axios.get(`${process.env.COMIC_API_URL}/chapters`, {
+    params: {
+      comic_id: params.comicId,
+      chapter_id: params.previewId,
+    },
+  })
+  const chapterInfo = response.data.data.results[0] || null
+
+  return {
+    props: { chapterInfo },
+  }
+}

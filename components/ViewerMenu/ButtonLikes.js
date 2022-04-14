@@ -1,10 +1,12 @@
 import axios from 'axios'
 import Button from 'components/Common/Button'
 import IconLove from 'components/Icons/component/IconLove'
+import useStore from 'lib/store'
 import { useEffect, useState } from 'react'
 
 const ButtonLikes = ({ comicId, chapterId, isLoading }) => {
   const [isLiked, setIsLiked] = useState(false)
+  const { currentUser } = useStore()
 
   useEffect(() => {
     const fetchLiked = async () => {
@@ -19,10 +21,10 @@ const ButtonLikes = ({ comicId, chapterId, isLoading }) => {
       )
       setIsLiked(response.data.result)
     }
-    if (chapterId && comicId && !isLoading) {
+    if (chapterId && comicId && !isLoading && currentUser) {
       fetchLiked()
     }
-  }, [chapterId, comicId, isLoading])
+  }, [chapterId, comicId, isLoading, currentUser])
 
   const onClickLikes = async () => {
     setIsLiked(!isLiked)
