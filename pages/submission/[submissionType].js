@@ -19,9 +19,13 @@ import Head from 'components/Common/Head'
 const FormSubmission = ({ dataSubmission }) => {
   const [cover, setCover] = useState('')
   const [coverPreview, setCoverPreview] = useState('')
+  const [logo, setLogo] = useState('')
+  const [logoPreview, setLogoPreview] = useState('')
   const [items, setItems] = useState([])
-  const [isOverDimensions, setIsOverDimensions] = useState(false)
+  const [isOverDimensionsLogo, setIsOverDimensionsLogo] = useState(false)
+  const [isOverDimensionsCover, setIsOverDimensionsCover] = useState(false)
   const [sizeComic, setSizeComic] = useState(0)
+  const [isOverDimensionsPage, setIsOverDimensionsPage] = useState(false)
   const methods = useForm()
   const { register, handleSubmit, formState, setValue, reset, clearErrors } =
     methods
@@ -29,7 +33,8 @@ const FormSubmission = ({ dataSubmission }) => {
   const [genreSelect, setGenreSelect] = useState('')
   const [subGenreList, setSubGenreList] = useState([])
   const [subGenreSelect, setSubGenreSelect] = useState('')
-  const [errorMessage, setErrorMessage] = useState(false)
+  const [errorMessageLogo, setErrorMessageLogo] = useState(false)
+  const [errorMessageCover, setErrorMessageCover] = useState(false)
   const genreModalRef = useRef()
   const subGenreModalRef = useRef()
   const [loading, setLoading] = useState(false)
@@ -72,7 +77,8 @@ const FormSubmission = ({ dataSubmission }) => {
 
   useEffect(() => {
     if (cover === undefined) setCoverPreview(cover)
-  }, [cover])
+    if (logo === undefined) setLogoPreview(logo)
+  }, [cover, logo])
 
   useEffect(() => {
     let size = 0
@@ -92,17 +98,25 @@ const FormSubmission = ({ dataSubmission }) => {
   }
 
   const onSubmit = async (data) => {
+    console.log(data)
     data.cover = cover
     data.pages = items
+    data.logo = logo
     const checkSizeofFile = formatBytes(sizeComic).props.children > 20.0
     const checkNumberOfFile = items.length > 100
 
     const errorCheckNumberOfFile = 'The maximum number of files is 100.'
     const errorCheckSizeOfFile = 'The maximum number of sizes is 20 MB'
 
-    if (checkNumberOfFile || checkSizeofFile || isOverDimensions) {
+    if (
+      checkNumberOfFile ||
+      checkSizeofFile ||
+      isOverDimensionsLogo ||
+      isOverDimensionsCover ||
+      isOverDimensionsPage
+    ) {
       window.scrollTo(0, 0)
-      if (!isOverDimensions) {
+      if (!isOverDimensionsLogo) {
         _showToast(
           'error',
           checkNumberOfFile ? errorCheckNumberOfFile : errorCheckSizeOfFile
@@ -113,8 +127,10 @@ const FormSubmission = ({ dataSubmission }) => {
       window.scrollTo(0, 0)
 
       const cover = new FormData()
+      const logo = new FormData()
       if (dataSubmission.type_submission !== 'artist') {
         cover.append('files', data.cover)
+        logo.append('files', data.logo)
       }
       const pages = new FormData()
       data.pages.forEach((page) => {
@@ -123,11 +139,15 @@ const FormSubmission = ({ dataSubmission }) => {
 
       if (dataSubmission.type_submission !== 'artist') {
         await axios
-          .all([postCoverComic(cover), postPagesComic(pages)])
+          .all([
+            postCoverComic(cover),
+            postPagesComic(pages),
+            postCoverComic(logo),
+          ])
           .then((results) => {
             data.cover = results[0].data
             data.pages = results[1].data
-
+            data.logo = results[2].data
             return results.data
           })
           .catch((error) => {
@@ -150,13 +170,19 @@ const FormSubmission = ({ dataSubmission }) => {
       form.append('type_submission', dataSubmission.type_submission)
       if (dataSubmission.type_submission !== 'artist') {
         form.append('cover', data.cover)
+        form.append('logo', data.logo)
+        form.append('comic_id', data.title.replaceAll(/\s/g, '-'))
+        form.append('name', data.name)
+        form.append('chapter_id', '1')
+        form.append('lang', 'id')
+      } else {
+        form.append('subgenre', subGenreSelect)
+        form.append('portfolio_url', data.portfolio_url)
       }
       form.append('title', data.title)
       form.append('genre', genreSelect)
-      form.append('subgenre', subGenreSelect)
       form.append('synopsis', data.synopsis)
       form.append('email', data.email)
-      form.append('portfolio_url', data.portfolio_url)
       data.pages.forEach((page) => {
         form.append('pages[]', page)
       })
@@ -166,6 +192,8 @@ const FormSubmission = ({ dataSubmission }) => {
         .then((response) => {
           setCover('')
           setCoverPreview('')
+          setLogo('')
+          setLogoPreview('')
           setItems([])
           setIsSubmit(true)
           setGenreSelect(genreList[0].genre)
@@ -194,7 +222,24 @@ const FormSubmission = ({ dataSubmission }) => {
 
     if (e.target.files && e.target.files.length > 0) {
       const newItems = []
+      let isOverDimensions = []
       for (const file of e.target.files) {
+        //check dimensions
+        if (dataSubmission.type_submission !== 'artist') {
+          const reader = new FileReader()
+          reader.readAsDataURL(file)
+          reader.onload = () => {
+            const image = new Image()
+            image.src = reader.result
+            image.onload = () => {
+              if (image.width === 800 && image.height === 1000) {
+                isOverDimensions.push(false)
+              } else {
+                isOverDimensions.push(true)
+              }
+            }
+          }
+        }
         const imgUrl = await readFileAsUrl(file)
         newItems.push({
           id:
@@ -204,8 +249,15 @@ const FormSubmission = ({ dataSubmission }) => {
           file: file,
         })
       }
-      const currentItems = [...items]
-      setItems(currentItems.concat(newItems))
+      if (isOverDimensions.every((data) => !data)) {
+        setIsOverDimensionsPage(false)
+      } else {
+        setIsOverDimensionsPage(true)
+      }
+      if (isOverDimensions.every((data) => !data)) {
+        const currentItems = [...items]
+        setItems(currentItems.concat(newItems))
+      }
     }
   }
 
@@ -253,24 +305,37 @@ const FormSubmission = ({ dataSubmission }) => {
     setValue('pages', files)
   }
 
-  const inputFilecover = (event) => {
+  const inputFilecover = (event, type) => {
     const img = event.target.files[0]
     let checkDimensions = false
-    setCover(img)
+    type === 'logo' ? setLogo(img) : setCover(img)
 
     if (typeof img !== 'undefined') {
       let size = img.size / (1024 * 1024).toFixed(10)
       if (size < 10 || checkDimensions) {
         let binaryData = []
         binaryData.push(img)
-        setCoverPreview(
-          window.URL.createObjectURL(new Blob(binaryData, { type: 'image/*' }))
-        )
-        setIsOverDimensions(false)
-        setErrorMessage(false)
+        if (type === 'logo') {
+          setLogoPreview(
+            window.URL.createObjectURL(
+              new Blob(binaryData, { type: 'image/*' })
+            )
+          )
+          setErrorMessageLogo(false)
+        } else {
+          setCoverPreview(
+            window.URL.createObjectURL(
+              new Blob(binaryData, { type: 'image/*' })
+            )
+          )
+          setErrorMessageCover(false)
+        }
       } else {
-        setIsOverDimensions(true)
-        setErrorMessage(true)
+        if (type === 'logo') {
+          setErrorMessageLogo(true)
+        } else {
+          setErrorMessageCover(true)
+        }
       }
     }
 
@@ -279,9 +344,24 @@ const FormSubmission = ({ dataSubmission }) => {
       const img = new Image()
 
       img.onload = () => {
-        if (img.width !== 640 || img.height !== 890) {
-          checkDimensions = true
-          setIsOverDimensions(true)
+        if (dataSubmission.type_submission === 'artist') {
+          if (img.width !== 640 || img.height !== 890) {
+            setIsOverDimensionsLogo(true)
+          }
+        } else {
+          if (type === 'logo') {
+            if (img.width !== 1080 || img.height !== 1080) {
+              setIsOverDimensionsLogo(true)
+            } else {
+              setIsOverDimensionsLogo(false)
+            }
+          } else if (type === 'cover') {
+            if (img.width !== 2048 || img.height !== 2048) {
+              setIsOverDimensionsCover(true)
+            } else {
+              setIsOverDimensionsCover(false)
+            }
+          }
         }
       }
 
@@ -303,7 +383,7 @@ const FormSubmission = ({ dataSubmission }) => {
           </div>
         )}
         {dataSubmission.type_submission !== 'artist' ? (
-          <div className="border-4 border-dotted border-[#F5A1DB] mb-9 p-4 rounded-md md:mx-36 relative">
+          <div className="border-4 border-dashed border-primary mb-9 p-4 rounded-md md:mx-36 relative">
             <h1 className="text-center font-bold text-3xl mb-2">
               {dataSubmission.title}
             </h1>
@@ -334,12 +414,19 @@ const FormSubmission = ({ dataSubmission }) => {
                 here
               </a>
             </h4>
-            {dataSubmission.type_submission !== 'artist' && (
-              <p className="text-justify mt-2 mb-6">
-                *Top 10 best submitted comics will be published in Paras Comic
-                for free
-              </p>
-            )}
+          </div>
+          <div className="mb-4">
+            <h4>
+              For more detail, you can ask to our{` `}
+              <a
+                href={`bit.ly/ParasComicdiscord`}
+                target="_blank"
+                rel="noreferrer"
+                className="text-primary border-b-2 border-transparent cursor-pointer active:border-primary"
+              >
+                FAQ
+              </a>
+            </h4>
           </div>
           <FormProvider {...methods}>
             <form
@@ -350,10 +437,85 @@ const FormSubmission = ({ dataSubmission }) => {
               {dataSubmission.type_submission !== 'artist' && (
                 <div className="md:flex justify-between">
                   <div>
+                    <label className="font-bold text-md">Comic Logo</label>
+                    <div
+                      className={`relative cursor-pointer ${
+                        !logo && !logoPreview ? 'w-40 h-40 ' : 'w-60 h-80'
+                      } overflow-hidden rounded-md mt-2 hover:opacity-80`}
+                    >
+                      <input
+                        type="file"
+                        accept="image/*"
+                        {...register('logo', {
+                          required: true,
+                          onChange: (e) => inputFilecover(e, 'logo'),
+                        })}
+                        className="cursor-pointer w-full opacity-0 absolute inset-0 z-20"
+                      />
+                      <div
+                        className={`${
+                          !logo && !logoPreview ? 'w-40 h-40 ' : 'w-full h-full'
+                        } overflow-hidden bg-comic-gray-secondary shadow-inner relative input-text`}
+                      >
+                        <img
+                          src={logo === '' ? null : logoPreview}
+                          className={'w-full h-full object-cover cover-comic'}
+                          style={{ textIndent: '-10000px' }}
+                        />
+                        {!logo && !logoPreview && (
+                          <svg
+                            className="w-14 h-14 text-comic-gray-tertiary absolute inset-0 mx-auto my-auto"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                            ></path>
+                          </svg>
+                        )}
+                      </div>
+                    </div>
+                    {(formState.errors.logo ||
+                      errorMessageLogo ||
+                      isOverDimensionsLogo) && (
+                      <span
+                        className={`${
+                          !logoPreview ||
+                          errorMessageLogo ||
+                          isOverDimensionsLogo
+                            ? 'text-red-500'
+                            : 'hidden'
+                        }`}
+                      >
+                        {errorMessageLogo
+                          ? 'Image must be less than 10mb'
+                          : isOverDimensionsLogo
+                          ? 'The dimensions of the comic cover must be 1080 x 1080'
+                          : 'This field is required'}
+                      </span>
+                    )}
+                    <div>
+                      <p className="text-comic-gray-tertiary text-sm font-normal mt-4 mb-8">
+                        Image size must be 1080 x 1080, <br /> Image must be
+                        less than 10mb
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {dataSubmission.type_submission !== 'artist' && (
+                <div className="md:flex justify-between">
+                  <div>
                     <label className="font-bold text-md">Cover Comic</label>
                     <div
                       className={`relative cursor-pointer ${
-                        !cover && !coverPreview ? 'w-40 h-40 ' : 'w-60 h-80'
+                        !cover && !coverPreview ? 'w-80 h-52 ' : 'w-80 h-80'
                       } overflow-hidden rounded-md mt-2 hover:opacity-80`}
                     >
                       <input
@@ -361,14 +523,14 @@ const FormSubmission = ({ dataSubmission }) => {
                         accept="image/*"
                         {...register('cover', {
                           required: true,
-                          onChange: inputFilecover,
+                          onChange: (e) => inputFilecover(e, 'cover'),
                         })}
                         className="cursor-pointer w-full opacity-0 absolute inset-0 z-20"
                       />
                       <div
                         className={`${
                           !cover && !coverPreview
-                            ? 'w-40 h-40 '
+                            ? 'w-80 h-52 '
                             : 'w-full h-full'
                         } overflow-hidden bg-comic-gray-secondary shadow-inner relative input-text`}
                       >
@@ -396,26 +558,28 @@ const FormSubmission = ({ dataSubmission }) => {
                       </div>
                     </div>
                     {(formState.errors.cover ||
-                      errorMessage ||
-                      isOverDimensions) && (
+                      errorMessageCover ||
+                      isOverDimensionsCover) && (
                       <span
                         className={`${
-                          !coverPreview || errorMessage || isOverDimensions
+                          !coverPreview ||
+                          errorMessageCover ||
+                          isOverDimensionsCover
                             ? 'text-red-500'
                             : 'hidden'
                         }`}
                       >
-                        {errorMessage
+                        {errorMessageCover
                           ? 'Image must be less than 10mb'
-                          : isOverDimensions
-                          ? 'The dimensions of the comic cover must be 640 x 890'
+                          : isOverDimensionsCover
+                          ? 'The dimensions of the comic cover must be 2048 x 2048'
                           : 'This field is required'}
                       </span>
                     )}
                     <div>
                       <p className="text-comic-gray-tertiary text-sm font-normal mt-4 mb-8">
-                        Image size must be 640 x 890, <br /> Image must be less
-                        than 10mb
+                        Image size must be 2048 x 2048, <br /> Image must be
+                        less than 10mb
                       </p>
                     </div>
                   </div>
@@ -437,25 +601,57 @@ const FormSubmission = ({ dataSubmission }) => {
                   )}
                 </div>
               </div>
+              {dataSubmission.type_submission !== 'artist' && (
+                <div className="md:flex justify-between gap-8 mt-8">
+                  <div className="mb-2">
+                    <label className="font-bold text-md">
+                      Comic Author's Name
+                    </label>
+                    <InputText
+                      label="name"
+                      register={register}
+                      required
+                      type="text"
+                      placeholder="Fullname"
+                      className="mt-3 mr-64"
+                    />
+                    {formState.errors.name && (
+                      <span className="text-red-500">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
+                </div>
+              )}
               <div className="md:flex justify-start gap-2 md:gap-20">
                 <InputDropdown
                   title="Genre"
                   ref={genreModalRef}
-                  data={genreList}
+                  data={
+                    dataSubmission.type_submission !== 'artist'
+                      ? genreList.filter(
+                          (genre) =>
+                            genre.genre_id === 'action' ||
+                            genre.genre_id === 'romance'
+                        )
+                      : genreList
+                  }
                   register={register}
                   label="genre"
                   selectItem={setGenreSelect}
                   submit={isSubmit}
                 />
-                <InputDropdown
-                  title="Sub Genre"
-                  ref={subGenreModalRef}
-                  data={subGenreList}
-                  register={register}
-                  label="subgenre"
-                  selectItem={setSubGenreSelect}
-                  submit={isSubmit}
-                />
+                {dataSubmission.type_submission === 'artist' && (
+                  <InputDropdown
+                    title="Sub Genre"
+                    ref={subGenreModalRef}
+                    data={subGenreList}
+                    register={register}
+                    label="subgenre"
+                    selectItem={setSubGenreSelect}
+                    submit={isSubmit}
+                  />
+                )}
               </div>
               <div className="mt-8 mb-2">
                 <label className="font-bold text-md">Synopsis</label>
@@ -508,9 +704,11 @@ const FormSubmission = ({ dataSubmission }) => {
                   <div className="flex gap-4 mt-8 mb-2">
                     <label className="font-bold text-md">
                       Upload File{' '}
-                      <span className="font-thin">
-                        (for your comic examples)
-                      </span>
+                      {dataSubmission.type_submission === 'artist' && (
+                        <span className="font-thin">
+                          (for your comic examples)
+                        </span>
+                      )}
                     </label>
                   </div>
                 </div>
@@ -602,11 +800,19 @@ const FormSubmission = ({ dataSubmission }) => {
                   {formatBytes(sizeComic)} / 20 MB
                 </h4>
               </div>
-              {formState.errors.pages && (
+              {(formState.errors.pages || isOverDimensionsPage) && (
                 <span
-                  className={items.length !== 0 ? 'hidden ' : 'text-red-500'}
+                  className={
+                    dataSubmission.type_submission === 'artist'
+                      ? items.length !== 0
+                        ? 'hidden '
+                        : 'text-red-500'
+                      : `text-red-500`
+                  }
                 >
-                  This field is required
+                  {isOverDimensionsPage
+                    ? `The dimensions of each comic page must be 800 x 1000`
+                    : `This field is required`}
                 </span>
               )}
               {dataSubmission.type_submission === 'artist' && (
