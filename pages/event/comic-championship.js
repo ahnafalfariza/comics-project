@@ -29,6 +29,7 @@ const ComicChampionship = () => {
         __sort: '_id::1',
         __skip: page * FETCH_COMICS_LIMIT,
         __limit: FETCH_COMICS_LIMIT,
+        type: 'championship',
       },
     })
     const newData = response.data.data

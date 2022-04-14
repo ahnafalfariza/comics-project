@@ -79,7 +79,13 @@ const ChapterView = ({ isLoading }) => {
       chapterData.lang &&
       activeLang
     ) {
-      fetchChapterPage(chapterData.lang[activeLang], comicId, chapterId)
+      const lang = chapterData.lang[activeLang] ? activeLang : 'id'
+      fetchChapterPage(
+        chapterData.lang[lang],
+        comicId,
+        chapterId,
+        chapterData.is_locked
+      )
     }
   }, [chapterData, activeLang])
 
@@ -96,11 +102,14 @@ const ChapterView = ({ isLoading }) => {
     setChapterData(_chapterData || null)
   }
 
-  const fetchChapterPage = async (numPage, comicId, chapterId) => {
+  const fetchChapterPage = async (numPage, comicId, chapterId, locked) => {
     let url = []
+    const lang = chapterData.lang[activeLang] ? activeLang : 'id'
     for (let i = 1; i <= numPage; i++) {
       url.push(
-        `${process.env.COMIC_API_URL}/pages/${comicId}/${chapterId}/${i}/${activeLang}`
+        `${process.env.COMIC_API_URL}/pages/${
+          locked ? '' : 'unlocked/'
+        }${comicId}/${chapterId}/${i}/${lang}`
       )
     }
     setChapterPageUrl(url)

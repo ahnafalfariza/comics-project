@@ -23,6 +23,7 @@ const CommentList = () => {
   const fetchCommentData = useStore((state) => state.fetchCommentData)
   const postComment = useStore((state) => state.postComment)
   const clearCommentData = useStore((state) => state.clearCommentData)
+  const currentUser = useStore((state) => state.currentUser)
 
   const router = useRouter()
 
@@ -80,7 +81,9 @@ const CommentList = () => {
         <Button
           size="sm"
           className="float-right"
-          isDisabled={commentText === ''}
+          isDisabled={
+            commentText === '' || currentUser?.accountId === undefined
+          }
           onClick={() => postComment(commentText, () => setCommentText(''))}
         >
           Post comment

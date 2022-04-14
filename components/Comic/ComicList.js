@@ -21,7 +21,7 @@ const ComicList = ({ comics, fetchComics, hasMore, size = 'big' }) => {
         }
       >
         <div
-          className={`grid grid-cols-2 md:grid-cols-${col} gap-4 md:gap-${gap} overflow-hidden`}
+          className={`grid md:grid-cols-5 grid-cols-2 gap-4 md:gap-${gap} overflow-hidden`}
         >
           {comics.map((data, i) => (
             <ComicItem data={data} key={i} />

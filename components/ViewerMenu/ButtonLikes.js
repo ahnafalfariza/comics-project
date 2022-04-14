@@ -1,10 +1,14 @@
 import axios from 'axios'
 import Button from 'components/Common/Button'
 import IconLove from 'components/Icons/component/IconLove'
+import LoginModal from 'components/Modal/LoginModal'
+import useStore from 'lib/store'
 import { useEffect, useState } from 'react'
 
 const ButtonLikes = ({ comicId, chapterId, isLoading }) => {
   const [isLiked, setIsLiked] = useState(false)
+  const [showLogin, setShowLogin] = useState(false)
+  const { currentUser } = useStore()
 
   useEffect(() => {
     const fetchLiked = async () => {
@@ -19,12 +23,17 @@ const ButtonLikes = ({ comicId, chapterId, isLoading }) => {
       )
       setIsLiked(response.data.result)
     }
-    if (chapterId && comicId && !isLoading) {
+    if (chapterId && comicId && !isLoading && currentUser?.accountId) {
       fetchLiked()
     }
-  }, [chapterId, comicId, isLoading])
+  }, [chapterId, comicId, currentUser?.accountId, isLoading])
 
   const onClickLikes = async () => {
+    if (!currentUser) {
+      setShowLogin(true)
+      return
+    }
+
     setIsLiked(!isLiked)
 
     const body = new FormData()
@@ -40,12 +49,19 @@ const ButtonLikes = ({ comicId, chapterId, isLoading }) => {
   }
 
   return (
-    <Button className="flex items-center mr-8" size="md" onClick={onClickLikes}>
-      <IconLove color={isLiked ? 'white' : 'none'} />
-      <div className="ml-3 text-white text-xl">
-        {isLiked ? 'Liked' : 'Like'}
-      </div>
-    </Button>
+    <>
+      <LoginModal show={showLogin} onClose={() => setShowLogin(false)} />
+      <Button
+        className="flex items-center mr-8"
+        size="md"
+        onClick={onClickLikes}
+      >
+        <IconLove color={isLiked ? 'white' : 'none'} />
+        <div className="ml-3 text-white text-xl">
+          {isLiked ? 'Liked' : 'Like'}
+        </div>
+      </Button>
+    </>
   )
 }
 
