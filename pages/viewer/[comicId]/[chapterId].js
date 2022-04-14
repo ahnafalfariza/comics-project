@@ -13,8 +13,9 @@ import ChapterImagePage from 'components/ViewerMenu/ChapterImagePage'
 import ChapterNotAvailableModal from 'components/Modal/ChapterNotAvailableModal'
 import ShareComponent from 'components/Common/ShareComponent'
 import ButtonLikes from 'components/ViewerMenu/ButtonLikes'
+import { parseImgUrl } from 'utils/common'
 
-const ChapterView = ({ isLoading }) => {
+const ChapterView = ({ isLoading, chapterInfo }) => {
   const menuTopRef = useRef()
   const menuBottomRef = useRef()
   const viewerRef = useRef()
@@ -108,7 +109,11 @@ const ChapterView = ({ isLoading }) => {
 
   return (
     <Layout showNav={false} showFooter={false} className="bg-white">
-      <Head />
+      <Head
+        title={`Read ${chapterInfo.metadata.title}`}
+        description={chapterInfo.metadata.description}
+        image={parseImgUrl(chapterInfo.metadata.media)}
+      />
       <ChapterNotAvailableModal
         show={
           chapterData &&
@@ -167,3 +172,17 @@ const ChapterView = ({ isLoading }) => {
 }
 
 export default ChapterView
+
+export async function getServerSideProps({ params }) {
+  const response = await axios.get(`${process.env.COMIC_API_URL}/chapters`, {
+    params: {
+      comic_id: params.comicId,
+      chapter_id: params.chapterId,
+    },
+  })
+  const chapterInfo = response.data.data.results[0] || null
+
+  return {
+    props: { chapterInfo },
+  }
+}
