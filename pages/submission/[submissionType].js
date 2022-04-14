@@ -661,11 +661,16 @@ const FormSubmission = ({ dataSubmission }) => {
                   ref={genreModalRef}
                   data={
                     dataSubmission.type_submission !== 'artist'
-                      ? genreList.filter(
-                          (genre) =>
-                            genre.genre_id === 'action' ||
-                            genre.genre_id === 'romance'
-                        )
+                      ? genreList
+                          .filter(
+                            (genre) =>
+                              genre.genre_id === 'action' ||
+                              genre.genre_id === 'romance'
+                          )
+                          .map((genre) => ({
+                            ...genre,
+                            genre: `${genre.genre}-Fantasy`,
+                          }))
                       : genreList
                   }
                   register={register}
