@@ -107,6 +107,12 @@ const FormSubmission = ({ dataSubmission }) => {
 
     const errorCheckNumberOfFile = 'The maximum number of files is 100.'
     const errorCheckSizeOfFile = 'The maximum number of sizes is 20 MB'
+    const errorCheckDimensionsOfPage =
+      'The dimensions of each comic page must be 800 x 1000'
+    const errorCheckDimensionsLogo =
+      'The dimensions of comic logo must be 1080 x 1080'
+    const errorCheckDimensionsCover =
+      'The dimensions of comic cover must be 2048 x 2048'
 
     if (
       checkNumberOfFile ||
@@ -116,11 +122,37 @@ const FormSubmission = ({ dataSubmission }) => {
       isOverDimensionsPage
     ) {
       window.scrollTo(0, 0)
-      if (!isOverDimensionsLogo) {
+      if (checkNumberOfFile) {
         _showToast(
           'error',
-          checkNumberOfFile ? errorCheckNumberOfFile : errorCheckSizeOfFile
+          isOverDimensionsLogo ? errorCheckNumberOfFile : errorCheckSizeOfFile
         )
+        return
+      }
+      if (isOverDimensionsLogo) {
+        _showToast(
+          'error',
+          isOverDimensionsLogo ? errorCheckDimensionsLogo : errorCheckSizeOfFile
+        )
+        return
+      }
+      if (isOverDimensionsCover) {
+        _showToast(
+          'error',
+          isOverDimensionsCover
+            ? errorCheckDimensionsCover
+            : errorCheckSizeOfFile
+        )
+        return
+      }
+      if (isOverDimensionsPage) {
+        _showToast(
+          'error',
+          isOverDimensionsPage
+            ? errorCheckDimensionsOfPage
+            : errorCheckSizeOfFile
+        )
+        return
       }
     } else {
       setLoading(true)
