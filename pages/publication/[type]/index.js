@@ -101,16 +101,11 @@ const ComicDetailPage = ({ errorCode, publicationDetail, userProfile }) => {
   return (
     <Layout>
       <div className="min-h-screen bg-white">
-        <div
-          className="fixed inset-0 opacity-75"
-          style={{
-            zIndex: 0,
-            backgroundImage: `url('/bg.jpg')`,
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-          }}
-        ></div>
-        <Head title={publicationDetail.title} />
+        <Head
+          title={publicationDetail.title}
+          description={publicationDetail.description}
+          image={parseImgUrl(publicationDetail.thumbnail)}
+        />
         {isComponentMounted && (
           <div
             className="absolute z-0 opacity-0"
