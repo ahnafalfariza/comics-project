@@ -15,11 +15,16 @@ const ComicChampionship = () => {
   const [activeTab, setActiveTab] = useState('all')
 
   useEffect(() => {
-    fetchComics()
-  }, [])
+    fetchComics(true, activeTab)
+  }, [activeTab])
 
-  const fetchComics = async () => {
-    if (!hasMore || isFetching) {
+  const fetchComics = async (fromStart = false, genre) => {
+    const _hasMore = fromStart ? true : hasMore
+    const _page = fromStart ? 0 : page
+    const _comics = fromStart ? [] : comics
+    const _genre = genre === 'all' ? '' : genre
+
+    if (!_hasMore || isFetching) {
       return
     }
 
@@ -27,15 +32,16 @@ const ComicChampionship = () => {
     const response = await axios.get(`${process.env.COMIC_API_URL}/comics`, {
       params: {
         __sort: '_id::1',
-        __skip: page * FETCH_COMICS_LIMIT,
+        __skip: _page * FETCH_COMICS_LIMIT,
         __limit: FETCH_COMICS_LIMIT,
         type: 'championship',
+        genre: _genre,
       },
     })
     const newData = response.data.data
-    const newChapters = [...comics, ...newData.results]
+    const newChapters = [..._comics, ...newData.results]
     setComics(newChapters)
-    setPage(page + 1)
+    setPage(_page + 1)
 
     if (newData.results.length < FETCH_COMICS_LIMIT) {
       setHasMore(false)
@@ -44,6 +50,7 @@ const ComicChampionship = () => {
     }
     setIsFetching(false)
   }
+
   return (
     <Layout>
       <Head title="Paras Comic Championship" />
@@ -52,9 +59,9 @@ const ComicChampionship = () => {
           Comic Championship
         </p>
 
-        <div className="h-screen bg-slate-500 w-full flex items-center justify-center mb-12">
+        {/* <div className="h-screen bg-slate-500 w-full flex items-center justify-center mb-12">
           <p>Ini Bannernya</p>
-        </div>
+        </div> */}
 
         <div className="flex justify-center gap-4 mb-6 text-center">
           <div>
@@ -75,13 +82,13 @@ const ComicChampionship = () => {
           <div>
             <p
               className={`cursor-pointer ${
-                activeTab === 'action-fantasy' ? 'font-bold' : ''
+                activeTab === 'Action' ? 'font-bold' : ''
               }`}
-              onClick={() => setActiveTab('action-fantasy')}
+              onClick={() => setActiveTab('Action')}
             >
               Action-Fantasy
             </p>
-            {activeTab === 'action-fantasy' && (
+            {activeTab === 'Action' && (
               <div className="flex justify-center">
                 <div className="w-6 h-1 bg-primary" />
               </div>
@@ -90,13 +97,13 @@ const ComicChampionship = () => {
           <div>
             <p
               className={`cursor-pointer ${
-                activeTab === 'romance-fantasy' ? 'font-bold' : ''
+                activeTab === 'Romance' ? 'font-bold' : ''
               }`}
-              onClick={() => setActiveTab('romance-fantasy')}
+              onClick={() => setActiveTab('Romance')}
             >
               Romance-Fantasy
             </p>
-            {activeTab === 'romance-fantasy' && (
+            {activeTab === 'Romance' && (
               <div className="flex justify-center">
                 <div className="w-6 h-1 bg-primary" />
               </div>
