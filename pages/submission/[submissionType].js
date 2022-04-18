@@ -98,7 +98,6 @@ const FormSubmission = ({ dataSubmission }) => {
   }
 
   const onSubmit = async (data) => {
-    console.log(data)
     data.cover = cover
     data.pages = items
     data.logo = logo
@@ -112,7 +111,7 @@ const FormSubmission = ({ dataSubmission }) => {
     const errorCheckDimensionsLogo =
       'The dimensions of comic logo must be 1080 x 1080'
     const errorCheckDimensionsCover =
-      'The dimensions of comic cover must be 2048 x 2048'
+      'The dimensions of comic cover must be 2048 x 2848'
 
     if (
       checkNumberOfFile ||
@@ -208,9 +207,12 @@ const FormSubmission = ({ dataSubmission }) => {
         form.append('chapter_id', '1')
         form.append('lang', 'id')
       } else {
-        form.append('subgenre', subGenreSelect)
         form.append('portfolio_url', data.portfolio_url)
       }
+      form.append(
+        'subgenre',
+        dataSubmission.type_submission !== 'artist' ? 'fantasy' : subGenreSelect
+      )
       form.append('title', data.title)
       form.append('genre', genreSelect)
       form.append('synopsis', data.synopsis)
@@ -388,7 +390,7 @@ const FormSubmission = ({ dataSubmission }) => {
               setIsOverDimensionsLogo(false)
             }
           } else if (type === 'cover') {
-            if (img.width !== 2048 || img.height !== 2048) {
+            if (img.width !== 2048 || img.height !== 2848) {
               setIsOverDimensionsCover(true)
             } else {
               setIsOverDimensionsCover(false)
@@ -472,7 +474,7 @@ const FormSubmission = ({ dataSubmission }) => {
                     <label className="font-bold text-md">Comic Logo</label>
                     <div
                       className={`relative cursor-pointer ${
-                        !logo && !logoPreview ? 'w-40 h-40 ' : 'w-60 h-80'
+                        !logo && !logoPreview ? 'w-28 h-28 ' : 'w-52 h-52'
                       } overflow-hidden rounded-md mt-2 hover:opacity-80`}
                     >
                       <input
@@ -486,7 +488,7 @@ const FormSubmission = ({ dataSubmission }) => {
                       />
                       <div
                         className={`${
-                          !logo && !logoPreview ? 'w-40 h-40 ' : 'w-full h-full'
+                          !logo && !logoPreview ? 'w-28 h-28 ' : 'w-full h-full'
                         } overflow-hidden bg-comic-gray-secondary shadow-inner relative input-text`}
                       >
                         <img
@@ -547,7 +549,7 @@ const FormSubmission = ({ dataSubmission }) => {
                     <label className="font-bold text-md">Cover Comic</label>
                     <div
                       className={`relative cursor-pointer ${
-                        !cover && !coverPreview ? 'w-80 h-52 ' : 'w-80 h-80'
+                        !cover && !coverPreview ? 'w-40 h-40 ' : 'w-60 h-80'
                       } overflow-hidden rounded-md mt-2 hover:opacity-80`}
                     >
                       <input
@@ -562,7 +564,7 @@ const FormSubmission = ({ dataSubmission }) => {
                       <div
                         className={`${
                           !cover && !coverPreview
-                            ? 'w-80 h-52 '
+                            ? 'w-40 h-40 '
                             : 'w-full h-full'
                         } overflow-hidden bg-comic-gray-secondary shadow-inner relative input-text`}
                       >
@@ -604,13 +606,13 @@ const FormSubmission = ({ dataSubmission }) => {
                         {errorMessageCover
                           ? 'Image must be less than 10mb'
                           : isOverDimensionsCover
-                          ? 'The dimensions of the comic cover must be 2048 x 2048'
+                          ? 'The dimensions of the comic cover must be 2048 x 2848'
                           : 'This field is required'}
                       </span>
                     )}
                     <div>
                       <p className="text-comic-gray-tertiary text-sm font-normal mt-4 mb-8">
-                        Image size must be 2048 x 2048, <br /> Image must be
+                        Image size must be 2048 x 2848, <br /> Image must be
                         less than 10mb
                       </p>
                     </div>
