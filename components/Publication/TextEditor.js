@@ -308,7 +308,7 @@ const getBlockStyle = (block) => {
     case 'unstyled':
       return 'mb-4'
     case 'code-block':
-      return 'bg-gray-900'
+      return 'bg-primary'
     case 'atomic':
       return 'my-4'
     default:
