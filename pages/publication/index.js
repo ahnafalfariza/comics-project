@@ -26,9 +26,7 @@ const Publication = () => {
 
   useEffect(() => {
     if (router.isReady) {
-      if (publicationList?.length === 0) {
-        fetchData(true)
-      }
+      fetchData(true)
     }
   }, [router.isReady])
 
