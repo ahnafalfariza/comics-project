@@ -46,7 +46,7 @@ const PublicationFeatured = ({ data }) => {
           <a>
             <div className="cursor-pointer">
               <div className="overflow-hidden" style={{ maxHeight: `3.75rem` }}>
-                <h1 className="text-black text-2xl font-bold line-clamp-2 border-b-2 border-transparent">
+                <h1 className="text-black text-2xl font-bold line-clamp-1 border-b-2 border-transparent">
                   {data.title}
                 </h1>
               </div>
