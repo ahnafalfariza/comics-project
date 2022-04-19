@@ -59,9 +59,9 @@ const ComicChampionship = () => {
           Comic Championship
         </p>
 
-        {/* <div className="h-screen bg-slate-500 w-full flex items-center justify-center mb-12">
-          <p>Ini Bannernya</p>
-        </div> */}
+        <div className="mb-12">
+          <img src="https://paras-cdn.imgix.net/bafybeih3dhszjjvsyq2erghlmezdq5i7jfpz2h6den55iwn4odin4mrenu" />
+        </div>
 
         <div className="flex justify-center gap-4 mb-6 text-center">
           <div>
