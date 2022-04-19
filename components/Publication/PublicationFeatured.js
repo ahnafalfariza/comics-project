@@ -34,7 +34,7 @@ const PublicationFeatured = ({ data }) => {
             >
               <img
                 className="w-full h-full object-cover"
-                src={parseImgUrl(data.thumbnail, null, { width: `600` })}
+                src={parseImgUrl(data.thumbnail, null, { width: `1000` })}
                 style={{ height }}
               />
             </div>
