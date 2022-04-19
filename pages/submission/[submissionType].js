@@ -716,8 +716,8 @@ const FormSubmission = ({ dataSubmission }) => {
                 </div>
               )}
               {dataSubmission.type_submission !== 'artist' && (
-                <div className="flex w-full items-center">
-                  <div className="mt-8 mb-2 w-6/12 mr-2">
+                <div className="block md:flex w-full items-center">
+                  <div className="mt-8 mb-2 w-full md:w-6/12 mr-2">
                     <label className="font-bold text-md">Instagram</label>
                     <p className="italic text-xs text-gray-400">
                       https://instagram.com/username
@@ -735,7 +735,7 @@ const FormSubmission = ({ dataSubmission }) => {
                       </span>
                     )}
                   </div>
-                  <div className="mt-8 mb-2 w-6/12 mx-1">
+                  <div className="mt-8 mb-2 w-full md:w-6/12 mx-1">
                     <label className="font-bold text-md">Twitter</label>
                     <p className="italic text-xs text-gray-400">
                       https://twitter.com/username
@@ -753,7 +753,7 @@ const FormSubmission = ({ dataSubmission }) => {
                       </span>
                     )}
                   </div>
-                  <div className="mt-8 mb-2 w-6/12 ml-2">
+                  <div className="mt-8 mb-2 w-full md:w-6/12 ml-2">
                     <label className="font-bold text-md">Discord</label>
                     <p className="italic text-xs text-gray-400">
                       https://discord.gg/link
