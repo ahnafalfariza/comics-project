@@ -200,11 +200,18 @@ const FormSubmission = ({ dataSubmission }) => {
       const form = new FormData()
       form.append('type_submission', dataSubmission.type_submission)
       if (dataSubmission.type_submission !== 'artist') {
+        const socialMedia = {
+          twitter: data.twitter,
+          instagram: data.instagram,
+          discord: data.discord,
+        }
         form.append('cover', data.cover)
         form.append('logo', data.logo)
         form.append('comic_id', data.title.replaceAll(/\s/g, '-'))
         form.append('name', data.name)
         form.append('chapter_id', '1')
+        form.append('phone_number', data.phone_number)
+        form.append('social_media', JSON.stringify(socialMedia))
         form.append('lang', 'id')
       } else {
         form.append('portfolio_url', data.portfolio_url)
@@ -443,25 +450,27 @@ const FormSubmission = ({ dataSubmission }) => {
                 href={`https://ipfs.fleek.co/ipfs/${dataSubmission.guideline}`}
                 target="_blank"
                 rel="noreferrer"
-                className="text-primary border-b-2 border-transparent cursor-pointer active:border-primary"
+                className="text-primary border-b-2 border-transparent cursor-pointer active:border-primary hover:text-opacity-30 transition-all"
               >
                 here
               </a>
             </h4>
           </div>
-          <div className="mb-4">
-            <h4>
-              For more detail, you can ask to our{` `}
-              <a
-                href={`bit.ly/ParasComicdiscord`}
-                target="_blank"
-                rel="noreferrer"
-                className="text-primary border-b-2 border-transparent cursor-pointer active:border-primary"
-              >
-                FAQ
-              </a>
-            </h4>
-          </div>
+          {dataSubmission.type_submission !== 'artist' && (
+            <div className="mb-4">
+              <h4>
+                Having difficulties?{` `}
+                <a
+                  href={`https://bit.ly/ParasComicDiscord`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-primary cursor-pointer transition-all hover:text-opacity-30"
+                >
+                  Ask Our Team
+                </a>
+              </h4>
+            </div>
+          )}
           <FormProvider {...methods}>
             <form
               id="form-submission"
@@ -611,7 +620,18 @@ const FormSubmission = ({ dataSubmission }) => {
                       </span>
                     )}
                     <div>
-                      <p className="text-comic-gray-tertiary text-sm font-normal mt-4 mb-8">
+                      <p className="mt-4 text-comic-gray-tertiary text-sm font-normal">
+                        Download our cover template{' '}
+                        <a
+                          href={`https://bit.ly/ParasChampionshipCover`}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-primary border-b-2 border-transparent cursor-pointer active:border-primary"
+                        >
+                          here
+                        </a>
+                      </p>
+                      <p className="text-comic-gray-tertiary text-sm font-normal mb-8">
                         Image size must be 2048 x 2848, <br /> Image must be
                         less than 10mb
                       </p>
@@ -655,6 +675,119 @@ const FormSubmission = ({ dataSubmission }) => {
                       </span>
                     )}
                   </div>
+                </div>
+              )}
+              {dataSubmission.type_submission !== 'artist' && (
+                <div className="mt-8 mb-2">
+                  <label className="font-bold text-md">Email</label>
+                  <InputText
+                    label="email"
+                    register={register}
+                    required
+                    className="mt-3 md:w-96"
+                    placeholder="Please input your email"
+                    type="email"
+                    width="80"
+                  />
+                  {formState.errors.email && (
+                    <span className="text-red-500">This field is required</span>
+                  )}
+                </div>
+              )}
+              {dataSubmission.type_submission !== 'artist' && (
+                <div className="mt-8 mb-2">
+                  <label className="font-bold text-md">
+                    Mobile/Whatsapp Number
+                  </label>
+                  <p className="italic text-xs text-gray-400">628xxx</p>
+                  <InputText
+                    label="phone_number"
+                    register={register}
+                    className="mt-3 md:w-96"
+                    placeholder="Please input your phone number"
+                    type="phone_number"
+                    width="80"
+                  />
+                  {formState.errors.phone_number && (
+                    <span className="text-red-500">
+                      Use appropriate format number
+                    </span>
+                  )}
+                </div>
+              )}
+              {dataSubmission.type_submission !== 'artist' && (
+                <div className="flex w-full items-center">
+                  <div className="mt-8 mb-2 w-6/12 mr-2">
+                    <label className="font-bold text-md">Instagram</label>
+                    <p className="italic text-xs text-gray-400">
+                      https://instagram.com/username
+                    </p>
+                    <InputText
+                      label="instagram"
+                      register={register}
+                      className="mt-3 md:w-full"
+                      placeholder="username"
+                      type="instagram"
+                    />
+                    {formState.errors.instagram && (
+                      <span className="text-red-500">
+                        Use appropriate format link
+                      </span>
+                    )}
+                  </div>
+                  <div className="mt-8 mb-2 w-6/12 mx-1">
+                    <label className="font-bold text-md">Twitter</label>
+                    <p className="italic text-xs text-gray-400">
+                      https://twitter.com/username
+                    </p>
+                    <InputText
+                      label="twitter"
+                      register={register}
+                      className="mt-3 md:w-full"
+                      placeholder="username"
+                      type="twitter"
+                    />
+                    {formState.errors.twitter && (
+                      <span className="text-red-500">
+                        Use appropriate format link
+                      </span>
+                    )}
+                  </div>
+                  <div className="mt-8 mb-2 w-6/12 ml-2">
+                    <label className="font-bold text-md">Discord</label>
+                    <p className="italic text-xs text-gray-400">
+                      https://discord.gg/link
+                    </p>
+                    <InputText
+                      label="discord"
+                      register={register}
+                      className="mt-3 md:w-full"
+                      placeholder="https://discord.gg/link"
+                      type="discord"
+                    />
+                    {formState.errors.discord && (
+                      <span className="text-red-500">
+                        Use appropriate format link
+                      </span>
+                    )}
+                  </div>
+                </div>
+              )}
+              {dataSubmission.type_submission === 'artist' && (
+                <div className="mt-8 mb-2">
+                  <label className="font-bold text-md">Email</label>
+                  <InputText
+                    label="email"
+                    register={register}
+                    required
+                    className="mt-3 md:w-96"
+                    placeholder="Please input your email"
+                    type="email"
+                    width="80"
+                  />
+                  {formState.errors.email && (
+                    <span className="text-red-500">This field is required</span>
+                  )}
                 </div>
               )}
               <div className="md:flex justify-start gap-2 md:gap-20">
@@ -706,21 +839,23 @@ const FormSubmission = ({ dataSubmission }) => {
                   <span className="text-red-500">This field is required</span>
                 )}
               </div>
-              <div className="mt-8 mb-2">
-                <label className="font-bold text-md">Email</label>
-                <InputText
-                  label="email"
-                  register={register}
-                  required
-                  className="mt-3 md:w-96"
-                  placeholder="Please input your email"
-                  type="email"
-                  width="80"
-                />
-                {formState.errors.email && (
-                  <span className="text-red-500">This field is required</span>
-                )}
-              </div>
+              {dataSubmission.type_submission === 'artist' && (
+                <div className="mt-8 mb-2">
+                  <label className="font-bold text-md">Email</label>
+                  <InputText
+                    label="email"
+                    register={register}
+                    required
+                    className="mt-3 md:w-96"
+                    placeholder="Please input your email"
+                    type="email"
+                    width="80"
+                  />
+                  {formState.errors.email && (
+                    <span className="text-red-500">This field is required</span>
+                  )}
+                </div>
+              )}
               {dataSubmission.type_submission === 'artist' && (
                 <div className="mt-8 mb-2">
                   <label className="font-bold text-md">Link Portfolio</label>
