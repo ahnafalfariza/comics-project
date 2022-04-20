@@ -200,18 +200,15 @@ const FormSubmission = ({ dataSubmission }) => {
       const form = new FormData()
       form.append('type_submission', dataSubmission.type_submission)
       if (dataSubmission.type_submission !== 'artist') {
-        const socialMedia = {
-          twitter: data.twitter,
-          instagram: data.instagram,
-          discord: data.discord,
-        }
         form.append('cover', data.cover)
         form.append('logo', data.logo)
         form.append('comic_id', data.title.replaceAll(/\s/g, '-'))
         form.append('name', data.name)
         form.append('chapter_id', '1')
         form.append('phone_number', data.phone_number)
-        form.append('social_media', JSON.stringify(socialMedia))
+        form.append('social_media[twitter]', data.twitter)
+        form.append('social_media[instagram]', data.instagram)
+        form.append('social_media[discord]', data.discord)
         form.append('lang', 'id')
       } else {
         form.append('portfolio_url', data.portfolio_url)
