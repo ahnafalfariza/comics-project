@@ -69,7 +69,9 @@ const Collection = ({
   return (
     <Layout>
       <Head
-        title={chapterInfo ? chapterInfo.metadata.title : comicInfo.title}
+        title={
+          chapterInfo ? `Buy ${chapterInfo.metadata.title}` : comicInfo.title
+        }
         description={
           chapterInfo ? chapterInfo.metadata.description : comicInfo.description
         }
