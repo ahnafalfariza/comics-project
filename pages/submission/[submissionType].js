@@ -210,6 +210,7 @@ const FormSubmission = ({ dataSubmission }) => {
         form.append('social_media[instagram]', data.instagram)
         form.append('social_media[discord]', data.discord)
         form.append('lang', 'id')
+        form.append('story_concept_file', data.story_concept_file)
       } else {
         form.append('portfolio_url', data.portfolio_url)
       }
@@ -824,6 +825,9 @@ const FormSubmission = ({ dataSubmission }) => {
               </div>
               <div className="mt-8 mb-2">
                 <label className="font-bold text-md">Synopsis</label>
+                <p className="italic text-xs text-gray-400">
+                  Please input your synopsis with max 250 characters
+                </p>
                 <InputTextarea
                   label="synopsis"
                   register={register}
@@ -831,10 +835,25 @@ const FormSubmission = ({ dataSubmission }) => {
                   className="resize-none h-40 mt-3"
                   type="text"
                   placeholder="Synopsis of your comic"
+                  maxLength={250}
                 />
                 {formState.errors.synopsis && (
                   <span className="text-red-500">This field is required</span>
                 )}
+              </div>
+              <div className="mt-8 mb-2">
+                <label className="font-bold text-md">Story Concept</label>
+                <p className="italic text-xs text-gray-400">
+                  Please input your full storyline from beginning to the end
+                  with no limited character
+                </p>
+                <InputTextarea
+                  label="story_concept_file"
+                  register={register}
+                  className="resize-none h-40 mt-3"
+                  type="text"
+                  placeholder="Tell us your story concept"
+                />
               </div>
               {dataSubmission.type_submission === 'artist' && (
                 <div className="mt-8 mb-2">
