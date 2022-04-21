@@ -16,6 +16,7 @@ import { InputDropdown } from '../../components/Common/form/components/InputDrop
 import Layout from 'components/Common/Layout'
 import Head from 'components/Common/Head'
 import slug from 'slug'
+import { encodeImageToBlurhash } from 'lib/blurhash'
 
 const FormSubmission = ({ dataSubmission }) => {
   const [cover, setCover] = useState('')
@@ -114,6 +115,8 @@ const FormSubmission = ({ dataSubmission }) => {
     const errorCheckDimensionsCover =
       'The dimensions of comic cover must be 2048 x 2848'
 
+    let blurhash = ''
+
     if (
       checkNumberOfFile ||
       checkSizeofFile ||
@@ -163,6 +166,8 @@ const FormSubmission = ({ dataSubmission }) => {
       if (dataSubmission.type_submission !== 'artist') {
         cover.append('files', data.cover)
         logo.append('files', data.logo)
+        const coverLink = await readFileAsUrl(data.cover)
+        blurhash = await encodeImageToBlurhash(coverLink)
       }
       const pages = new FormData()
       data.pages.forEach((page) => {
@@ -202,6 +207,7 @@ const FormSubmission = ({ dataSubmission }) => {
       form.append('type_submission', dataSubmission.type_submission)
       if (dataSubmission.type_submission !== 'artist') {
         form.append('cover', data.cover)
+        form.append('blurhash', blurhash)
         form.append('logo', data.logo)
         form.append('comic_id', slug(data.title))
         form.append('name', data.name)
