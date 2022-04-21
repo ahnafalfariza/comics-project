@@ -15,6 +15,7 @@ import { readFileAsUrl } from 'utils/common'
 import { InputDropdown } from '../../components/Common/form/components/InputDropdown'
 import Layout from 'components/Common/Layout'
 import Head from 'components/Common/Head'
+import slug from 'slug'
 
 const FormSubmission = ({ dataSubmission }) => {
   const [cover, setCover] = useState('')
@@ -202,7 +203,7 @@ const FormSubmission = ({ dataSubmission }) => {
       if (dataSubmission.type_submission !== 'artist') {
         form.append('cover', data.cover)
         form.append('logo', data.logo)
-        form.append('comic_id', data.title.replaceAll(/\s/g, '-'))
+        form.append('comic_id', slug(data.title))
         form.append('name', data.name)
         form.append('chapter_id', '1')
         form.append('phone_number', data.phone_number)
