@@ -209,7 +209,10 @@ const FormSubmission = ({ dataSubmission }) => {
         form.append('cover', data.cover)
         form.append('blurhash', blurhash)
         form.append('logo', data.logo)
-        form.append('comic_id', slug(data.title))
+        form.append(
+          'comic_id',
+          slug(data.title) + '_' + Math.random().toString(16).slice(2)
+        )
         form.append('name', data.name)
         form.append('chapter_id', '1')
         form.append('phone_number', data.phone_number)
@@ -455,6 +458,39 @@ const FormSubmission = ({ dataSubmission }) => {
             </p>
           </div>
         )}
+
+        <div className="mt-4 border-2 border-dashed border-primary flex max-w-6xl items-center justify-between rounded-md py-4 px-8">
+          {dataSubmission.type_submission !== 'artist' && (
+            <div className="mx-2">
+              <h4 className="font-semibold">
+                Read Submission Guideline{' '}
+                <a
+                  href={`https://ipfs.fleek.co/ipfs/${dataSubmission.guideline}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-primary border-b-2 border-transparent cursor-pointer active:border-primary hover:text-opacity-30 transition-all"
+                >
+                  here
+                </a>
+              </h4>
+            </div>
+          )}
+          {dataSubmission.type_submission !== 'artist' && (
+            <div className="mx-2">
+              <h4 className="font-semibold">
+                Having difficulties?{` `}
+                <a
+                  href={`https://bit.ly/ParasComicDiscord`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-primary cursor-pointer transition-all hover:text-opacity-30"
+                >
+                  Ask Our Team
+                </a>
+              </h4>
+            </div>
+          )}
+        </div>
         <div
           className={`max-w-3xl ${
             dataSubmission.type_submission === 'artist' && `m-auto p-4`
@@ -852,7 +888,11 @@ const FormSubmission = ({ dataSubmission }) => {
                   className="resize-none h-40 mt-3"
                   type="text"
                   placeholder="Tell us your story concept"
+                  required
                 />
+                {formState.errors.story_concept_file && (
+                  <span className="text-red-500">This field is required</span>
+                )}
               </div>
               {dataSubmission.type_submission === 'artist' && (
                 <div className="mt-8 mb-2">
@@ -1017,38 +1057,6 @@ const FormSubmission = ({ dataSubmission }) => {
               />
             </form>
           </FormProvider>
-        </div>
-        <div className="border-2 border-dashed border-primary flex max-w-3xl items-center justify-between rounded-md py-4 px-8">
-          {dataSubmission.type_submission !== 'artist' && (
-            <div className="mx-2">
-              <h4 className="font-semibold">
-                Read Submission Guideline{' '}
-                <a
-                  href={`https://ipfs.fleek.co/ipfs/${dataSubmission.guideline}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-primary border-b-2 border-transparent cursor-pointer active:border-primary hover:text-opacity-30 transition-all"
-                >
-                  here
-                </a>
-              </h4>
-            </div>
-          )}
-          {dataSubmission.type_submission !== 'artist' && (
-            <div className="mx-2">
-              <h4 className="font-semibold">
-                Having difficulties?{` `}
-                <a
-                  href={`https://bit.ly/ParasComicDiscord`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-primary cursor-pointer transition-all hover:text-opacity-30"
-                >
-                  Ask Our Team
-                </a>
-              </h4>
-            </div>
-          )}
         </div>
       </div>
     </Layout>
