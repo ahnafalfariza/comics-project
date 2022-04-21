@@ -423,14 +423,22 @@ const FormSubmission = ({ dataSubmission }) => {
           </div>
         )}
         {dataSubmission.type_submission !== 'artist' ? (
-          <div className="border-4 border-dashed border-primary mb-9 p-4 rounded-md md:mx-36 relative">
-            <h1 className="text-center font-bold text-3xl mb-2">
-              {dataSubmission.title}
-            </h1>
-            <p className="text-primary text-sm text-center whitespace-pre-line">
-              {dataSubmission.description}
-            </p>
-          </div>
+          <>
+            <div className="hidden md:block">
+              <img
+                src={`https://paras-cdn.imgix.net/bafybeigii7iy77byzjcpbvkq2gi7qiahwkjyn5sxljb6bb6mazffacdmsm`}
+                className="object-contain"
+                alt=""
+              />
+            </div>
+            <div className="block md:hidden">
+              <img
+                src={`https://paras-cdn.imgix.net/bafybeidcbu2aoell56amcz574idulbdeaveotdmmalaxngcgxk6zga2pie`}
+                className="object-contain"
+                alt=""
+              />
+            </div>
+          </>
         ) : (
           <div>
             <h1 className="text-center font-bold text-3xl mb-2">
@@ -441,31 +449,22 @@ const FormSubmission = ({ dataSubmission }) => {
             </p>
           </div>
         )}
-        <div className="max-w-3xl m-auto p-4 py-8">
-          <div className="mb-4">
-            <h4>
-              Read Submission Guideline{' '}
-              <a
-                href={`https://ipfs.fleek.co/ipfs/${dataSubmission.guideline}`}
-                target="_blank"
-                rel="noreferrer"
-                className="text-primary border-b-2 border-transparent cursor-pointer active:border-primary hover:text-opacity-30 transition-all"
-              >
-                here
-              </a>
-            </h4>
-          </div>
-          {dataSubmission.type_submission !== 'artist' && (
+        <div
+          className={`max-w-3xl ${
+            dataSubmission.type_submission === 'artist' && `m-auto p-4`
+          } py-8`}
+        >
+          {dataSubmission.type_submission === 'artist' && (
             <div className="mb-4">
               <h4>
-                Having difficulties?{` `}
+                Read Submission Guideline{' '}
                 <a
-                  href={`https://bit.ly/ParasComicDiscord`}
+                  href={`https://ipfs.fleek.co/ipfs/${dataSubmission.guideline}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-primary cursor-pointer transition-all hover:text-opacity-30"
+                  className="text-primary border-b-2 border-transparent cursor-pointer active:border-primary hover:text-opacity-30 transition-all"
                 >
-                  Ask Our Team
+                  here
                 </a>
               </h4>
             </div>
@@ -1019,6 +1018,38 @@ const FormSubmission = ({ dataSubmission }) => {
               />
             </form>
           </FormProvider>
+        </div>
+        <div className="border-2 border-dashed border-primary flex max-w-3xl items-center justify-between rounded-md py-4 px-8">
+          {dataSubmission.type_submission !== 'artist' && (
+            <div className="mx-2">
+              <h4 className="font-semibold">
+                Read Submission Guideline{' '}
+                <a
+                  href={`https://ipfs.fleek.co/ipfs/${dataSubmission.guideline}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-primary border-b-2 border-transparent cursor-pointer active:border-primary hover:text-opacity-30 transition-all"
+                >
+                  here
+                </a>
+              </h4>
+            </div>
+          )}
+          {dataSubmission.type_submission !== 'artist' && (
+            <div className="mx-2">
+              <h4 className="font-semibold">
+                Having difficulties?{` `}
+                <a
+                  href={`https://bit.ly/ParasComicDiscord`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-primary cursor-pointer transition-all hover:text-opacity-30"
+                >
+                  Ask Our Team
+                </a>
+              </h4>
+            </div>
+          )}
         </div>
       </div>
     </Layout>
