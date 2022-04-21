@@ -459,8 +459,8 @@ const FormSubmission = ({ dataSubmission }) => {
           </div>
         )}
 
-        <div className="mt-4 border-2 border-dashed border-primary flex max-w-6xl items-center justify-between rounded-md py-4 px-8">
-          {dataSubmission.type_submission !== 'artist' && (
+        {dataSubmission.type_submission !== 'artist' && (
+          <div className="mt-4 border-2 border-dashed border-primary flex max-w-6xl items-center justify-between rounded-md py-4 px-8">
             <div className="mx-2">
               <h4 className="font-semibold">
                 Read Submission Guideline{' '}
@@ -474,23 +474,23 @@ const FormSubmission = ({ dataSubmission }) => {
                 </a>
               </h4>
             </div>
-          )}
-          {dataSubmission.type_submission !== 'artist' && (
-            <div className="mx-2">
-              <h4 className="font-semibold">
-                Having difficulties?{` `}
-                <a
-                  href={`https://bit.ly/ParasComicDiscord`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-primary cursor-pointer transition-all hover:text-opacity-30"
-                >
-                  Ask Our Team
-                </a>
-              </h4>
-            </div>
-          )}
-        </div>
+            {dataSubmission.type_submission !== 'artist' && (
+              <div className="mx-2">
+                <h4 className="font-semibold">
+                  Having difficulties?{` `}
+                  <a
+                    href={`https://bit.ly/ParasComicDiscord`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-primary cursor-pointer transition-all hover:text-opacity-30"
+                  >
+                    Ask Our Team
+                  </a>
+                </h4>
+              </div>
+            )}
+          </div>
+        )}
         <div
           className={`max-w-3xl ${
             dataSubmission.type_submission === 'artist' && `m-auto p-4`
