@@ -714,7 +714,7 @@ const FormSubmission = ({ dataSubmission }) => {
                 </div>
               )}
               {dataSubmission.type_submission !== 'artist' && (
-                <div className="block md:flex w-full items-center">
+                <div className="block md:flex w-full items-start">
                   <div className="mt-8 mb-2 w-full md:w-6/12 mr-2">
                     <label className="font-bold text-md">Instagram</label>
                     <p className="italic text-xs text-gray-400">
@@ -753,21 +753,14 @@ const FormSubmission = ({ dataSubmission }) => {
                   </div>
                   <div className="mt-8 mb-2 w-full md:w-6/12 ml-2">
                     <label className="font-bold text-md">Discord</label>
-                    <p className="italic text-xs text-gray-400">
-                      https://discord.gg/link
-                    </p>
+                    <p className="italic text-xs text-gray-400">Username</p>
                     <InputText
                       label="discord"
                       register={register}
                       className="mt-3 md:w-full"
-                      placeholder="https://discord.gg/link"
+                      placeholder="username"
                       type="discord"
                     />
-                    {formState.errors.discord && (
-                      <span className="text-red-500">
-                        Use appropriate format link
-                      </span>
-                    )}
                   </div>
                 </div>
               )}

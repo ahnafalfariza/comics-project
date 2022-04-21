@@ -51,17 +51,6 @@ const InputText = ({
         {...rest}
       />
     )
-  } else if (type === 'discord') {
-    return (
-      <input
-        className={inputStyle}
-        {...register(label, {
-          pattern:
-            /^((https?):\/\/)?(www\.)?(discord\.gg)\/([A-z0-9\-#_=+()*<>'"`]+)\/?/,
-        })}
-        {...rest}
-      />
-    )
   } else {
     return (
       <input
