@@ -71,7 +71,7 @@ const ComicInfo = ({
               <div>
                 <h4 className="text-white mb-1 font-semibold ">Genre</h4>
                 <p className="text-blueGray-200 mb-4">
-                  {data.genre}, {data.subgenre}
+                  {data.genre} {data.subgenre ? `- ${data.subgenre}` : ''}
                 </p>
               </div>
             </div>

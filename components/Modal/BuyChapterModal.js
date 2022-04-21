@@ -166,15 +166,17 @@ const BuyChapterModal = ({
                             </Button>
                           </div>
                         )}
-                        <div className="mt-2">
-                          <div className="mt-2 w-full text-center">
-                            <Link href={tokenCta.link}>
-                              <a className="font-semibold text-black text-sm">
-                                {tokenCta.text}
-                              </a>
-                            </Link>
+                        {data.is_locked !== undefined && data.is_locked && (
+                          <div className="mt-2">
+                            <div className="mt-2 w-full text-center">
+                              <Link href={tokenCta.link}>
+                                <a className="font-semibold text-black text-sm">
+                                  {tokenCta.text}
+                                </a>
+                              </Link>
+                            </div>
                           </div>
-                        </div>
+                        )}
                       </>
                     )}
                     <div className="flex flex-wrap items-center justify-between -mb-2 md:-mb-4">
