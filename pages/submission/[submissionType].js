@@ -11,7 +11,7 @@ import {
   postCoverComic,
   postPagesComic,
 } from 'services/submission'
-import { readFileAsUrl } from 'utils/common'
+import { parseImgUrl, readFileAsUrl } from 'utils/common'
 import { InputDropdown } from '../../components/Common/form/components/InputDropdown'
 import Layout from 'components/Common/Layout'
 import Head from 'components/Common/Head'
@@ -421,7 +421,11 @@ const FormSubmission = ({ dataSubmission }) => {
 
   return (
     <Layout>
-      <Head title={dataSubmission.title} />
+      <Head
+        title={dataSubmission.title}
+        description={dataSubmission.description}
+        image={parseImgUrl(dataSubmission.cover)}
+      />
       <div className="max-w-4xl m-auto p-4 py-8">
         {loading && (
           <div className="h-full w-full fixed top-0 right-0 bg-black bg-opacity-70 z-50">
