@@ -14,14 +14,18 @@ const ComicList = ({ comics, fetchComics, hasMore, size = 'big' }) => {
         hasMore={hasMore}
         loader={
           <ComicListLoader
-            size={comics.length === 0 ? 8 : 4}
+            size={comics.length === 0 ? col * 2 : col}
             gap={gap}
             col={col}
           />
         }
       >
         <div
-          className={`grid md:grid-cols-5 grid-cols-2 gap-4 md:gap-${gap} overflow-hidden`}
+          className={`grid ${
+            size === 'big'
+              ? 'md:grid-cols-4 md:gap-8'
+              : 'md:grid-cols-5 md:gap-4'
+          } grid-cols-2 gap-4 overflow-hidden`}
         >
           {comics.map((data, i) => (
             <ComicItem data={data} key={i} />
