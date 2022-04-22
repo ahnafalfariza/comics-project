@@ -226,7 +226,7 @@ const FormSubmission = ({ dataSubmission }) => {
       }
       form.append(
         'subgenre',
-        dataSubmission.type_submission !== 'artist' ? 'fantasy' : subGenreSelect
+        dataSubmission.type_submission !== 'artist' ? 'Fantasy' : subGenreSelect
       )
       form.append('title', data.title)
       form.append('genre', genreSelect)
