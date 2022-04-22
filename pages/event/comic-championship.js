@@ -81,7 +81,10 @@ const ComicChampionship = () => {
 
   return (
     <Layout>
-      <Head title="Paras Comic Championship" />
+      <Head
+        title="Paras Comic Championship"
+        image="https://paras-cdn.imgix.net/bafybeihzazhdnyqjjm6uuddkl6ai6chvk73m6bmu4ws5gau2z77j7dwsbm"
+      />
       <div className="max-w-6xl m-auto px-4 mb-8">
         <div className="mb-12 hidden md:block">
           <Link href="/submission/championship">
