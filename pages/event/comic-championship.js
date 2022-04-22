@@ -21,7 +21,10 @@ const ComicChampionship = () => {
   const [activeTab, setActiveTab] = useState('overview')
 
   const isEmpty =
-    (activeTab !== 'Action' || activeTab !== 'Romace') && comics.length === 0
+    activeTab !== 'Action' &&
+    activeTab !== 'Romace' &&
+    activeTab !== 'overview' &&
+    comics.length === 0
 
   useEffect(() => {
     if (

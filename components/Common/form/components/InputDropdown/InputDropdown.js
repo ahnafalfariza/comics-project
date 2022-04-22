@@ -12,8 +12,10 @@ const InputDropdown = ({ title, label, ref, data, selectItem, submit }) => {
       dataItem.push(item[label])
     })
     const initial = dataItem.filter((item) => item === dataItem[0])
-    setSelect(initial.toString())
-  }, [label, data, submit])
+    if (select === '') {
+      setSelect(initial.toString())
+    }
+  }, [data, label, select])
 
   useEffect(() => {
     const onClickEv = (e) => {

@@ -229,7 +229,7 @@ const FormSubmission = ({ dataSubmission }) => {
         dataSubmission.type_submission !== 'artist' ? 'Fantasy' : subGenreSelect
       )
       form.append('title', data.title)
-      form.append('genre', genreSelect)
+      form.append('genre', genreSelect.split('-')[0])
       form.append('synopsis', data.synopsis)
       form.append('email', data.email)
       data.pages.forEach((page) => {
