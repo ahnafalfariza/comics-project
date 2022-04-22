@@ -1,8 +1,10 @@
 import ContentLoader from 'react-content-loader'
 
-export const ComicListLoader = () => (
-  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mt-8">
-    {Array(8)
+export const ComicListLoader = ({ size = 8, col = 4, gap = 8 }) => (
+  <div
+    className={`grid grid-cols-2 md:grid-cols-${col} gap-4 md:gap-${gap} mt-8`}
+  >
+    {Array(size)
       .fill('')
       .map((item, idx) => (
         <div key={idx}>

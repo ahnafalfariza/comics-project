@@ -3,11 +3,11 @@ import { parseImgUrl } from 'utils/common'
 import Token from 'components/Token/Token'
 import Link from 'next/link'
 
-const ComicItem = ({ data, key, showLike = false }) => {
+const ComicItem = ({ data, showLike = false }) => {
   const router = useRouter()
 
   return (
-    <div key={key}>
+    <div>
       <a
         onClick={(e) => e.preventDefault()}
         href={`/comics/${data.comic_id}/chapter`}

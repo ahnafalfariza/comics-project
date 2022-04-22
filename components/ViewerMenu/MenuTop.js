@@ -8,6 +8,7 @@ const LANG_LIST = {
   en: 'English',
   zh: '简体中文',
   ru: 'Русский',
+  id: 'Indonesia',
 }
 
 const MenuTop = forwardRef(

@@ -15,13 +15,19 @@ import { readFileAsUrl } from 'utils/common'
 import { InputDropdown } from '../../components/Common/form/components/InputDropdown'
 import Layout from 'components/Common/Layout'
 import Head from 'components/Common/Head'
+import slug from 'slug'
+import { encodeImageToBlurhash } from 'lib/blurhash'
 
 const FormSubmission = ({ dataSubmission }) => {
   const [cover, setCover] = useState('')
   const [coverPreview, setCoverPreview] = useState('')
+  const [logo, setLogo] = useState('')
+  const [logoPreview, setLogoPreview] = useState('')
   const [items, setItems] = useState([])
-  const [isOverDimensions, setIsOverDimensions] = useState(false)
+  const [isOverDimensionsLogo, setIsOverDimensionsLogo] = useState(false)
+  const [isOverDimensionsCover, setIsOverDimensionsCover] = useState(false)
   const [sizeComic, setSizeComic] = useState(0)
+  const [isOverDimensionsPage, setIsOverDimensionsPage] = useState(false)
   const methods = useForm()
   const { register, handleSubmit, formState, setValue, reset, clearErrors } =
     methods
@@ -29,7 +35,8 @@ const FormSubmission = ({ dataSubmission }) => {
   const [genreSelect, setGenreSelect] = useState('')
   const [subGenreList, setSubGenreList] = useState([])
   const [subGenreSelect, setSubGenreSelect] = useState('')
-  const [errorMessage, setErrorMessage] = useState(false)
+  const [errorMessageLogo, setErrorMessageLogo] = useState(false)
+  const [errorMessageCover, setErrorMessageCover] = useState(false)
   const genreModalRef = useRef()
   const subGenreModalRef = useRef()
   const [loading, setLoading] = useState(false)
@@ -72,7 +79,8 @@ const FormSubmission = ({ dataSubmission }) => {
 
   useEffect(() => {
     if (cover === undefined) setCoverPreview(cover)
-  }, [cover])
+    if (logo === undefined) setLogoPreview(logo)
+  }, [cover, logo])
 
   useEffect(() => {
     let size = 0
@@ -94,27 +102,72 @@ const FormSubmission = ({ dataSubmission }) => {
   const onSubmit = async (data) => {
     data.cover = cover
     data.pages = items
+    data.logo = logo
     const checkSizeofFile = formatBytes(sizeComic).props.children > 20.0
     const checkNumberOfFile = items.length > 100
 
     const errorCheckNumberOfFile = 'The maximum number of files is 100.'
     const errorCheckSizeOfFile = 'The maximum number of sizes is 20 MB'
+    const errorCheckDimensionsOfPage =
+      'The dimensions of each comic page must be 800 x 1000'
+    const errorCheckDimensionsLogo =
+      'The dimensions of comic logo must be 1080 x 1080'
+    const errorCheckDimensionsCover =
+      'The dimensions of comic cover must be 2048 x 2848'
 
-    if (checkNumberOfFile || checkSizeofFile || isOverDimensions) {
+    let blurhash = ''
+
+    if (
+      checkNumberOfFile ||
+      checkSizeofFile ||
+      isOverDimensionsLogo ||
+      isOverDimensionsCover ||
+      isOverDimensionsPage
+    ) {
       window.scrollTo(0, 0)
-      if (!isOverDimensions) {
+      if (checkNumberOfFile) {
         _showToast(
           'error',
-          checkNumberOfFile ? errorCheckNumberOfFile : errorCheckSizeOfFile
+          isOverDimensionsLogo ? errorCheckNumberOfFile : errorCheckSizeOfFile
         )
+        return
+      }
+      if (isOverDimensionsLogo) {
+        _showToast(
+          'error',
+          isOverDimensionsLogo ? errorCheckDimensionsLogo : errorCheckSizeOfFile
+        )
+        return
+      }
+      if (isOverDimensionsCover) {
+        _showToast(
+          'error',
+          isOverDimensionsCover
+            ? errorCheckDimensionsCover
+            : errorCheckSizeOfFile
+        )
+        return
+      }
+      if (isOverDimensionsPage) {
+        _showToast(
+          'error',
+          isOverDimensionsPage
+            ? errorCheckDimensionsOfPage
+            : errorCheckSizeOfFile
+        )
+        return
       }
     } else {
       setLoading(true)
       window.scrollTo(0, 0)
 
       const cover = new FormData()
+      const logo = new FormData()
       if (dataSubmission.type_submission !== 'artist') {
         cover.append('files', data.cover)
+        logo.append('files', data.logo)
+        const coverLink = await readFileAsUrl(data.cover)
+        blurhash = await encodeImageToBlurhash(coverLink)
       }
       const pages = new FormData()
       data.pages.forEach((page) => {
@@ -123,11 +176,15 @@ const FormSubmission = ({ dataSubmission }) => {
 
       if (dataSubmission.type_submission !== 'artist') {
         await axios
-          .all([postCoverComic(cover), postPagesComic(pages)])
+          .all([
+            postCoverComic(cover),
+            postPagesComic(pages),
+            postCoverComic(logo),
+          ])
           .then((results) => {
             data.cover = results[0].data
             data.pages = results[1].data
-
+            data.logo = results[2].data
             return results.data
           })
           .catch((error) => {
@@ -150,13 +207,31 @@ const FormSubmission = ({ dataSubmission }) => {
       form.append('type_submission', dataSubmission.type_submission)
       if (dataSubmission.type_submission !== 'artist') {
         form.append('cover', data.cover)
+        form.append('blurhash', blurhash)
+        form.append('logo', data.logo)
+        form.append(
+          'comic_id',
+          slug(data.title) + '_' + Math.random().toString(16).slice(2)
+        )
+        form.append('name', data.name)
+        form.append('chapter_id', '1')
+        form.append('phone_number', data.phone_number)
+        form.append('social_media[twitter]', data.twitter)
+        form.append('social_media[instagram]', data.instagram)
+        form.append('social_media[discord]', data.discord)
+        form.append('lang', 'id')
+        form.append('story_concept_file', data.story_concept_file)
+      } else {
+        form.append('portfolio_url', data.portfolio_url)
       }
+      form.append(
+        'subgenre',
+        dataSubmission.type_submission !== 'artist' ? 'Fantasy' : subGenreSelect
+      )
       form.append('title', data.title)
       form.append('genre', genreSelect)
-      form.append('subgenre', subGenreSelect)
       form.append('synopsis', data.synopsis)
       form.append('email', data.email)
-      form.append('portfolio_url', data.portfolio_url)
       data.pages.forEach((page) => {
         form.append('pages[]', page)
       })
@@ -166,6 +241,8 @@ const FormSubmission = ({ dataSubmission }) => {
         .then((response) => {
           setCover('')
           setCoverPreview('')
+          setLogo('')
+          setLogoPreview('')
           setItems([])
           setIsSubmit(true)
           setGenreSelect(genreList[0].genre)
@@ -194,7 +271,24 @@ const FormSubmission = ({ dataSubmission }) => {
 
     if (e.target.files && e.target.files.length > 0) {
       const newItems = []
+      let isOverDimensions = []
       for (const file of e.target.files) {
+        //check dimensions
+        if (dataSubmission.type_submission !== 'artist') {
+          const reader = new FileReader()
+          reader.readAsDataURL(file)
+          reader.onload = () => {
+            const image = new Image()
+            image.src = reader.result
+            image.onload = () => {
+              if (image.width === 800 && image.height === 1000) {
+                isOverDimensions.push(false)
+              } else {
+                isOverDimensions.push(true)
+              }
+            }
+          }
+        }
         const imgUrl = await readFileAsUrl(file)
         newItems.push({
           id:
@@ -204,8 +298,15 @@ const FormSubmission = ({ dataSubmission }) => {
           file: file,
         })
       }
-      const currentItems = [...items]
-      setItems(currentItems.concat(newItems))
+      if (isOverDimensions.every((data) => !data)) {
+        setIsOverDimensionsPage(false)
+      } else {
+        setIsOverDimensionsPage(true)
+      }
+      if (isOverDimensions.every((data) => !data)) {
+        const currentItems = [...items]
+        setItems(currentItems.concat(newItems))
+      }
     }
   }
 
@@ -253,24 +354,37 @@ const FormSubmission = ({ dataSubmission }) => {
     setValue('pages', files)
   }
 
-  const inputFilecover = (event) => {
+  const inputFilecover = (event, type) => {
     const img = event.target.files[0]
     let checkDimensions = false
-    setCover(img)
+    type === 'logo' ? setLogo(img) : setCover(img)
 
     if (typeof img !== 'undefined') {
       let size = img.size / (1024 * 1024).toFixed(10)
       if (size < 10 || checkDimensions) {
         let binaryData = []
         binaryData.push(img)
-        setCoverPreview(
-          window.URL.createObjectURL(new Blob(binaryData, { type: 'image/*' }))
-        )
-        setIsOverDimensions(false)
-        setErrorMessage(false)
+        if (type === 'logo') {
+          setLogoPreview(
+            window.URL.createObjectURL(
+              new Blob(binaryData, { type: 'image/*' })
+            )
+          )
+          setErrorMessageLogo(false)
+        } else {
+          setCoverPreview(
+            window.URL.createObjectURL(
+              new Blob(binaryData, { type: 'image/*' })
+            )
+          )
+          setErrorMessageCover(false)
+        }
       } else {
-        setIsOverDimensions(true)
-        setErrorMessage(true)
+        if (type === 'logo') {
+          setErrorMessageLogo(true)
+        } else {
+          setErrorMessageCover(true)
+        }
       }
     }
 
@@ -279,9 +393,24 @@ const FormSubmission = ({ dataSubmission }) => {
       const img = new Image()
 
       img.onload = () => {
-        if (img.width !== 640 || img.height !== 890) {
-          checkDimensions = true
-          setIsOverDimensions(true)
+        if (dataSubmission.type_submission === 'artist') {
+          if (img.width !== 640 || img.height !== 890) {
+            setIsOverDimensionsLogo(true)
+          }
+        } else {
+          if (type === 'logo') {
+            if (img.width !== 1080 || img.height !== 1080) {
+              setIsOverDimensionsLogo(true)
+            } else {
+              setIsOverDimensionsLogo(false)
+            }
+          } else if (type === 'cover') {
+            if (img.width !== 2048 || img.height !== 2848) {
+              setIsOverDimensionsCover(true)
+            } else {
+              setIsOverDimensionsCover(false)
+            }
+          }
         }
       }
 
@@ -303,14 +432,22 @@ const FormSubmission = ({ dataSubmission }) => {
           </div>
         )}
         {dataSubmission.type_submission !== 'artist' ? (
-          <div className="border-4 border-dotted border-[#F5A1DB] mb-9 p-4 rounded-md md:mx-36 relative">
-            <h1 className="text-center font-bold text-3xl mb-2">
-              {dataSubmission.title}
-            </h1>
-            <p className="text-primary text-sm text-center whitespace-pre-line">
-              {dataSubmission.description}
-            </p>
-          </div>
+          <>
+            <div className="hidden md:block">
+              <img
+                src={`https://paras-cdn.imgix.net/bafybeigii7iy77byzjcpbvkq2gi7qiahwkjyn5sxljb6bb6mazffacdmsm`}
+                className="object-contain"
+                alt=""
+              />
+            </div>
+            <div className="block md:hidden">
+              <img
+                src={`https://paras-cdn.imgix.net/bafybeidcbu2aoell56amcz574idulbdeaveotdmmalaxngcgxk6zga2pie`}
+                className="object-contain"
+                alt=""
+              />
+            </div>
+          </>
         ) : (
           <div>
             <h1 className="text-center font-bold text-3xl mb-2">
@@ -321,32 +458,140 @@ const FormSubmission = ({ dataSubmission }) => {
             </p>
           </div>
         )}
-        <div className="max-w-3xl m-auto p-4 py-8">
-          <div className="mb-4">
-            <h4>
-              Read Submission Guideline{' '}
-              <a
-                href={`https://ipfs.fleek.co/ipfs/${dataSubmission.guideline}`}
-                target="_blank"
-                rel="noreferrer"
-                className="text-primary border-b-2 border-transparent cursor-pointer active:border-primary"
-              >
-                here
-              </a>
-            </h4>
+
+        {dataSubmission.type_submission !== 'artist' && (
+          <div className="mt-4 border-2 border-dashed border-primary flex max-w-6xl items-center justify-between rounded-md py-4 px-8">
+            <div className="mx-2">
+              <h4 className="font-semibold">
+                Read Submission Guideline{' '}
+                <a
+                  href={`https://ipfs.fleek.co/ipfs/${dataSubmission.guideline}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-primary border-b-2 border-transparent cursor-pointer active:border-primary hover:text-opacity-30 transition-all"
+                >
+                  here
+                </a>
+              </h4>
+            </div>
             {dataSubmission.type_submission !== 'artist' && (
-              <p className="text-justify mt-2 mb-6">
-                *Top 10 best submitted comics will be published in Paras Comic
-                for free
-              </p>
+              <div className="mx-2">
+                <h4 className="font-semibold">
+                  Having difficulties?{` `}
+                  <a
+                    href={`https://bit.ly/ParasComicDiscord`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-primary cursor-pointer transition-all hover:text-opacity-30"
+                  >
+                    Ask Our Team
+                  </a>
+                </h4>
+              </div>
             )}
           </div>
+        )}
+        <div
+          className={`max-w-3xl ${
+            dataSubmission.type_submission === 'artist' && `m-auto p-4`
+          } py-8`}
+        >
+          {dataSubmission.type_submission === 'artist' && (
+            <div className="mb-4">
+              <h4>
+                Read Submission Guideline{' '}
+                <a
+                  href={`https://ipfs.fleek.co/ipfs/${dataSubmission.guideline}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-primary border-b-2 border-transparent cursor-pointer active:border-primary hover:text-opacity-30 transition-all"
+                >
+                  here
+                </a>
+              </h4>
+            </div>
+          )}
           <FormProvider {...methods}>
             <form
               id="form-submission"
               onSubmit={handleSubmit(onSubmit)}
               method="post"
             >
+              {dataSubmission.type_submission !== 'artist' && (
+                <div className="md:flex justify-between">
+                  <div>
+                    <label className="font-bold text-md">Comic Logo</label>
+                    <div
+                      className={`relative cursor-pointer ${
+                        !logo && !logoPreview ? 'w-28 h-28 ' : 'w-52 h-52'
+                      } overflow-hidden rounded-md mt-2 hover:opacity-80`}
+                    >
+                      <input
+                        type="file"
+                        accept="image/*"
+                        {...register('logo', {
+                          required: true,
+                          onChange: (e) => inputFilecover(e, 'logo'),
+                        })}
+                        className="cursor-pointer w-full opacity-0 absolute inset-0 z-20"
+                      />
+                      <div
+                        className={`${
+                          !logo && !logoPreview ? 'w-28 h-28 ' : 'w-full h-full'
+                        } overflow-hidden bg-comic-gray-secondary shadow-inner relative input-text`}
+                      >
+                        <img
+                          src={logo === '' ? null : logoPreview}
+                          className={'w-full h-full object-cover cover-comic'}
+                          style={{ textIndent: '-10000px' }}
+                        />
+                        {!logo && !logoPreview && (
+                          <svg
+                            className="w-14 h-14 text-comic-gray-tertiary absolute inset-0 mx-auto my-auto"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                            ></path>
+                          </svg>
+                        )}
+                      </div>
+                    </div>
+                    {(formState.errors.logo ||
+                      errorMessageLogo ||
+                      isOverDimensionsLogo) && (
+                      <span
+                        className={`${
+                          !logoPreview ||
+                          errorMessageLogo ||
+                          isOverDimensionsLogo
+                            ? 'text-red-500'
+                            : 'hidden'
+                        }`}
+                      >
+                        {errorMessageLogo
+                          ? 'Image must be less than 10mb'
+                          : isOverDimensionsLogo
+                          ? 'The dimensions of the comic cover must be 1080 x 1080'
+                          : 'This field is required'}
+                      </span>
+                    )}
+                    <div>
+                      <p className="text-comic-gray-tertiary text-sm font-normal mt-4 mb-8">
+                        Image size must be 1080 x 1080, <br /> Image must be
+                        less than 10mb
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {dataSubmission.type_submission !== 'artist' && (
                 <div className="md:flex justify-between">
                   <div>
@@ -361,7 +606,7 @@ const FormSubmission = ({ dataSubmission }) => {
                         accept="image/*"
                         {...register('cover', {
                           required: true,
-                          onChange: inputFilecover,
+                          onChange: (e) => inputFilecover(e, 'cover'),
                         })}
                         className="cursor-pointer w-full opacity-0 absolute inset-0 z-20"
                       />
@@ -396,26 +641,39 @@ const FormSubmission = ({ dataSubmission }) => {
                       </div>
                     </div>
                     {(formState.errors.cover ||
-                      errorMessage ||
-                      isOverDimensions) && (
+                      errorMessageCover ||
+                      isOverDimensionsCover) && (
                       <span
                         className={`${
-                          !coverPreview || errorMessage || isOverDimensions
+                          !coverPreview ||
+                          errorMessageCover ||
+                          isOverDimensionsCover
                             ? 'text-red-500'
                             : 'hidden'
                         }`}
                       >
-                        {errorMessage
+                        {errorMessageCover
                           ? 'Image must be less than 10mb'
-                          : isOverDimensions
-                          ? 'The dimensions of the comic cover must be 640 x 890'
+                          : isOverDimensionsCover
+                          ? 'The dimensions of the comic cover must be 2048 x 2848'
                           : 'This field is required'}
                       </span>
                     )}
                     <div>
-                      <p className="text-comic-gray-tertiary text-sm font-normal mt-4 mb-8">
-                        Image size must be 640 x 890, <br /> Image must be less
-                        than 10mb
+                      <p className="mt-4 text-comic-gray-tertiary text-sm font-normal">
+                        Download our cover template{' '}
+                        <a
+                          href={`https://bit.ly/ParasChampionshipCover`}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-primary border-b-2 border-transparent cursor-pointer active:border-primary"
+                        >
+                          here
+                        </a>
+                      </p>
+                      <p className="text-comic-gray-tertiary text-sm font-normal mb-8">
+                        Image size must be 2048 x 2848, <br /> Image must be
+                        less than 10mb
                       </p>
                     </div>
                   </div>
@@ -437,28 +695,174 @@ const FormSubmission = ({ dataSubmission }) => {
                   )}
                 </div>
               </div>
+              {dataSubmission.type_submission !== 'artist' && (
+                <div className="md:flex justify-between gap-8 mt-8">
+                  <div className="mb-2">
+                    <label className="font-bold text-md">
+                      Comic Author's Name
+                    </label>
+                    <InputText
+                      label="name"
+                      register={register}
+                      required
+                      type="text"
+                      placeholder="Fullname"
+                      className="mt-3 mr-64"
+                    />
+                    {formState.errors.name && (
+                      <span className="text-red-500">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
+                </div>
+              )}
+              {dataSubmission.type_submission !== 'artist' && (
+                <div className="mt-8 mb-2">
+                  <label className="font-bold text-md">Email</label>
+                  <InputText
+                    label="email"
+                    register={register}
+                    required
+                    className="mt-3 md:w-96"
+                    placeholder="Please input your email"
+                    type="email"
+                    width="80"
+                  />
+                  {formState.errors.email && (
+                    <span className="text-red-500">This field is required</span>
+                  )}
+                </div>
+              )}
+              {dataSubmission.type_submission !== 'artist' && (
+                <div className="mt-8 mb-2">
+                  <label className="font-bold text-md">
+                    Mobile/Whatsapp Number
+                  </label>
+                  <p className="italic text-xs text-gray-400">628xxx</p>
+                  <InputText
+                    label="phone_number"
+                    register={register}
+                    className="mt-3 md:w-96"
+                    placeholder="Please input your phone number"
+                    type="phone_number"
+                    width="80"
+                  />
+                  {formState.errors.phone_number && (
+                    <span className="text-red-500">
+                      Use appropriate format number
+                    </span>
+                  )}
+                </div>
+              )}
+              {dataSubmission.type_submission !== 'artist' && (
+                <div className="block md:flex w-full items-start">
+                  <div className="mt-8 mb-2 w-full md:w-6/12 mr-2">
+                    <label className="font-bold text-md">Instagram</label>
+                    <p className="italic text-xs text-gray-400">
+                      https://instagram.com/username
+                    </p>
+                    <InputText
+                      label="instagram"
+                      register={register}
+                      className="mt-3 md:w-full"
+                      placeholder="username"
+                      type="instagram"
+                    />
+                    {formState.errors.instagram && (
+                      <span className="text-red-500">
+                        Use appropriate format link
+                      </span>
+                    )}
+                  </div>
+                  <div className="mt-8 mb-2 w-full md:w-6/12 mx-1">
+                    <label className="font-bold text-md">Twitter</label>
+                    <p className="italic text-xs text-gray-400">
+                      https://twitter.com/username
+                    </p>
+                    <InputText
+                      label="twitter"
+                      register={register}
+                      className="mt-3 md:w-full"
+                      placeholder="username"
+                      type="twitter"
+                    />
+                    {formState.errors.twitter && (
+                      <span className="text-red-500">
+                        Use appropriate format link
+                      </span>
+                    )}
+                  </div>
+                  <div className="mt-8 mb-2 w-full md:w-6/12 ml-2">
+                    <label className="font-bold text-md">Discord</label>
+                    <p className="italic text-xs text-gray-400">Username</p>
+                    <InputText
+                      label="discord"
+                      register={register}
+                      className="mt-3 md:w-full"
+                      placeholder="username"
+                      type="discord"
+                    />
+                  </div>
+                </div>
+              )}
+              {dataSubmission.type_submission === 'artist' && (
+                <div className="mt-8 mb-2">
+                  <label className="font-bold text-md">Email</label>
+                  <InputText
+                    label="email"
+                    register={register}
+                    required
+                    className="mt-3 md:w-96"
+                    placeholder="Please input your email"
+                    type="email"
+                    width="80"
+                  />
+                  {formState.errors.email && (
+                    <span className="text-red-500">This field is required</span>
+                  )}
+                </div>
+              )}
               <div className="md:flex justify-start gap-2 md:gap-20">
                 <InputDropdown
                   title="Genre"
                   ref={genreModalRef}
-                  data={genreList}
+                  data={
+                    dataSubmission.type_submission !== 'artist'
+                      ? genreList
+                          .filter(
+                            (genre) =>
+                              genre.genre_id === 'action' ||
+                              genre.genre_id === 'romance'
+                          )
+                          .map((genre) => ({
+                            ...genre,
+                            genre: `${genre.genre}-Fantasy`,
+                          }))
+                      : genreList
+                  }
                   register={register}
                   label="genre"
                   selectItem={setGenreSelect}
                   submit={isSubmit}
                 />
-                <InputDropdown
-                  title="Sub Genre"
-                  ref={subGenreModalRef}
-                  data={subGenreList}
-                  register={register}
-                  label="subgenre"
-                  selectItem={setSubGenreSelect}
-                  submit={isSubmit}
-                />
+                {dataSubmission.type_submission === 'artist' && (
+                  <InputDropdown
+                    title="Sub Genre"
+                    ref={subGenreModalRef}
+                    data={subGenreList}
+                    register={register}
+                    label="subgenre"
+                    selectItem={setSubGenreSelect}
+                    submit={isSubmit}
+                  />
+                )}
               </div>
               <div className="mt-8 mb-2">
                 <label className="font-bold text-md">Synopsis</label>
+                <p className="italic text-xs text-gray-400">
+                  Please input your synopsis with max 250 characters
+                </p>
                 <InputTextarea
                   label="synopsis"
                   register={register}
@@ -466,26 +870,47 @@ const FormSubmission = ({ dataSubmission }) => {
                   className="resize-none h-40 mt-3"
                   type="text"
                   placeholder="Synopsis of your comic"
+                  maxLength={250}
                 />
                 {formState.errors.synopsis && (
                   <span className="text-red-500">This field is required</span>
                 )}
               </div>
               <div className="mt-8 mb-2">
-                <label className="font-bold text-md">Email</label>
-                <InputText
-                  label="email"
+                <label className="font-bold text-md">Story Concept</label>
+                <p className="italic text-xs text-gray-400">
+                  Please input your full storyline from beginning to the end
+                  with no limited character
+                </p>
+                <InputTextarea
+                  label="story_concept_file"
                   register={register}
+                  className="resize-none h-40 mt-3"
+                  type="text"
+                  placeholder="Tell us your story concept"
                   required
-                  className="mt-3 md:w-96"
-                  placeholder="Please input your email"
-                  type="email"
-                  width="80"
                 />
-                {formState.errors.email && (
+                {formState.errors.story_concept_file && (
                   <span className="text-red-500">This field is required</span>
                 )}
               </div>
+              {dataSubmission.type_submission === 'artist' && (
+                <div className="mt-8 mb-2">
+                  <label className="font-bold text-md">Email</label>
+                  <InputText
+                    label="email"
+                    register={register}
+                    required
+                    className="mt-3 md:w-96"
+                    placeholder="Please input your email"
+                    type="email"
+                    width="80"
+                  />
+                  {formState.errors.email && (
+                    <span className="text-red-500">This field is required</span>
+                  )}
+                </div>
+              )}
               {dataSubmission.type_submission === 'artist' && (
                 <div className="mt-8 mb-2">
                   <label className="font-bold text-md">Link Portfolio</label>
@@ -508,9 +933,11 @@ const FormSubmission = ({ dataSubmission }) => {
                   <div className="flex gap-4 mt-8 mb-2">
                     <label className="font-bold text-md">
                       Upload File{' '}
-                      <span className="font-thin">
-                        (for your comic examples)
-                      </span>
+                      {dataSubmission.type_submission === 'artist' && (
+                        <span className="font-thin">
+                          (for your comic examples)
+                        </span>
+                      )}
                     </label>
                   </div>
                 </div>
@@ -602,11 +1029,19 @@ const FormSubmission = ({ dataSubmission }) => {
                   {formatBytes(sizeComic)} / 20 MB
                 </h4>
               </div>
-              {formState.errors.pages && (
+              {(formState.errors.pages || isOverDimensionsPage) && (
                 <span
-                  className={items.length !== 0 ? 'hidden ' : 'text-red-500'}
+                  className={
+                    dataSubmission.type_submission === 'artist'
+                      ? items.length !== 0
+                        ? 'hidden '
+                        : 'text-red-500'
+                      : `text-red-500`
+                  }
                 >
-                  This field is required
+                  {isOverDimensionsPage
+                    ? `The dimensions of each comic page must be 800 x 1000`
+                    : `This field is required`}
                 </span>
               )}
               {dataSubmission.type_submission === 'artist' && (

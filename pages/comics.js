@@ -72,7 +72,7 @@ const Comics = () => {
             dataLength={comics.length}
             next={fetchComics}
             hasMore={hasMore}
-            loader={<ComicListLoader />}
+            loader={<ComicListLoader size={comics.length === 0 ? 8 : 4} />}
           >
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 overflow-hidden">
               {comics.map((data, i) => (

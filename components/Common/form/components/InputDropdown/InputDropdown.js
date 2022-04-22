@@ -58,7 +58,7 @@ const InputDropdown = ({ title, label, ref, data, selectItem, submit }) => {
         </div>
       </div>
       {modal && (
-        <div className="justify-between items-center w-80 md:w-64 py-2 mt-2 bg-white shadow-lg rounded-lg absolute z-20 h-60 overflow-y-scroll">
+        <div className="justify-between items-center w-80 md:w-64 py-2 mt-2 bg-white shadow-lg rounded-lg absolute z-20 max-h-60 overflow-y-scroll">
           <div>
             <ul className="text-black w-full">
               {data.map((item, index) => {
