@@ -20,11 +20,7 @@ const ComicChampionship = () => {
   const [isFetching, setIsFetching] = useState(false)
   const [activeTab, setActiveTab] = useState('overview')
 
-  const isEmpty =
-    activeTab !== 'Action' &&
-    activeTab !== 'Romace' &&
-    activeTab !== 'overview' &&
-    comics.length === 0
+  const isEmpty = false
 
   useEffect(() => {
     if (
