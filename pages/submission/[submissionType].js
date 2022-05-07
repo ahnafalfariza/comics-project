@@ -223,6 +223,7 @@ const FormSubmission = ({ dataSubmission }) => {
         form.append('story_concept_file', data.story_concept_file)
       } else {
         form.append('portfolio_url', data.portfolio_url)
+        form.append('story_concept_file', data.story_concept_file)
       }
       form.append(
         'subgenre',
