@@ -17,6 +17,7 @@ import Layout from 'components/Common/Layout'
 import Head from 'components/Common/Head'
 import slug from 'slug'
 import { encodeImageToBlurhash } from 'lib/blurhash'
+import { sentryCaptureException } from 'lib/sentry'
 
 const FormSubmission = ({ dataSubmission }) => {
   const [cover, setCover] = useState('')
@@ -188,6 +189,7 @@ const FormSubmission = ({ dataSubmission }) => {
             return results.data
           })
           .catch((error) => {
+            sentryCaptureException(error)
             return error
           })
       } else {
@@ -199,6 +201,7 @@ const FormSubmission = ({ dataSubmission }) => {
             return results.data
           })
           .catch((error) => {
+            sentryCaptureException(error)
             return error
           })
       }
@@ -258,8 +261,12 @@ const FormSubmission = ({ dataSubmission }) => {
           return response.data
         })
         .catch((error) => {
+          const msg =
+            error.response?.data?.message ||
+            `Something wrong happened, please try again!`
+          sentryCaptureException(error)
           setLoading(false)
-          _showToast('error', 'Something wrong happened, please try again!')
+          _showToast('error', msg)
           return error
         })
     }
