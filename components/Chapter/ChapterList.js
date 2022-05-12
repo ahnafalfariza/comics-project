@@ -104,7 +104,9 @@ const ChapterList = ({
                 <h4 className={listBadgeStyle}>{textRight()}</h4>
               </div>
               {data.is_explicit && (
-                <p className="text-xs text-red-500 mt-2">Explicit Cntent</p>
+                <p className="text-xs text-red-500 mt-2 text-center">
+                  Explicit Cntent
+                </p>
               )}
             </div>
           </a>
