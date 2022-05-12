@@ -4,13 +4,14 @@ import { InputTextarea } from 'components/Common/form'
 import Head from 'components/Common/Head'
 import Layout from 'components/Common/Layout'
 import { encodeImageToBlurhash } from 'lib/blurhash'
+import { sentryCaptureException } from 'lib/sentry'
 import useStore from 'lib/store'
 import router from 'next/router'
 import { useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { useForm } from 'react-hook-form'
 import { MoonLoader } from 'react-spinners'
-import { postCoverComic, postPagesComic } from 'services/submission'
+import { postCoverComic } from 'services/submission'
 import { readFileAsUrl } from 'utils/common'
 
 const SubmissionChampionshipFinal = () => {
@@ -121,26 +122,30 @@ const SubmissionChampionshipFinal = () => {
     setLoading(true)
     window.scrollTo(0, 0)
     const cover = new FormData()
-    const pages = new FormData()
 
     cover.append('files', coverFile)
     const coverLink = await readFileAsUrl(coverFile)
     const blurhash = await encodeImageToBlurhash(coverLink)
 
-    data.pages.forEach((page) => {
-      pages.append('files', page.file)
-    })
+    try {
+      const resCover = await postCoverComic(cover)
+      const resPage = await axios.all(
+        data.pages.map((page) => {
+          const formData = new FormData()
+          formData.append('files', page.file)
+          return postCoverComic(formData)
+        })
+      )
 
-    await axios
-      .all([postCoverComic(cover), postPagesComic(pages)])
-      .then((results) => {
-        data.cover = results[0].data
-        data.pages = results[1].data
-        return results.data
-      })
-      .catch((error) => {
-        return error
-      })
+      data.cover = resCover.data
+      data.pages = resPage.map((res) => res.data)
+    } catch (error) {
+      const msg =
+        error.response?.data?.message ||
+        'Something wrong happened, please try again!'
+      _showToast('error', msg)
+      sentryCaptureException(error)
+    }
 
     const form = new FormData()
     form.append('cover', data.cover)
@@ -168,7 +173,11 @@ const SubmissionChampionshipFinal = () => {
       })
       .catch((error) => {
         setLoading(false)
-        _showToast('error', 'Something wrong happened, please try again!')
+        const msg =
+          error.response?.data?.message ||
+          'Something wrong happened, please try again!'
+        _showToast('error', msg)
+        sentryCaptureException(error)
         return error
       })
   }
