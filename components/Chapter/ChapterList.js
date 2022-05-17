@@ -100,12 +100,12 @@ const ChapterList = ({
               </h5>
             </div>
             <div>
-              <div className="flex justify-end">
+              <div className="flex md:justify-end">
                 <h4 className={listBadgeStyle}>{textRight()}</h4>
               </div>
               {data.is_explicit && (
                 <p className="text-xs text-red-500 mt-2 text-center">
-                  Explicit Cntent
+                  Explicit Content
                 </p>
               )}
             </div>
