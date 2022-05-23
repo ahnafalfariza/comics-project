@@ -1,5 +1,4 @@
 import Modal from 'components/Common/Modal'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 const ChapterNotAvailableModal = ({ show, onClose }) => {
