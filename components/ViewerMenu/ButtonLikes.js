@@ -50,7 +50,11 @@ const ButtonLikes = ({ comicId, chapterId, isLoading }) => {
 
   return (
     <>
-      <LoginModal show={showLogin} onClose={() => setShowLogin(false)} />
+      <LoginModal
+        title="Login to like this chapter"
+        show={showLogin}
+        onClose={() => setShowLogin(false)}
+      />
       <Button
         className="flex items-center mr-8"
         size="md"
