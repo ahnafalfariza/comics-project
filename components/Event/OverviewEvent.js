@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 const OverviewEvent = () => {
   const [activeTab, setActiveTab] = useState('roadmap')
-  const [activeLang, setActiveLang] = useState('en')
+  const [activeLang, setActiveLang] = useState('id')
 
   const contentTab = () => {
     if (activeTab === 'roadmap') {

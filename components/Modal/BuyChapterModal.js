@@ -13,6 +13,7 @@ import { IconXCircle } from 'components/Icons'
 import { parseImgUrl } from 'utils/common'
 import LoginModal from 'components/Modal/LoginModal'
 import Link from 'next/link'
+import ExplicitContentModal from './ExplicitContentModal'
 
 const BuyChapterModal = ({
   data = {
@@ -52,6 +53,7 @@ const BuyChapterModal = ({
   const router = useRouter()
   const buyChapter = useStore((state) => state.buyChapter)
   const [showLogin, setShowLogin] = useState(false)
+  const [showExpWarning, setShowExpWarning] = useState(false)
 
   const onClickPreview = () => {
     router.push({
@@ -128,6 +130,11 @@ const BuyChapterModal = ({
                     <p className="text-2xl text-black">
                       {data.metadata.subtitle}
                     </p>
+                    {data.is_explicit && (
+                      <p className="absolute right-0 top-0 p-4 text-xs text-red-500 mt-2">
+                        Explicit Content
+                      </p>
+                    )}
                     <p className="text-black mt-4 text-sm mb-6">
                       {data.metadata.description}
                     </p>
@@ -140,7 +147,11 @@ const BuyChapterModal = ({
                             <Button
                               size="md"
                               isFullWidth
-                              onClick={onClickReadNow}
+                              onClick={() =>
+                                data.is_explicit
+                                  ? setShowExpWarning(true)
+                                  : onClickReadNow()
+                              }
                             >
                               Read Now
                             </Button>
@@ -202,6 +213,11 @@ const BuyChapterModal = ({
           </div>
         </div>
       </Modal>
+      <ExplicitContentModal
+        onClickYes={onClickReadNow}
+        onClose={() => setShowExpWarning(false)}
+        show={showExpWarning}
+      />
       <LoginModal onClose={() => setShowLogin(false)} show={showLogin} />
     </>
   )

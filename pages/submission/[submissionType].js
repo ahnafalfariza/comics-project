@@ -5,18 +5,14 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { FormProvider, useForm } from 'react-hook-form'
 import { MoonLoader } from 'react-spinners'
-import {
-  getGenres,
-  getSubGenres,
-  postCoverComic,
-  postPagesComic,
-} from 'services/submission'
+import { getGenres, getSubGenres, postCoverComic } from 'services/submission'
 import { parseImgUrl, readFileAsUrl } from 'utils/common'
 import { InputDropdown } from '../../components/Common/form/components/InputDropdown'
 import Layout from 'components/Common/Layout'
 import Head from 'components/Common/Head'
 import slug from 'slug'
 import { encodeImageToBlurhash } from 'lib/blurhash'
+import { sentryCaptureException } from 'lib/sentry'
 
 const FormSubmission = ({ dataSubmission }) => {
   const [cover, setCover] = useState('')
@@ -176,32 +172,27 @@ const FormSubmission = ({ dataSubmission }) => {
 
       if (dataSubmission.type_submission !== 'artist') {
         await axios
-          .all([
-            postCoverComic(cover),
-            postPagesComic(pages),
-            postCoverComic(logo),
-          ])
+          .all([postCoverComic(cover), postCoverComic(logo)])
           .then((results) => {
             data.cover = results[0].data
-            data.pages = results[1].data
-            data.logo = results[2].data
+            data.logo = results[1].data
             return results.data
           })
           .catch((error) => {
-            return error
-          })
-      } else {
-        await axios
-          .all([postPagesComic(pages)])
-          .then((results) => {
-            data.pages = results[0].data
-
-            return results.data
-          })
-          .catch((error) => {
+            sentryCaptureException(error)
             return error
           })
       }
+
+      const resPage = await axios.all(
+        data.pages.map((page) => {
+          const formData = new FormData()
+          formData.append('files', page.file)
+          return postCoverComic(formData)
+        })
+      )
+
+      data.pages = resPage.map((res) => res.data)
 
       const form = new FormData()
       form.append('type_submission', dataSubmission.type_submission)
@@ -258,8 +249,12 @@ const FormSubmission = ({ dataSubmission }) => {
           return response.data
         })
         .catch((error) => {
+          const msg =
+            error.response?.data?.message ||
+            `Something wrong happened, please try again!`
+          sentryCaptureException(error)
           setLoading(false)
-          _showToast('error', 'Something wrong happened, please try again!')
+          _showToast('error', msg)
           return error
         })
     }
