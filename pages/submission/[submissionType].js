@@ -901,23 +901,6 @@ const FormSubmission = ({ dataSubmission }) => {
               </div>
               {dataSubmission.type_submission === 'artist' && (
                 <div className="mt-8 mb-2">
-                  <label className="font-bold text-md">Email</label>
-                  <InputText
-                    label="email"
-                    register={register}
-                    required
-                    className="mt-3 md:w-96"
-                    placeholder="Please input your email"
-                    type="email"
-                    width="80"
-                  />
-                  {formState.errors.email && (
-                    <span className="text-red-500">This field is required</span>
-                  )}
-                </div>
-              )}
-              {dataSubmission.type_submission === 'artist' && (
-                <div className="mt-8 mb-2">
                   <label className="font-bold text-md">Link Portfolio</label>
                   <InputText
                     label="portfolio_url"
