@@ -40,7 +40,7 @@ const FormSubmission = ({ dataSubmission }) => {
 
   const setToastConfig = useStore((state) => state.setToastConfig)
 
-  const _showToast = (type, msg) => {
+  const _showToast = (type, msg, duration = 2500) => {
     setToastConfig({
       text: (
         <div
@@ -52,7 +52,7 @@ const FormSubmission = ({ dataSubmission }) => {
         </div>
       ),
       type: type,
-      duration: 2500,
+      duration: duration,
     })
   }
 
@@ -100,9 +100,9 @@ const FormSubmission = ({ dataSubmission }) => {
     data.pages = items
     data.logo = logo
     const checkSizeofFile = formatBytes(sizeComic).props.children > 20.0
-    const checkNumberOfFile = items.length > 100
+    const checkNumberOfFile = items.length > 200
 
-    const errorCheckNumberOfFile = 'The maximum number of files is 100.'
+    const errorCheckNumberOfFile = 'The maximum number of files is 200.'
     const errorCheckSizeOfFile = 'The maximum number of sizes is 20 MB'
     const errorCheckDimensionsOfPage =
       'The dimensions of each comic page must be 800 x 1000'
@@ -244,7 +244,8 @@ const FormSubmission = ({ dataSubmission }) => {
           setLoading(false)
           _showToast(
             'success',
-            "Thank you for your interest, We'll be in touch!"
+            "Thank you for your interest, We'll be in touch!",
+            null
           )
           return response.data
         })
@@ -254,7 +255,7 @@ const FormSubmission = ({ dataSubmission }) => {
             `Something wrong happened, please try again!`
           sentryCaptureException(error)
           setLoading(false)
-          _showToast('error', msg)
+          _showToast('error', msg, null)
           return error
         })
     }
@@ -946,12 +947,12 @@ const FormSubmission = ({ dataSubmission }) => {
                     {' '}
                     <span
                       className={
-                        items.length > 100 ? 'text-red-500' : 'text-primary'
+                        items.length > 200 ? 'text-red-500' : 'text-primary'
                       }
                     >
                       {items.length}
                     </span>{' '}
-                    / 100
+                    / 200
                   </h4>
                   <label>
                     <input
