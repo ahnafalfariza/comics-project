@@ -3,11 +3,11 @@ import { useRouter } from 'next/router'
 import Token from 'components/Token/Token'
 import { nFormatter } from '../../utils/common'
 
-const ComicMostLiked = ({ data, key }) => {
+const ComicMostLiked = ({ data }) => {
   const router = useRouter()
 
   return (
-    <div key={key} className="block md:flex md:flex-row md:w-full">
+    <div className="block md:flex md:flex-row md:w-full">
       <div
         className="w-full cursor-pointer hover:opacity-90 transition ease-in-out duration-300 md:w-1/2"
         onClick={() => router.push(`/comics/${data.comic_id}/chapter`)}

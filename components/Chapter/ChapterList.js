@@ -99,7 +99,16 @@ const ChapterList = ({
                 {parseDate(data.metadata.issued_at)}
               </h5>
             </div>
-            <h4 className={listBadgeStyle}>{textRight()}</h4>
+            <div>
+              <div className="flex md:justify-end">
+                <h4 className={listBadgeStyle}>{textRight()}</h4>
+              </div>
+              {data.is_explicit && (
+                <p className="text-xs text-red-500 mt-2 text-center">
+                  Explicit Content
+                </p>
+              )}
+            </div>
           </a>
         </Link>
       </div>

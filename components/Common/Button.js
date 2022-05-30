@@ -10,6 +10,7 @@ const Button = ({
   className,
   style,
   onClick,
+  type,
 }) => {
   const buttonBaseStyle =
     'inline-block text-center relative whitespace-nowrap rounded-full font-medium text-body'
@@ -65,6 +66,7 @@ const Button = ({
 
   return (
     <button
+      type={type}
       disabled={isDisabled}
       className={buttonStyle}
       style={style}

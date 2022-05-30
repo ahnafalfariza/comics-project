@@ -87,9 +87,10 @@ const ChapterView = ({ isLoading, chapterInfo }) => {
         chapterData.lang[lang],
         comicId,
         chapterId,
-        chapterData.is_locked
+        chapterData.is_locked && chapterData?.price !== '0'
       )
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chapterData, activeLang])
 
   useEffect(() => {
@@ -163,11 +164,13 @@ const ChapterView = ({ isLoading, chapterInfo }) => {
       </div>
       <div className="mt-8 mx-4">
         <div className="flex items-center justify-center">
-          <ButtonLikes
-            chapterId={chapterId}
-            comicId={comicId}
-            isLoading={isLoading}
-          />
+          {chapterData?.type !== 'championship' && (
+            <ButtonLikes
+              chapterId={chapterId}
+              comicId={comicId}
+              isLoading={isLoading}
+            />
+          )}
           <div>
             <div>Share Now</div>
             <ShareComponent
