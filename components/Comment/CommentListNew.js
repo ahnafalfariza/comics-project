@@ -3,9 +3,6 @@ import Button from 'components/Common/Button'
 import { InputTextarea } from 'components/Common/form'
 import useStore from 'lib/store'
 import React, { useEffect, useState } from 'react'
-import Scrollbars from 'react-custom-scrollbars-2'
-import InfiniteScroll from 'react-infinite-scroll-component'
-import CommentsLoader from './CommentsLoader'
 import { useRouter } from 'next/router'
 import Avatar from 'components/Common/Avatar'
 import { parseImgUrl } from 'utils/common'
@@ -13,24 +10,35 @@ import { formatTimeAgo } from 'utils/dateHelper'
 import near from 'lib/near'
 import { IconThumbDown, IconThumbUp } from 'components/Icons'
 import CommentDeleteModal from './CommentDeleteModal'
+import CommentsLoader from './CommentsLoader'
+
+const LIMIT = 4
+const SKIP = 0
 
 const CommentListNew = () => {
   const [commentText, setCommentText] = useState('')
 
   const [sortedBy, setSortedBy] = useState('newest')
   const [showSortByModal, setShowSortByModal] = useState(false)
+  const [skip, setSkip] = useState(SKIP)
   const commentData = useStore((state) => state.commentData)
   const fetchCommentData = useStore((state) => state.fetchCommentData)
+  const setResetCommentData = useStore((state) => state.setResetCommentData)
+  const loadingComment = useStore((state) => state.loadingComment)
   const postComment = useStore((state) => state.postComment)
   const clearCommentData = useStore((state) => state.clearCommentData)
+  const commentDataHasMore = useStore((store) => store.commentDataHasMore)
+  const setResetCommentDataHasMore = useStore(
+    (store) => store.setResetCommentDataHasMore
+  )
   const currentUser = useStore((state) => state.currentUser)
 
   const router = useRouter()
   const { comicId, chapterId } = router.query
 
   useEffect(() => {
-    fetchCommentData(comicId, chapterId, sortedBy)
-  }, [chapterId, comicId, fetchCommentData, sortedBy])
+    fetchCommentData(comicId, chapterId, sortedBy, LIMIT, skip)
+  }, [chapterId, comicId, fetchCommentData, sortedBy, skip])
 
   useEffect(() => {
     return () => clearCommentData()
@@ -92,6 +100,9 @@ const CommentListNew = () => {
               <div
                 className="p-1 rounded-t-md md:p-2 hover:bg-gray-200 transition-all cursor-pointer text-sm font-semibold"
                 onClick={() => {
+                  setResetCommentData()
+                  setSkip(0)
+                  setResetCommentDataHasMore()
                   setSortedBy('newest')
                   setShowSortByModal(false)
                 }}
@@ -101,6 +112,9 @@ const CommentListNew = () => {
               <div
                 className="p-1 rounded-b-md md:p-2 hover:bg-gray-200 transition-all cursor-pointer text-sm font-semibold"
                 onClick={() => {
+                  setResetCommentData()
+                  setSkip(0)
+                  setResetCommentDataHasMore()
                   setSortedBy('top')
                   setShowSortByModal(false)
                 }}
@@ -110,32 +124,35 @@ const CommentListNew = () => {
             </div>
           )}
         </div>
-        <Scrollbars
-          className="h-full"
-          universal={true}
-          renderView={(props) => <div {...props} id="activityListScroll"></div>}
-        >
-          {commentData.length !== 0 ? (
-            <InfiniteScroll
-              dataLength={commentData.length}
-              next={() => fetchCommentData(comicId, chapterId, sortedBy)}
-              hasMore={false}
-              loader={<CommentsLoader />}
-            >
-              {commentData.map((data) => (
-                <CommentNew
-                  key={data.comment_id}
-                  data={data}
-                  commentData={commentData}
-                />
-              ))}
-            </InfiniteScroll>
-          ) : (
-            <div className="p-4 text-black text-center">
-              Be the first to comment
+        {loadingComment ? (
+          <CommentsLoader />
+        ) : commentData.length !== 0 ? (
+          <div className="flex flex-col mb-8">
+            {commentData.map((data) => (
+              <CommentNew
+                key={data.comment_id}
+                data={data}
+                commentData={commentData}
+              />
+            ))}
+            <div className="flex items-center justify-center">
+              {commentDataHasMore && (
+                <div
+                  className="p-2 rounded-md border border-black cursor-pointer text-black text-sm font-semibold bg-white hover:bg-gray-100 w-2/12 text-center"
+                  onClick={() => {
+                    setSkip((prev) => prev + LIMIT)
+                  }}
+                >
+                  More
+                </div>
+              )}
             </div>
-          )}
-        </Scrollbars>
+          </div>
+        ) : (
+          <div className="p-4 text-black text-center">
+            Be the first to comment
+          </div>
+        )}
       </div>
     </div>
   )
