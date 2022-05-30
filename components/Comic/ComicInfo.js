@@ -84,7 +84,7 @@ const ComicInfo = ({
         <Tabs defaultIndex={defaultIndex} onTabsChange={onTabsChange}>
           <TabList>
             <Tab>Chapter</Tab>
-            <Tab>Collectibles</Tab>
+            <Tab>{data.type !== 'championship' ? 'Collectibles' : ''}</Tab>
           </TabList>
         </Tabs>
       </div>
