@@ -14,6 +14,7 @@ import ChapterNotAvailableModal from 'components/Modal/ChapterNotAvailableModal'
 import ShareComponent from 'components/Common/ShareComponent'
 import ButtonLikes from 'components/ViewerMenu/ButtonLikes'
 import { parseImgUrl } from 'utils/common'
+import CommentListNew from 'components/Comment/CommentListNew'
 
 const ChapterView = ({ isLoading, chapterInfo }) => {
   const menuTopRef = useRef()
@@ -26,6 +27,7 @@ const ChapterView = ({ isLoading, chapterInfo }) => {
   const [chapterPageUrl, setChapterPageUrl] = useState([])
   const [hasNext, setHasNext] = useState(null)
   const [activeLang, setActiveLang] = useState('en')
+  const [delayCommentListNew, setDelayCommentListNew] = useState(true)
 
   const showComment = useStore((state) => state.showComment)
 
@@ -90,6 +92,12 @@ const ChapterView = ({ isLoading, chapterInfo }) => {
     }
   }, [chapterData, activeLang])
 
+  useEffect(() => {
+    setTimeout(() => {
+      setDelayCommentListNew(false)
+    }, 500)
+  })
+
   const fetchChapterData = async (comicId, chapterId) => {
     const response = await axios.get(`${process.env.COMIC_API_URL}/chapters`, {
       params: {
@@ -135,7 +143,6 @@ const ChapterView = ({ isLoading, chapterInfo }) => {
         data={chapterData}
         hideCloseButton={true}
       />
-      <CommentListModal />
       <MenuTop
         ref={menuTopRef}
         showMenu={showMenu}
@@ -154,7 +161,7 @@ const ChapterView = ({ isLoading, chapterInfo }) => {
           <ChapterImagePage key={url} url={url} />
         ))}
       </div>
-      <div className="mt-8 mb-20 mx-4">
+      <div className="mt-8 mx-4">
         <div className="flex items-center justify-center">
           <ButtonLikes
             chapterId={chapterId}
@@ -176,6 +183,11 @@ const ChapterView = ({ isLoading, chapterInfo }) => {
           </div>
         </div>
       </div>
+      {!delayCommentListNew && (
+        <div className="mt-8 mb-20 mx-4">
+          <CommentListNew />
+        </div>
+      )}
     </Layout>
   )
 }

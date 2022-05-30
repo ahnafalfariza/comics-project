@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 
-import { IconChevron, IconGift, IconMessageCircle } from 'components/Icons'
+import { IconChevron, IconGift } from 'components/Icons'
 
 import near from 'lib/near'
 import useStore from 'lib/store'
@@ -16,7 +16,6 @@ const MenuBottom = forwardRef(
     ref
   ) => {
     const buyChapter = useStore((state) => state.buyChapter)
-    const setShowComment = useStore((state) => state.setShowComment)
     const router = useRouter()
 
     const textRight = () => {
@@ -77,13 +76,6 @@ const MenuBottom = forwardRef(
                       <p className="text-black ml-2 text-sm">Support</p>
                     </div>
                   )}
-                  <div
-                    className="flex items-center cursor-pointer"
-                    onClick={setShowComment}
-                  >
-                    <IconMessageCircle size={20} color="#000000" />
-                    <p className="text-black ml-2 text-sm">Comment</p>
-                  </div>
                 </div>
                 <div className="flex items-center space-x-2">
                   <IconChevron
