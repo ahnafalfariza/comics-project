@@ -71,9 +71,11 @@ const TabInfo = ({ localToken, isNFT }) => {
               onClick={() => setShowModal('royalty')}
             >
               <p className="text-black font-semibold">
-                {Object.keys(localToken.royalty).length !== 0
-                  ? `${Object.values(localToken.royalty)[0] / 100} %`
-                  : `None`}
+                {Object.values(localToken.royalty).reduce(
+                  (a, b) => parseInt(a) + parseInt(b),
+                  0
+                ) / 100}
+                %
               </p>
               <div className="pl-1 pb-0.5">
                 <svg
