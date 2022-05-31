@@ -26,7 +26,8 @@ const ComicChampionship = () => {
     if (
       activeTab === 'all' ||
       activeTab === 'Action' ||
-      activeTab === 'Romance'
+      activeTab === 'Romance' ||
+      activeTab === 'finalist'
     ) {
       fetchComics(true, activeTab)
     }
@@ -47,15 +48,22 @@ const ComicChampionship = () => {
       return
     }
 
+    const params = {
+      __sort: '_id::1',
+      __skip: _page * FETCH_COMICS_LIMIT,
+      __limit: FETCH_COMICS_LIMIT,
+      type: 'championship',
+      genre: _genre,
+    }
+
+    if (genre === 'finalist') {
+      delete params.genre
+      params.is_final_round = true
+    }
+
     setIsFetching(true)
     const response = await axios.get(`${process.env.COMIC_API_URL}/comics`, {
-      params: {
-        __sort: '_id::1',
-        __skip: _page * FETCH_COMICS_LIMIT,
-        __limit: FETCH_COMICS_LIMIT,
-        type: 'championship',
-        genre: _genre,
-      },
+      params,
     })
     const newData = response.data.data
     const newChapters = [..._comics, ...newData.results]
@@ -163,10 +171,10 @@ const ComicChampionship = () => {
           </div>
           <div>
             <p
-              className={`cursor-not-allowed opacity-50 ${
+              className={`cursor-pointer ${
                 activeTab === 'finalist' ? 'font-bold' : ''
               }`}
-              onClick={() => null}
+              onClick={() => onChangeTab('finalist')}
             >
               Finalist
             </p>

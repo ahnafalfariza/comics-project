@@ -166,7 +166,11 @@ const TokenSeriesDetail = ({ token, className }) => {
             </div>
           </Scrollbars>
           <div className="p-3">
-            {isOwned && isOwned === 'not_owned' && (
+            {isOwned && isOwned === 'owned' ? (
+              <Button onClick={onClickRead} isFullWidth>
+                Read
+              </Button>
+            ) : (
               <Button
                 isDisabled={!token.price}
                 onClick={onClickBuy}
@@ -179,11 +183,6 @@ const TokenSeriesDetail = ({ token, className }) => {
                   : token.is_non_mintable
                   ? 'Sold Out'
                   : 'Coming Soon'}
-              </Button>
-            )}
-            {isOwned && isOwned === 'owned' && (
-              <Button onClick={onClickRead} isFullWidth>
-                Read
               </Button>
             )}
           </div>
