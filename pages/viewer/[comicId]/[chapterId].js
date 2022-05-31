@@ -14,6 +14,8 @@ import ShareComponent from 'components/Common/ShareComponent'
 import ButtonLikes from 'components/ViewerMenu/ButtonLikes'
 import { parseImgUrl } from 'utils/common'
 import CommentListNew from 'components/Comment/CommentListNew'
+import LoginModal from 'components/Modal/LoginModal'
+import near from 'lib/near'
 
 const ChapterView = ({ isLoading, chapterInfo }) => {
   const menuTopRef = useRef()
@@ -138,11 +140,18 @@ const ChapterView = ({ isLoading, chapterInfo }) => {
           Object.keys(chapterData.lang).length === 0
         }
       />
-      <BuyChapterModal
-        active={chapterData?.status !== 'read' || false}
-        data={chapterData}
-        hideCloseButton={true}
-      />
+      {chapterData && !near.currentUser ? (
+        <LoginModal
+          show={chapterData?.status !== 'read' || false}
+          hideCloseButton={true}
+        />
+      ) : chapterData && chapterData?.status !== 'read' ? (
+        <BuyChapterModal
+          active={chapterData?.status !== 'read' || false}
+          data={chapterData}
+          hideCloseButton={true}
+        />
+      ) : null}
       <MenuTop
         ref={menuTopRef}
         showMenu={showMenu}
