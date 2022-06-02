@@ -37,7 +37,7 @@ const ComicChampionship = () => {
     fetchComics(true, '')
   }, [])
 
-  const fetchComics = async (fromStart = false, genre) => {
+  const fetchComics = async (fromStart = false, genre = activeTab) => {
     const _hasMore = fromStart ? true : hasMore
     const _page = fromStart ? 0 : page
     const _comics = fromStart ? [] : comics
