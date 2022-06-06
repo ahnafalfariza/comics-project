@@ -25,6 +25,7 @@ const CommentListNew = () => {
   const fetchCommentData = useStore((state) => state.fetchCommentData)
   const setResetCommentData = useStore((state) => state.setResetCommentData)
   const loadingComment = useStore((state) => state.loadingComment)
+  const loadingResetComment = useStore((state) => state.loadingResetComment)
   const postComment = useStore((state) => state.postComment)
   const clearCommentData = useStore((state) => state.clearCommentData)
   const commentDataHasMore = useStore((store) => store.commentDataHasMore)
@@ -124,7 +125,7 @@ const CommentListNew = () => {
             </div>
           )}
         </div>
-        {loadingComment ? (
+        {loadingResetComment ? (
           <CommentsLoader />
         ) : commentData.length !== 0 ? (
           <div className="flex flex-col mb-8">
@@ -138,12 +139,14 @@ const CommentListNew = () => {
             <div className="flex items-center justify-center">
               {commentDataHasMore && (
                 <div
-                  className="p-2 rounded-md border border-black cursor-pointer text-black text-sm font-semibold bg-white hover:bg-gray-100 w-2/12 text-center"
+                  className={`p-2 rounded-md border border-black cursor-pointer text-black text-sm font-semibold bg-white hover:bg-gray-100 w-2/12 text-center ${
+                    loadingComment && `pointer-events-none`
+                  }`}
                   onClick={() => {
                     setSkip((prev) => prev + LIMIT)
                   }}
                 >
-                  More
+                  {loadingComment ? `Loading...` : `More`}
                 </div>
               )}
             </div>
