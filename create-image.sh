@@ -25,12 +25,6 @@ if [ ! $? -eq 0 ]; then
 	exit
 fi
 
-if ([ ! -e ".sentryclirc" ])
-  then
-	echo "errors.file .sentryclirc is not exist"
-	exit
-fi
-
 CURRENT_BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
 LAST_COMMIT=$(git rev-parse HEAD)
 GIT_STATUS=$(git status -s)
