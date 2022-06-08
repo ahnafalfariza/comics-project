@@ -1,10 +1,6 @@
 name: Build and Deploy 
 on:
   workflow_call:
-    inputs: 
-      BUILD_ENV:
-        required: true
-
     secrets:
       IMAGE:
         required: true
@@ -53,7 +49,7 @@ jobs:
         GKE_DEPLOYMENT_NAME: ${{ secrets.GKE_DEPLOYMENT_NAME }}
         GKE_NAMESPACE: ${{ secrets.GKE_NAMESPACE }}
       run: |-
-        kubectl get configmap "config-${PROJECT}-${BUILD_ENV}" -n $GKE_NAMESPACE -o go-template='{{range $k,$v := .data}}{{printf "%s=" $k}}{{if not $v}}{{$v}}{{else}}{{$v}}{{end}}{{"\n"}}{{end}}' > .env.temp
+        kubectl get configmap "config-${GKE_DEPLOYMENT_NAME}" -n $GKE_NAMESPACE -o go-template='{{range $k,$v := .data}}{{printf "%s=" $k}}{{if not $v}}{{$v}}{{else}}{{$v}}{{end}}{{"\n"}}{{end}}' > .env.temp
 
     - name: Build
       env: 

@@ -9,8 +9,6 @@ jobs:
     if: ${{ github.ref == 'refs/heads/develop' }}
     needs: build-image 
     uses: ./.github/workflows/build_and_deploy.yml 
-    with:
-      BUILD_ENV: develop
     secrets:
       IMAGE: ${{ secrets.IMAGE }}
       GKE_DEPLOYMENT_NAME: ${{ secrets.GKE_DEPLOYMENT_NAME_DEVELOP }}
