@@ -34,6 +34,7 @@ const CommentListNew = () => {
     (store) => store.setResetCommentDataHasMore
   )
   const currentUser = useStore((state) => state.currentUser)
+  const [loginModalText, setLoginModalText] = useState(null)
 
   const router = useRouter()
   const { comicId, chapterId } = router.query
@@ -63,10 +64,14 @@ const CommentListNew = () => {
           <Button
             size="sm"
             className="float-right w-2/12 mx-1"
-            isDisabled={
-              commentText === '' || currentUser?.accountId === undefined
-            }
-            onClick={() => postComment(commentText, () => setCommentText(''))}
+            isDisabled={commentText === ''}
+            onClick={() => {
+              if (currentUser?.accountId === undefined) {
+                setLoginModalText('Login to leave a comment')
+                return
+              }
+              postComment(commentText, () => setCommentText(''))
+            }}
           >
             Post
           </Button>
@@ -134,7 +139,9 @@ const CommentListNew = () => {
               <CommentNew
                 key={data.comment_id}
                 data={data}
-                commentData={commentData}
+                showLoginModal={() =>
+                  setLoginModalText('Login to like this comment')
+                }
               />
             ))}
             <div className="flex items-center justify-center">
@@ -157,18 +164,22 @@ const CommentListNew = () => {
             Be the first to comment
           </div>
         )}
+        <LoginModal
+          show={loginModalText !== null}
+          onClose={() => setLoginModalText(null)}
+          title={loginModalText}
+        />
       </div>
     </div>
   )
 }
 
-const CommentNew = ({ data }) => {
+const CommentNew = ({ data, showLoginModal }) => {
   const [userLikes, setUserLikes] = useState(data?.user_likes)
   const [numLikes, setNumLikes] = useState(data?.likes)
   const [numDislikes, setNumDislikes] = useState(data?.dislikes)
   const [userData, setUserData] = useState({})
   const [showDeleteCommentModal, setShowDeleteCommentModal] = useState(false)
-  const [showLogin, setShowLogin] = useState(false)
 
   const likeComment = useStore((state) => state.likeComment)
   const dislikeComment = useStore((state) => state.dislikeComment)
@@ -189,7 +200,7 @@ const CommentNew = ({ data }) => {
 
   const _likeAction = () => {
     if (currentUser?.accountId === undefined) {
-      setShowLogin(true)
+      showLoginModal()
       return
     }
     setUserLikes(userLikes === 'likes' ? null : 'likes')
@@ -200,7 +211,7 @@ const CommentNew = ({ data }) => {
 
   const _dislikeAction = () => {
     if (currentUser?.accountId === undefined) {
-      setShowLogin(true)
+      showLoginModal()
       return
     }
     setUserLikes(userLikes === 'dislikes' ? null : 'dislikes')
@@ -289,7 +300,6 @@ const CommentNew = ({ data }) => {
         onClick={() => deleteComment(data?.comment_id, comicId, chapterId)}
         onClose={() => setShowDeleteCommentModal(false)}
       />
-      <LoginModal show={showLogin} onClose={() => setShowLogin(false)} />
     </div>
   )
 }
