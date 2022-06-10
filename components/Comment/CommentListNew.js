@@ -11,6 +11,7 @@ import near from 'lib/near'
 import { IconThumbDown, IconThumbUp } from 'components/Icons'
 import CommentDeleteModal from './CommentDeleteModal'
 import CommentsLoader from './CommentsLoader'
+import LoginModal from 'components/Modal/LoginModal'
 
 const LIMIT = 4
 const SKIP = 0
@@ -139,7 +140,7 @@ const CommentListNew = () => {
             <div className="flex items-center justify-center">
               {commentDataHasMore && (
                 <div
-                  className={`p-2 rounded-md border border-black cursor-pointer text-black text-sm font-semibold bg-white hover:bg-gray-100 w-2/12 text-center ${
+                  className={`p-2 rounded-md border border-black cursor-pointer text-black text-sm font-semibold bg-white hover:bg-gray-100 w-2/12 text-center mb-4 ${
                     loadingComment && `pointer-events-none`
                   }`}
                   onClick={() => {
@@ -167,10 +168,12 @@ const CommentNew = ({ data }) => {
   const [numDislikes, setNumDislikes] = useState(data?.dislikes)
   const [userData, setUserData] = useState({})
   const [showDeleteCommentModal, setShowDeleteCommentModal] = useState(false)
+  const [showLogin, setShowLogin] = useState(false)
 
   const likeComment = useStore((state) => state.likeComment)
   const dislikeComment = useStore((state) => state.dislikeComment)
   const deleteComment = useStore((state) => state.deleteComment)
+  const currentUser = useStore((state) => state.currentUser)
   const router = useRouter()
   const { comicId, chapterId } = router.query
 
@@ -185,6 +188,10 @@ const CommentNew = ({ data }) => {
   }, [data?.account_id])
 
   const _likeAction = () => {
+    if (currentUser?.accountId === undefined) {
+      setShowLogin(true)
+      return
+    }
     setUserLikes(userLikes === 'likes' ? null : 'likes')
     setNumLikes(userLikes === 'likes' ? numLikes - 1 : numLikes + 1)
     setNumDislikes(userLikes === 'dislikes' ? numDislikes - 1 : numDislikes)
@@ -192,6 +199,10 @@ const CommentNew = ({ data }) => {
   }
 
   const _dislikeAction = () => {
+    if (currentUser?.accountId === undefined) {
+      setShowLogin(true)
+      return
+    }
     setUserLikes(userLikes === 'dislikes' ? null : 'dislikes')
     setNumDislikes(userLikes === 'dislikes' ? numDislikes - 1 : numDislikes + 1)
     setNumLikes(userLikes === 'likes' ? numLikes - 1 : numLikes)
@@ -278,6 +289,7 @@ const CommentNew = ({ data }) => {
         onClick={() => deleteComment(data?.comment_id, comicId, chapterId)}
         onClose={() => setShowDeleteCommentModal(false)}
       />
+      <LoginModal show={showLogin} onClose={() => setShowLogin(false)} />
     </div>
   )
 }
