@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from 'react'
 import Layout from 'components/Common/Layout'
 import MenuTop from 'components/ViewerMenu/MenuTop'
 import MenuBottom from 'components/ViewerMenu/MenuBottom'
-import CommentListModal from 'components/Comment/CommentListModal'
 import useStore from 'lib/store'
 import axios from 'axios'
 import { useRouter } from 'next/router'
@@ -14,6 +13,9 @@ import ChapterNotAvailableModal from 'components/Modal/ChapterNotAvailableModal'
 import ShareComponent from 'components/Common/ShareComponent'
 import ButtonLikes from 'components/ViewerMenu/ButtonLikes'
 import { parseImgUrl } from 'utils/common'
+import CommentListNew from 'components/Comment/CommentListNew'
+import LoginModal from 'components/Modal/LoginModal'
+import near from 'lib/near'
 
 const ChapterView = ({ isLoading, chapterInfo }) => {
   const menuTopRef = useRef()
@@ -26,6 +28,7 @@ const ChapterView = ({ isLoading, chapterInfo }) => {
   const [chapterPageUrl, setChapterPageUrl] = useState([])
   const [hasNext, setHasNext] = useState(null)
   const [activeLang, setActiveLang] = useState('en')
+  const [delayCommentListNew, setDelayCommentListNew] = useState(true)
 
   const showComment = useStore((state) => state.showComment)
 
@@ -91,6 +94,12 @@ const ChapterView = ({ isLoading, chapterInfo }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chapterData, activeLang])
 
+  useEffect(() => {
+    setTimeout(() => {
+      setDelayCommentListNew(false)
+    }, 500)
+  })
+
   const fetchChapterData = async (comicId, chapterId) => {
     const response = await axios.get(`${process.env.COMIC_API_URL}/chapters`, {
       params: {
@@ -131,12 +140,18 @@ const ChapterView = ({ isLoading, chapterInfo }) => {
           Object.keys(chapterData.lang).length === 0
         }
       />
-      <BuyChapterModal
-        active={chapterData?.status !== 'read' || false}
-        data={chapterData}
-        hideCloseButton={true}
-      />
-      <CommentListModal />
+      {chapterData && !near.currentUser ? (
+        <LoginModal
+          show={chapterData?.status !== 'read' || false}
+          hideCloseButton={true}
+        />
+      ) : chapterData && chapterData?.status !== 'read' ? (
+        <BuyChapterModal
+          active={chapterData?.status !== 'read' || false}
+          data={chapterData}
+          hideCloseButton={true}
+        />
+      ) : null}
       <MenuTop
         ref={menuTopRef}
         showMenu={showMenu}
@@ -155,7 +170,7 @@ const ChapterView = ({ isLoading, chapterInfo }) => {
           <ChapterImagePage key={url} url={url} />
         ))}
       </div>
-      <div className="mt-8 mb-20 mx-4">
+      <div className="mt-8 mx-4">
         <div className="flex items-center justify-center">
           {chapterData?.type !== 'championship' && (
             <ButtonLikes
@@ -179,6 +194,11 @@ const ChapterView = ({ isLoading, chapterInfo }) => {
           </div>
         </div>
       </div>
+      {!delayCommentListNew && (
+        <div className="mt-8 mb-20 mx-4">
+          <CommentListNew />
+        </div>
+      )}
     </Layout>
   )
 }
