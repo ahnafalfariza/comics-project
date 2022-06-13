@@ -42,7 +42,7 @@ const ComicChampionship = () => {
     const _page = fromStart ? 0 : page
     const _comics = fromStart ? [] : comics
     const _isFetching = fromStart ? false : isFetching
-    const _genre = genre === 'all' ? '' : genre
+    const _genre = genre === 'all' || genre === 'overview' ? '' : genre
 
     if (!_hasMore || _isFetching) {
       return
