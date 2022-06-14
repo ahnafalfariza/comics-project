@@ -33,7 +33,7 @@ const SubmissionChampionshipFinal = () => {
   const [loading, setLoading] = useState(false)
   const setToastConfig = useStore((state) => state.setToastConfig)
 
-  const _showToast = (type, msg) => {
+  const _showToast = (type, msg, duration = 2500) => {
     setToastConfig({
       text: (
         <div
@@ -45,7 +45,7 @@ const SubmissionChampionshipFinal = () => {
         </div>
       ),
       type: type,
-      duration: 2500,
+      duration,
     })
   }
 
@@ -90,8 +90,8 @@ const SubmissionChampionshipFinal = () => {
 
   const onSubmit = async (data) => {
     const checkSizeOfFile = formatBytes(totalPageSize).props.children > 20.0
-    const checkNumberOfFile = data.pages.length > 100
-    const errorCheckNumberOfFile = 'The maximum number of files is 100.'
+    const checkNumberOfFile = data.pages.length > 200
+    const errorCheckNumberOfFile = 'The maximum number of files is 200.'
     const errorCheckSizeOfFile = 'The maximum number of sizes is 20 MB'
     const errorCheckDimensionsOfPage =
       'The dimensions of each comic page must be 800 x 1000'
@@ -143,7 +143,7 @@ const SubmissionChampionshipFinal = () => {
       const msg =
         error.response?.data?.message ||
         'Something wrong happened, please try again!'
-      _showToast('error', msg)
+      _showToast('error', msg, null)
       sentryCaptureException(error)
     }
 
@@ -168,7 +168,11 @@ const SubmissionChampionshipFinal = () => {
         reset()
         clearErrors()
         setLoading(false)
-        _showToast('success', "Thank you for your interest, We'll be in touch!")
+        _showToast(
+          'success',
+          "Thank you for your interest, We'll be in touch!",
+          null
+        )
         return response.data
       })
       .catch((error) => {
@@ -176,7 +180,7 @@ const SubmissionChampionshipFinal = () => {
         const msg =
           error.response?.data?.message ||
           'Something wrong happened, please try again!'
-        _showToast('error', msg)
+        _showToast('error', msg, null)
         sentryCaptureException(error)
         return error
       })
@@ -294,14 +298,14 @@ const SubmissionChampionshipFinal = () => {
         )}
         <div className="hidden md:block">
           <img
-            src={`https://paras-cdn.imgix.net/bafybeigii7iy77byzjcpbvkq2gi7qiahwkjyn5sxljb6bb6mazffacdmsm`}
+            src={`https://paras-cdn.imgix.net/bafybeigc6gbmqungrtanm3hy24klehoutyub3njwcvkhpcpyjxsjh65l34`}
             className="object-contain"
             alt=""
           />
         </div>
         <div className="block md:hidden">
           <img
-            src={`https://paras-cdn.imgix.net/bafybeidcbu2aoell56amcz574idulbdeaveotdmmalaxngcgxk6zga2pie`}
+            src={`https://paras-cdn.imgix.net/bafybeif3ip5wrrsygxf63ifcown5owharclzjxtm2g3kjujfpmbvvcesaq`}
             className="object-contain"
             alt=""
           />
@@ -312,7 +316,7 @@ const SubmissionChampionshipFinal = () => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <div>
-            <label className="font-bold text-md">Cover Comic</label>
+            <label className="font-bold text-md">Cover chapter 2</label>
             <div
               className={`relative cursor-pointer ${
                 !coverPreview ? 'w-40 h-40 ' : 'w-60 h-80'
@@ -384,7 +388,7 @@ const SubmissionChampionshipFinal = () => {
             </div>
           </div>
           <div className="mt-8 mb-2">
-            <label className="font-bold text-md">Synopsis</label>
+            <label className="font-bold text-md">Synopsis chapter 2</label>
             <p className="italic text-xs text-gray-400">
               Please input your synopsis with max 250 characters
             </p>
@@ -394,7 +398,7 @@ const SubmissionChampionshipFinal = () => {
               required
               className="resize-none h-40 mt-3"
               type="text"
-              placeholder="Synopsis of your comic"
+              placeholder="Synopsis of your chapter two"
               maxLength={250}
             />
             {errors.synopsis && (
@@ -411,12 +415,12 @@ const SubmissionChampionshipFinal = () => {
               <h4>
                 <span
                   className={
-                    pages.length > 100 ? 'text-red-500' : 'text-primary'
+                    pages.length > 200 ? 'text-red-500' : 'text-primary'
                   }
                 >
                   {`${pages.length} `}
                 </span>
-                / 100
+                / 200
               </h4>
               <label>
                 <input
@@ -490,14 +494,13 @@ const SubmissionChampionshipFinal = () => {
                 )}
               </Droppable>
             </DragDropContext>
-            {errors.pages ||
-              (isOverDimensionsPage && (
-                <span className="text-red-500">
-                  {isOverDimensionsPage
-                    ? `The dimensions of each comic page must be 800 x 1000`
-                    : `This field is required`}
-                </span>
-              ))}
+            {(errors.pages || isOverDimensionsPage) && (
+              <span className="text-red-500">
+                {isOverDimensionsPage
+                  ? `The dimensions of each comic page must be 800 x 1000`
+                  : `This field is required`}
+              </span>
+            )}
             <h4 className="absolute right-0 -bottom-7">
               {formatBytes(totalPageSize)} / 20 MB
             </h4>
