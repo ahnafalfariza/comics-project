@@ -1,7 +1,8 @@
 import { Tab, TabList, Tabs } from 'components/Common/Tabs'
 import { useRouter } from 'next/router'
 import { parseDate } from 'utils/dateHelper'
-import { parseImgUrl, nFormatter } from 'utils/common'
+import { parseImgUrl } from 'utils/common'
+import { linkDiscordVote } from 'constants/discordvote'
 
 const ComicInfo = ({
   data = {
@@ -77,6 +78,16 @@ const ComicInfo = ({
             </div>
             <h4 className="text-white mb-1 font-semibold ">Synopsis:</h4>
             <p className="text-blueGray-200">{data.description}</p>
+            {linkDiscordVote[data.comic_id] && (
+              // eslint-disable-next-line react/jsx-no-target-blank
+              <a
+                href={linkDiscordVote[data.comic_id]}
+                target="_blank"
+                className="mt-4 font-semibold bg-primary rounded-full tracking-wider px-8 py-3 text-white inline-block"
+              >
+                Vote in Discord
+              </a>
+            )}
           </div>
         </div>
       </div>

@@ -14,6 +14,7 @@ import ChapterNotAvailableModal from 'components/Modal/ChapterNotAvailableModal'
 import ShareComponent from 'components/Common/ShareComponent'
 import ButtonLikes from 'components/ViewerMenu/ButtonLikes'
 import { parseImgUrl } from 'utils/common'
+import { linkDiscordVote } from 'constants/discordvote'
 
 const ChapterView = ({ isLoading, chapterInfo }) => {
   const menuTopRef = useRef()
@@ -178,6 +179,18 @@ const ChapterView = ({ isLoading, chapterInfo }) => {
             />
           </div>
         </div>
+        {linkDiscordVote[comicId] && (
+          <div className="flex items-center justify-center mt-4">
+            {/* eslint-disable-next-line react/jsx-no-target-blank */}
+            <a
+              href={linkDiscordVote[comicId]}
+              target="_blank"
+              className="mt-4 font-semibold bg-primary rounded-full tracking-wider px-8 py-3 text-white inline-block"
+            >
+              Vote in Discord
+            </a>
+          </div>
+        )}
       </div>
     </Layout>
   )
