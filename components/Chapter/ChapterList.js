@@ -84,17 +84,23 @@ const ChapterList = ({
           </a>
         </Link>
         <div className="sm:ml-36 ml-24 pl-1 w-full flex flex-col sm:flex-row sm:items-center items-start justify-between">
-          <div className="mr-4">
-            <h5 className="sm:text-sm text-xs font-semibold text-gray-500 mb-1 uppercase">
-              Chapter {parseInt(data.metadata.chapter_id)}
-            </h5>
-            <h3 className="text-black font-semibold text-sm sm:text-lg">
-              {data.metadata.title}
-            </h3>
-            <h5 className="text-gray-800 sm:text-sm text-xs">
-              {parseDate(data.metadata.issued_at)}
-            </h5>
-          </div>
+          <Link
+            href={`/comics/${data.metadata.comic_id}/chapter?chapterId=${data.metadata.chapter_id}`}
+          >
+            <a onClick={(e) => e.preventDefault()}>
+              <div className="mr-4">
+                <h5 className="sm:text-sm text-xs font-semibold text-gray-500 mb-1 uppercase">
+                  Chapter {parseInt(data.metadata.chapter_id)}
+                </h5>
+                <h3 className="text-black font-semibold text-sm sm:text-lg">
+                  {data.metadata.title}
+                </h3>
+                <h5 className="text-gray-800 sm:text-sm text-xs">
+                  {parseDate(data.metadata.issued_at)}
+                </h5>
+              </div>
+            </a>
+          </Link>
           <div>
             <div className="flex items-center gap-6">
               <ButtonLikeChapterList

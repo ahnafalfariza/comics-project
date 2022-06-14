@@ -26,7 +26,7 @@ const ProfilePageLiked = ({ profile }) => {
 
   useEffect(() => {
     if (currentUser) fetchTokens(true)
-  }, [router])
+  }, [router, currentUser])
 
   const fetchTokens = async (initial) => {
     const _tokens = initial ? [] : tokens
@@ -167,7 +167,7 @@ const ProfilePageLiked = ({ profile }) => {
             >
               login
             </span>{' '}
-            to see a list of comics liked
+            to see list of liked comics
           </div>
         )}
         <BuyChapterModal
