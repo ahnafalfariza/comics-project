@@ -26,7 +26,7 @@ const ProfilePageLiked = ({ profile }) => {
 
   useEffect(() => {
     if (currentUser) fetchTokens(true)
-  }, [router, currentUser])
+  }, [currentUser])
 
   const fetchTokens = async (initial) => {
     const _tokens = initial ? [] : tokens
@@ -141,6 +141,7 @@ const ProfilePageLiked = ({ profile }) => {
                     <div className="text-center mt-2 text-sm">
                       <Link
                         href={`/comics/${token.metadata.comic_id}/chapter?chapterId=${token.metadata.chapter_id}`}
+                        shallow
                       >
                         <a
                           className="inline-block text-black cursor-pointer hover:text-opacity-80 text-base font-semibold mb-4"

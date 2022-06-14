@@ -74,6 +74,7 @@ const ChapterList = ({
       <div className={listWrapperStyle} onClick={onClick}>
         <Link
           href={`/comics/${data.metadata.comic_id}/chapter?chapterId=${data.metadata.chapter_id}`}
+          shallow
         >
           <a onClick={(e) => e.preventDefault()}>
             <div
@@ -86,6 +87,7 @@ const ChapterList = ({
         <div className="sm:ml-36 ml-24 pl-1 w-full flex flex-col sm:flex-row sm:items-center items-start justify-between">
           <Link
             href={`/comics/${data.metadata.comic_id}/chapter?chapterId=${data.metadata.chapter_id}`}
+            shallow
           >
             <a onClick={(e) => e.preventDefault()}>
               <div className="mr-4">
@@ -130,43 +132,23 @@ ChapterList.displayName = 'ChapterList'
 
 export default ChapterList
 
-const ButtonLikeChapterList = ({
-  comicId,
-  chapterId,
-  likes = {},
-  isLoading,
-}) => {
+const ButtonLikeChapterList = ({ comicId, chapterId, likes = {} }) => {
   const [isLiked, setIsLiked] = useState(false)
   const [showLogin, setShowLogin] = useState(false)
   const [totalLikes, setTotalLikes] = useState()
   const { currentUser } = useStore()
 
   useEffect(() => {
-    fetchLikesLength(likes)
+    processLikes(likes)
   }, [])
 
-  const fetchLikesLength = (likes) => {
+  const processLikes = (likes) => {
     const totalLikes = Object.keys(likes).length
     setTotalLikes(totalLikes)
+    if (currentUser) {
+      setIsLiked(likes[currentUser.accountId.replace('.', '#')] ? true : false)
+    }
   }
-
-  useEffect(() => {
-    const fetchLiked = async () => {
-      const response = await axios.get(
-        `${process.env.COMIC_API_URL}/like-chapter`,
-        {
-          params: {
-            comic_id: comicId,
-            chapter_id: chapterId,
-          },
-        }
-      )
-      setIsLiked(response.data.result)
-    }
-    if (chapterId && comicId && !isLoading && currentUser?.accountId) {
-      fetchLiked()
-    }
-  }, [chapterId, comicId, currentUser?.accountId, isLoading])
 
   const onClickLikes = async (e) => {
     if (!currentUser) {
