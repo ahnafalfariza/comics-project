@@ -4,9 +4,18 @@ on:
     secrets:
       IMAGE:
         required: true
+
+      GKE_DEPLOYMENT_NAME:
+        required: true
+      GKE_NAMESPACE:
+        required: true
       GKE_SA_KEY:
         required: true
       GKE_PROJECT_ID:
+        required: true
+      GKE_CLUSTER:
+        required: true
+      GKE_ZONE:
         required: true
 
 jobs:
