@@ -6,7 +6,7 @@ on:
 
 jobs:
   build-and-deploy-develop:
-    if: ${{ github.ref == 'feat/add-workflows' }}
+    if: ${{ github.ref == 'refs/heads/feat/add-workflows' }}
     uses: ./.github/workflows/build_and_deploy.yml
     secrets:
       IMAGE: ${{ secrets.IMAGE }}
