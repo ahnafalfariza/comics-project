@@ -5,17 +5,9 @@ on:
       - feat/add-workflows
 
 jobs:
-  build-image:
-    uses: ./.github/workflows/build.yml
-    secrets:
-      IMAGE: ${{ secrets.IMAGE }}
-      GKE_SA_KEY: ${{ secrets.GKE_SA_KEY_TESTNET }}
-      GKE_PROJECT_ID: ${{ secrets.GKE_PROJECT_ID_TESTNET }}
-
-  deploy-develop:
-    if: ${{ github.ref == 'refs/heads/develop' }}
-    needs: build-image
-    uses: ./.github/workflows/deploy.yml
+  build-and-deploy-develop:
+    if: ${{ github.ref == 'feat/add-workflows' }}
+    uses: ./.github/workflows/build_and_deploy.yml
     secrets:
       IMAGE: ${{ secrets.IMAGE }}
       GKE_DEPLOYMENT_NAME: ${{ secrets.GKE_DEPLOYMENT_NAME_DEVELOP }}
