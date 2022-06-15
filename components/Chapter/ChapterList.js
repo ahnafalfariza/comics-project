@@ -139,8 +139,10 @@ const ButtonLikeChapterList = ({ comicId, chapterId, likes = {} }) => {
   const { currentUser } = useStore()
 
   useEffect(() => {
-    processLikes(likes)
-  }, [])
+    if (currentUser) {
+      processLikes(likes)
+    }
+  }, [currentUser])
 
   const processLikes = (likes) => {
     const totalLikes = Object.keys(likes).length
@@ -186,7 +188,7 @@ const ButtonLikeChapterList = ({ comicId, chapterId, likes = {} }) => {
           }}
         >
           <IconLove
-            size={10}
+            size={20}
             color={isLiked ? 'red' : 'none'}
             stroke={isLiked ? 'red' : 'black'}
             strokeWidth={1.5}

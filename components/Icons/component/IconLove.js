@@ -11,7 +11,6 @@ const IconLove = ({
   <svg
     width={size}
     height={size}
-    className="w-6 h-6"
     fill={color}
     stroke="currentColor"
     viewBox="0 0 24 24"
