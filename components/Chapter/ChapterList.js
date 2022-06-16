@@ -139,9 +139,7 @@ const ButtonLikeChapterList = ({ comicId, chapterId, likes = {} }) => {
   const { currentUser } = useStore()
 
   useEffect(() => {
-    if (currentUser) {
-      processLikes(likes)
-    }
+    processLikes(likes)
   }, [currentUser])
 
   const processLikes = (likes) => {
