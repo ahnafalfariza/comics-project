@@ -173,13 +173,11 @@ const ChapterView = ({ isLoading, chapterInfo }) => {
       </div>
       <div className="mt-8 mx-4">
         <div className="flex items-center justify-center">
-          {chapterData?.type !== 'championship' && (
-            <ButtonLikes
-              chapterId={chapterId}
-              comicId={comicId}
-              isLoading={isLoading}
-            />
-          )}
+          <ButtonLikes
+            chapterId={chapterId}
+            comicId={comicId}
+            isLoading={isLoading}
+          />
           <div>
             <div>Share Now</div>
             <ShareComponent

@@ -17,6 +17,8 @@ const Profile = ({ userData, setUserData }) => {
       router.push(`/${router.query.userId}/comics`)
     } else if (idx === 1) {
       router.push(`/${router.query.userId}/collectibles`)
+    } else if (idx === 2) {
+      router.push(`/${router.query.userId}/liked`)
     }
   }
 
@@ -25,6 +27,8 @@ const Profile = ({ userData, setUserData }) => {
       return 0
     } else if (router.pathname.includes('collectibles')) {
       return 1
+    } else if (router.pathname.includes('liked')) {
+      return 2
     }
   }
 
@@ -97,6 +101,7 @@ const Profile = ({ userData, setUserData }) => {
           <TabList>
             <Tab>Comics</Tab>
             <Tab>Collectibles</Tab>
+            <Tab>Liked</Tab>
           </TabList>
         </Tabs>
       </div>
