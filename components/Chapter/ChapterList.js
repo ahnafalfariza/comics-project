@@ -104,7 +104,7 @@ const ChapterList = ({
             </a>
           </Link>
           <div>
-            <div className="flex items-center gap-6">
+            <div className="flex items-center md:gap-6">
               <ButtonLikeChapterList
                 comicId={data.metadata.comic_id}
                 chapterId={data.metadata.chapter_id}
