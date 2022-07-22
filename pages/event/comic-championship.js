@@ -9,8 +9,8 @@ import { useEffect, useState } from 'react'
 const FETCH_COMICS_LIMIT = 10
 
 const banner = {
-  mobile: 'bafybeia2biy5appc3pxgic43u7cixpjjtaavtzf5apucn42ybfldmm4oiq',
-  desktop: 'bafybeidrr3b2ajnxmrf2r6rm656mwu7wyvraeo5xoncnr23dufki7ejaka',
+  mobile: 'bafybeia4jujs4x6usbg4u5c3fncl2ar6rzrh6fgvzui4mox7tqxykgfxsi',
+  desktop: 'bafybeibxfc6x3bwrf4zyxxnoj56xgxkfrr3qdeswj57eazcwj6hj2gmtfy',
 }
 
 const ComicChampionship = () => {
