@@ -16,7 +16,6 @@ import { parseImgUrl } from 'utils/common'
 import CommentListNew from 'components/Comment/CommentListNew'
 import LoginModal from 'components/Modal/LoginModal'
 import near from 'lib/near'
-import { linkDiscordVote } from 'constants/discordvote'
 
 const ChapterView = ({ isLoading, chapterInfo }) => {
   const menuTopRef = useRef()
@@ -192,18 +191,6 @@ const ChapterView = ({ isLoading, chapterInfo }) => {
             />
           </div>
         </div>
-        {linkDiscordVote[comicId] && (
-          <div className="flex items-center justify-center mt-4">
-            {/* eslint-disable-next-line react/jsx-no-target-blank */}
-            <a
-              href={linkDiscordVote[comicId]}
-              target="_blank"
-              className="mt-4 font-semibold bg-primary rounded-full tracking-wider px-8 py-3 text-white inline-block"
-            >
-              Vote in Discord
-            </a>
-          </div>
-        )}
       </div>
       {!delayCommentListNew && (
         <div className="mt-8 mb-20 mx-4">
