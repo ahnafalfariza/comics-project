@@ -3,6 +3,7 @@ import ComicList from 'components/Comic/ComicList'
 import Head from 'components/Common/Head'
 import Layout from 'components/Common/Layout'
 import OverviewEvent from 'components/Event/OverviewEvent'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
@@ -96,14 +97,18 @@ const ComicChampionship = () => {
       />
       <div className="max-w-6xl m-auto px-4 mb-8">
         <div className="mb-12 hidden md:block">
-          <a href="https://discord.gg/sHGbPBp2bB">
-            <img src={`https://paras-cdn.imgix.net/${banner.desktop}`} />
-          </a>
+          <Link href="/event/comic-championship?tab=finalist">
+            <a>
+              <img src={`https://paras-cdn.imgix.net/${banner.desktop}`} />
+            </a>
+          </Link>
         </div>
         <div className="mb-12 md:hidden -mx-4">
-          <a href="https://discord.gg/sHGbPBp2bB">
-            <img src={`https://paras-cdn.imgix.net/${banner.mobile}`} />
-          </a>
+          <Link href="/event/comic-championship?tab=finalist">
+            <a>
+              <img src={`https://paras-cdn.imgix.net/${banner.mobile}`} />
+            </a>
+          </Link>
         </div>
 
         <div className="justify-center gap-4 mb-6 text-center hidden md:flex">
