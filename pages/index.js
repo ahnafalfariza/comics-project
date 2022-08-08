@@ -124,7 +124,7 @@ export default function Home() {
         </div>
         <div className="max-w-6xl m-auto py-16 px-4">
           <div className="text-5xl font-bold mb-4 text-black leading-normal text-center">
-            Feature
+            Featured
           </div>
           <div className="md:flex">
             <div className="text-center flex-1 p-4 font-medium">
