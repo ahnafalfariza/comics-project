@@ -131,7 +131,7 @@ export default function Home() {
               <img src={`/yours.svg`} />
               <p className="text-xl text-black mb-3">Comic is 100% yours</p>
               <p className="text-gray-800">
-                Read, lend, and sell your digital comic anytime you want
+                Read, lend, or sell your digital comic anytime you want
               </p>
             </div>
             <div className="text-center flex-1 p-4 font-medium">
