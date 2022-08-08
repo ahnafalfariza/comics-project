@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from 'react'
 import Layout from 'components/Common/Layout'
 import MenuTop from 'components/ViewerMenu/MenuTop'
 import MenuBottom from 'components/ViewerMenu/MenuBottom'
-import CommentListModal from 'components/Comment/CommentListModal'
 import useStore from 'lib/store'
 import axios from 'axios'
 import { useRouter } from 'next/router'
@@ -14,6 +13,10 @@ import ChapterNotAvailableModal from 'components/Modal/ChapterNotAvailableModal'
 import ShareComponent from 'components/Common/ShareComponent'
 import ButtonLikes from 'components/ViewerMenu/ButtonLikes'
 import { parseImgUrl } from 'utils/common'
+import CommentListNew from 'components/Comment/CommentListNew'
+import LoginModal from 'components/Modal/LoginModal'
+import near from 'lib/near'
+import { linkDiscordVote } from 'constants/discordvote'
 
 const ChapterView = ({ isLoading, chapterInfo }) => {
   const menuTopRef = useRef()
@@ -26,6 +29,7 @@ const ChapterView = ({ isLoading, chapterInfo }) => {
   const [chapterPageUrl, setChapterPageUrl] = useState([])
   const [hasNext, setHasNext] = useState(null)
   const [activeLang, setActiveLang] = useState('en')
+  const [delayCommentListNew, setDelayCommentListNew] = useState(true)
 
   const showComment = useStore((state) => state.showComment)
 
@@ -85,10 +89,17 @@ const ChapterView = ({ isLoading, chapterInfo }) => {
         chapterData.lang[lang],
         comicId,
         chapterId,
-        chapterData.is_locked
+        chapterData.is_locked && chapterData?.price !== '0'
       )
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chapterData, activeLang])
+
+  useEffect(() => {
+    setTimeout(() => {
+      setDelayCommentListNew(false)
+    }, 500)
+  })
 
   const fetchChapterData = async (comicId, chapterId) => {
     const response = await axios.get(`${process.env.COMIC_API_URL}/chapters`, {
@@ -130,12 +141,18 @@ const ChapterView = ({ isLoading, chapterInfo }) => {
           Object.keys(chapterData.lang).length === 0
         }
       />
-      <BuyChapterModal
-        active={chapterData?.status !== 'read' || false}
-        data={chapterData}
-        hideCloseButton={true}
-      />
-      <CommentListModal />
+      {chapterData && !near.currentUser ? (
+        <LoginModal
+          show={chapterData?.status !== 'read' || false}
+          hideCloseButton={true}
+        />
+      ) : chapterData && chapterData?.status !== 'read' ? (
+        <BuyChapterModal
+          active={chapterData?.status !== 'read' || false}
+          data={chapterData}
+          hideCloseButton={true}
+        />
+      ) : null}
       <MenuTop
         ref={menuTopRef}
         showMenu={showMenu}
@@ -154,7 +171,7 @@ const ChapterView = ({ isLoading, chapterInfo }) => {
           <ChapterImagePage key={url} url={url} />
         ))}
       </div>
-      <div className="mt-8 mb-20 mx-4">
+      <div className="mt-8 mx-4">
         <div className="flex items-center justify-center">
           <ButtonLikes
             chapterId={chapterId}
@@ -175,7 +192,24 @@ const ChapterView = ({ isLoading, chapterInfo }) => {
             />
           </div>
         </div>
+        {linkDiscordVote[comicId] && (
+          <div className="flex items-center justify-center mt-4">
+            {/* eslint-disable-next-line react/jsx-no-target-blank */}
+            <a
+              href={linkDiscordVote[comicId]}
+              target="_blank"
+              className="mt-4 font-semibold bg-primary rounded-full tracking-wider px-8 py-3 text-white inline-block"
+            >
+              Vote in Discord
+            </a>
+          </div>
+        )}
       </div>
+      {!delayCommentListNew && (
+        <div className="mt-8 mb-20 mx-4">
+          <CommentListNew />
+        </div>
+      )}
     </Layout>
   )
 }

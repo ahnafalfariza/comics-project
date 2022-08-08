@@ -3,7 +3,12 @@ import Modal from 'components/Common/Modal'
 import { IconXCircle } from 'components/Icons'
 import near from 'lib/near'
 
-const LoginModal = ({ show, onClose, title = 'Login to buy this chapter' }) => {
+const LoginModal = ({
+  show,
+  onClose,
+  title = 'Login to buy this chapter',
+  hideCloseButton = false,
+}) => {
   return (
     <Modal isShow={show} close={onClose}>
       <div className="max-w-sm m-4 md:m-auto w-full relative bg-white px-4 py-8 text-center rounded-md shadow-xl">
@@ -28,12 +33,14 @@ const LoginModal = ({ show, onClose, title = 'Login to buy this chapter' }) => {
             Login with NEAR
           </Button>
         </div>
-        <div
-          className="absolute -top-4 -right-4 cursor-pointer"
-          onClick={onClose}
-        >
-          <IconXCircle size={32} />
-        </div>
+        {!hideCloseButton && (
+          <div
+            className="absolute -top-4 -right-4 cursor-pointer"
+            onClick={onClose}
+          >
+            <IconXCircle size={32} />
+          </div>
+        )}
       </div>
     </Modal>
   )

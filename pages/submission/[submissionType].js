@@ -5,18 +5,14 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { FormProvider, useForm } from 'react-hook-form'
 import { MoonLoader } from 'react-spinners'
-import {
-  getGenres,
-  getSubGenres,
-  postCoverComic,
-  postPagesComic,
-} from 'services/submission'
+import { getGenres, getSubGenres, postCoverComic } from 'services/submission'
 import { parseImgUrl, readFileAsUrl } from 'utils/common'
 import { InputDropdown } from '../../components/Common/form/components/InputDropdown'
 import Layout from 'components/Common/Layout'
 import Head from 'components/Common/Head'
 import slug from 'slug'
 import { encodeImageToBlurhash } from 'lib/blurhash'
+import { sentryCaptureException } from 'lib/sentry'
 
 const FormSubmission = ({ dataSubmission }) => {
   const [cover, setCover] = useState('')
@@ -44,7 +40,7 @@ const FormSubmission = ({ dataSubmission }) => {
 
   const setToastConfig = useStore((state) => state.setToastConfig)
 
-  const _showToast = (type, msg) => {
+  const _showToast = (type, msg, duration = 2500) => {
     setToastConfig({
       text: (
         <div
@@ -56,7 +52,7 @@ const FormSubmission = ({ dataSubmission }) => {
         </div>
       ),
       type: type,
-      duration: 2500,
+      duration: duration,
     })
   }
 
@@ -104,9 +100,9 @@ const FormSubmission = ({ dataSubmission }) => {
     data.pages = items
     data.logo = logo
     const checkSizeofFile = formatBytes(sizeComic).props.children > 20.0
-    const checkNumberOfFile = items.length > 100
+    const checkNumberOfFile = items.length > 200
 
-    const errorCheckNumberOfFile = 'The maximum number of files is 100.'
+    const errorCheckNumberOfFile = 'The maximum number of files is 200.'
     const errorCheckSizeOfFile = 'The maximum number of sizes is 20 MB'
     const errorCheckDimensionsOfPage =
       'The dimensions of each comic page must be 800 x 1000'
@@ -176,32 +172,27 @@ const FormSubmission = ({ dataSubmission }) => {
 
       if (dataSubmission.type_submission !== 'artist') {
         await axios
-          .all([
-            postCoverComic(cover),
-            postPagesComic(pages),
-            postCoverComic(logo),
-          ])
+          .all([postCoverComic(cover), postCoverComic(logo)])
           .then((results) => {
             data.cover = results[0].data
-            data.pages = results[1].data
-            data.logo = results[2].data
+            data.logo = results[1].data
             return results.data
           })
           .catch((error) => {
-            return error
-          })
-      } else {
-        await axios
-          .all([postPagesComic(pages)])
-          .then((results) => {
-            data.pages = results[0].data
-
-            return results.data
-          })
-          .catch((error) => {
+            sentryCaptureException(error)
             return error
           })
       }
+
+      const resPage = await axios.all(
+        data.pages.map((page) => {
+          const formData = new FormData()
+          formData.append('files', page.file)
+          return postCoverComic(formData)
+        })
+      )
+
+      data.pages = resPage.map((res) => res.data)
 
       const form = new FormData()
       form.append('type_submission', dataSubmission.type_submission)
@@ -253,13 +244,18 @@ const FormSubmission = ({ dataSubmission }) => {
           setLoading(false)
           _showToast(
             'success',
-            "Thank you for your interest, We'll be in touch!"
+            "Thank you for your interest, We'll be in touch!",
+            null
           )
           return response.data
         })
         .catch((error) => {
+          const msg =
+            error.response?.data?.message ||
+            `Something wrong happened, please try again!`
+          sentryCaptureException(error)
           setLoading(false)
-          _showToast('error', 'Something wrong happened, please try again!')
+          _showToast('error', msg, null)
           return error
         })
     }
@@ -901,23 +897,6 @@ const FormSubmission = ({ dataSubmission }) => {
               </div>
               {dataSubmission.type_submission === 'artist' && (
                 <div className="mt-8 mb-2">
-                  <label className="font-bold text-md">Email</label>
-                  <InputText
-                    label="email"
-                    register={register}
-                    required
-                    className="mt-3 md:w-96"
-                    placeholder="Please input your email"
-                    type="email"
-                    width="80"
-                  />
-                  {formState.errors.email && (
-                    <span className="text-red-500">This field is required</span>
-                  )}
-                </div>
-              )}
-              {dataSubmission.type_submission === 'artist' && (
-                <div className="mt-8 mb-2">
                   <label className="font-bold text-md">Link Portfolio</label>
                   <InputText
                     label="portfolio_url"
@@ -951,12 +930,12 @@ const FormSubmission = ({ dataSubmission }) => {
                     {' '}
                     <span
                       className={
-                        items.length > 100 ? 'text-red-500' : 'text-primary'
+                        items.length > 200 ? 'text-red-500' : 'text-primary'
                       }
                     >
                       {items.length}
                     </span>{' '}
-                    / 100
+                    / 200
                   </h4>
                   <label>
                     <input

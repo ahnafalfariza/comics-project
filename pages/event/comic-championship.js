@@ -3,59 +3,69 @@ import ComicList from 'components/Comic/ComicList'
 import Head from 'components/Common/Head'
 import Layout from 'components/Common/Layout'
 import OverviewEvent from 'components/Event/OverviewEvent'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 const FETCH_COMICS_LIMIT = 10
 
 const banner = {
-  mobile: 'bafybeihzazhdnyqjjm6uuddkl6ai6chvk73m6bmu4ws5gau2z77j7dwsbm',
-  desktop: 'bafybeichntn366brrvvj7wh3xdnhn5xdg67acwjhgy7g6rrmsbymssxbju',
+  mobile: 'bafybeia2biy5appc3pxgic43u7cixpjjtaavtzf5apucn42ybfldmm4oiq',
+  desktop: 'bafybeidrr3b2ajnxmrf2r6rm656mwu7wyvraeo5xoncnr23dufki7ejaka',
 }
 
 const ComicChampionship = () => {
+  const router = useRouter()
   const [comics, setComics] = useState([])
   const [page, setPage] = useState(0)
   const [hasMore, setHasMore] = useState(true)
   const [isFetching, setIsFetching] = useState(false)
-  const [activeTab, setActiveTab] = useState('overview')
+  const [activeTab, setActiveTab] = useState(router.query.tab || 'overview')
 
   const isEmpty = false
+
+  useEffect(() => {
+    setActiveTab(router.query.tab || 'overview')
+  }, [router.query.tab])
 
   useEffect(() => {
     if (
       activeTab === 'all' ||
       activeTab === 'Action' ||
-      activeTab === 'Romance'
+      activeTab === 'Romance' ||
+      activeTab === 'finalist' ||
+      activeTab === 'overview'
     ) {
       fetchComics(true, activeTab)
     }
   }, [activeTab])
 
-  useEffect(() => {
-    fetchComics(true, '')
-  }, [])
-
-  const fetchComics = async (fromStart = false, genre) => {
+  const fetchComics = async (fromStart = false, genre = activeTab) => {
     const _hasMore = fromStart ? true : hasMore
     const _page = fromStart ? 0 : page
     const _comics = fromStart ? [] : comics
     const _isFetching = fromStart ? false : isFetching
-    const _genre = genre === 'all' ? '' : genre
+    const _genre = genre === 'all' || genre === 'overview' ? '' : genre
 
     if (!_hasMore || _isFetching) {
       return
     }
 
+    const params = {
+      __sort: '_id::1',
+      __skip: _page * FETCH_COMICS_LIMIT,
+      __limit: FETCH_COMICS_LIMIT,
+      type: 'championship',
+      genre: _genre,
+    }
+
+    if (genre === 'finalist') {
+      delete params.genre
+      params.is_final_round = true
+    }
+
     setIsFetching(true)
     const response = await axios.get(`${process.env.COMIC_API_URL}/comics`, {
-      params: {
-        __sort: '_id::1',
-        __skip: _page * FETCH_COMICS_LIMIT,
-        __limit: FETCH_COMICS_LIMIT,
-        type: 'championship',
-        genre: _genre,
-      },
+      params,
     })
     const newData = response.data.data
     const newChapters = [..._comics, ...newData.results]
@@ -74,8 +84,8 @@ const ComicChampionship = () => {
     if (isEmpty) {
       return
     }
-
     setActiveTab(value)
+    router.push({ query: { tab: value } }, undefined, { scroll: false })
   }
 
   return (
@@ -86,18 +96,14 @@ const ComicChampionship = () => {
       />
       <div className="max-w-6xl m-auto px-4 mb-8">
         <div className="mb-12 hidden md:block">
-          <Link href="/submission/championship">
-            <a>
-              <img src={`https://paras-cdn.imgix.net/${banner.desktop}`} />
-            </a>
-          </Link>
+          <a href="https://discord.gg/sHGbPBp2bB">
+            <img src={`https://paras-cdn.imgix.net/${banner.desktop}`} />
+          </a>
         </div>
         <div className="mb-12 md:hidden -mx-4">
-          <Link href="/submission/championship">
-            <a>
-              <img src={`https://paras-cdn.imgix.net/${banner.mobile}`} />
-            </a>
-          </Link>
+          <a href="https://discord.gg/sHGbPBp2bB">
+            <img src={`https://paras-cdn.imgix.net/${banner.mobile}`} />
+          </a>
         </div>
 
         <div className="justify-center gap-4 mb-6 text-center hidden md:flex">
@@ -106,7 +112,7 @@ const ComicChampionship = () => {
               className={`cursor-pointer ${
                 activeTab === 'overview' ? 'font-bold' : ''
               }`}
-              onClick={() => setActiveTab('overview')}
+              onClick={() => onChangeTab('overview')}
             >
               Overview
             </p>
@@ -163,10 +169,10 @@ const ComicChampionship = () => {
           </div>
           <div>
             <p
-              className={`cursor-not-allowed opacity-50 ${
+              className={`cursor-pointer ${
                 activeTab === 'finalist' ? 'font-bold' : ''
               }`}
-              onClick={() => null}
+              onClick={() => onChangeTab('finalist')}
             >
               Finalist
             </p>
@@ -243,10 +249,10 @@ const ComicChampionship = () => {
             </div>
             <div>
               <p
-                className={`cursor-not-allowed opacity-50 ${
+                className={`cursor-pointer ${
                   activeTab === 'finalist' ? 'font-bold' : ''
                 }`}
-                onClick={() => null}
+                onClick={() => onChangeTab('finalist')}
               >
                 Finalist
               </p>

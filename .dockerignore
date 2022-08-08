@@ -1,10 +1,10 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-=351c48f45052476689624e79fd209e77ebddc6c7ea354ae8a8f2de828ea65f9a
+db.json
+.env
+
 # dependencies
 /node_modules
 /.pnp
 .pnp.js
-.env.*
 
 # testing
 /coverage
@@ -26,12 +26,11 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env
-.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # vercel
 .vercel
-
-# Sentry
-.sentryclirc
 
