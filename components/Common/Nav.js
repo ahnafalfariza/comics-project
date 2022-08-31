@@ -7,11 +7,12 @@ import near from 'lib/near'
 import Button from './Button'
 import Avatar from './Avatar'
 
-import { IconLogout } from 'components/Icons'
+import { IconLink, IconLogout } from 'components/Icons'
 import { parseImgUrl, prettyBalance } from 'utils/common'
 import useStore from 'lib/store'
 import LoginModal from 'components/Modal/LoginModal'
 import IconPencil from 'components/Icons/component/IconPencil'
+import BindModal from 'components/Modal/BindModal'
 
 const Nav = () => {
   const profileModalRef = useRef()
@@ -22,6 +23,7 @@ const Nav = () => {
   const [showProfileModal, setShowProfileModal] = useState(false)
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false)
   const [showLoginModal, setShowLoginModal] = useState(false)
+  const [showBindModal, setShowBindModal] = useState(false)
 
   useEffect(() => {
     const onClickEv = (e) => {
@@ -103,12 +105,24 @@ const Nav = () => {
                 className="flex flex-shrink-0 items-center space-x-2 cursor-pointer"
                 onClick={() => router.push('/publication/create')}
               >
-                <IconPencil size={18} className="text-black opacity-80" />
+                <IconPencil
+                  size={18}
+                  color="black"
+                  className="text-black opacity-80"
+                />
                 <p className="text-black opacity-80">Create Publication</p>
               </div>
               <hr className="opacity-90 -mx-2 my-3" />
             </>
           )}
+          <div
+            className="flex flex-shrink-0 items-center space-x-2 cursor-pointer"
+            onClick={() => setShowBindModal(true)}
+          >
+            <IconLink size={18} className="text-black opacity-80" />
+            <p className="text-black opacity-80">Bind mobile app account</p>
+          </div>
+          <hr className="opacity-90 -mx-2 my-3" />
           <div
             className="flex flex-shrink-0 items-center space-x-2 cursor-pointer"
             onClick={() => near.signOut()}
@@ -128,6 +142,7 @@ const Nav = () => {
         show={showLoginModal}
         onClose={() => setShowLoginModal(false)}
       />
+      <BindModal show={showBindModal} onClose={() => setShowBindModal(false)} />
       <div ref={mobileMenuRef} className="bg-background sticky z-30 top-0">
         <div className="relative bg-background max-w-6xl m-auto flex py-2 px-4 items-center justify-between z-40">
           <div className="flex items-center md:hidden">

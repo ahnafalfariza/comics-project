@@ -33,6 +33,11 @@ const Button = ({
         !isDisabled && 'hover:bg-primary hover:bg-opacity-10'
       }`
       break
+    case 'no-border':
+      buttonVariantStyle = `bg-transparent text-gray ${
+        !isDisabled && 'hover:bg-primary hover:bg-opacity-10'
+      }`
+      break
     default:
       break
   }
@@ -89,7 +94,7 @@ Button.propTypes = {
   isDisabled: PropTypes.bool,
   isFullWidth: PropTypes.bool,
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
-  variant: PropTypes.oneOf(['primary', 'secondary', 'ghost']),
+  variant: PropTypes.oneOf(['primary', 'secondary', 'ghost', 'no-border']),
   onClick: PropTypes.func,
 }
 

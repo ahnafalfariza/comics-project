@@ -51,6 +51,17 @@ const InputText = ({
         {...rest}
       />
     )
+  } else if (type == 'password') {
+    return (
+      <input
+        type={'password'}
+        className={inputStyle}
+        {...register(label, {
+          required,
+        })}
+        {...rest}
+      />
+    )
   } else {
     return (
       <input
