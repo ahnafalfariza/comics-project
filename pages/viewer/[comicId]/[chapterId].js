@@ -88,7 +88,8 @@ const ChapterView = ({ isLoading, chapterInfo }) => {
         chapterData.lang[lang],
         comicId,
         chapterId,
-        chapterData.is_locked && chapterData?.price !== '0'
+        chapterData.is_locked &&
+          (chapterData?.price !== '0' || chapterData?.mint_only)
       )
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
