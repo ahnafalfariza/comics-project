@@ -16,7 +16,7 @@ const ChapterImagePage = ({ url }) => {
     const fetchImage = async () => {
       try {
         const img = new Image()
-        const response = await axios.get(url, {
+        const response = await axios.get(url + '?web_only=true', {
           responseType: 'blob',
           signal: controller.signal,
         })
