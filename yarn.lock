@@ -176,13 +176,13 @@
   dependencies:
     clsx "^1.0.4"
 
-"@draft-js-plugins/divider@^4.1.1":
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/@draft-js-plugins/divider/-/divider-4.1.1.tgz#9764e35366f17f0114d189276db45a9e81e08c05"
-  integrity sha512-dl3ZleveBEOQjP+QquMfv3QWcLeG27uEceEcCO6YahEVESrGyui6TbBrFayyIVSUkDkro3XYsRrLIxBO7dyqPw==
+"@draft-js-plugins/divider@^4.1.2":
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/@draft-js-plugins/divider/-/divider-4.1.2.tgz#7bf43083278def7e06245810feef17b410f9a7bb"
+  integrity sha512-mcpoYjXJ/366EHK3alAm2S1aTySfZs5HBZqOOd+6EwZW2Ui1AfqShnCMKuOrCoLZEWoGty4iPMf9hX5CH1Gkgw==
   dependencies:
     clsx "^1.0.4"
-    prop-types "^15.5.8"
+    prop-types "^15.8.1"
 
 "@draft-js-plugins/editor@^4.0.0":
   version "4.1.2"
@@ -3715,7 +3715,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@15.7.2, prop-types@^15.5.10, prop-types@^15.7.2:
+prop-types@15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -3724,7 +3724,7 @@ prop-types@15.7.2, prop-types@^15.5.10, prop-types@^15.7.2:
     object-assign "^4.1.1"
     react-is "^16.8.1"
 
-prop-types@^15.5.8, prop-types@^15.8.1:
+prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
