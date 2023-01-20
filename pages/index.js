@@ -123,6 +123,11 @@ export default function Home() {
           </div>
         </div>
         <div className="max-w-6xl m-auto py-16 px-4">
+          <a href="https://play.google.com/store/apps/details?id=id.paras.comicmobile">
+            <img src="/app-banner.jpg" className="w-full" />
+          </a>
+        </div>
+        <div className="max-w-6xl m-auto py-16 px-4">
           <div className="text-5xl font-bold mb-4 text-black leading-normal text-center">
             Feature
           </div>
