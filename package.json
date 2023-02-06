@@ -44,7 +44,7 @@
     "react-hook-form": "^7.23.0",
     "react-infinite-scroll-component": "^6.1.0",
     "react-linkify": "^1.0.0-alpha",
-    "react-share": "^4.4.0",
+    "react-share": "^4.4.1",
     "react-slick": "^0.28.1",
     "react-spinners": "^0.11.0",
     "slick-carousel": "^1.8.1",
