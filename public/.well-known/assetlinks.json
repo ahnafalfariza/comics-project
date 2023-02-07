@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "id.paras.comicmobile",
+      "sha256_cert_fingerprints": [
+        "33:78:81:89:2C:47:84:63:91:40:9E:E3:5F:84:59:FE:06:39:29:FA:6A:FD:11:1B:73:A4:8C:FC:67:4C:19:B1"
+      ]
+    }
+  }
+]
