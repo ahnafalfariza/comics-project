@@ -16,7 +16,7 @@
     "@draft-js-plugins/buttons": "^4.0.0",
     "@draft-js-plugins/divider": "^4.1.1",
     "@draft-js-plugins/editor": "^4.0.0",
-    "@draft-js-plugins/focus": "^4.1.0",
+    "@draft-js-plugins/focus": "^4.1.4",
     "@draft-js-plugins/image": "^4.0.0",
     "@draft-js-plugins/inline-toolbar": "^4.1.0",
     "@draft-js-plugins/linkify": "^4.1.0",
