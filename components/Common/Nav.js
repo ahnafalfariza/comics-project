@@ -218,16 +218,6 @@ const Nav = () => {
             </Link>
           </div>
           <div className="flex items-center gap-4">
-            <div className="hidden md:block">
-              <Link href="/event/comic-championship">
-                <a>
-                  <img
-                    src="https://paras-cdn.imgix.net/bafybeigrw7tgvh3ia3omqswcqj47ma4alt2x564uwu7nppfou7qrs2jkru"
-                    className="h-20"
-                  />
-                </a>
-              </Link>
-            </div>
             {near.isLoggedIn() ? (
               <div ref={profileModalRef} className="relative h-auto">
                 <div
@@ -342,16 +332,6 @@ const Nav = () => {
                     >
                       Submission
                     </span>
-                  </a>
-                </Link>
-              </div>
-              <div className="p-3">
-                <Link href="/event/comic-championship">
-                  <a className="font-semibold hover:text-primary flex justify-center">
-                    <img
-                      src="https://paras-cdn.imgix.net/bafybeigrw7tgvh3ia3omqswcqj47ma4alt2x564uwu7nppfou7qrs2jkru"
-                      className="h-20"
-                    />
                   </a>
                 </Link>
               </div>
